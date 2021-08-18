@@ -1,0 +1,26 @@
+.row {
+  display: flex;
+  user-select: none;
+  width: fit-content;
+}
+
+.board {
+  width: fit-content;
+}
+
+.spacer {
+  min-height: 30px;
+  min-width: 30px;
+  display: flex;
+  align-content: center;
+  align-items: center;
+}
+.letter {
+  min-height: 20px;
+  min-width: 20px;
+  margin: auto;
+}
+
+.spacer>.visited {
+  background-color: brown;
+}

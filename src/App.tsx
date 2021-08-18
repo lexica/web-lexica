@@ -1,24 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
+import { Reducer, useEffect, useReducer } from 'react';
+import * as R from 'ramda';
 import './App.css';
+import {
+  getInitialState,
+  gameReducer,
+  GameState,
+  GameAction,
+  GameReducerInitializerArgument
+} from './game/context'
+import Board from './Board'
 
 function App() {
+  const [state, dispatch] = useReducer<
+    Reducer<GameState, GameAction>,
+    GameReducerInitializerArgument
+  >(gameReducer, { board: 'olrteoahiewnrnbasutaiupsn', wordLength: 4 }, getInitialState)
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Board board={state.board} context={dispatch} />
+      {R.map(word => <div>{word}</div>, state.possibleWordsGivenLetterChain)}
     </div>
   );
 }
