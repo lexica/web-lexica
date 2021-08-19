@@ -14,7 +14,7 @@ const splitLineAlongRows = (line: string) => {
   const width = Math.sqrt(line.length)
 
   if (Math.floor(width) !== width) {
-    console.log(width, line, "doesn't make a square")
+    // console.log(width, line, "doesn't make a square")
     throw new Error(`${line} doesn't make a square`)
   }
 
@@ -79,7 +79,7 @@ export const getPossibleTravelDirections = ({ row, column, width }: { row: numbe
   const unfilteredColumns = [column - 1, column, column + 1]
   const columns = R.filter((potentialColumn: number) => potentialColumn >= 0 && potentialColumn < width, unfilteredColumns)
 
-  console.log({ rows, columns, unfilteredRows, unfilteredColumns })
+  // console.log({ rows, columns, unfilteredRows, unfilteredColumns })
 
   const coordinates = getAllPossibleCoordinates({ rows, columns })
 

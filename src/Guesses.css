@@ -1,0 +1,20 @@
+.guess-list {
+  display: flex;
+
+}
+
+.last-guess {
+  margin: auto;
+}
+
+.guess {
+  color: gray;
+  text-decoration: line-through;
+  margin-left: 5px;
+}
+
+.correct-guess {
+  color: black;
+  text-decoration: none;
+  margin-left: 5px;
+}

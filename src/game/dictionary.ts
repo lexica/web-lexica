@@ -59,7 +59,9 @@ const recursiveTraverseBoard = ({ row, column, wordSoFar, board, foundWords, dic
   boardCopy[row][column].visited = true
   const { letter } = boardCopy[row][column]
   const maybeWord = `${wordSoFar}${letter}`
+  // console.log(`working with word chain: ${maybeWord}`)
   const index = wordSoFar.length
+  // console.log(JSON.stringify({ maybeWord, wordSoFar }))
 
   const narrowedDictionary = R.filter((word) => {
     if (word[index] === maybeWord[index]) {
@@ -120,7 +122,8 @@ export const removeWordsThatCantBeSpelledOnBoard = (line: string, dictionary: st
 }
 
 export const possibleWordsGivenBoard = (options: Omit<RecursiveTraverseBoard, 'foundWords'>) => {
-  return recursiveTraverseBoard({ ...options, foundWords: [], wordSoFar: options.wordSoFar.substring(0, -1) })
+  const { wordSoFar } = options
+  return recursiveTraverseBoard({ ...options, foundWords: [], wordSoFar: wordSoFar.substring(0, wordSoFar.length - 1) })
 }
 
 export const loadDictionary = (line: string, fullDictionary: string[], wordLength: number) => {

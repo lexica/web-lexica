@@ -6,6 +6,8 @@
 
 .board {
   width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .spacer {
@@ -21,6 +23,6 @@
   margin: auto;
 }
 
-.spacer>.visited {
+.visited {
   background-color: brown;
 }

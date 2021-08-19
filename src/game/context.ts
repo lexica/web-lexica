@@ -1,7 +1,7 @@
 import React, { createContext } from 'react'
 import * as R from 'ramda'
 
-import { Board, Coordinates, getBoard, getPossibleTravelDirections, deepCopyBoard } from './board'
+import { Coordinates, getBoard, getPossibleTravelDirections, deepCopyBoard } from './board'
 import englishDictionary from './dict.json'
 import { loadDictionary, possibleWordsGivenBoard } from './dictionary'
 
@@ -23,118 +23,6 @@ export type GameContextType = {
   foundWords: string[]
 }
 
-// class Game {
-//   public possibleWords: string[]
-//   public foundWords: string[]
-//   public board: Board
-
-//   private fullDictionary: string[]
-//   private boardDictionary: string[]
-//   private mouseIsClicked: boolean
-//   private wordSoFar: string
-//   private currentCoordinate: Coordinates
-
-//   constructor() {
-//     this.fullDictionary = englishDictionary
-//     this.boardDictionary = []
-//     this.possibleWords = []
-//     this.foundWords = []
-//     this.mouseIsClicked = false
-//     this.board = { width: 0 }
-//     this.wordSoFar = ''
-//     this.currentCoordinate = { row: 0, column: 0 }
-//   }
-
-//   public startGame = (boardLine: string, wordLength: number) => {
-//     this.boardDictionary = loadDictionary(boardLine, this.fullDictionary, wordLength)
-//     this.possibleWords = [...this.boardDictionary]
-//     this.foundWords = []
-//     this.board = getBoard(boardLine)
-//   }
-
-//   private resetBoard = () => {
-//     for(let x = 0; x < this.board.width; x++) {
-//       for(let y = 0; y < this.board.width; y++) {
-//         this.board[x][y].visited = false
-//       }
-//     }
-//   }
-
-//   private filterOutFoundWords = (dictionary: string[]) => {
-//     return R.filter<string>(word => !this.foundWords.includes(word), dictionary)
-//   }
-
-//   private isInReachableLocation = (coordinates: Coordinates) => {
-//     const possibleTravelDirections = getPossibleTravelDirections({ ...this.currentCoordinate, width: this.board.width })
-
-//     console.log('checking coordinates:', coordinates)
-
-//     if (!possibleTravelDirections.filter(cw => coordinates.column === cw.column && coordinates.row === cw.row).length) {
-//       console.log('non-accessible', { currentCoordinates: this.currentCoordinate, targetCoordinates: coordinates, possibleTravelDirections })
-//       return false
-//     }
-
-//     const { row, column } = coordinates
-//     if (this.board[row][column].visited) {
-//       console.log('letter is visited')
-//       return false
-//     }
-//   }
-
-//   private updateWordStatus = (coordinates: Coordinates) => {
-//     const { row, column } = coordinates
-
-//     this.possibleWords = possibleWordsGivenBoard({
-//       ...coordinates,
-//       dictionary: this.filterOutFoundWords(this.possibleWords),
-//       board: this.board,
-//       wordSoFar: this.wordSoFar
-//     })
-
-//     this.wordSoFar = `${this.wordSoFar}${this.board[row][column].letter}`
-//     this.board[row][column].visited = true
-
-//     console.log(this.wordSoFar)
-//   }
-
-//   private buildWord = (coordinates: Coordinates) => {
-//     if (!this.isInReachableLocation(coordinates)) return
-//     console.log('updating coordinates')
-//     this.currentCoordinate = coordinates
-//     this.updateWordStatus(coordinates)
-//   }
-
-//   public updateCoordinates = (row: number, column: number) => {
-//     console.log('mouse clicked:', this.mouseIsClicked)
-
-//     if (this.mouseIsClicked) return this.buildWord({ row, column })
-
-//     this.currentCoordinate = { row, column }
-//   }
-
-//   private mouseClickBegin = () => {
-//     this.mouseIsClicked = true
-//     this.updateWordStatus(this.currentCoordinate)
-//   }
-
-//   private mouseClickEnd = () => {
-//     this.mouseIsClicked = false
-//     if (this.possibleWords.includes(this.wordSoFar)) {
-//       this.foundWords.push(this.wordSoFar)
-//     }
-//     this.possibleWords = [...this.boardDictionary]
-//     this.wordSoFar = ''
-//     this.resetBoard()
-//   }
-
-//   public handleMouseClickEvent = (mouseIsClicked: boolean) => {
-//     if (this.mouseIsClicked === mouseIsClicked) return
-//     if (mouseIsClicked) return this.mouseClickBegin()
-
-//     return this.mouseClickEnd()
-//   }
-// }
-
 export type GameState = {
   board: GameBoard,
   foundWords: string[],
@@ -142,15 +30,19 @@ export type GameState = {
   remainingWords: string[],
   currentLetter: Coordinates,
   currentLetterChain: string,
-  mouseIsClicked: boolean
+  mouseIsClicked: boolean,
+  guessedWords: string[]
+  shouldUpdate: boolean
+  forceUpdate: React.DispatchWithoutAction
 }
 
 export type GameReducerInitializerArgument = {
   board: string,
-  wordLength: number
+  wordLength: number,
+  forceUpdate: React.DispatchWithoutAction
 }
 
-export const getInitialState = ({ board, wordLength }: GameReducerInitializerArgument): GameState => {
+export const getInitialState = ({ board, wordLength, forceUpdate }: GameReducerInitializerArgument): GameState => {
   const remainingWords = loadDictionary(board, englishDictionary, wordLength)
   return {
     board: getBoard(board),
@@ -159,7 +51,10 @@ export const getInitialState = ({ board, wordLength }: GameReducerInitializerArg
     foundWords: [],
     mouseIsClicked: false,
     possibleWordsGivenLetterChain: remainingWords,
-    remainingWords
+    remainingWords,
+    guessedWords: [],
+    shouldUpdate: false,
+    forceUpdate
   }
 }
 
@@ -183,6 +78,13 @@ export type GameAction = {
   info: HoverInfo | ClickInfo
 }
 
+const changeCurrentLetter = (state: GameState, newLetter: Coordinates) => {
+  state.currentLetter.row = newLetter.row
+  state.currentLetter.column = newLetter.column
+  return state
+}
+
+
 const handleLetterChainUpdate = (state: GameState): GameState => {
   const {
     possibleWordsGivenLetterChain,
@@ -193,24 +95,27 @@ const handleLetterChainUpdate = (state: GameState): GameState => {
   } = state
   const { row, column } = currentLetter
 
-  console.log({ currentLetter })
+  // console.log(JSON.stringify({ currentLetter, currentLetterChain }))
 
   const newPossibleWords = possibleWordsGivenBoard({
     ...currentLetter,
     dictionary: R.filter(word => !foundWords.includes(word), possibleWordsGivenLetterChain),
     board,
-    wordSoFar: currentLetterChain
+    wordSoFar: `${currentLetterChain}${board[row][column].letter}`
   })
 
-  const newCurrentLetterChain = `${currentLetterChain}${board[row][column].letter}`
+  const wordsRemoved = R.filter<string>(word => !newPossibleWords.includes(word), state.possibleWordsGivenLetterChain)
+
+  // console.log(JSON.stringify({ wordsRemoved }))
+
+  // console.log(`${state.possibleWordsGivenLetterChain.length - newPossibleWords.length} impossible words removed`)
+
   board[row][column].visited = true
 
-  console.log({ currentLetterChain, newCurrentLetterChain })
-  return {
-    ...state,
-    possibleWordsGivenLetterChain: newPossibleWords,
-    currentLetterChain: newCurrentLetterChain
-  }
+  state.possibleWordsGivenLetterChain = newPossibleWords
+  state.currentLetterChain += board[row][column].letter
+
+  return state
 }
 
 const handleStartClick = (state: GameState): GameState => {
@@ -218,7 +123,7 @@ const handleStartClick = (state: GameState): GameState => {
 }
 
 const handleFinishClick = (state: GameState): GameState => {
-  console.log('finishing a click')
+  // console.log('finishing a click')
   const {
     currentLetterChain,
     remainingWords,
@@ -240,20 +145,23 @@ const handleFinishClick = (state: GameState): GameState => {
         newBoard[x][y].visited = false
       }
     }
-  return {
-    ...state,
-    foundWords: newFoundWords,
-    remainingWords: newRemainingWords,
-    possibleWordsGivenLetterChain: newPossibleWords,
-    currentLetterChain: newLetterChain,
-    board: newBoard
-  }
+  state.foundWords = newFoundWords
+  state.remainingWords = newRemainingWords
+  state.possibleWordsGivenLetterChain = newPossibleWords
+  state.currentLetterChain = newLetterChain
+  state.board = newBoard
+  currentLetterChain.length && state.guessedWords.push(`${currentLetterChain}`)
+  return state
 }
 
 const handleClick = (state: GameState, { clicked }: ClickInfo) => {
   if (clicked === state.mouseIsClicked) return state
 
   state.mouseIsClicked = clicked
+
+  state.shouldUpdate = true
+
+  // console.log(`is clicked: ${state.mouseIsClicked}`)
 
   return clicked ? handleStartClick(state) : handleFinishClick(state)
 }
@@ -262,13 +170,13 @@ const isValidMove = ({ board, currentLetter }: GameState, newCoords: Coordinates
     const possibleTravelDirections = getPossibleTravelDirections({ ...currentLetter, width: board.width })
 
     if (!possibleTravelDirections.filter(cw => newCoords.column === cw.column && newCoords.row === cw.row).length) {
-      console.log('non-accessible coords', { currentCoordinates: currentLetter, targetCoordinates: newCoords, possibleTravelDirections })
+      // console.log('non-accessible coords', JSON.stringify({ currentCoordinates: currentLetter, targetCoordinates: newCoords, possibleTravelDirections }))
       return false
     }
 
     const { row, column } = newCoords
     if (board[row][column].visited) {
-      console.log('letter is visited', { targetCoordinates: newCoords })
+      // console.log('letter is visited', JSON.stringify({ targetCoordinates: newCoords }))
       return false
     }
 
@@ -282,24 +190,34 @@ const areSameCoordinates = (a: Coordinates, b: Coordinates) => {
 const handleClickedHover = (state: GameState, coordinates: Coordinates): GameState => {
   const { currentLetter } = state
   const shouldUpdate = !areSameCoordinates(currentLetter, coordinates) && isValidMove(state, coordinates)
-  if (shouldUpdate) return handleLetterChainUpdate({ ...state, currentLetter: coordinates })
+  // console.log(`same coordinates on hover, not updating: ${JSON.stringify({ currentLetter, coordinates })}`)
+  if (shouldUpdate) {
+    state.shouldUpdate = true
+    changeCurrentLetter(state, coordinates)
+    // console.log(`These should match: ${JSON.stringify({ currentLetter: state.currentLetter,  coordinates })}`)
+    return handleLetterChainUpdate(state)
+  }
   return state
 }
 
 const handleHover = (state: GameState, { coordinates }: HoverInfo): GameState => {
   if (state.mouseIsClicked) return handleClickedHover(state, coordinates)
-  return {
-    ...state,
-    currentLetter: coordinates
-  }
+  state.currentLetter = coordinates
+  return state
 }
 
 export const gameReducer = (state: GameState, action: GameAction) => {
-  console.log(JSON.stringify(state, null, 2))
-  if (action.type === click) return handleClick(state, action.info as ClickInfo)
-  if (action.type === hover) return handleHover(state, action.info as HoverInfo)
+  state.shouldUpdate = false
+  let toReturn = state
+  if (action.type === click) toReturn = handleClick(state, action.info as ClickInfo)
+  if (action.type === hover) toReturn = handleHover(state, action.info as HoverInfo)
 
-  return state
+  if (state.shouldUpdate) {
+    // console.log('forcing update...')
+    toReturn.forceUpdate()
+  }
+
+  return toReturn
 }
 
 export const GameContext = createContext<React.Dispatch<GameAction>>(null as any)

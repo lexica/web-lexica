@@ -18,16 +18,16 @@ const Letter: React.FC<LetterProps> = ({
   visited,
 }) => {
   const dispatch = useContext(GameContext)
-  const classes = ['letter']
+  const classes = ['spacer']
 
   if (visited) classes.push('visited')
 
-  return <div className="spacer" key={`spacer-${row}-${column}`}>
+  return <div className={classes.join(' ')} key={`spacer-${row}-${column}`}>
     <div
-      className={classes.join(' ')}
+      className="letter"
       onMouseOver={() => { dispatch({ type: 'hover', info: { coordinates: { row, column } } }); console.log(`${row}-${column} hover`) }}
     >
-      {letter}
+      {letter.toUpperCase()}
     </div>
   </div>
 }
