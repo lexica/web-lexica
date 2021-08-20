@@ -38,12 +38,12 @@ export type GameState = {
 
 export type GameReducerInitializerArgument = {
   board: string,
-  wordLength: number,
+  minimumWordLength: number,
   forceUpdate: React.DispatchWithoutAction
 }
 
-export const getInitialState = ({ board, wordLength, forceUpdate }: GameReducerInitializerArgument): GameState => {
-  const remainingWords = loadDictionary(board, englishDictionary, wordLength)
+export const getInitialState = ({ board, minimumWordLength, forceUpdate }: GameReducerInitializerArgument): GameState => {
+  const remainingWords = loadDictionary(board, englishDictionary, minimumWordLength)
   return {
     board: getBoard(board),
     currentLetter: { row: 0, column: 0 },
@@ -97,14 +97,14 @@ const handleLetterChainUpdate = (state: GameState): GameState => {
 
   // console.log(JSON.stringify({ currentLetter, currentLetterChain }))
 
-  const newPossibleWords = possibleWordsGivenBoard({
+  const newPossibleWords = R.uniq(possibleWordsGivenBoard({
     ...currentLetter,
     dictionary: R.filter(word => !foundWords.includes(word), possibleWordsGivenLetterChain),
     board,
     wordSoFar: `${currentLetterChain}${board[row][column].letter}`
-  })
+  }))
 
-  const wordsRemoved = R.filter<string>(word => !newPossibleWords.includes(word), state.possibleWordsGivenLetterChain)
+  // const wordsRemoved = R.filter<string>(word => !newPossibleWords.includes(word), state.possibleWordsGivenLetterChain)
 
   // console.log(JSON.stringify({ wordsRemoved }))
 

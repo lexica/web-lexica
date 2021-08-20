@@ -1,4 +1,6 @@
 import * as R from 'ramda'
+import { Dispatch, Reducer, useReducer } from 'react'
+import { GameAction, gameReducer, GameReducerInitializerArgument, GameState, getInitialState } from './context'
 
 import scores from './scores.json'
 
@@ -16,3 +18,53 @@ export const scoreWord = (word: string, _pointMode: PointModes = PointModes.Lett
 )(word)
 
 export const orderByWordScore = (dictionary: string[]) => R.sortWith([R.descend<string>(scoreWord), R.ascend<string>(R.identity)], dictionary)
+
+export type GameURLParams = {
+  b: string,
+  l: string,
+  t: string,
+  s: ScoreType,
+  m: string,
+  mv: string,
+  v: string
+}
+
+enum GameParamMap {
+  Board = 'b',
+  Language = 'l',
+  Time = 't',
+  Score = 's',
+  MinimumWordLength = 'm',
+  MinimumVersion = 'mv',
+  Version = 'v'
+}
+
+enum ScoreType {
+  Letters = 'l',
+  Words = 'w'
+}
+
+const parseGameParameters = (urlParams: GameURLParams) => ({
+  board: urlParams[GameParamMap.Board],
+  language: urlParams[GameParamMap.Language],
+  time: parseInt(urlParams[GameParamMap.Time]),
+  score: urlParams[GameParamMap.Score],
+  minimumWordLength: parseInt(urlParams[GameParamMap.MinimumWordLength]),
+  minimumVersion: parseInt(urlParams[GameParamMap.MinimumVersion]),
+  version: parseInt(urlParams[GameParamMap.Version])
+})
+
+export const useGame = (urlParams: GameURLParams): [GameState, Dispatch<GameAction>] => {
+  const gameParams = parseGameParameters(urlParams)
+
+  const forceUpdate = useReducer((x: number) => x+1, 0)[1]
+  const [state, dispatch] = useReducer<
+    Reducer<GameState, GameAction>,
+    GameReducerInitializerArgument
+  >(gameReducer, {
+    forceUpdate,
+    ...gameParams
+  }, getInitialState)
+  return [state, dispatch]
+}
+

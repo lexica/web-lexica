@@ -126,8 +126,8 @@ export const possibleWordsGivenBoard = (options: Omit<RecursiveTraverseBoard, 'f
   return recursiveTraverseBoard({ ...options, foundWords: [], wordSoFar: wordSoFar.substring(0, wordSoFar.length - 1) })
 }
 
-export const loadDictionary = (line: string, fullDictionary: string[], wordLength: number) => {
-  const narrowedDictionary = removeImpossibleWords(line, fullDictionary, wordLength)
+export const loadDictionary = (line: string, fullDictionary: string[], minimumWordLength: number) => {
+  const narrowedDictionary = removeImpossibleWords(line, fullDictionary, minimumWordLength)
   const narrowerDictionary = removeWordsThatRequireMoreLetters(line, narrowedDictionary)
 
   const dictionary = removeWordsThatCantBeSpelledOnBoard(line, narrowerDictionary)
