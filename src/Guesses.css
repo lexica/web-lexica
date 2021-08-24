@@ -1,10 +1,19 @@
 .guess-list {
   display: flex;
+  margin-top: 5px;
+  min-height: 20px;
+  overflow-x: hidden;
+}
 
+br {
+  color: grey;
+  height: 2px;
 }
 
 .last-guess {
   margin: auto;
+  min-height: 20px;
+  align-self: center;
 }
 
 .guess {

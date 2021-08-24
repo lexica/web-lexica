@@ -31,6 +31,8 @@ export type GameState = {
   currentLetter: Coordinates,
   currentLetterChain: string,
   mouseIsClicked: boolean,
+  startTime: Date,
+  totalTime: number,
   guessedWords: string[]
   shouldUpdate: boolean
   forceUpdate: React.DispatchWithoutAction
@@ -39,10 +41,11 @@ export type GameState = {
 export type GameReducerInitializerArgument = {
   board: string,
   minimumWordLength: number,
-  forceUpdate: React.DispatchWithoutAction
+  forceUpdate: React.DispatchWithoutAction,
+  totalTime: number
 }
 
-export const getInitialState = ({ board, minimumWordLength, forceUpdate }: GameReducerInitializerArgument): GameState => {
+export const getInitialState = ({ board, minimumWordLength, forceUpdate, totalTime }: GameReducerInitializerArgument): GameState => {
   const remainingWords = loadDictionary(board, englishDictionary, minimumWordLength)
   return {
     board: getBoard(board),
@@ -53,6 +56,8 @@ export const getInitialState = ({ board, minimumWordLength, forceUpdate }: GameR
     possibleWordsGivenLetterChain: remainingWords,
     remainingWords,
     guessedWords: [],
+    startTime: new Date(),
+    totalTime,
     shouldUpdate: false,
     forceUpdate
   }
@@ -124,11 +129,30 @@ const handleStartClick = (state: GameState): GameState => {
 
 const handleFinishClick = (state: GameState): GameState => {
   // console.log('finishing a click')
+
+  const {
+    startTime,
+    totalTime,
+    board
+  } = state
+
+  const newBoard = deepCopyBoard(board)
+
+    for(let x = 0; x < board.width; x++) {
+      for(let y = 0; y < board.width; y++) {
+        newBoard[x][y].visited = false
+      }
+    }
+
+  if (gameIsOver(startTime, totalTime)) {
+    state.board = newBoard
+    return state
+  }
+
   const {
     currentLetterChain,
     remainingWords,
-    foundWords,
-    board
+    foundWords
   } = state
 
   const foundAWord = remainingWords.includes(currentLetterChain)
@@ -138,13 +162,6 @@ const handleFinishClick = (state: GameState): GameState => {
 
   const newPossibleWords = newRemainingWords
   const newLetterChain = ''
-  const newBoard = deepCopyBoard(board)
-
-    for(let x = 0; x < board.width; x++) {
-      for(let y = 0; y < board.width; y++) {
-        newBoard[x][y].visited = false
-      }
-    }
   state.foundWords = newFoundWords
   state.remainingWords = newRemainingWords
   state.possibleWordsGivenLetterChain = newPossibleWords
@@ -204,6 +221,13 @@ const handleHover = (state: GameState, { coordinates }: HoverInfo): GameState =>
   if (state.mouseIsClicked) return handleClickedHover(state, coordinates)
   state.currentLetter = coordinates
   return state
+}
+
+const gameIsOver = (startTime: Date, totalTime: number) => {
+  const passedTime: number = ((new Date() as any) - (startTime as any)) / 1000
+  const gameOver = passedTime >= totalTime
+  console.log(`game is over: ${gameOver}`)
+  return gameOver
 }
 
 export const gameReducer = (state: GameState, action: GameAction) => {

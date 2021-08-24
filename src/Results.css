@@ -1,0 +1,49 @@
+.main-container {
+  display: flex;
+}
+
+.words-and-scores {
+  display: flex;
+}
+
+.words-and-scores:first-child {
+  margin-right: auto;
+  margin-left: 5px;
+}
+
+.words-and-scores:last-child {
+  margin-left: auto;
+  margin-right: 5px;
+}
+
+.titles {
+  display: flex;
+}
+
+.titles>div:first-child {
+  margin-right: auto;
+  margin-left: 5px;
+}
+
+.titles>div:last-child {
+  margin-left: auto;
+  margin-right: 5px;
+}
+
+.words {
+  display: flex;
+  flex-direction: column;
+}
+
+.words>div {
+  margin-right: auto;
+}
+
+.scores>div {
+  margin-left: auto;
+}
+
+.scores {
+  display: flex;
+  flex-direction: column;
+}

@@ -1,0 +1,28 @@
+.container {
+  display: flex;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+}
+
+.section:first-child {
+  margin-right: auto;
+  margin-left: 5px;
+}
+
+.section:last-child {
+  margin-left: auto;
+  margin-right: 5px;
+}
+
+.title {
+  font-weight: lighter;
+  align-self: center;
+}
+
+.info {
+  font-weight: bolder;
+  align-self: center;
+}

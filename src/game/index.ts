@@ -54,7 +54,9 @@ const parseGameParameters = (urlParams: GameURLParams) => ({
   version: parseInt(urlParams[GameParamMap.Version])
 })
 
-export const useGame = (urlParams: GameURLParams): [GameState, Dispatch<GameAction>] => {
+type GameParameters = ReturnType<typeof parseGameParameters>
+
+export const useGame = (urlParams: GameURLParams): [GameState, Dispatch<GameAction>, GameParameters] => {
   const gameParams = parseGameParameters(urlParams)
 
   const forceUpdate = useReducer((x: number) => x+1, 0)[1]
@@ -62,9 +64,10 @@ export const useGame = (urlParams: GameURLParams): [GameState, Dispatch<GameActi
     Reducer<GameState, GameAction>,
     GameReducerInitializerArgument
   >(gameReducer, {
+    totalTime: gameParams.time,
     forceUpdate,
     ...gameParams
   }, getInitialState)
-  return [state, dispatch]
+  return [state, dispatch, gameParams]
 }
 
