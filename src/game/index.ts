@@ -1,6 +1,13 @@
 import * as R from 'ramda'
 import { Dispatch, Reducer, useReducer } from 'react'
-import { GameAction, gameReducer, GameReducerInitializerArgument, GameState, getInitialState } from './context'
+import { Board } from './board'
+import {
+  GameAction,
+  gameReducer,
+  GameReducerInitializerArgument,
+  GameState as InternalGameState,
+  getInitialState
+} from './context'
 
 import scores from './scores.json'
 
@@ -56,18 +63,29 @@ export const parseGameParameters = (urlParams: GameURLParams) => ({
 
 export type GameParameters = ReturnType<typeof parseGameParameters>
 
+export type GameState = {
+  board: Board,
+  foundWords: string[],
+  remainingWords: string[],
+  guessedWords: string[]
+}
+
 export const useGame = (urlParams: GameURLParams): [GameState, Dispatch<GameAction>, GameParameters] => {
   const gameParams = parseGameParameters(urlParams)
 
   const forceUpdate = useReducer((x: number) => x+1, 0)[1]
   const [state, dispatch] = useReducer<
-    Reducer<GameState, GameAction>,
+    Reducer<InternalGameState, GameAction>,
     GameReducerInitializerArgument
   >(gameReducer, {
     totalTime: gameParams.time,
     forceUpdate,
     ...gameParams
   }, getInitialState)
-  return [state, dispatch, gameParams]
+
+  const { board, foundWords, remainingWords, guessedWords } = state
+
+  const exportedState = { board, foundWords, remainingWords, guessedWords }
+  return [exportedState, dispatch, gameParams]
 }
 
