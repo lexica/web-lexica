@@ -44,7 +44,7 @@ enum ScoreType {
   Words = 'w'
 }
 
-const parseGameParameters = (urlParams: GameURLParams) => ({
+export const parseGameParameters = (urlParams: GameURLParams) => ({
   board: urlParams[GameParamMap.Board],
   language: urlParams[GameParamMap.Language],
   time: parseInt(urlParams[GameParamMap.Time]),
@@ -54,7 +54,7 @@ const parseGameParameters = (urlParams: GameURLParams) => ({
   version: parseInt(urlParams[GameParamMap.Version])
 })
 
-type GameParameters = ReturnType<typeof parseGameParameters>
+export type GameParameters = ReturnType<typeof parseGameParameters>
 
 export const useGame = (urlParams: GameURLParams): [GameState, Dispatch<GameAction>, GameParameters] => {
   const gameParams = parseGameParameters(urlParams)

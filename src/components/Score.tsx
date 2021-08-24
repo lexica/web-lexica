@@ -1,15 +1,5 @@
-import { useState } from 'react'
-import { scoreWord } from './game'
+import { scoreWord } from '../game'
 import './Score.css'
-
-const useInterval = <T extends any>(callback: (...args: any[]) => T, interval: number, initialValue?: T): [T, () => void] => {
-  const [value, setValue] = useState<T | undefined>(initialValue)
-  const [intervalValue] = useState(setInterval(() => setValue(callback), interval))
-
-  const stopInterval = () => clearInterval(intervalValue)
-
-  return [value as T, stopInterval]
-}
 
 const getTime = (timeInSeconds: number) => {
   const seconds = timeInSeconds % 60
@@ -21,26 +11,12 @@ const getTime = (timeInSeconds: number) => {
 const Score: React.FC<{
   remainingWords: string[],
   foundWords: string[],
-  time: number,
-  startedAt: Date
+  remainingTime: number
 }> = ({
   remainingWords,
   foundWords,
-  time,
-  startedAt
+  remainingTime
 }) => {
-  const getRemainingTime = () => {
-    const timePassedInMs: number = (new Date() as any - (startedAt as any))
-    const timePassed = Math.floor(timePassedInMs / 1000)
-    return time - timePassed
-  }
-  
-  const [remainingTime, stopInterval] = useInterval<number>(getRemainingTime, 500, 0)
-
-  if (remainingTime <= 0) {
-    stopInterval()
-  }
-
   const totalScore = foundWords.reduce((score: number, word: string) => scoreWord(word) + score, 0)
   const foundCount = foundWords.length
   const remainingCount = remainingWords.length

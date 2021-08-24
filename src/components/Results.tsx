@@ -1,7 +1,7 @@
 import * as R from 'ramda'
 
 import './Results.css'
-import { orderByWordScore, scoreWord } from "./game"
+import { orderByWordScore, scoreWord } from "../game"
 
 const Results: React.FC<{ foundWords: string[], remainingWords: string[] }> = ({
   foundWords,

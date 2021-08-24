@@ -1,9 +1,9 @@
 import React, { useContext } from 'react'
 import * as R from 'ramda'
 
-import { GameAction, GameBoard, GameContext } from './game/context'
+import { GameAction, GameBoard, GameContext } from '../game/context'
 import './Board.css'
-import { getPointOnGridInfo, GetPointOnGridInfoArguments } from './touch'
+import { getPointOnGridInfo, GetPointOnGridInfoArguments } from '../util/touch'
 
 type LetterProps = {
   row: number,

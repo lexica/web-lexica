@@ -1,5 +1,5 @@
 import * as R from 'ramda'
-import { scoreWord } from './game'
+import { scoreWord } from '../game'
 
 import './Guesses.css'
 
