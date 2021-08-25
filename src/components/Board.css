@@ -1,14 +1,20 @@
 .row {
   display: flex;
   user-select: none;
-  width: fit-content;
 }
 
-.board {
-  touch-action: none;
-  width: fit-content;
+/* .board>.row {
   margin-left: auto;
   margin-right: auto;
+} */
+
+.board {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  touch-action: none;
+  width: fit-content;
+  height: fit-content;
 }
 
 .spacer {
@@ -19,10 +25,137 @@
   align-items: center;
 }
 .letter {
+  margin-left: auto;
+  margin-right: auto;
   min-height: 20px;
   min-width: 20px;
-  margin: auto;
 }
+
+:root {
+  --letter-container-scaler: 0.66;
+  --letter-font-scaler: 0.4;
+
+  /* ---- HORIZONTAL VARS ---- */
+  --horizontal-max-size: 74vh;
+  --horizontal-min-size: 48vh;
+  --horizontal-preferred-size: 48vw;
+  --horizontal-6-max-size: calc(var(--horizontal-max-size) / 6);
+  --horizontal-6-min-size: calc(var(--horizontal-min-size) / 6);
+  --horizontal-6-preferred-size: calc(var(--horizontal-preferred-size) / 6);
+  --horizontal-5-max-size: calc(var(--horizontal-max-size) / 5);
+  --horizontal-5-min-size: calc(var(--horizontal-min-size) / 5);
+  --horizontal-5-preferred-size: calc(var(--horizontal-preferred-size) / 5);
+  --horizontal-4-max-size: calc(var(--horizontal-max-size) / 4);
+  --horizontal-4-min-size: calc(var(--horizontal-min-size) / 4);
+  --horizontal-4-preferred-size: calc(var(--horizontal-preferred-size) / 4);
+
+  --horizontal-6-spacer-size: clamp(var(--horizontal-6-min-size), var(--horizontal-6-preferred-size), var(--horizontal-6-max-size));
+  --horizontal-6-letter-size: calc(var(--horizontal-6-spacer-size) * var(--letter-container-scaler));
+  --horizontal-6-font-size: calc(var(--horizontal-6-spacer-size) * var(--letter-font-scaler));
+  --horizontal-5-spacer-size: clamp(var(--horizontal-5-min-size), var(--horizontal-5-preferred-size), var(--horizontal-5-max-size));
+  --horizontal-5-letter-size: calc(var(--horizontal-5-spacer-size) * var(--letter-container-scaler));
+  --horizontal-5-font-size: calc(var(--horizontal-5-spacer-size) * var(--letter-font-scaler));
+  --horizontal-4-spacer-size: clamp(var(--horizontal-4-min-size), var(--horizontal-4-preferred-size), var(--horizontal-4-max-size));
+  --horizontal-4-letter-size: calc(var(--horizontal-4-spacer-size) * var(--letter-container-scaler));
+  --horizontal-4-font-size: calc(var(--horizontal-4-spacer-size) * var(--letter-font-scaler));
+
+  /* ---- VERTICAL VARS ---- */
+  --vertical-max-size: 98vw;
+  --vertical-min-size: 48vw;
+  --vertical-preferred-size: 73vh;
+  --vertical-6-max-size: calc(var(--vertical-max-size) / 6);
+  --vertical-6-min-size: calc(var(--vertical-min-size) / 6);
+  --vertical-6-preferred-size: calc(var(--vertical-preferred-size) / 6);
+  --vertical-5-max-size: calc(var(--vertical-max-size) / 5);
+  --vertical-5-min-size: calc(var(--vertical-min-size) / 5);
+  --vertical-5-preferred-size: calc(var(--vertical-preferred-size) / 5);
+  --vertical-4-max-size: calc(var(--vertical-max-size) / 4);
+  --vertical-4-min-size: calc(var(--vertical-min-size) / 4);
+  --vertical-4-preferred-size: calc(var(--vertical-preferred-size) / 4);
+
+  --vertical-6-spacer-size: clamp(var(--vertical-6-min-size), var(--vertical-6-preferred-size), var(--vertical-6-max-size));
+  --vertical-6-letter-size: calc(var(--vertical-6-spacer-size) * var(--letter-container-scaler));
+  --vertical-6-font-size: calc(var(--vertical-6-spacer-size) * var(--letter-font-scaler));
+  --vertical-5-spacer-size: clamp(var(--vertical-5-min-size), var(--vertical-5-preferred-size), var(--vertical-5-max-size));
+  --vertical-5-letter-size: calc(var(--vertical-5-spacer-size) * var(--letter-container-scaler));
+  --vertical-5-font-size: calc(var(--vertical-5-spacer-size) * var(--letter-font-scaler));
+  --vertical-4-spacer-size: clamp(var(--vertical-4-min-size), var(--vertical-4-preferred-size), var(--vertical-4-max-size));
+  --vertical-4-letter-size: calc(var(--vertical-4-spacer-size) * var(--letter-container-scaler));
+  --vertical-4-font-size: calc(var(--vertical-4-spacer-size) * var(--letter-font-scaler));
+}
+
+@media screen and (orientation: portrait) {
+  .spacer:first-child:nth-last-child(6),
+  .spacer:first-child:nth-last-child(6) ~ .spacer {
+    height: var(--vertical-6-spacer-size);
+    width: var(--vertical-6-spacer-size);
+  }
+  .spacer:first-child:nth-last-child(6)>.letter,
+  .spacer:first-child:nth-last-child(6) ~ .spacer>.letter {
+    height: var(--vertical-6-letter-size);
+    width: var(--vertical-6-letter-size);
+    font-size: var(--vertical-6-font-size);
+  }
+  .spacer:first-child:nth-last-child(5),
+  .spacer:first-child:nth-last-child(5) ~ .spacer {
+    height: var(--vertical-5-spacer-size);
+    width: var(--vertical-5-spacer-size);
+  }
+  .spacer:first-child:nth-last-child(5)>.letter,
+  .spacer:first-child:nth-last-child(5) ~ .spacer>.letter {
+    height: var(--vertical-5-letter-size);
+    width: var(--vertical-5-letter-size);
+    font-size: var(--vertical-5-font-size);
+  }
+  .spacer:first-child:nth-last-child(4),
+  .spacer:first-child:nth-last-child(4) ~ .spacer {
+    height: var(--vertical-4-spacer-size);
+    width: var(--vertical-4-spacer-size);
+  }
+  .spacer:first-child:nth-last-child(4)>.letter,
+  .spacer:first-child:nth-last-child(4) ~ .spacer>.letter {
+    height: var(--vertical-4-letter-size);
+    width: var(--vertical-4-letter-size);
+    font-size: var(--vertical-4-font-size);
+  }
+}
+
+@media screen and (orientation: landscape) {
+  .spacer:first-child:nth-last-child(6),
+  .spacer:first-child:nth-last-child(6) ~ .spacer {
+    height: var(--horizontal-6-spacer-size);
+    width: var(--horizontal-6-spacer-size);
+  }
+  .spacer:first-child:nth-last-child(6)>.letter,
+  .spacer:first-child:nth-last-child(6) ~ .spacer>.letter {
+    height: var(--horizontal-6-letter-size);
+    width: var(--horizontal-6-letter-size);
+    font-size: var(--horizontal-6-font-size);
+  }
+  .spacer:first-child:nth-last-child(5),
+  .spacer:first-child:nth-last-child(5) ~ .spacer {
+    height: var(--horizontal-5-spacer-size);
+    width: var(--horizontal-5-spacer-size);
+  }
+  .spacer:first-child:nth-last-child(5)>.letter,
+  .spacer:first-child:nth-last-child(5) ~ .spacer>.letter {
+    height: var(--horizontal-5-letter-size);
+    width: var(--horizontal-5-letter-size);
+    font-size: var(--horizontal-5-font-size);
+  }
+  .spacer:first-child:nth-last-child(4),
+  .spacer:first-child:nth-last-child(4) ~ .spacer {
+    height: var(--horizontal-4-spacer-size);
+    width: var(--horizontal-4-spacer-size);
+  }
+  .spacer:first-child:nth-last-child(4)>.letter,
+  .spacer:first-child:nth-last-child(4) ~ .spacer>.letter {
+    height: var(--horizontal-4-letter-size);
+    width: var(--horizontal-4-letter-size);
+    font-size: var(--horizontal-4-font-size);
+  }
+}
+
 
 .visited {
   background-color: brown;
