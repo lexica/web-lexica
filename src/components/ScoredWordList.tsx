@@ -2,7 +2,7 @@ import * as R from 'ramda'
 
 import { orderByWordScore, ScoreType, scoreWord } from "../game";
 
-import './FoundWords.css'
+import './ScoredWordList.css'
 
 export type FoundWordsProps = { foundWords: string[], scoreType: ScoreType }
 

@@ -9,7 +9,7 @@ import Board from './Board'
 import Score from './Score'
 import Guesses from './Guesses'
 import MostRecentGuess from './MostRecentGuess'
-import FoundWords from './FoundWords'
+import ScoredWordList from './ScoredWordList'
 import { HorizontalContainer, VerticalContainer } from './game/layouts'
 
 
@@ -67,7 +67,7 @@ const Game: React.FC<{ handleFinish: (foundWords: string[], remainingWords: stri
   const mostRecentGuesses = <MostRecentGuess {...guessProps}/>
   const guesses = <Guesses {...guessProps} />
   const score = <Score {...{ remainingWords, foundWords, remainingTime: remainingTime <= 0 ? 0 : remainingTime }}/>
-  const foundWordsComponent = <FoundWords {...{ foundWords, scoreType }} />
+  const foundWordsComponent = <ScoredWordList {...{ foundWords, scoreType }} />
 
 
   const verticalLayout = <VerticalContainer

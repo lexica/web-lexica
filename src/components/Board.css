@@ -15,24 +15,32 @@
   touch-action: none;
   width: fit-content;
   height: fit-content;
+  margin: auto;
 }
 
 .spacer {
   min-height: 30px;
   min-width: 30px;
   display: flex;
-  align-content: center;
-  align-items: center;
+  /* align-content: center;
+  align-items: center; */
 }
-.letter {
-  margin-left: auto;
-  margin-right: auto;
+.activator {
   min-height: 20px;
   min-width: 20px;
+  margin: auto;
+  line-height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.letter {
+  width: fit-content;
+  height: fit-content;
 }
 
 :root {
-  --letter-container-scaler: 0.66;
+  --activator-container-scaler: 0.66;
   --letter-font-scaler: 0.4;
 
   /* ---- HORIZONTAL VARS ---- */
@@ -50,13 +58,13 @@
   --horizontal-4-preferred-size: calc(var(--horizontal-preferred-size) / 4);
 
   --horizontal-6-spacer-size: clamp(var(--horizontal-6-min-size), var(--horizontal-6-preferred-size), var(--horizontal-6-max-size));
-  --horizontal-6-letter-size: calc(var(--horizontal-6-spacer-size) * var(--letter-container-scaler));
+  --horizontal-6-activator-size: calc(var(--horizontal-6-spacer-size) * var(--activator-container-scaler));
   --horizontal-6-font-size: calc(var(--horizontal-6-spacer-size) * var(--letter-font-scaler));
   --horizontal-5-spacer-size: clamp(var(--horizontal-5-min-size), var(--horizontal-5-preferred-size), var(--horizontal-5-max-size));
-  --horizontal-5-letter-size: calc(var(--horizontal-5-spacer-size) * var(--letter-container-scaler));
+  --horizontal-5-activator-size: calc(var(--horizontal-5-spacer-size) * var(--activator-container-scaler));
   --horizontal-5-font-size: calc(var(--horizontal-5-spacer-size) * var(--letter-font-scaler));
   --horizontal-4-spacer-size: clamp(var(--horizontal-4-min-size), var(--horizontal-4-preferred-size), var(--horizontal-4-max-size));
-  --horizontal-4-letter-size: calc(var(--horizontal-4-spacer-size) * var(--letter-container-scaler));
+  --horizontal-4-activator-size: calc(var(--horizontal-4-spacer-size) * var(--activator-container-scaler));
   --horizontal-4-font-size: calc(var(--horizontal-4-spacer-size) * var(--letter-font-scaler));
 
   /* ---- VERTICAL VARS ---- */
@@ -74,13 +82,13 @@
   --vertical-4-preferred-size: calc(var(--vertical-preferred-size) / 4);
 
   --vertical-6-spacer-size: clamp(var(--vertical-6-min-size), var(--vertical-6-preferred-size), var(--vertical-6-max-size));
-  --vertical-6-letter-size: calc(var(--vertical-6-spacer-size) * var(--letter-container-scaler));
+  --vertical-6-activator-size: calc(var(--vertical-6-spacer-size) * var(--activator-container-scaler));
   --vertical-6-font-size: calc(var(--vertical-6-spacer-size) * var(--letter-font-scaler));
   --vertical-5-spacer-size: clamp(var(--vertical-5-min-size), var(--vertical-5-preferred-size), var(--vertical-5-max-size));
-  --vertical-5-letter-size: calc(var(--vertical-5-spacer-size) * var(--letter-container-scaler));
+  --vertical-5-activator-size: calc(var(--vertical-5-spacer-size) * var(--activator-container-scaler));
   --vertical-5-font-size: calc(var(--vertical-5-spacer-size) * var(--letter-font-scaler));
   --vertical-4-spacer-size: clamp(var(--vertical-4-min-size), var(--vertical-4-preferred-size), var(--vertical-4-max-size));
-  --vertical-4-letter-size: calc(var(--vertical-4-spacer-size) * var(--letter-container-scaler));
+  --vertical-4-activator-size: calc(var(--vertical-4-spacer-size) * var(--activator-container-scaler));
   --vertical-4-font-size: calc(var(--vertical-4-spacer-size) * var(--letter-font-scaler));
 }
 
@@ -90,10 +98,13 @@
     height: var(--vertical-6-spacer-size);
     width: var(--vertical-6-spacer-size);
   }
-  .spacer:first-child:nth-last-child(6)>.letter,
-  .spacer:first-child:nth-last-child(6) ~ .spacer>.letter {
-    height: var(--vertical-6-letter-size);
-    width: var(--vertical-6-letter-size);
+  .spacer:first-child:nth-last-child(6)>.activator,
+  .spacer:first-child:nth-last-child(6) ~ .spacer>.activator {
+    height: var(--vertical-6-activator-size);
+    width: var(--vertical-6-activator-size);
+  }
+  .spacer:first-child:nth-last-child(6)>.activator>.letter,
+  .spacer:first-child:nth-last-child(6) ~ .spacer>.activator>.letter {
     font-size: var(--vertical-6-font-size);
   }
   .spacer:first-child:nth-last-child(5),
@@ -101,10 +112,13 @@
     height: var(--vertical-5-spacer-size);
     width: var(--vertical-5-spacer-size);
   }
-  .spacer:first-child:nth-last-child(5)>.letter,
-  .spacer:first-child:nth-last-child(5) ~ .spacer>.letter {
-    height: var(--vertical-5-letter-size);
-    width: var(--vertical-5-letter-size);
+  .spacer:first-child:nth-last-child(5)>.activator,
+  .spacer:first-child:nth-last-child(5) ~ .spacer>.activator {
+    height: var(--vertical-5-activator-size);
+    width: var(--vertical-5-activator-size);
+  }
+  .spacer:first-child:nth-last-child(5)>.activator>.letter,
+  .spacer:first-child:nth-last-child(5) ~ .spacer>.activator>.letter {
     font-size: var(--vertical-5-font-size);
   }
   .spacer:first-child:nth-last-child(4),
@@ -112,10 +126,13 @@
     height: var(--vertical-4-spacer-size);
     width: var(--vertical-4-spacer-size);
   }
-  .spacer:first-child:nth-last-child(4)>.letter,
-  .spacer:first-child:nth-last-child(4) ~ .spacer>.letter {
-    height: var(--vertical-4-letter-size);
-    width: var(--vertical-4-letter-size);
+  .spacer:first-child:nth-last-child(4)>.activator,
+  .spacer:first-child:nth-last-child(4) ~ .spacer>.activator {
+    height: var(--vertical-4-activator-size);
+    width: var(--vertical-4-activator-size);
+  }
+  .spacer:first-child:nth-last-child(4)>.activator>.letter,
+  .spacer:first-child:nth-last-child(4) ~ .spacer>.activator>.letter {
     font-size: var(--vertical-4-font-size);
   }
 }
@@ -126,10 +143,13 @@
     height: var(--horizontal-6-spacer-size);
     width: var(--horizontal-6-spacer-size);
   }
-  .spacer:first-child:nth-last-child(6)>.letter,
-  .spacer:first-child:nth-last-child(6) ~ .spacer>.letter {
-    height: var(--horizontal-6-letter-size);
-    width: var(--horizontal-6-letter-size);
+  .spacer:first-child:nth-last-child(6)>.activator,
+  .spacer:first-child:nth-last-child(6) ~ .spacer>.activator {
+    height: var(--horizontal-6-activator-size);
+    width: var(--horizontal-6-activator-size);
+  }
+  .spacer:first-child:nth-last-child(6)>.activator>.letter,
+  .spacer:first-child:nth-last-child(6) ~ .spacer>.activator>.letter {
     font-size: var(--horizontal-6-font-size);
   }
   .spacer:first-child:nth-last-child(5),
@@ -137,10 +157,13 @@
     height: var(--horizontal-5-spacer-size);
     width: var(--horizontal-5-spacer-size);
   }
-  .spacer:first-child:nth-last-child(5)>.letter,
-  .spacer:first-child:nth-last-child(5) ~ .spacer>.letter {
-    height: var(--horizontal-5-letter-size);
-    width: var(--horizontal-5-letter-size);
+  .spacer:first-child:nth-last-child(5)>.activator,
+  .spacer:first-child:nth-last-child(5) ~ .spacer>.activator {
+    height: var(--horizontal-5-activator-size);
+    width: var(--horizontal-5-activator-size);
+  }
+  .spacer:first-child:nth-last-child(5)>.activator>.letter,
+  .spacer:first-child:nth-last-child(5) ~ .spacer>.activator>.letter {
     font-size: var(--horizontal-5-font-size);
   }
   .spacer:first-child:nth-last-child(4),
@@ -148,10 +171,13 @@
     height: var(--horizontal-4-spacer-size);
     width: var(--horizontal-4-spacer-size);
   }
-  .spacer:first-child:nth-last-child(4)>.letter,
-  .spacer:first-child:nth-last-child(4) ~ .spacer>.letter {
-    height: var(--horizontal-4-letter-size);
-    width: var(--horizontal-4-letter-size);
+  .spacer:first-child:nth-last-child(4)>.activator,
+  .spacer:first-child:nth-last-child(4) ~ .spacer>.activator {
+    height: var(--horizontal-4-activator-size);
+    width: var(--horizontal-4-activator-size);
+  }
+  .spacer:first-child:nth-last-child(4)>.activator>.letter,
+  .spacer:first-child:nth-last-child(4) ~ .spacer>.activator>.letter {
     font-size: var(--horizontal-4-font-size);
   }
 }

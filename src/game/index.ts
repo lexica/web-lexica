@@ -14,6 +14,11 @@ import scores from './scores.json'
 const alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'qu', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'] as const
 type Alphabet = typeof alphabet[number]
 
+export enum ScoreType {
+  Letters = 'l',
+  Words = 'w'
+}
+
 export const scoreWord = (word: string, _scoreType: ScoreType = ScoreType.Letters) => R.pipe<string, Alphabet[], number>(
   R.splitEvery(1) as (a: string) => Alphabet[],
   R.reduce<Alphabet, number>((acc, letter) => acc + scores[(letter as string) === 'q' ? 'qu' : letter], 0)
@@ -42,11 +47,6 @@ enum GameParamMap {
   MinimumWordLength = 'm',
   MinimumVersion = 'mv',
   Version = 'v'
-}
-
-export enum ScoreType {
-  Letters = 'l',
-  Words = 'w'
 }
 
 export const parseGameParameters = (urlParams: GameURLParams) => ({

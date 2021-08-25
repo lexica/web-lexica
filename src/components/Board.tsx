@@ -29,10 +29,10 @@ const Letter: React.FC<LetterProps> = ({
     key={`spacer-${row}-${column}`}
   >
     <div
-      className="letter"
+      className="activator"
       onMouseOver={dispatchMoveEvent}
     >
-      {letter.toUpperCase()}
+      <div className="letter">{letter.toUpperCase()}</div>
     </div>
   </div>
 }

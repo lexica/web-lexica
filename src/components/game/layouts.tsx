@@ -44,9 +44,9 @@ export const VerticalContainer: React.FC<VerticalContainerProps> = ({
   Score
 }) => {
   return <div className="game-vertical-container">
-    {Board}
-    {MostRecentGuess}
-    {Guesses}
-    {Score}
+    <div className="board-holder">{Board}</div>
+    <div className="most-recent-guess-holder">{MostRecentGuess}</div>
+    <div className="guesses-holder">{Guesses}</div>
+    <div className="score-holder">{Score}</div>
   </div>
 }
