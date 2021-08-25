@@ -37,6 +37,7 @@
   margin-top: .3em;
   display: flex;
   flex-direction: row;
+  font-weight: 900;
 }
 
 .game-horizontal-container>
