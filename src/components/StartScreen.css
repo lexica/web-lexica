@@ -1,0 +1,50 @@
+@import "../style/constants.css";
+
+.start-screen {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+.start-screen-title {
+  font-size: var(--font-size-title);
+  margin: 1vh;
+}
+
+.start-screen-language {
+  margin-top: 1vh;
+  color: var(--color-accent);
+  font-size: var(--font-size-title);
+}
+
+.start-screen-info-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  margin-top: 1vh;
+}
+
+.start-screen-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 1vh;
+}
+
+.start-screen-start-prompt {
+  font-weight: var(--font-weight-light);
+  margin-top: auto;
+}
+
+.start-screen-start-button {
+  background-color: var(--color-accent);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-background-light);
+  cursor: pointer;
+  padding: 1vh;
+  margin: 1vh;
+  text-align: center;
+}
