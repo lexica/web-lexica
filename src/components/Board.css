@@ -1,3 +1,5 @@
+@import "../style/constants.css";
+
 .row {
   display: flex;
   user-select: none;
@@ -184,5 +186,5 @@
 
 
 .visited {
-  background-color: brown;
+  background-color: var(--color-accent);
 }

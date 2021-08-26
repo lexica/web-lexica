@@ -6,9 +6,6 @@ import Results from './components/Results';
 import Game from './components/Game';
 import StartScreen from './components/StartScreen';
 
-
-
-
 function App() {
   const [started, updateStarted] = useState(false)
   const [results, updateResults] = useState({

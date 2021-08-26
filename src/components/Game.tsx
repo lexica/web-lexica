@@ -68,7 +68,7 @@ const Game: React.FC<{ handleFinish: (foundWords: string[], remainingWords: stri
   const mostRecentGuesses = <MostRecentGuess {...{ ...guessProps, currentLetterChain }}/>
   const guesses = <Guesses {...guessProps} />
   const score = <Score {...{ remainingWords, foundWords, remainingTime: remainingTime <= 0 ? 0 : remainingTime }}/>
-  const foundWordsComponent = <ScoredWordList {...{ foundWords, scoreType }} />
+  const foundWordsComponent = <ScoredWordList {...{ scoredWords: foundWords, scoreType }} />
 
 
   const verticalLayout = <VerticalContainer

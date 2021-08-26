@@ -1,5 +1,7 @@
 import * as R from 'ramda'
-import { Dispatch, Reducer, useReducer } from 'react'
+import { Dispatch, Reducer, useMemo, useReducer } from 'react'
+import { useLocation } from 'react-router'
+import { parseURLSearch } from '../util/url'
 import { Board } from './board'
 import {
   GameAction,
@@ -67,6 +69,12 @@ export type GameState = {
   foundWords: string[],
   remainingWords: string[],
   guessedWords: string[]
+}
+
+export const useGameParameters = () => {
+  const location = useLocation()
+  const params = useMemo(() => parseGameParameters(parseURLSearch<GameURLParams>(location.search)), [location.search])
+  return params
 }
 
 export const useGame = (urlParams: GameURLParams): [GameState, Dispatch<GameAction>, GameParameters] => {

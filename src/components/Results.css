@@ -1,23 +1,32 @@
-.main-container {
+.results {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 1vh;
+}
+.results-main-container {
   display: flex;
+  width: 100%;
+  height: 100%;
+  overflow-y: hidden;
 }
 
-.words-and-scores {
-  display: flex;
+.results-main-container>div {
+  width: 33%;
+  overflow-y: auto;
+  height: 100%;
 }
 
-.words-and-scores:first-child {
+.results-main-container>div:first-child {
   margin-right: auto;
-  margin-left: 5px;
-}
-
-.words-and-scores:last-child {
-  margin-left: auto;
-  margin-right: 5px;
 }
 
 .titles {
   display: flex;
+}
+
+.titles>div {
+  width: 33%;
 }
 
 .titles>div:first-child {
@@ -28,22 +37,4 @@
 .titles>div:last-child {
   margin-left: auto;
   margin-right: 5px;
-}
-
-.words {
-  display: flex;
-  flex-direction: column;
-}
-
-.words>div {
-  margin-right: auto;
-}
-
-.scores>div {
-  margin-left: auto;
-}
-
-.scores {
-  display: flex;
-  flex-direction: column;
 }

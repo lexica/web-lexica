@@ -4,18 +4,18 @@ import { orderByWordScore, ScoreType, scoreWord } from "../game";
 
 import './ScoredWordList.css'
 
-export type FoundWordsProps = { foundWords: string[], scoreType: ScoreType }
+export type ScoredWordsProps = { scoredWords: string[], scoreType: ScoreType }
 
-const FoundWords: React.FC<FoundWordsProps> = ({ foundWords, scoreType }) => {
-  const orderedWords = orderByWordScore(foundWords, scoreType)
+const ScoredWords: React.FC<ScoredWordsProps> = ({ scoredWords, scoreType }) => {
+  const orderedWords = orderByWordScore(scoredWords, scoreType)
 
-  const makeFoundWord = (word: string) =>  <div className="found-words-word">{word.toUpperCase()}</div> 
-  const makeScore = (word: string) => <div className="found-words-score">+{scoreWord(word, scoreType)}</div>
+  const makeScoredWord = (word: string) =>  <div className="scored-words-word">{word.toUpperCase()}</div> 
+  const makeScore = (word: string) => <div className="scored-words-score">+{scoreWord(word, scoreType)}</div>
 
-  return <div className="found-words-container">
-    <div className="found-words-words">{R.map(makeFoundWord, orderedWords)}</div>
-    <div className="found-words-scores">{R.map(makeScore, orderedWords)}</div>
+  return <div className="scored-words-container">
+    <div className="scored-words-words">{R.map(makeScoredWord, orderedWords)}</div>
+    <div className="scored-words-scores">{R.map(makeScore, orderedWords)}</div>
     </div>
 }
 
-export default FoundWords
+export default ScoredWords
