@@ -62,6 +62,7 @@ export const parseGameParameters = (urlParams: GameURLParams) => ({
 export type GameParameters = ReturnType<typeof parseGameParameters>
 
 export type GameState = {
+  currentLetterChain: string,
   board: Board,
   foundWords: string[],
   remainingWords: string[],
@@ -81,9 +82,9 @@ export const useGame = (urlParams: GameURLParams): [GameState, Dispatch<GameActi
     ...gameParams
   }, getInitialState)
 
-  const { board, foundWords, remainingWords, guessedWords } = state
+  const { board, foundWords, remainingWords, guessedWords, currentLetterChain } = state
 
-  const exportedState = { board, foundWords, remainingWords, guessedWords }
+  const exportedState = { board, foundWords, remainingWords, guessedWords, currentLetterChain }
   return [exportedState, dispatch, gameParams]
 }
 

@@ -1,3 +1,5 @@
+@import "../style/constants.css";
+
 @media (orientation: landscape) {
   .guess-list {
     display: flex;
@@ -56,15 +58,14 @@
 
 
 .incorrect-guess {
-  color: gray;
+  color: var(--color-content-low-contrast-dark);
   text-decoration: line-through;
 }
 
 .repeat-guess {
-  color: gray;
+  color: var(--color-content-low-contrast-dark);
 }
 
 .correct-guess {
-  color: black;
   text-decoration: none;
 }

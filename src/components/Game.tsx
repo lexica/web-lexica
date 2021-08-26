@@ -41,7 +41,8 @@ const Game: React.FC<{ handleFinish: (foundWords: string[], remainingWords: stri
 
   const {
     remainingWords,
-    foundWords
+    foundWords,
+    currentLetterChain
   } = game
   const gameIsOver = getTimeDifference(startedAt, new Date()) > (gameParameters.time * 1000)
 
@@ -64,7 +65,7 @@ const Game: React.FC<{ handleFinish: (foundWords: string[], remainingWords: stri
   }
 
   const board = <Board board={game.board} context={dispatch} />
-  const mostRecentGuesses = <MostRecentGuess {...guessProps}/>
+  const mostRecentGuesses = <MostRecentGuess {...{ ...guessProps, currentLetterChain }}/>
   const guesses = <Guesses {...guessProps} />
   const score = <Score {...{ remainingWords, foundWords, remainingTime: remainingTime <= 0 ? 0 : remainingTime }}/>
   const foundWordsComponent = <ScoredWordList {...{ foundWords, scoreType }} />

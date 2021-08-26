@@ -26,8 +26,8 @@ export const HorizontalContainer: React.FC<HorizontalContainerProps> = ({
     <div className="right-pane">
       <div className="score-holder">{Score}</div>
       <div className="list-titles-holder">
-        <div className="title">Guesses</div>
-        <div className="title">Found Words</div>
+        <div>Guesses</div>
+        <div>Found Words</div>
       </div>
       <div className="lists-holder">
         <div className="guesses-holder">{Guesses}</div>

@@ -1,3 +1,5 @@
+@import "../style/constants.css";
+
 .container {
   display: flex;
 }
@@ -18,11 +20,11 @@
 }
 
 .title {
-  font-weight: lighter;
+  font-weight: var(--font-weight-light);
   align-self: center;
 }
 
 .info {
-  font-weight: bolder;
+  font-weight: var(--font-weight-bold);
   align-self: center;
 }

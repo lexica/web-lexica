@@ -1,3 +1,5 @@
+@import "../../style/constants.css";
+
 .game-horizontal-container {
   display: flex;
   flex-direction: row;
@@ -40,21 +42,29 @@
   margin-top: .3em;
   display: flex;
   flex-direction: row;
-  font-weight: 900;
+  font-weight: bolder;
 }
 
 .game-horizontal-container>
   .right-pane>
     .list-titles-holder>
-      .title:first-child {
+      div {
+  width: fit-content;
+}
+
+.game-horizontal-container>
+  .right-pane>
+    .list-titles-holder>
+      div:first-child {
   margin-right: auto;
 }
 
 .game-horizontal-container>
   .right-pane>
     .list-titles-holder>
-      .title:last-child {
+      div:last-child {
   margin-left: auto;
+  width: 33%;
 }
 
 .game-horizontal-container>
@@ -62,6 +72,13 @@
     .lists-holder {
   display: flex;
   flex-direction: row;
+}
+
+.game-horizontal-container>
+  .right-pane>
+    .lists-holder>
+      .found-words-holder {
+  min-width: 33%;
 }
 
 .game-horizontal-container>
@@ -83,7 +100,8 @@
   flex-direction: column;
   width: 100%;
   height: 100%;
-  margin: 1vh;
+  padding: 1vh;
+  box-sizing: border-box;
 }
 
 .game-vertical-container>.score-holder {

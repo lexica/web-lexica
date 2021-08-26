@@ -68,7 +68,7 @@
   --horizontal-4-font-size: calc(var(--horizontal-4-spacer-size) * var(--letter-font-scaler));
 
   /* ---- VERTICAL VARS ---- */
-  --vertical-max-size: 98vw;
+  --vertical-max-size: 97vw;
   --vertical-min-size: 48vw;
   --vertical-preferred-size: 73vh;
   --vertical-6-max-size: calc(var(--vertical-max-size) / 6);

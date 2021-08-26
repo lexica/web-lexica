@@ -1,8 +1,12 @@
+@import "./style/constants.css";
+
 .App {
   text-align: center;
   margin: auto;
   width: 100%;
-  height: 100%
+  height: 100%;
+  background-color: var(--color-background-dark);
+  color: var(--color-content-dark);
 }
 
 .App-logo {
