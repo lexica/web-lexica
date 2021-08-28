@@ -11,7 +11,6 @@ const Results: React.FC<{ foundWords: string[], remainingWords: string[] }> = ({
   const orderedMissedWords = orderByWordScore(remainingWords)
 
   return <div className="results">
-    <hr/>
     <div className="titles">
       <div>Found Words</div>
       <div>Missed Words</div>
