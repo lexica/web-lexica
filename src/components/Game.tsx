@@ -21,8 +21,14 @@ const getRemainingTimeUnapplied = (startTime: Date, totalTime: number) => () => 
   return totalTime - timePassed
 }
 
-const Game: React.FC<{ handleFinish: (foundWords: string[], remainingWords: string[]) => void }> = ({
-  handleFinish
+export type GameParams = {
+  handleFinish: (foundWords: string[], remainingWords: string[]) => void
+  dictionary: string[]
+}
+
+const Game: React.FC<GameParams> = ({
+  handleFinish,
+  dictionary
 }) => {
   const [startedAt] = useState(new Date())
 
@@ -30,7 +36,7 @@ const Game: React.FC<{ handleFinish: (foundWords: string[], remainingWords: stri
 
   const searchParams = parseURLSearch<GameURLParams>(location.search)
 
-  const [game, dispatch, gameParameters] = useGame(searchParams)
+  const [game, dispatch, gameParameters] = useGame(searchParams, dictionary)
 
   const getRemainingTime = getRemainingTimeUnapplied(startedAt, gameParameters.time)
   const [remainingTime, stopInterval] = useInterval<number>(getRemainingTime, 500, 0)

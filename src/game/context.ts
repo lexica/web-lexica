@@ -2,8 +2,7 @@ import React, { createContext } from 'react'
 import * as R from 'ramda'
 
 import { Coordinates, getBoard, getPossibleTravelDirections, deepCopyBoard } from './board'
-import englishDictionary from './dict.json'
-import { loadDictionary, possibleWordsGivenBoard } from './dictionary'
+import { possibleWordsGivenBoard } from './dictionary'
 
 export type GameBoard = {
   [key: number]: {
@@ -40,21 +39,20 @@ export type GameState = {
 
 export type GameReducerInitializerArgument = {
   board: string,
-  minimumWordLength: number,
   forceUpdate: React.DispatchWithoutAction,
   totalTime: number
+  dictionary: string[]
 }
 
-export const getInitialState = ({ board, minimumWordLength, forceUpdate, totalTime }: GameReducerInitializerArgument): GameState => {
-  const remainingWords = loadDictionary(board, englishDictionary, minimumWordLength)
+export const getInitialState = ({ board, forceUpdate, totalTime, dictionary }: GameReducerInitializerArgument): GameState => {
   return {
     board: getBoard(board),
     currentLetter: { row: 0, column: 0 },
     currentLetterChain: '',
     foundWords: [],
     mouseIsClicked: false,
-    possibleWordsGivenLetterChain: remainingWords,
-    remainingWords,
+    possibleWordsGivenLetterChain: dictionary,
+    remainingWords: dictionary,
     guessedWords: [],
     startTime: new Date(),
     totalTime,

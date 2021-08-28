@@ -31,7 +31,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: 1vh;
+  margin: 2vh;
 }
 
 .start-screen-start-prompt {
@@ -39,12 +39,29 @@
   margin-top: auto;
 }
 
-.start-screen-start-button {
-  background-color: var(--color-accent);
-  font-weight: var(--font-weight-bold);
-  color: var(--color-background-light);
-  cursor: pointer;
+.start-screen-start-button-universal {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: center;
   padding: 1vh;
   margin: 1vh;
-  text-align: center;
+}
+
+.start-screen-start-button-universal>div {
+  margin-left: 0.5vh;
+}
+
+.start-screen-start-button-disabled {
+  background-color: var(--color-content-dark);
+  color: var(--color-background-dark);
+  user-select: none;
+  cursor: default;
+}
+
+.start-screen-start-button {
+  background-color: var(--color-accent);
+  color: var(--color-background-light);
+  cursor: pointer;
 }

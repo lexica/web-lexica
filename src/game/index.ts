@@ -1,5 +1,6 @@
+import axios from 'axios'
 import * as R from 'ramda'
-import { Dispatch, Reducer, useMemo, useReducer } from 'react'
+import { Dispatch, Reducer, useEffect, useMemo, useReducer, useState } from 'react'
 import { useLocation } from 'react-router'
 import { parseURLSearch } from '../util/url'
 import { Board } from './board'
@@ -10,6 +11,7 @@ import {
   GameState as InternalGameState,
   getInitialState
 } from './context'
+import { loadDictionary } from './dictionary'
 
 import scores from './scores.json'
 
@@ -77,7 +79,7 @@ export const useGameParameters = () => {
   return params
 }
 
-export const useGame = (urlParams: GameURLParams): [GameState, Dispatch<GameAction>, GameParameters] => {
+export const useGame = (urlParams: GameURLParams, dictionary: string[]): [GameState, Dispatch<GameAction>, GameParameters] => {
   const gameParams = parseGameParameters(urlParams)
 
   const forceUpdate = useReducer((x: number) => x+1, 0)[1]
@@ -87,6 +89,7 @@ export const useGame = (urlParams: GameURLParams): [GameState, Dispatch<GameActi
   >(gameReducer, {
     totalTime: gameParams.time,
     forceUpdate,
+    dictionary,
     ...gameParams
   }, getInitialState)
 
@@ -96,3 +99,79 @@ export const useGame = (urlParams: GameURLParams): [GameState, Dispatch<GameActi
   return [exportedState, dispatch, gameParams]
 }
 
+type UseLanguageDictionaryReturnValue = {
+  dictionary: string[],
+  loading: boolean,
+  error: boolean
+}
+
+const useLanguageDictionary = (language: string) => {
+  const url = useMemo(
+    () => `https://raw.githubusercontent.com/lexica/lexica/master/assets/dictionaries/dictionary.${language}.txt`,
+    [language]
+  )
+  const [dictionary, updateDictionary] = useState<UseLanguageDictionaryReturnValue>({
+    dictionary: [],
+    loading: true,
+    error: false
+  })
+
+  useEffect(() => {
+    if (url.indexOf('..') === -1) {
+      axios.get<string>(url).then(({ data }) => {
+        const dict = data.split('\n')
+        updateDictionary({
+          loading: false,
+          error: false,
+          dictionary: dict
+        })
+      }).catch(err => {
+        updateDictionary({
+          loading: false,
+          error: true,
+          dictionary: []
+        })
+        return err
+      })
+    }
+  }, [url, updateDictionary])
+
+  return dictionary
+}
+
+const resolveDictionary = (dictionary: string[], board: string, minimumWordLength: number): Promise<string[]> => {
+  const canUseWebWorkers = false
+  if (canUseWebWorkers) {
+    // do the web workers stuff here.... not sure how to do that quite yet
+  }
+  return Promise.resolve(loadDictionary(board, dictionary, minimumWordLength))
+}
+
+export const useDictionary = (): UseLanguageDictionaryReturnValue => {
+  const gameParams = useGameParameters()
+  const completeDictionary = useLanguageDictionary(gameParams.language)
+  const [boardDictionary, updateBoardDictionary] = useState(completeDictionary)
+
+  useEffect(() => {
+    const { dictionary, loading, error } = completeDictionary
+    const { board, minimumWordLength } = gameParams
+    if (!loading && !error) {
+      resolveDictionary(dictionary, board, minimumWordLength)
+        .then(boardDictionary => updateBoardDictionary({
+          dictionary: boardDictionary,
+          loading: false,
+          error: false
+        }))
+        .catch(err => {
+          updateBoardDictionary({
+            dictionary,
+            loading: false,
+            error: true
+          })
+          return err
+        })
+    }
+  }, [completeDictionary, gameParams])
+
+  return boardDictionary
+}

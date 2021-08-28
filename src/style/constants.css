@@ -1,6 +1,6 @@
 :root {
-  --font-size: clamp(1em, 2.5vh, 2em);
-  --font-size-title: clamp(1.4em, 3vh, 2.4em);
+  --font-size: clamp(3vw, 2.5vh, 6vw);
+  --font-size-title: clamp(3.5vw, 3vh, 7vw);
   --font-weight-bold: bolder;
   --font-weight-light: lighter;
 

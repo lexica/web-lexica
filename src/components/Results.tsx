@@ -1,5 +1,5 @@
 import './Results.css'
-import { orderByWordScore, ScoreType, useGameParameters } from "../game"
+import { orderByWordScore, useGameParameters } from "../game"
 import ScoredWordList from './ScoredWordList'
 
 const Results: React.FC<{ foundWords: string[], remainingWords: string[] }> = ({
