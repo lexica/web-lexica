@@ -16,6 +16,7 @@ body {
   overflow-y: hidden;
   background-color: var(--color-background-dark);
   color: var(--color-content-dark);
+  box-sizing: border-box;
 }
 
 hr {

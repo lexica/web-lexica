@@ -23,9 +23,14 @@ export enum ScoreType {
   Words = 'w'
 }
 
-export const scoreWord = (word: string, _scoreType: ScoreType = ScoreType.Letters) => R.pipe<string, Alphabet[], number>(
+export type Language = keyof typeof scores
+export type Letter = keyof typeof scores[Language]
+
+export const getLetterScore = (letter: string, language: string) => scores[language as Language][letter as Letter]
+
+export const scoreWord = (word: string, _scoreType: ScoreType = ScoreType.Letters, language: string = 'en_US') => R.pipe<string, Alphabet[], number>(
   R.splitEvery(1) as (a: string) => Alphabet[],
-  R.reduce<Alphabet, number>((acc, letter) => acc + scores[(letter as string) === 'q' ? 'qu' : letter], 0)
+  R.reduce<Alphabet, number>((acc, letter) => acc + scores[language as any as keyof typeof scores][(letter as string) === 'q' ? 'qu' : letter], 0)
 )(word)
 
 export const orderByWordScore = (dictionary: string[], scoreType: ScoreType = ScoreType.Letters) => R.sortWith(

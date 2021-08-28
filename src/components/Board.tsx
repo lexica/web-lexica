@@ -4,12 +4,13 @@ import * as R from 'ramda'
 import { GameAction, GameBoard, GameContext } from '../game/context'
 import './Board.css'
 import { getPointOnGridInfo, GetPointOnGridInfoArguments } from '../util/touch'
+import { getLetterScore, ScoreType, useGameParameters } from '../game'
 
 type LetterProps = {
   row: number,
   column: number,
   letter: string,
-  visited: boolean
+  visited: boolean,
 }
 
 const Letter: React.FC<LetterProps> = ({
@@ -19,10 +20,13 @@ const Letter: React.FC<LetterProps> = ({
   visited,
 }) => {
   const dispatch = useContext(GameContext)
+  const { score: scoreType, language } = useGameParameters()
   const classes = ['spacer']
 
   if (visited) classes.push('visited')
   const dispatchMoveEvent = () => { dispatch({ type: 'hover', info: { coordinates: { row, column } } }); console.log(`${row}-${column} hover`) }
+
+  const showScore = scoreType === ScoreType.Letters || undefined
 
   return <div
     className={classes.join(' ')}
@@ -34,6 +38,7 @@ const Letter: React.FC<LetterProps> = ({
     >
       <div className="letter">{letter.toUpperCase()}</div>
     </div>
+    {showScore && <div className="board-letter-score">{getLetterScore(letter, language)}</div>}
   </div>
 }
 
