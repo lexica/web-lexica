@@ -1,0 +1,17 @@
+@import "../style/constants.css";
+
+@media screen and (orientation: portrait) {
+  .most-recent-guess {
+    font-size: var(--font-size);
+  }
+}
+
+@media screen and (orientation: landscape) {
+  .most-recent-guess {
+    font-size: var(--font-size-title);
+  }
+}
+
+.repeat-guess {
+  color: var(--color-content-low-contrast-dark)
+}

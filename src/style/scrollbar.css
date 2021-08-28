@@ -1,0 +1,77 @@
+@import "./constants.css";
+
+/* .scrollbar::-webkit-scrollbar {
+  width: 1.5vh;
+  background-color: var(--color-background-dark);
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+  background-color: var(--color-accent);
+  border-radius: 3px;
+}
+
+.scrollbar {
+  overflow-y: hidden;
+  transition: overflow-y 0.5s;
+}
+
+.scrollbar:hover {
+  transition: overflow-y 0.5s;
+  overflow-y: auto;
+} */
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  .scrollbar {
+    /* The background-color of the scrollbar cannot be transitioned.
+      To work around this, we set and transition the property
+      of the wrapper and just set the scrollbar to inherit its
+      value. Now, when the the wrapper transitions that property,
+      so does the scrollbar. However, if we set a background-color,
+      this color shows up in the wrapper as well as the scrollbar.
+      Solution: we transition the border-color and add a border-right
+      to the scrollbar that is as large as the viewport. */
+    border-color: var(--color-background-dark);
+    transition: border-color 0.3s ease-out;
+    /* make this element do the scrolling */
+    overflow-y: auto;
+  }
+
+  .scrollbar:hover {
+    border-color: var(--color-accent);
+    transition: border-color 0.1s ease-in;
+  }
+  /* .scrollbar::-webkit-scrollbar,
+  .scrollbar::-webkit-scrollbar-thumb,
+  .scrollbar::-webkit-scrollbar-corner { */
+
+  .scrollbar::-webkit-scrollbar-thumb {
+    /* add border to act as background-color */
+    border-right-style: inset;
+    /* sum viewport dimensions to guarantee border will fill scrollbar */
+    border-right-width: 1vw;
+    /* inherit border-color to inherit transitions */
+    border-color: inherit;
+    border-radius: .5vw;
+  }
+
+  .scrollbar::-webkit-scrollbar-track {
+    color: var(--color-background-dark)
+  }
+
+  .scrollbar::-webkit-scrollbar {
+    width: 1vw;
+    height: 1vh;
+  }
+}
+
+/* .scrollbar::-webkit-scrollbar-thumb {
+  border-color: rgba(38, 139, 210, 0.15);
+} */
+
+/* .scrollbar::-webkit-scrollbar-thumb:hover {
+  border-color: rgba(38, 139, 210, 0.25);
+} */
+
+/* .scrollbar::-webkit-scrollbar-thumb:active {
+  border-color: rgba(38, 139, 210, 0.4);
+} */

@@ -5,9 +5,7 @@ import './App.css';
 import Results from './components/Results';
 import Game from './components/Game';
 import StartScreen from './components/StartScreen';
-
-
-
+import { useDictionary } from './game';
 
 function App() {
   const [started, updateStarted] = useState(false)
@@ -16,6 +14,8 @@ function App() {
     foundWords: [] as string[],
     remainingWords: [] as string[]
   })
+
+  const { loading, error, dictionary } = useDictionary()
 
   const handleStart = () => updateStarted(true)
   const handleFinish = (foundWords: string[], remainingWords: string[]) => {
@@ -41,8 +41,8 @@ function App() {
           finished
             ? <Results {...{ foundWords, remainingWords }}/>
             : started
-              ? <Game {...{ handleFinish }}/>
-              : <StartScreen {...{ handleStart }}/>
+              ? <Game {...{ handleFinish, dictionary }}/>
+              : <StartScreen {...{ handleStart, loading, error, dictionary }}/>
         }
       </div>
   );

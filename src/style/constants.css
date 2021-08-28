@@ -1,0 +1,17 @@
+:root {
+  --font-size: clamp(3vw, 2.5vh, 6vw);
+  --font-size-title: clamp(3.5vw, 3vh, 7vw);
+  --font-weight-bold: bolder;
+  --font-weight-light: lighter;
+
+  --color-content-dark: #93a1a1;
+  --color-content-light: #586e75;
+
+  --color-content-low-contrast-dark: #657b83;
+  --color-content-low-contrast-light: #839496;
+
+  --color-background-dark: #002b36;
+  --color-background-light: #eee8d5;
+
+  --color-accent: #268bd2;
+}
