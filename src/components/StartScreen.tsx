@@ -66,7 +66,7 @@ const StartScreen: React.FC<StartScreenProps> = ({
     <div className="start-screen-info-container">
       <div className="start-screen-info">
         <Timer
-          title="time"
+          title="Time"
           fill={constants.colorContentDark}
           width={fontSize}
           height={fontSize}
@@ -75,7 +75,7 @@ const StartScreen: React.FC<StartScreenProps> = ({
       </div>
       <div className="start-screen-info">
         <GridView
-          title="grid-size"
+          title="Grid-Size"
           fill={constants.colorContentDark}
           width={fontSize}
           height={fontSize}
@@ -84,7 +84,7 @@ const StartScreen: React.FC<StartScreenProps> = ({
       </div>
       <div className="start-screen-info">
         <EmojiEvents
-          title="grid-size"
+          title="Scoring"
           fill={constants.colorContentDark}
           width={fontSize}
           height={fontSize}
@@ -93,7 +93,7 @@ const StartScreen: React.FC<StartScreenProps> = ({
       </div>
       <div className="start-screen-info">
         <Sort
-          title="word-length"
+          title="Minimum Word Length"
           fill={constants.colorContentDark}
           width={fontSize}
           height={fontSize}
