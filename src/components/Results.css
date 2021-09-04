@@ -2,28 +2,22 @@
   width: 100%;
   height: 100%;
   box-sizing: border-box;
-  padding: 1vh 0;
+  padding: 1vh 0 0 0;
+  display: flex;
+  flex-direction: column;
 }
+
+.results>div:first-child {
+  margin: 1vh;
+}
+
 .results-main-container {
   display: flex;
   width: 100%;
   height: 100%;
-  padding: 0 1vh;
+  padding: 1vh 1vh;
   box-sizing: border-box;
-}
-
-.results-main-container>div {
-  min-width: 33%;
-  width: fit-content;
-  height: 100%;
-  padding-right: .25vh;
-}
-
-.results-main-container>div:first-child {
-  margin-right: auto;
-}
-.results-main-container>div:last-child {
-  margin-left: auto;
+  overflow-y: clip;
 }
 
 .titles {
@@ -32,21 +26,79 @@
   border-top: 1px solid var(--color-accent);
   border-bottom: 1px solid var(--color-accent);
   box-sizing: border-box;
-  padding: 0.5vh 1vh;
+  padding: 0.5vh 2vh;
   margin: 0.5vh 0;
 }
 
-.titles>div {
-  min-width: 33%;
-  width: fit-content;
+.results-list-selector {
+  display: flex;
+  flex-direction: row;
+  cursor: pointer;
 }
 
-.titles>div:first-child {
-  margin-right: auto;
-  margin-left: 5px;
+.results-list-selector>div {
+  width: 100%;
 }
 
-.titles>div:last-child {
-  margin-left: auto;
-  margin-right: 5px;
+.results-list-selector>div.selected {
+  background-color: var(--color-background-dark-alt);
+}
+
+@media screen and (orientation: landscape) {
+  .results-main-container>div {
+    min-width: 33%;
+    width: fit-content;
+    height: 100%;
+    padding-right: .25vh;
+  }
+
+  .results-main-container>div:first-child {
+    margin-right: auto;
+  }
+  .results-main-container>div:last-child {
+    margin-left: auto;
+  }
+
+  .titles>div {
+    min-width: 33%;
+    width: fit-content;
+  }
+
+
+  .results-list-selector {
+    display: none;
+    visibility: hidden;
+  }
+
+  .titles>div:first-child {
+    margin-right: auto;
+    margin-left: 5px;
+  }
+
+  .titles>div:last-child {
+    margin-left: auto;
+    margin-right: 5px;
+  }
+}
+
+@media screen and (orientation: portrait) {
+  .results-list-selector {
+    display: flex;
+    flex-direction: row;
+    visibility: initial;
+  }
+  .results-found-words {
+    width: 100%;
+  }
+  .results-missed-words {
+    width: 100%;
+  }
+  .titles>div {
+    width: 100%;
+    margin: auto;
+  }
+  .disabled {
+    visibility: hidden;
+    display: none;
+  }
 }

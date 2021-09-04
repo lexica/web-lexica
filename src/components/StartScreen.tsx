@@ -108,7 +108,7 @@ const StartScreen: React.FC<StartScreenProps> = ({
       onClick={disabled ? undefined : handleStart}
     >
       <PlayCircle
-        title="start-game"
+        title="Start"
         fill={disabled ? constants.colorBackgroundDark : constants.colorBackgroundLight}
         width={fontSizeTitle}
         height={fontSizeTitle}

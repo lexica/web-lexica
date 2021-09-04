@@ -11,28 +11,40 @@ const getTime = (timeInSeconds: number) => {
 const Score: React.FC<{
   remainingWords: string[],
   foundWords: string[],
-  remainingTime: number
+  remainingTime: number,
+  hideTime?: boolean,
+  showPercent?: boolean
 }> = ({
   remainingWords,
   foundWords,
-  remainingTime
+  remainingTime,
+  hideTime,
+  showPercent
 }) => {
-  const totalScore = foundWords.reduce((score: number, word: string) => scoreWord(word) + score, 0)
+  const currentScore = foundWords.reduce((score: number, word: string) => scoreWord(word) + score, 0)
+  const totalScore = remainingWords.reduce((score: number, word: string) => scoreWord(word) + score, 0) + currentScore
   const foundCount = foundWords.length
-  const remainingCount = remainingWords.length
+  const totalCount = remainingWords.length + foundCount
   return (
     <div className="container">
-      <div className="section">
+      <div
+        className="section"
+        style={hideTime ? { display: 'none'} : {}}
+      >
         <div className="title">Time</div>
         <div className="info">{getTime(remainingTime)}</div>
       </div>
       <div className="section">
         <div className="title">Words</div>
-        <div className="info">{`${foundCount}/${remainingCount + foundCount}`}</div>
+        <div className="info">
+          {foundCount}/{totalCount}{showPercent ? ` (${Math.floor((foundCount/totalCount) * 100)}%)` : '' }
+        </div>
       </div>
       <div className="section">
         <div className="title">Score</div>
-        <div className="info">{totalScore}</div>
+        <div className="info">
+          {currentScore}/{totalScore}{showPercent ? ` (${Math.floor((currentScore/totalScore) * 100)}%)` : ''}
+        </div>
       </div>
     </div>
   )

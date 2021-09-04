@@ -49,8 +49,14 @@
   margin: 1vh;
 }
 
-.start-screen-start-button-universal>div {
+.start-screen-start-button-universal div {
   margin-left: 0.5vh;
+  font-size: var(--font-size-title);
+}
+
+.start-screen-start-button-universal svg {
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 .start-screen-start-button-disabled {

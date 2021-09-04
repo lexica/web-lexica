@@ -1,40 +1,10 @@
-import { useEffect, useCallback, useState } from "react"
+import { useEffect, useCallback, useState } from 'react'
 
-const getHeight = (id: string) => {
-  const rawHeight = getComputedStyle(document.getElementById(id) as HTMLElement).height
-  const height = parseFloat(rawHeight)
-
-  console.log(JSON.stringify({ rawHeight, height, id }))
-
-  return height
-}
-
-// eslint-disable-next-line
-const em = (value: number) => {
-  const emPerPixel = getHeight('em-cheat')
-  return value * emPerPixel
-}
-
-const vh = (value: number) => {
-  const vhPerPixel = getHeight('viewport-height-cheat')
-  return value * vhPerPixel
-}
-
-// eslint-disable-next-line
-const vw = (value: number) => {
-  const vwPerPixel = getHeight('viewport-width-cheat')
-  return value * vwPerPixel
-}
-
-const clamp = (min: number, target: number, max: number) => {
-  const clampMin = Math.max(target, min)
-  const clampMax = Math.min(clampMin, max)
-  return clampMax
-}
+import { cssExp } from '../util/css-parse'
 
 const getConstants = () => ({
-  fontSize: clamp(vw(3), vh(2.5), vw(6)),
-  fontSizeTitle: clamp(vw(3.5), vh(3), vw(7)),
+  fontSize: cssExp`clamp(1em, min(2.5vh, 4vw), 2em)`,
+  fontSizeTitle: cssExp`clamp(1.5em, min(3vh, 5.25vw), 3em)`,
   fontWeightBold: 700,
   fontWeightLight: 100,
 
@@ -46,6 +16,10 @@ const getConstants = () => ({
 
   colorBackgroundDark: '#002b36',
   colorBackgroundLight: '#eee8d5',
+
+  colorBackgroundDarkAlt: '#073642',
+  colorBackgroundLightAlt: '#fdf6e3',
+
   colorAccent: '#268bd2'
 })
 
@@ -67,8 +41,8 @@ export const useConstants = () => {
 
 
 const constants = {
-  fontSize: 'clamp(1em, 2.5vh, 2em)',
-  fontSizeTitle: 'clamp(1.4em, 3vh, 2.4em)',
+  fontSize: 'clamp(1em, min(2.5vh, 4vw), 2em)',
+  fontSizeTitle: 'clamp(1.5em, min(3vh, 5.25vw), 3em)',
   fontWeightBold: 'bolder',
   fontWeightLight: 'lighter',
 
@@ -80,6 +54,10 @@ const constants = {
 
   colorBackgroundDark: '#002b36',
   colorBackgroundLight: '#eee8d5',
+
+  colorBackgroundDarkAlt: '#073642',
+  colorBackgroundLightAlt: '#fdf6e3',
+
   colorAccent: '#268bd2'
 }
 
