@@ -6,7 +6,7 @@ As of right now, the scope of the project is not to fully replicate everything L
 
 There are still a lot of rough edges with the project, but, all in all, it is in a playable state for both desktop and mobile users.
 
-As of right now, this is what the website can do:
+Currently, this is what the web version of Lexica can do:
 
 1. Play English (US, but maybe other variants) games
 1. Play `Letter Score` games.
