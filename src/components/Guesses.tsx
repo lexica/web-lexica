@@ -1,4 +1,5 @@
 import * as R from 'ramda'
+import { makeClasses } from '../util/classes'
 
 import './Guesses.css'
 
@@ -9,11 +10,14 @@ type GuessProps = {
   key: number
 }
 const Guess: React.FC<GuessProps> = ({ guess, isFirstGuess, isInDictionary, key }) => {
-  const className = isFirstGuess && isInDictionary
-    ? 'correct-guess'
-    : isInDictionary
-      ? 'repeat-guess'
-      : 'incorrect-guess'
+  const firstAndCorrect = isFirstGuess && isInDictionary
+  const correct = isInDictionary
+
+  const className = correct
+    ? firstAndCorrect
+      ? 'correct-gues'
+      : 'repeat-guess'
+    : 'incorrect-guess'
 
   return <div {...{ className, key }}>{guess.toUpperCase()}</div>
 }
@@ -25,12 +29,18 @@ const getGuessInfo = (guess: string, guesses: string[], dictionary: string[], in
   return { isFirstGuess, isInDictionary }
 }
 
+export enum GuessOrientation {
+  Vertical = 'vertical',
+  Horizontal = 'horizontal'
+}
+
 export type GuessesProps = {
  guesses: string[],
  dictionary: string[],
+ orientation: GuessOrientation
 }
 
-const Guesses: React.FC<GuessesProps> = ({ guesses, dictionary }) => {
+const Guesses: React.FC<GuessesProps> = ({ guesses, dictionary, orientation }) => {
   const guessesReversed = R.reverse(guesses)
   const indexedMap = R.addIndex<string, JSX.Element>(R.map)
 
@@ -41,7 +51,10 @@ const Guesses: React.FC<GuessesProps> = ({ guesses, dictionary }) => {
 
 
 
-  return <div className="guess-list" >
+  return <div className={makeClasses(
+    'guess-list',
+    orientation
+  )} >
     {indexedMap(makeGuess, guessesReversed)}
   </div>
 }

@@ -1,7 +1,6 @@
 import axios from 'axios'
 import * as R from 'ramda'
 import { Dispatch, Reducer, useEffect, useMemo, useReducer, useState } from 'react'
-import { useLocation } from 'react-router'
 import { Board } from './board'
 import {
   GameAction,

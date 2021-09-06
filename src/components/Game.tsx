@@ -2,11 +2,10 @@ import { useState, useEffect, useContext } from 'react'
 
 import { useGame } from '../game'
 import { ElementIdentifier, useElementSize, useInterval } from '../util/hooks'
-import { parseURLSearch } from '../util/url'
  
 import Board from './Board'
 import Score from './Score'
-import Guesses from './Guesses'
+import Guesses, { GuessOrientation } from './Guesses'
 import MostRecentGuess from './MostRecentGuess'
 import ScoredWordList from './ScoredWordList'
 import { HorizontalContainer, VerticalContainer } from './game/layouts'
@@ -52,6 +51,8 @@ const Game: React.FC<GameParams> = ({
   } = game
   const gameIsOver = getTimeDifference(startedAt, new Date()) > (time * 1000)
 
+  const guessOrientation = useVerticalLayout ? GuessOrientation.Horizontal : GuessOrientation.Vertical
+
   useEffect(() => stopInterval, [stopInterval])
 
   useEffect(() => {
@@ -70,7 +71,7 @@ const Game: React.FC<GameParams> = ({
 
   const board = <Board board={game.board} context={dispatch} />
   const mostRecentGuesses = <MostRecentGuess {...{ ...guessProps, currentLetterChain }}/>
-  const guesses = <Guesses {...guessProps} />
+  const guesses = <Guesses {...{ ...guessProps, orientation: guessOrientation }} />
   const score = <Score {...{ remainingWords, foundWords, remainingTime: remainingTime <= 0 ? 0 : remainingTime }}/>
   const foundWordsComponent = <ScoredWordList {...{ scoredWords: foundWords, scoreType }} />
 
