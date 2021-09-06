@@ -1,5 +1,6 @@
 import * as R from 'ramda'
-import { ScoreType, scoreWord } from "../game"
+import { scoreWord } from '../game'
+import { ScoreType } from '../game/rules'
 
 import './MostRecentGuess.css'
 

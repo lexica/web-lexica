@@ -1,12 +1,14 @@
 import * as R from 'ramda'
 
+type Letter = {
+  letter: string,
+  visited: boolean,
+  index: number
+}
+
 export type Board = {
   [key: number]: {
-    [key: number]: {
-      letter: string,
-      visited: boolean
-      index: number
-    }
+    [key: number]: Letter
   } & { index: number }
 } & { width: number }
 
@@ -45,6 +47,21 @@ export const getBoard = (line: string): Board => {
   }))
 
   return { ...getRows(board), width: board.length }
+}
+
+const boardMap = <T>(board: Board, callback: (letter: Letter, coordinates: Coordinates) => T): T[] => {
+  const { width } = board
+  let response: T[] = []
+  for(let row = 0; row < width; row++) {
+    for(let column = 0; column < width; column++) {
+      response.push(callback(board[row][column], { row, column }))
+    }
+  }
+  return response
+}
+
+export const getLine = (board: Board) => {
+  return boardMap(board, ({ letter }) => letter).join('')
 }
 
 export const deepCopyBoard = (board: Board) => {

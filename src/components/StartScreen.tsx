@@ -1,8 +1,5 @@
-import { useState } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useContext } from 'react'
 
-import { parseGameParameters, GameURLParams } from '../game'
-import { parseURLSearch } from '../util/url'
 import constants, { useConstants } from '../style/constants'
 
 import './StartScreen.css'
@@ -11,6 +8,7 @@ import { ReactComponent as GridView } from '@material-design-icons/svg/round/gri
 import { ReactComponent as EmojiEvents } from '@material-design-icons/svg/round/emoji_events.svg'
 import { ReactComponent as Sort } from '@material-design-icons/svg/round/sort.svg'
 import { ReactComponent as PlayCircle } from '@material-design-icons/svg/round/play_circle.svg'
+import { Rules } from '../game/rules'
 
 const getLanguageName = (languageCode: string): string => ({
   en_US: 'English (US)'
@@ -40,14 +38,13 @@ const StartScreen: React.FC<StartScreenProps> = ({
   loading,
   error
 }) => {
-  const location = useLocation()
-  const [gameParams] = useState(parseGameParameters(parseURLSearch<GameURLParams>(location.search)))
+  const rules = useContext(Rules)
 
   const { fontSize, fontSizeTitle } = useConstants()
 
   console.log(JSON.stringify({ fontSize }))
 
-  const gridSize = Math.floor(Math.sqrt(gameParams.board.length))
+  const gridSize = Math.floor(Math.sqrt(rules.board.length))
 
   const startButtonClass = loading || error
     ? 'start-screen-start-button-disabled'
@@ -62,7 +59,7 @@ const StartScreen: React.FC<StartScreenProps> = ({
 
   return <div className="start-screen">
     <div className="start-screen-title">Web Lexica Multiplayer Game</div>
-    <div className="start-screen-language">{getLanguageName(gameParams.language)}</div>
+    <div className="start-screen-language">{getLanguageName(rules.language)}</div>
     <div className="start-screen-info-container">
       <div className="start-screen-info">
         <Timer
@@ -71,7 +68,7 @@ const StartScreen: React.FC<StartScreenProps> = ({
           width={fontSize}
           height={fontSize}
         />
-        <div>{getReadableTime(gameParams.time)}</div>
+        <div>{getReadableTime(rules.time)}</div>
       </div>
       <div className="start-screen-info">
         <GridView
@@ -89,7 +86,7 @@ const StartScreen: React.FC<StartScreenProps> = ({
           width={fontSize}
           height={fontSize}
         />
-        <div>{getScoringType(gameParams.score)} Points</div>
+        <div>{getScoringType(rules.score)} Points</div>
       </div>
       <div className="start-screen-info">
         <Sort
@@ -98,7 +95,7 @@ const StartScreen: React.FC<StartScreenProps> = ({
           width={fontSize}
           height={fontSize}
         />
-        <div>&ge; {gameParams.minimumWordLength}</div>
+        <div>&ge; {rules.minimumWordLength}</div>
       </div>
     </div>
     <div className="start-screen-word-count">{wordCount}</div>

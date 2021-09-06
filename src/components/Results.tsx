@@ -1,6 +1,6 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 
-import { orderByWordScore, useGameParameters } from "../game"
+import { orderByWordScore } from "../game"
 import ScoredWordList from './ScoredWordList'
 import { useConstants } from '../style/constants'
 
@@ -8,6 +8,7 @@ import './Results.css'
 import { ReactComponent as CheckCircle } from '@material-design-icons/svg/round/check_circle.svg'
 import { ReactComponent as HighlightOff } from '@material-design-icons/svg/round/highlight_off.svg'
 import Score from './Score'
+import { Rules } from '../game/rules'
 
 enum Lists {
   FoundWords = 'found',
@@ -53,7 +54,7 @@ const Results: React.FC<{ foundWords: string[], remainingWords: string[] }> = ({
   remainingWords,
 }) => {
   const [displayedList, updateDisplayedList] = useState(Lists.FoundWords)
-  const { score: scoreType } = useGameParameters()
+  const { score: scoreType } = useContext(Rules)
   const orderedFoundWords = orderByWordScore(foundWords)
   const orderedMissedWords = orderByWordScore(remainingWords)
 

@@ -1,7 +1,6 @@
-import { useState, useEffect } from 'react' 
-import { useLocation } from 'react-router-dom'
+import { useState, useEffect, useContext } from 'react' 
 
-import { useGame, GameURLParams } from '../game'
+import { useGame } from '../game'
 import { ElementIdentifier, useElementSize, useInterval } from '../util/hooks'
 import { parseURLSearch } from '../util/url'
  
@@ -11,6 +10,7 @@ import Guesses from './Guesses'
 import MostRecentGuess from './MostRecentGuess'
 import ScoredWordList from './ScoredWordList'
 import { HorizontalContainer, VerticalContainer } from './game/layouts'
+import { Rules } from '../game/rules'
 
 
 const getTimeDifference = (start: Date, end: Date) => ((end as any) - (start as any)) as number
@@ -32,13 +32,13 @@ const Game: React.FC<GameParams> = ({
 }) => {
   const [startedAt] = useState(new Date())
 
-  const location = useLocation()
+  const rules = useContext(Rules)
 
-  const searchParams = parseURLSearch<GameURLParams>(location.search)
+  const [game, dispatch] = useGame(rules, dictionary)
 
-  const [game, dispatch, gameParameters] = useGame(searchParams, dictionary)
+  const { time, score: scoreType } = rules
 
-  const getRemainingTime = getRemainingTimeUnapplied(startedAt, gameParameters.time)
+  const getRemainingTime = getRemainingTimeUnapplied(startedAt, time)
   const [remainingTime, stopInterval] = useInterval<number>(getRemainingTime, 500, 0)
 
   const { size: { height, width } } = useElementSize(ElementIdentifier.Class, 'game-container')
@@ -50,7 +50,7 @@ const Game: React.FC<GameParams> = ({
     foundWords,
     currentLetterChain
   } = game
-  const gameIsOver = getTimeDifference(startedAt, new Date()) > (gameParameters.time * 1000)
+  const gameIsOver = getTimeDifference(startedAt, new Date()) > (time * 1000)
 
   useEffect(() => stopInterval, [stopInterval])
 
@@ -61,8 +61,6 @@ const Game: React.FC<GameParams> = ({
     }
   }, [gameIsOver, handleFinish, foundWords, remainingWords, stopInterval])
 
-
-  const scoreType = gameParameters.score
 
   const guessProps = {
     guesses: game.guessedWords,

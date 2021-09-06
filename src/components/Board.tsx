@@ -4,7 +4,8 @@ import * as R from 'ramda'
 import { GameAction, GameBoard, GameContext } from '../game/context'
 import './Board.css'
 import { getPointOnGridInfo, GetPointOnGridInfoArguments } from '../util/touch'
-import { getLetterScore, ScoreType, useGameParameters } from '../game'
+import { getLetterScore,  } from '../game'
+import { Rules, ScoreType } from '../game/rules'
 
 type LetterProps = {
   row: number,
@@ -20,7 +21,8 @@ const Letter: React.FC<LetterProps> = ({
   visited,
 }) => {
   const dispatch = useContext(GameContext)
-  const { score: scoreType, language } = useGameParameters()
+  // const { score: scoreType, language } = useGameParameters()
+  const { score: scoreType, language } = useContext(Rules)
   const classes = ['spacer']
 
   if (visited) classes.push('visited')
