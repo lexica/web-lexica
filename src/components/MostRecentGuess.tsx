@@ -1,6 +1,7 @@
 import * as R from 'ramda'
 import { scoreWord } from '../game'
 import { ScoreType } from '../game/rules'
+import { makeClasses } from '../util/classes'
 
 import './MostRecentGuess.css'
 
@@ -22,14 +23,14 @@ const MostRecentGuess: React.FC<MostRecentGuessProps> = ({
   const mostRecentGuess = R.head(guessesReversed) || ''
 
   const isCorrectGuess = dictionary.includes(mostRecentGuess)
-  const isFirstTimeGuessing = guessesReversed.lastIndexOf(mostRecentGuess) === 0
+  const isFirstTimeGuessing = guesses.filter(guess => guess === mostRecentGuess).length === 1
 
   const shouldScoreWord = !showLetterChain && isCorrectGuess
   const repeatScore = !isFirstTimeGuessing
 
   const score = shouldScoreWord ? ` +${scoreWord(mostRecentGuess, scoreType)}` : ''
 
-  const classes = ['most-recent-guess', repeatScore ? 'repeat-score' : ''].join(' ')
+  const classes = makeClasses('most-recent-guess', { condition: repeatScore, name: 'repeat-guess' })
 
   const word = showLetterChain ? currentLetterChain : mostRecentGuess
 
