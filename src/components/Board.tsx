@@ -26,7 +26,7 @@ const Letter: React.FC<LetterProps> = ({
   const classes = ['spacer']
 
   if (visited) classes.push('visited')
-  const dispatchMoveEvent = () => { dispatch({ type: 'hover', info: { coordinates: { row, column } } }); console.log(`${row}-${column} hover`) }
+  const dispatchMoveEvent = () => { dispatch({ type: 'hover', info: { coordinates: { row, column } } }); /* console.log(`${row}-${column} hover`) */ }
 
   const showScore = scoreType === ScoreType.Letters || undefined
 
@@ -92,8 +92,8 @@ export const Board: React.FC<{ board: GameBoard }> = ({ board }) => {
 
   return <div
     className="board"
-    onMouseDown={() => { handleClick(true); console.log('start click') }}
-    onMouseUp={() => { handleClick(false); console.log('end click') }}
+    onMouseDown={() => { handleClick(true); /* console.log('start click') */ }}
+    onMouseUp={() => { handleClick(false); /* console.log('end click') */ }}
     onTouchStart={(e) => {
       const lastTouch = getLast(e.touches)
       maybeDispatchMove(lastTouch, 1)
