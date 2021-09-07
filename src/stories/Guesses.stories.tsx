@@ -6,9 +6,21 @@ export default {
   title: 'Guess list',
   component: Guesses,
   argTypes: {
-    dictionary: ['word'],
-    guesses: ['guess'],
-    orientation: GuessOrientation
+    dictionary: {
+      defaultValue: [''],
+      description: 'A list of valid words, does not need to container every possible valid word, but at least all valid words that appear in `guesses`',
+      name: 'dictionary',
+    },
+    guesses: {
+      defaultValue: [''],
+      description: 'A list of guesses made during a game',
+      name: 'guesses'
+    },
+    orientation: {
+      defaultValue: GuessOrientation.Horizontal,
+      description: 'The flow of the listed guesses, either stacked vertically, or side by side horizontally',
+      name: 'orientation'
+    }
   },
 } as ComponentMeta<typeof Guesses>
 
@@ -31,9 +43,3 @@ Horizontal.args = {
   dictionary: ['correct'],
   orientation: GuessOrientation.Horizontal
 }
-
-// export const SixBySix = Template.bind({})
-// SixBySix.args = {
-//   board: getBoard('aaaaaabbbbbbccccccddddddeeeeeeffffff')
-// }
-
