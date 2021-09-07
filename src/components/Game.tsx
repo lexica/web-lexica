@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from 'react' 
 
 import { useGame } from '../game'
-import { ElementIdentifier, useElementSize, useInterval } from '../util/hooks'
+import { ScreenOrientation, useInterval, useOrientation } from '../util/hooks'
  
 import Board from './Board'
 import Score from './Score'
@@ -40,9 +40,9 @@ const Game: React.FC<GameParams> = ({
   const getRemainingTime = getRemainingTimeUnapplied(startedAt, time)
   const [remainingTime, stopInterval] = useInterval<number>(getRemainingTime, 500, 0)
 
-  const { size: { height, width } } = useElementSize(ElementIdentifier.Class, 'game-container')
+  const orientation = useOrientation()
 
-  const useVerticalLayout = height >= width
+  const useVerticalLayout = orientation === ScreenOrientation.Portrait
 
   const {
     remainingWords,

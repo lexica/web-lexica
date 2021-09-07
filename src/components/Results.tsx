@@ -9,16 +9,25 @@ import { ReactComponent as CheckCircle } from '@material-design-icons/svg/round/
 import { ReactComponent as HighlightOff } from '@material-design-icons/svg/round/highlight_off.svg'
 import Score from './Score'
 import { Rules } from '../game/rules'
+import { makeClasses } from '../util/classes'
 
 enum Lists {
   FoundWords = 'found',
   MissedWords = 'missed'
 }
 
-const ListSelector: React.FC<{ listName: Lists, displayedList: Lists, updateDisplayedList: (list: Lists) => void }> = ({
+type ListSelectorProps = {
+  listName: Lists,
+  displayedList: Lists,
+  updateDisplayedList: (list: Lists) => void,
+  orientation: ResultsOrientation
+}
+
+const ListSelector: React.FC<ListSelectorProps> = ({
   listName,
   displayedList,
-  updateDisplayedList
+  updateDisplayedList,
+  orientation
 }) => {
   const constants = useConstants()
 
@@ -36,11 +45,14 @@ const ListSelector: React.FC<{ listName: Lists, displayedList: Lists, updateDisp
     ? <CheckCircle {...svgProps} />
     : <HighlightOff {...svgProps}/>
 
+  const selectorClass = makeClasses(
+    'results-list-selector-button',
+    orientation,
+    { condition: displayedList === listName, name: 'selected' }
+  )
+
     return <div
-      className={[
-        'results-list-selector-button',
-        displayedList === listName ? 'selected' : ''
-      ].join(' ') }
+      className={selectorClass}
       onClick={() =>updateDisplayedList(listName)}
     >
       {svg}
@@ -48,10 +60,19 @@ const ListSelector: React.FC<{ listName: Lists, displayedList: Lists, updateDisp
     </div>
 }
 
+export enum ResultsOrientation {
+  Vertical = 'vertical',
+  Horizontal = 'horizontal'
+}
 
-const Results: React.FC<{ foundWords: string[], remainingWords: string[] }> = ({
+const Results: React.FC<{ 
+  foundWords: string[],
+  remainingWords: string[],
+  orientation: ResultsOrientation
+}> = ({
   foundWords,
   remainingWords,
+  orientation
 }) => {
   const [displayedList, updateDisplayedList] = useState(Lists.FoundWords)
   const { score: scoreType } = useContext(Rules)
@@ -59,19 +80,18 @@ const Results: React.FC<{ foundWords: string[], remainingWords: string[] }> = ({
   const orderedMissedWords = orderByWordScore(remainingWords)
 
 
-  let foundWordsClass = 'results-found-words'
-  let missedWordsClass = 'results-missed-words'
+  let foundWordsClass = makeClasses(
+    'results-found-words',
+    orientation,
+    { condition: displayedList === Lists.MissedWords, name: 'disabled' }
+  )
+  let missedWordsClass = makeClasses(
+    'results-missed-words',
+    orientation,
+    { condition: displayedList === Lists.FoundWords, name: 'disabled' }
+    )
 
-  switch (displayedList) {
-    case Lists.MissedWords:
-      foundWordsClass += ' disabled'
-      break;
-    case Lists.FoundWords:
-    default:
-      missedWordsClass += ' disabled'
-  }
-
-  const listSelectorProps = { displayedList, updateDisplayedList }
+  const listSelectorProps = { displayedList, updateDisplayedList, orientation }
 
   return <div className="results">
     <Score
@@ -81,7 +101,7 @@ const Results: React.FC<{ foundWords: string[], remainingWords: string[] }> = ({
       remainingTime={0}
       showPercent
     />
-    <div className="titles">
+    <div className={`titles ${orientation}`}>
       <div
         className={displayedList === Lists.MissedWords ? 'disabled' : ''}
       >
@@ -93,7 +113,7 @@ const Results: React.FC<{ foundWords: string[], remainingWords: string[] }> = ({
         Missed Words
       </div>
     </div>
-    <div className="results-main-container">
+    <div className={`results-main-container ${orientation}`}>
       <div className={foundWordsClass}>
         <ScoredWordList {...{
           scoredWords: orderedFoundWords,
@@ -107,7 +127,7 @@ const Results: React.FC<{ foundWords: string[], remainingWords: string[] }> = ({
         }}/>
       </div>
     </div>
-    <div className="results-list-selector">
+    <div className={`results-list-selector ${orientation}`}>
       <ListSelector {...{ ...listSelectorProps, listName: Lists.FoundWords }}/>
       <ListSelector {...{ ...listSelectorProps, listName: Lists.MissedWords }}/>
     </div>

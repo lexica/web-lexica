@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { Reducer, useCallback, useEffect, useMemo, useReducer, useState } from 'react'
 
 export const useInterval = <T extends any>(callback: (...args: any[]) => T, interval: number, initialValue?: T): [T, () => void] => {
   const [value, setValue] = useState<T | undefined>(initialValue)
@@ -76,4 +76,34 @@ export const useElementSize = (identifierType: ElementIdentifier, identifier: st
   })
 
   return size
+}
+
+export enum ScreenOrientation {
+  Landscape = 'landscape',
+  Portrait = 'portrait'
+}
+
+type OrientationAction = { width: number, height: number }
+
+export const useOrientation = () => {
+  const { size } = useElementSize(ElementIdentifier.Type, 'body')
+
+  const [orientation, setOrientation] = useReducer<Reducer<ScreenOrientation, OrientationAction>>(
+    ((state, { width, height}) => {
+      const newOrientation = height >= width
+        ? ScreenOrientation.Portrait
+        : ScreenOrientation.Landscape
+      if (newOrientation !== state) {
+        return newOrientation
+      }
+      return state
+    }),
+    ScreenOrientation.Landscape
+  )
+
+  useEffect(() => {
+    console.log('updating orientation')
+    setOrientation(size)
+  }, [size, setOrientation])
+  return orientation
 }
