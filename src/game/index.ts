@@ -14,22 +14,29 @@ import { GameRules, ScoreType } from './rules'
 
 import scores from './scores.json'
 
-const alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'qu', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'] as const
-type Alphabet = typeof alphabet[number]
-
-
 export type Language = keyof typeof scores
 export type Letter = keyof typeof scores[Language]
 
 export const getLetterScore = (letter: string, language: string) => scores[language as Language][letter as Letter]
 
-export const scoreWord = (word: string, _scoreType: ScoreType = ScoreType.Letters, language: string = 'en_US') => R.pipe<string, Alphabet[], number>(
-  R.splitEvery(1) as (a: string) => Alphabet[],
-  R.reduce<Alphabet, number>((acc, letter) => acc + scores[language as any as keyof typeof scores][(letter as string) === 'q' ? 'qu' : letter], 0)
+const getScoreByLetterPoints = (word: string, letterPoints: { [key: string]: number }) => R.pipe<string, string[], number>(
+  R.splitEvery(1) as (a: string) => string[],
+  R.reduce<string, number>((acc, letter) => acc + letterPoints[(letter as string) === 'q' ? 'qu' : letter], 0)
 )(word)
 
-export const orderByWordScore = (dictionary: string[], scoreType: ScoreType = ScoreType.Letters) => R.sortWith(
-  [R.descend<string>((word) => scoreWord(word, scoreType)), R.ascend<string>(R.identity)],
+export const scoreWord = (word: string, scoreType: ScoreType, language: string) => {
+  switch (scoreType) {
+    case ScoreType.Letters:
+      return getScoreByLetterPoints(word, scores[language as any as keyof typeof scores])
+    case ScoreType.Words:
+      return word.length
+    default:
+      return 0
+  }
+}
+
+export const orderByWordScore = (dictionary: string[], scoreType: ScoreType, language: string) => R.sortWith(
+  [R.descend<string>((word) => scoreWord(word, scoreType, language)), R.ascend<string>(R.identity)],
   dictionary
 )
 

@@ -1,4 +1,6 @@
+import { useContext } from 'react'
 import { scoreWord } from '../game'
+import { Rules } from '../game/rules'
 import './Score.css'
 
 const getTime = (timeInSeconds: number) => {
@@ -21,8 +23,10 @@ const Score: React.FC<{
   hideTime,
   showPercent
 }) => {
-  const currentScore = foundWords.reduce((score: number, word: string) => scoreWord(word) + score, 0)
-  const totalScore = remainingWords.reduce((score: number, word: string) => scoreWord(word) + score, 0) + currentScore
+  const { score: scoreType, language } = useContext(Rules)
+
+  const currentScore = foundWords.reduce((score: number, word: string) => scoreWord(word, scoreType, language) + score, 0)
+  const totalScore = remainingWords.reduce((score: number, word: string) => scoreWord(word, scoreType, language) + score, 0) + currentScore
   const foundCount = foundWords.length
   const totalCount = remainingWords.length + foundCount
   return (

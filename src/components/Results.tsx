@@ -75,9 +75,9 @@ const Results: React.FC<{
   orientation
 }) => {
   const [displayedList, updateDisplayedList] = useState(Lists.FoundWords)
-  const { score: scoreType } = useContext(Rules)
-  const orderedFoundWords = orderByWordScore(foundWords)
-  const orderedMissedWords = orderByWordScore(remainingWords)
+  const { score: scoreType, language } = useContext(Rules)
+  const orderedFoundWords = orderByWordScore(foundWords, scoreType, language)
+  const orderedMissedWords = orderByWordScore(remainingWords, scoreType, language)
 
 
   let foundWordsClass = makeClasses(

@@ -1,6 +1,8 @@
+import { useContext } from 'react'
 import * as R from 'ramda'
+
 import { scoreWord } from '../game'
-import { ScoreType } from '../game/rules'
+import { Rules } from '../game/rules'
 import { makeClasses } from '../util/classes'
 
 import './MostRecentGuess.css'
@@ -8,7 +10,6 @@ import './MostRecentGuess.css'
 export type MostRecentGuessProps = {
   guesses: string[],
   dictionary: string[],
-  scoreType: ScoreType,
   currentLetterChain: string
 }
 
@@ -16,8 +17,9 @@ const MostRecentGuess: React.FC<MostRecentGuessProps> = ({
   guesses,
   currentLetterChain,
   dictionary,
-  scoreType
 }) => {
+
+  const rules = useContext(Rules)
   const showLetterChain = currentLetterChain.length > 0
   const guessesReversed = R.reverse(guesses)
   const mostRecentGuess = R.head(guessesReversed) || ''
@@ -28,7 +30,7 @@ const MostRecentGuess: React.FC<MostRecentGuessProps> = ({
   const shouldScoreWord = !showLetterChain && isCorrectGuess
   const repeatScore = !isFirstTimeGuessing
 
-  const score = shouldScoreWord ? ` +${scoreWord(mostRecentGuess, scoreType)}` : ''
+  const score = shouldScoreWord ? ` +${scoreWord(mostRecentGuess, rules.score, rules.language)}` : ''
 
   const classes = makeClasses('most-recent-guess', { condition: repeatScore, name: 'repeat-guess' })
 
