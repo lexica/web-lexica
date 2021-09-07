@@ -1,6 +1,7 @@
 import * as R from 'ramda'
 
-import { orderByWordScore, ScoreType, scoreWord } from "../game";
+import { orderByWordScore, scoreWord } from '../game';
+import { ScoreType } from '../game/rules'
 
 import './ScoredWordList.css'
 import '../style/scrollbar.css'

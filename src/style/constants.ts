@@ -23,18 +23,33 @@ const getConstants = () => ({
   colorAccent: '#268bd2'
 })
 
+const useUnits = () => {
+  const [ready, setReady] = useState(false)
+  useEffect(() => {
+    if (document.getElementById('viewport-height-cheat')) {
+      setReady(true)
+    }
+  }, [setReady])
+  return ready
+}
+
 export const useConstants = () => {
   const [constants, updateConstants] = useState(getConstants())
   const updateState = useCallback(() => updateConstants(getConstants()), [])
 
+  const ready = useUnits()
+
+  useEffect(() => {
+    if (ready) updateConstants(getConstants())
+  }, [updateConstants, ready])
+
   useEffect(() => {
     const eventListener = () => {
-      console.log(JSON.stringify(getConstants()))
       updateState()
     }
     window.addEventListener('resize', eventListener)
     return () => window.removeEventListener('resize', eventListener)
-  })
+  }, [updateState])
 
   return constants
 }

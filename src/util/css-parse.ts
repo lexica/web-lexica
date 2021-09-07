@@ -5,12 +5,14 @@ const toCamelCaseReplaceFn = (_: string, wordSoFar: string, toCapitalize: string
 export const toCamelCase = (property: string) => property.replace(/(?:--)?(\w+)-(\w)/ig, toCamelCaseReplaceFn)
 
 const getHeight = (id: string) => {
-  const rawHeight = getComputedStyle(document.getElementById(id) as HTMLElement).height
-  const height = parseFloat(rawHeight)
+  try {
+    const rawHeight = getComputedStyle(document.getElementById(id) as HTMLElement).height
+    const height = parseFloat(rawHeight)
 
-  console.log(JSON.stringify({ rawHeight, height, id }))
-
-  return height
+    return height
+  } catch {
+    return 0
+  }
 }
 
 // eslint-disable-next-line

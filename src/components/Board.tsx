@@ -4,7 +4,8 @@ import * as R from 'ramda'
 import { GameAction, GameBoard, GameContext } from '../game/context'
 import './Board.css'
 import { getPointOnGridInfo, GetPointOnGridInfoArguments } from '../util/touch'
-import { getLetterScore, ScoreType, useGameParameters } from '../game'
+import { getLetterScore,  } from '../game'
+import { Rules, ScoreType } from '../game/rules'
 
 type LetterProps = {
   row: number,
@@ -20,11 +21,12 @@ const Letter: React.FC<LetterProps> = ({
   visited,
 }) => {
   const dispatch = useContext(GameContext)
-  const { score: scoreType, language } = useGameParameters()
+  // const { score: scoreType, language } = useGameParameters()
+  const { score: scoreType, language } = useContext(Rules)
   const classes = ['spacer']
 
   if (visited) classes.push('visited')
-  const dispatchMoveEvent = () => { dispatch({ type: 'hover', info: { coordinates: { row, column } } }); console.log(`${row}-${column} hover`) }
+  const dispatchMoveEvent = () => { dispatch({ type: 'hover', info: { coordinates: { row, column } } }); /* console.log(`${row}-${column} hover`) */ }
 
   const showScore = scoreType === ScoreType.Letters || undefined
 
@@ -90,8 +92,8 @@ export const Board: React.FC<{ board: GameBoard }> = ({ board }) => {
 
   return <div
     className="board"
-    onMouseDown={() => { handleClick(true); console.log('start click') }}
-    onMouseUp={() => { handleClick(false); console.log('end click') }}
+    onMouseDown={() => { handleClick(true); /* console.log('start click') */ }}
+    onMouseUp={() => { handleClick(false); /* console.log('end click') */ }}
     onTouchStart={(e) => {
       const lastTouch = getLast(e.touches)
       maybeDispatchMove(lastTouch, 1)

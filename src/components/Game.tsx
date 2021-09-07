@@ -1,16 +1,15 @@
-import { useState, useEffect } from 'react' 
-import { useLocation } from 'react-router-dom'
+import { useState, useEffect, useContext } from 'react' 
 
-import { useGame, GameURLParams } from '../game'
-import { ElementIdentifier, useElementSize, useInterval } from '../util/hooks'
-import { parseURLSearch } from '../util/url'
+import { useGame } from '../game'
+import { ScreenOrientation, useInterval, useOrientation } from '../util/hooks'
  
 import Board from './Board'
 import Score from './Score'
-import Guesses from './Guesses'
+import Guesses, { GuessOrientation } from './Guesses'
 import MostRecentGuess from './MostRecentGuess'
 import ScoredWordList from './ScoredWordList'
 import { HorizontalContainer, VerticalContainer } from './game/layouts'
+import { Rules } from '../game/rules'
 
 
 const getTimeDifference = (start: Date, end: Date) => ((end as any) - (start as any)) as number
@@ -32,25 +31,27 @@ const Game: React.FC<GameParams> = ({
 }) => {
   const [startedAt] = useState(new Date())
 
-  const location = useLocation()
+  const rules = useContext(Rules)
 
-  const searchParams = parseURLSearch<GameURLParams>(location.search)
+  const [game, dispatch] = useGame(rules, dictionary)
 
-  const [game, dispatch, gameParameters] = useGame(searchParams, dictionary)
+  const { time, score: scoreType } = rules
 
-  const getRemainingTime = getRemainingTimeUnapplied(startedAt, gameParameters.time)
+  const getRemainingTime = getRemainingTimeUnapplied(startedAt, time)
   const [remainingTime, stopInterval] = useInterval<number>(getRemainingTime, 500, 0)
 
-  const { size: { height, width } } = useElementSize(ElementIdentifier.Class, 'game-container')
+  const orientation = useOrientation()
 
-  const useVerticalLayout = height >= width
+  const useVerticalLayout = orientation === ScreenOrientation.Portrait
 
   const {
     remainingWords,
     foundWords,
     currentLetterChain
   } = game
-  const gameIsOver = getTimeDifference(startedAt, new Date()) > (gameParameters.time * 1000)
+  const gameIsOver = getTimeDifference(startedAt, new Date()) > (time * 1000)
+
+  const guessOrientation = useVerticalLayout ? GuessOrientation.Horizontal : GuessOrientation.Vertical
 
   useEffect(() => stopInterval, [stopInterval])
 
@@ -62,8 +63,6 @@ const Game: React.FC<GameParams> = ({
   }, [gameIsOver, handleFinish, foundWords, remainingWords, stopInterval])
 
 
-  const scoreType = gameParameters.score
-
   const guessProps = {
     guesses: game.guessedWords,
     dictionary: game.foundWords,
@@ -72,7 +71,7 @@ const Game: React.FC<GameParams> = ({
 
   const board = <Board board={game.board} context={dispatch} />
   const mostRecentGuesses = <MostRecentGuess {...{ ...guessProps, currentLetterChain }}/>
-  const guesses = <Guesses {...guessProps} />
+  const guesses = <Guesses {...{ ...guessProps, orientation: guessOrientation }} />
   const score = <Score {...{ remainingWords, foundWords, remainingTime: remainingTime <= 0 ? 0 : remainingTime }}/>
   const foundWordsComponent = <ScoredWordList {...{ scoredWords: foundWords, scoreType }} />
 

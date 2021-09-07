@@ -68,11 +68,11 @@ const click = actionTypes[1]
 
 type ActionTypes = typeof actionTypes[number]
 
-type HoverInfo = {
+export type HoverInfo = {
   coordinates: Coordinates
 }
 
-type ClickInfo = {
+export type ClickInfo = {
   clicked: boolean
 }
 
@@ -129,8 +129,6 @@ const handleFinishClick = (state: GameState): GameState => {
   // console.log('finishing a click')
 
   const {
-    startTime,
-    totalTime,
     board
   } = state
 
@@ -141,11 +139,6 @@ const handleFinishClick = (state: GameState): GameState => {
         newBoard[x][y].visited = false
       }
     }
-
-  if (gameIsOver(startTime, totalTime)) {
-    state.board = newBoard
-    return state
-  }
 
   const {
     currentLetterChain,
@@ -219,13 +212,6 @@ const handleHover = (state: GameState, { coordinates }: HoverInfo): GameState =>
   if (state.mouseIsClicked) return handleClickedHover(state, coordinates)
   state.currentLetter = coordinates
   return state
-}
-
-const gameIsOver = (startTime: Date, totalTime: number) => {
-  const passedTime: number = ((new Date() as any) - (startTime as any)) / 1000
-  const gameOver = passedTime >= totalTime
-  console.log(`game is over: ${gameOver}`)
-  return gameOver
 }
 
 export const gameReducer = (state: GameState, action: GameAction) => {
