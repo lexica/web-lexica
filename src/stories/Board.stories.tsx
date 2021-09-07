@@ -1,10 +1,10 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { Dispatch, Reducer, useReducer } from 'react';
+import { Dispatch, Reducer, useContext, useEffect, useReducer } from 'react';
 
 import { Board } from '../components/Board';
-import { Board as BoardObject, Coordinates, deepCopyBoard, getBoard, getLine } from '../game/board';
+import { Board as BoardObject, Coordinates, deepCopyBoard, getBoard } from '../game/board';
 import { ClickInfo, GameAction, GameContext, HoverInfo } from '../game/context';
-import { Rules, ScoreType } from '../game/rules';
+import { Rules } from '../game/rules';
 
 const metadata: ComponentMeta<typeof Board> = {
   title: 'Game Board',
@@ -69,38 +69,19 @@ const useMiniReducer = (originalBoard: BoardObject): [BoardObject, Dispatch<Game
   return [state, dispatch]
 }
 
-const Template: ComponentStory<typeof Board> = (args) => {
-  const [board, dispatch] = useMiniReducer(args.board)
+export const Template: ComponentStory<typeof Board> = (args) => {
+  const rules = useContext(Rules)
+  const [board, dispatch] = useMiniReducer(getBoard(rules.board))
+
+  useEffect(() => {
+    // force board update...
+    dispatch({ type: 'click', info: { clicked: true }})
+    dispatch({ type: 'click', info: { clicked: false }})
+  }, [rules, dispatch])
+
   return <GameContext.Provider
     value={dispatch as any}
   >
-    <Rules.Provider
-      value={{
-        board: getLine(args.board),
-        language: 'en_US',
-        minimumVersion: 0,
-        minimumWordLength: 4,
-        score: ScoreType.Letters,
-        time: 0,
-        version: 0
-      }}
-    >
-      <Board {...{ ...args, board }}/>
-    </Rules.Provider>
+    <Board {...{ board }}/>
   </GameContext.Provider>
-};
-
-export const FourByFour = Template.bind({});
-FourByFour.args = {
-  board: getBoard('aaaabbbbccccdddd'),
-};
-
-export const FiveByFive = Template.bind({});
-FiveByFive.args = {
-  board: getBoard('aaaaabbbbbcccccdddddeeeee')
-};
-
-export const SixBySix = Template.bind({});
-SixBySix.args = {
-  board: getBoard('aaaaaabbbbbbccccccddddddeeeeeeffffff')
 };

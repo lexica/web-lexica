@@ -3,7 +3,6 @@ import { ComponentMeta, ComponentStory } from '@storybook/react'
 import Results, { ResultsOrientation } from '../components/Results'
 import ScoredWordList from '../components/ScoredWordList'
 import Score from '../components/Score'
-import { Rules, ScoreType } from '../game/rules'
 import Cheats from './Cheats'
 
 const getLists = () => ({
@@ -53,21 +52,10 @@ const metadata: ComponentMeta<typeof Results> = {
 
 export default metadata
 
-export const Template: ComponentStory<typeof Results> = args => <Rules.Provider
-  value={{
-    board: 'abcdefghijklmnop',
-    language: 'en_US',
-    minimumVersion: 0,
-    version: 0,
-    minimumWordLength: 1,
-    score: ScoreType.Letters,
-    time: 0
-  }}
->
-  <Cheats>
-    <Results {...args}/>
-  </Cheats>
-</Rules.Provider>
+export const Template: ComponentStory<typeof Results> = args => <>
+  <Cheats/>
+  <Results {...args}/>
+</>
 
 export const HorizontalLayout = Template.bind({})
 HorizontalLayout.args = {

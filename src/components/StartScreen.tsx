@@ -15,8 +15,8 @@ const getLanguageName = (languageCode: string): string => ({
 }[languageCode] as any)
 
 const getScoringType = (scoringType: string): string => ({
-  'l': 'Letter',
-  'w': 'Word'
+  'l': 'Letter Points',
+  'w': 'Word Length'
 }[scoringType] as any)
 
 const getReadableTime = (time: number) => {
@@ -86,7 +86,7 @@ const StartScreen: React.FC<StartScreenProps> = ({
           width={fontSize}
           height={fontSize}
         />
-        <div>{getScoringType(rules.score)} Points</div>
+        <div>{getScoringType(rules.score)}</div>
       </div>
       <div className="start-screen-info">
         <Sort
