@@ -1,30 +1,50 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 
 import MostRecentGuess from '../components/MostRecentGuess'
+import Providers from './Providers'
 
 const defaults = {
-  dictionary: ['correct'],
+  foundWords: ['correct'],
   guesses: ['incorrect'],
-  currentLetterChain: '',
+  currentGuess: '',
 }
 
-const componentMeta: ComponentMeta<typeof MostRecentGuess> = {
+const ComponentBulder: React.FC<{
+  foundWords: string[],
+  guesses: string[],
+  currentGuess: string,
+  isGuessing: boolean
+}> = ({
+  foundWords,
+  currentGuess,
+  guesses,
+  isGuessing,
+}) => {
+
+  return <Providers 
+    guess={{
+      currentGuess,
+      isGuessing,
+      guesses
+    }}
+    score={{
+      foundWords
+    }}
+  >
+    <MostRecentGuess/>
+  </Providers>
+}
+
+const componentMeta: ComponentMeta<typeof ComponentBulder> = {
   title: 'Most Recent Guess',
   argTypes: {
-    guesses: {
-      description: 'All previous guesses made during the current game',
-      defaultValue: [''],
-      name: 'guesses'
+    GuessContext: {
+      description: 'This component requires the Guess context in order to function properly',
+      name: 'Guess Context'
     },
-    dictionary: {
-      description: 'List of valid words, does not need to be full dictionary, usually is set to any "found" words during the current game',
-      defalutValue: [''],
-      name: 'dictionary'
-    },
-    currentLetterChain: {
-      description: 'the "in-progress" guess of a user',
-      defaultValue: '',
-      name: 'currentLetterChain',
+    ScoreContext: {
+      description: 'This component requires the Score context in order to function properly',
+      name: 'Score Context'
     },
   },
   args: {
@@ -35,25 +55,30 @@ const componentMeta: ComponentMeta<typeof MostRecentGuess> = {
 
 export default componentMeta
 
-export const Template: ComponentStory<typeof MostRecentGuess> = args => <MostRecentGuess {...args}/>
+export const Template: ComponentStory<typeof ComponentBulder> = args => <ComponentBulder {...args}/>
 
 export const CorrectFirstGuess = Template.bind({})
 CorrectFirstGuess.args = {
-  dictionary: ['correct'],
+  foundWords: ['correct'],
   guesses: ['correct'],
-  currentLetterChain: '',
+  currentGuess: '',
+  isGuessing: false
 }
 
 export const RepeatCorrectGuess = Template.bind({})
 RepeatCorrectGuess.args = {
-  dictionary: ['correct'],
+  foundWords: ['correct'],
   guesses: ['correct', 'correct', 'correct'],
-  currentLetterChain: '',
 }
 
 export const IncorrectGuess = Template.bind({})
 IncorrectGuess.args = {
-  dictionary: ['correct'],
+  foundWords: ['correct'],
   guesses: ['correct', 'correct', 'correct', 'incorrect'],
-  currentLetterChain: '',
+}
+
+export const InProgressGuess = Template.bind({})
+InProgressGuess.args = {
+  isGuessing: true,
+  currentGuess: 'onomonopia'
 }

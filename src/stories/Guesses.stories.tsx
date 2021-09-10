@@ -1,20 +1,39 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { useContext } from 'react'
 
+import Providers from './Providers'
 import Guesses, { GuessOrientation } from '../components/Guesses'
+
+const GuessesBuilder: React.FC<{
+  guesses: string[],
+  foundWords: string[],
+  orientation: GuessOrientation
+}> = ({
+  guesses,
+  foundWords,
+  orientation
+}) => <Providers {...{
+  guess: { guesses },
+  score: { foundWords }
+}}
+>
+  <Guesses
+    orientation={orientation}
+  />
+</Providers>
+
 
 export default {
   title: 'Guess list',
   component: Guesses,
   argTypes: {
-    dictionary: {
-      defaultValue: [''],
-      description: 'A list of valid words, does not need to container every possible valid word, but at least all valid words that appear in `guesses`',
-      name: 'dictionary',
+    ScoreContext: {
+      description: 'This component requires the Score context',
+      name: 'Score Context',
     },
-    guesses: {
-      defaultValue: [''],
-      description: 'A list of guesses made during a game',
-      name: 'guesses'
+    GuessContext: {
+      description: 'This component requires the Guess context',
+      name: 'Guess Context'
     },
     orientation: {
       defaultValue: GuessOrientation.Horizontal,
@@ -22,24 +41,19 @@ export default {
       name: 'orientation'
     }
   },
-} as ComponentMeta<typeof Guesses>
+} as ComponentMeta<typeof GuessesBuilder>
 
-const Template: ComponentStory<typeof Guesses> = ({ guesses, dictionary, orientation }) => <Guesses
-  guesses={guesses}
-  dictionary={dictionary}
-  orientation={orientation}
-/>
-
+const Template: ComponentStory<typeof GuessesBuilder> = (args) => <GuessesBuilder {...args}/>
 export const Vertical = Template.bind({})
 Vertical.args = {
   guesses: ['incorrect', 'correct', 'correct',],
-  dictionary: ['correct'],
+  foundWords: ['correct'],
   orientation: GuessOrientation.Vertical
 }
 
 export const Horizontal = Template.bind({})
 Horizontal.args = {
   guesses: ['incorrect', 'correct', 'correct',],
-  dictionary: ['correct'],
+  foundWords: ['correct'],
   orientation: GuessOrientation.Horizontal
 }

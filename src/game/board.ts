@@ -12,11 +12,16 @@ export type Board = {
   } & { index: number }
 } & { width: number }
 
+export type Coordinates = {
+  row: number,
+  column: number
+}
+
 const splitLineAlongRows = (line: string) => {
   const width = Math.sqrt(line.length)
 
   if (Math.floor(width) !== width) {
-    // console.log(width, line, "doesn't make a square")
+    // logger.debug(width, line, "doesn't make a square")
     throw new Error(`${line} doesn't make a square`)
   }
 
@@ -76,9 +81,17 @@ export const deepCopyBoard = (board: Board) => {
   return copy
 }
 
-export type Coordinates = {
-  row: number,
-  column: number
+export const getUnvisitedBoard = (board: Board) => {
+  const copy = deepCopyBoard(board)
+  const { width } = copy
+
+  for(let row = 0; row < width; row++) {
+    for(let column = 0; column < width; column++) {
+      copy[row][column].visited = false
+    }
+  }
+
+  return copy
 }
 
 export const getAllPossibleCoordinates = ({ rows, columns }: { rows: number[], columns: number[]}) => R.reduce<number, Coordinates[]>(
@@ -95,8 +108,6 @@ export const getPossibleTravelDirections = ({ row, column, width }: { row: numbe
   const rows = R.filter((potentialRow: number) => potentialRow >= 0 && potentialRow < width, unfilteredRows)
   const unfilteredColumns = [column - 1, column, column + 1]
   const columns = R.filter((potentialColumn: number) => potentialColumn >= 0 && potentialColumn < width, unfilteredColumns)
-
-  // console.log({ rows, columns, unfilteredRows, unfilteredColumns })
 
   const coordinates = getAllPossibleCoordinates({ rows, columns })
 

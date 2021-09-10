@@ -10,10 +10,14 @@ import {
   getAllPossibleCoordinates,
   getPossibleTravelDirections,
   Board,
-  Coordinates
+  Coordinates,
+  getLine
 } from './board'
+import { createContext, useCallback, useEffect, useMemo, useState } from 'react'
+import { logger } from '../util/logger'
+import { LanguageState } from './language'
 
-export const removeImpossibleWords = (line: string, dictionary: string[], wordLength: number) => {
+const removeImpossibleWords = (line: string, dictionary: string[], wordLength: number) => {
   const orderedLine = orderWordAlphabetically(line, true)
 
   return R.filter((word: string) => {
@@ -25,7 +29,7 @@ export const removeImpossibleWords = (line: string, dictionary: string[], wordLe
   }, dictionary)
 }
 
-export const removeWordsThatRequireMoreLetters = (line: string, dictionary: string[]) => {
+const removeWordsThatRequireMoreLetters = (line: string, dictionary: string[]) => {
   const lineLetterCount = getLetterCounts(line)
 
   return R.filter((word: string) => {
@@ -59,9 +63,9 @@ const recursiveTraverseBoard = ({ row, column, wordSoFar, board, foundWords, dic
   boardCopy[row][column].visited = true
   const { letter } = boardCopy[row][column]
   const maybeWord = `${wordSoFar}${letter}`
-  // console.log(`working with word chain: ${maybeWord}`)
+  // logger.debug(`working with word chain: ${maybeWord}`)
   const index = wordSoFar.length
-  // console.log(JSON.stringify({ maybeWord, wordSoFar }))
+  // logger.debug(JSON.stringify({ maybeWord, wordSoFar }))
 
   const narrowedDictionary = R.filter((word) => {
     if (word[index] === maybeWord[index]) {
@@ -95,7 +99,7 @@ const recursiveTraverseBoard = ({ row, column, wordSoFar, board, foundWords, dic
  , foundWords, untraveledDirections)
 }
 
-export const removeWordsThatCantBeSpelledOnBoard = (line: string, dictionary: string[]) => {
+const removeWordsThatCantBeSpelledOnBoard = (line: string, dictionary: string[]) => {
   const getFreshBoard = () => deepCopyBoard(R.once(() => getBoard(line))())
 
   const board = getFreshBoard()
@@ -121,12 +125,7 @@ export const removeWordsThatCantBeSpelledOnBoard = (line: string, dictionary: st
   return R.sort(R.ascend<string>(R.identity), R.uniq(foundWords))
 }
 
-export const possibleWordsGivenBoard = (options: Omit<RecursiveTraverseBoard, 'foundWords'>) => {
-  const { wordSoFar } = options
-  return recursiveTraverseBoard({ ...options, foundWords: [], wordSoFar: wordSoFar.substring(0, wordSoFar.length - 1) })
-}
-
-export const loadDictionary = (line: string, fullDictionary: string[], minimumWordLength: number) => {
+const loadDictionary = (line: string, fullDictionary: string[], minimumWordLength: number) => {
   const narrowedDictionary = removeImpossibleWords(line, fullDictionary, minimumWordLength)
   const narrowerDictionary = removeWordsThatRequireMoreLetters(line, narrowedDictionary)
 
@@ -134,3 +133,50 @@ export const loadDictionary = (line: string, fullDictionary: string[], minimumWo
 
   return dictionary
 }
+
+const resolveDictionary = (line: string, fullDictionary: string[], minimumWordLength: number) => {
+  const canUseWebWorkers = false
+  if (canUseWebWorkers) {
+    // do web worker stuff.... maybe.
+  }
+  return Promise.resolve(loadDictionary(line, fullDictionary, minimumWordLength))
+}
+
+export type DictionaryState = {
+  boardDictionary: string[],
+  loading: boolean
+}
+
+export const useBoardDictionary = (languageState: LanguageState, board: Board | string, minimumWordLength: number) => {
+  const [dictionary, setDictionary] = useState<DictionaryState>({
+    boardDictionary: [],
+    loading: true
+  })
+
+  const memoizedBoard = useMemo(() => {
+    if (typeof board === 'string') return board
+    return getLine(board)
+  }, [board])
+
+  const resolveDictionaryCallback = useCallback((dictionary: string[]) => {
+    return resolveDictionary(memoizedBoard, dictionary, minimumWordLength)
+  }, [memoizedBoard, minimumWordLength])
+
+  useEffect(() => {
+    logger.debug('running dictionary useEffect')
+    resolveDictionaryCallback(languageState.dictionary).then(boardDictionary => setDictionary({
+      loading: boardDictionary.length === 0,
+      boardDictionary
+    }))
+  }, [
+    languageState,
+    setDictionary,
+    resolveDictionaryCallback
+  ])
+
+  return dictionary
+}
+
+export type DictionaryContext = DictionaryState
+
+export const Dictionary = createContext<DictionaryContext>({ boardDictionary: [], loading: true })

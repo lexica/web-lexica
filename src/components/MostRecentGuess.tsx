@@ -1,36 +1,32 @@
 import { useContext } from 'react'
 import * as R from 'ramda'
 
-import { scoreWord } from '../game'
+import { LetterScores, scoreWord } from '../game'
 import { Rules } from '../game/rules'
 import { makeClasses } from '../util/classes'
 
 import './MostRecentGuess.css'
+import { Guess } from '../game/guess'
+import { Dictionary } from '../game/dictionary'
 
-export type MostRecentGuessProps = {
-  guesses: string[],
-  dictionary: string[],
-  currentLetterChain: string
-}
-
-const MostRecentGuess: React.FC<MostRecentGuessProps> = ({
-  guesses,
-  currentLetterChain,
-  dictionary,
-}) => {
+const MostRecentGuess: React.FC = () => {
 
   const rules = useContext(Rules)
-  const showLetterChain = currentLetterChain.length > 0
+  const letterScores = useContext(LetterScores)
+
+  const { guesses, currentGuess: currentLetterChain, isGuessing } = useContext(Guess)
+  const dictionary = useContext(Dictionary)
+  const showLetterChain = isGuessing
   const guessesReversed = R.reverse(guesses)
   const mostRecentGuess = R.head(guessesReversed) || ''
 
-  const isCorrectGuess = dictionary.includes(mostRecentGuess)
+  const isCorrectGuess = dictionary.boardDictionary.includes(mostRecentGuess)
   const isFirstTimeGuessing = guesses.filter(guess => guess === mostRecentGuess).length === 1
 
   const shouldScoreWord = !showLetterChain && isCorrectGuess
   const repeatScore = !isFirstTimeGuessing
 
-  const score = shouldScoreWord ? ` +${scoreWord(mostRecentGuess, rules.score, rules.language)}` : ''
+  const score = shouldScoreWord ? ` +${scoreWord(mostRecentGuess, rules.score, letterScores)}` : ''
 
   const classes = makeClasses('most-recent-guess', { condition: repeatScore, name: 'repeat-guess' })
 
