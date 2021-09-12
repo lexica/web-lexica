@@ -2,7 +2,7 @@ name: Build and Deploy Web Lexica
 
 on:
   push:
-    branches: [ workflows ]
+    branches: [ master ]
   workflow_dispatch:
 
 jobs:
