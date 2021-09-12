@@ -1,0 +1,42 @@
+name: Build and Deploy Web Lexica
+
+on:
+  push:
+    branches: [ master ]
+  workflow_dispatch:
+
+jobs:
+
+  generate-and-publish:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 16.x
+
+      - name: Install dependencies, c
+        run: |
+          yarn install
+          yarn build
+
+      # This and the following step is based on https://kaizendorks.github.io/2020/04/16/vuepress-github-actions/
+      - name: Init new repo in ./build and commit production bundle
+        run: |
+          cd ./build
+          git init
+          git add -A
+          git config --local user.email "peter.serwylo+web-lexica@gmail.com"
+          git config --local user.name "Web Lexica GitHub Action"
+          git commit -m "[GitHub Actions] Deploy Web Lexica for $GITHUB_SHA"
+      - name: Force push to gh-pages branch
+        uses: ad-m/github-push-action@v0.6.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: gh-pages
+          force: true
+          directory: ./build
