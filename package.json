@@ -28,7 +28,7 @@
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public"
   },
-  "proxy": "http://localhost:5000",
+  "proxy": "https://lexica.github.io",
   "eslintConfig": {
     "extends": [
       "react-app",
