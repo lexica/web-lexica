@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react'
 
-import { orderByWordScore } from "../game"
+import { LetterScores, orderByWordScore } from "../game"
 import ScoredWordList from './ScoredWordList'
 import { useConstants } from '../style/constants'
 
@@ -9,6 +9,7 @@ import { ReactComponent as CheckCircle } from '@material-design-icons/svg/round/
 import { ReactComponent as HighlightOff } from '@material-design-icons/svg/round/highlight_off.svg'
 import Score from './Score'
 import { Rules } from '../game/rules'
+import { Score as ScoreContext } from '../game/score'
 import { makeClasses } from '../util/classes'
 
 enum Lists {
@@ -66,18 +67,17 @@ export enum ResultsOrientation {
 }
 
 const Results: React.FC<{ 
-  foundWords: string[],
-  remainingWords: string[],
   orientation: ResultsOrientation
 }> = ({
-  foundWords,
-  remainingWords,
   orientation
 }) => {
+  const { foundWords, remainingWords } = useContext(ScoreContext)
+  const letterScores = useContext(LetterScores)
+
   const [displayedList, updateDisplayedList] = useState(Lists.FoundWords)
-  const { score: scoreType, language } = useContext(Rules)
-  const orderedFoundWords = orderByWordScore(foundWords, scoreType, language)
-  const orderedMissedWords = orderByWordScore(remainingWords, scoreType, language)
+  const { score: scoreType } = useContext(Rules)
+  const orderedFoundWords = orderByWordScore(foundWords, scoreType, letterScores)
+  const orderedMissedWords = orderByWordScore(remainingWords, scoreType, letterScores)
 
 
   let foundWordsClass = makeClasses(
@@ -94,13 +94,7 @@ const Results: React.FC<{
   const listSelectorProps = { displayedList, updateDisplayedList, orientation }
 
   return <div className="results">
-    <Score
-      hideTime
-      foundWords={foundWords}
-      remainingWords={remainingWords}
-      remainingTime={0}
-      showPercent
-    />
+    <Score hideTime showPercent />
     <div className={`titles ${orientation}`}>
       <div
         className={displayedList === Lists.MissedWords ? 'disabled' : ''}

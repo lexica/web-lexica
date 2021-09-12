@@ -1,11 +1,12 @@
 import React, { useContext } from 'react'
 import * as R from 'ramda'
 
-import { GameAction, GameBoard, GameContext } from '../game/context'
 import './Board.css'
 import { getPointOnGridInfo, GetPointOnGridInfoArguments } from '../util/touch'
-import { getLetterScore,  } from '../game'
+import { getLetterScore, LetterScores,  } from '../game'
 import { Rules, ScoreType } from '../game/rules'
+import { Guess, GuessAction, GuessActionType, GuessDispatch } from '../game/guess'
+import { logger } from '../util/logger'
 
 type LetterProps = {
   row: number,
@@ -20,13 +21,16 @@ const Letter: React.FC<LetterProps> = ({
   letter,
   visited,
 }) => {
-  const dispatch = useContext(GameContext)
-  // const { score: scoreType, language } = useGameParameters()
-  const { score: scoreType, language } = useContext(Rules)
+  const dispatch = useContext(GuessDispatch)
+
+  const { score: scoreType } = useContext(Rules)
+
+  const letterScores = useContext(LetterScores)
+
   const classes = ['spacer']
 
   if (visited) classes.push('visited')
-  const dispatchMoveEvent = () => { dispatch({ type: 'hover', info: { coordinates: { row, column } } }); /* console.log(`${row}-${column} hover`) */ }
+  const dispatchMoveEvent = () => { dispatch({ type: GuessAction.EnterLetter, info: { row, column } }); logger.debug(`${row}-${column} hover`) }
 
   const showScore = scoreType === ScoreType.Letters || undefined
 
@@ -40,7 +44,7 @@ const Letter: React.FC<LetterProps> = ({
     >
       <div className="letter">{letter.toUpperCase()}</div>
     </div>
-    {showScore && <div className="board-letter-score">{getLetterScore(letter, language)}</div>}
+    {showScore && <div className="board-letter-score">{getLetterScore(letter, letterScores)}</div>}
   </div>
 }
 
@@ -55,10 +59,16 @@ function getLast<T extends ArrayLike>(items: T): T[number] {
 }
 
 
-export const Board: React.FC<{ board: GameBoard }> = ({ board }) => {
-  const dispatch = useContext(GameContext)
+export const Board: React.FC = () => {
+  const dispatch = useContext(GuessDispatch)
 
-  const handleClick = (clicked: boolean) => dispatch({ type: 'click', info: { clicked } })
+  const { board } = useContext(Guess)
+
+  const handleClick = (clicked: boolean) => {
+    clicked
+      ? dispatch({ type: GuessAction.BeginGuess } as GuessActionType<GuessAction.BeginGuess>)
+      : dispatch({ type: GuessAction.EndGuess } as GuessActionType<GuessAction.EndGuess>)
+  }
 
   const boardWidth = board.width
 
@@ -86,14 +96,14 @@ export const Board: React.FC<{ board: GameBoard }> = ({ board }) => {
     const { x: column, y: row } = residingSquare
 
     if (pointDistanceFromCenterOfSquare <= acceptableDistance) {
-      dispatch({ type: 'hover', info: { coordinates: { row, column } } })
+      dispatch({ type: GuessAction.EnterLetter, info: { row, column } })
     }
   }
 
   return <div
     className="board"
-    onMouseDown={() => { handleClick(true); /* console.log('start click') */ }}
-    onMouseUp={() => { handleClick(false); /* console.log('end click') */ }}
+    onMouseDown={() => { handleClick(true); /* logger.debug('start click') */ }}
+    onMouseUp={() => { handleClick(false); /* logger.debug('end click') */ }}
     onTouchStart={(e) => {
       const lastTouch = getLast(e.touches)
       maybeDispatchMove(lastTouch, 1)
@@ -109,8 +119,4 @@ export const Board: React.FC<{ board: GameBoard }> = ({ board }) => {
   </div>
 }
 
-const Wrapped: React.FC<{ board: GameBoard, context: React.Dispatch<GameAction> }> = ({ board, context }) => (
-  <GameContext.Provider value={context}><Board board={board}/></GameContext.Provider>
-)
-
-export default Wrapped
+export default Board

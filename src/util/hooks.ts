@@ -1,10 +1,12 @@
 import { Reducer, useCallback, useEffect, useMemo, useReducer, useState } from 'react'
 
+import { logger } from './logger'
+
 export const useInterval = <T extends any>(callback: (...args: any[]) => T, interval: number, initialValue?: T): [T, () => void] => {
   const [value, setValue] = useState<T | undefined>(initialValue)
   const [intervalValue] = useState(setInterval(() => setValue(callback), interval))
 
-  const stopInterval = () => clearInterval(intervalValue)
+  const stopInterval = useCallback(() => clearInterval(intervalValue), [intervalValue])
 
   return [value as T, stopInterval]
 }
@@ -62,7 +64,7 @@ export const useElementSize = (identifierType: ElementIdentifier, identifier: st
     }
   }, [element])
   useEffect(() => {
-    console.log('getting element...')
+    logger.debug('getting element...')
     const element = getElementBasedOnIdentifier(elementNameType, elementName)
     setElement(element)
     resizeCallback(element)
@@ -70,10 +72,11 @@ export const useElementSize = (identifierType: ElementIdentifier, identifier: st
 
 
   useEffect(() => {
+    logger.debug('running element size 2nd useEffect...')
     const eventListener = () => resizeCallback()
     window.addEventListener('resize', eventListener)
     return () => window.removeEventListener('resize', eventListener)
-  })
+  }, [resizeCallback])
 
   return size
 }
@@ -102,7 +105,7 @@ export const useOrientation = () => {
   )
 
   useEffect(() => {
-    console.log('updating orientation')
+    logger.debug('updating orientation')
     setOrientation(size)
   }, [size, setOrientation])
   return orientation

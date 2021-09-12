@@ -1,10 +1,10 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react'
 
 import StartScreen from '../components/StartScreen'
-import { Rules, ScoreType } from '../game/rules'
 import Cheats from './Cheats'
+import Providers from './Providers'
 
-const metadata: ComponentMeta<typeof StartScreen> = {
+const metadata: ComponentMeta<typeof ComponentBuilder> = {
   title: 'StartScreen',
   component: StartScreen,
   argTypes: {
@@ -17,17 +17,18 @@ const metadata: ComponentMeta<typeof StartScreen> = {
       name: 'dictionary'
     },
     loading: {
-      description: 'the loading state of the `dictionary` to be used during the game, true means the dictionary is still loading',
+      description: 'the loading state of the language metadata and dictionary processing',
       name: 'loading'
     },
     error: {
-      description: 'the error state of the dictionary being loaded',
+      description: 'the error state of the language metadata being loaded',
       name: 'error'
     }
   },
   args: {
-    handleStart: () => {},
-    dictionary: ['hero', 'green', 'wednesday'],
+    dictionary: {
+      boardDictionary: ['hero', 'green', 'wednesday']
+    },
     error: false,
     loading: false
   }
@@ -35,17 +36,19 @@ const metadata: ComponentMeta<typeof StartScreen> = {
 
 export default metadata
 
-export const Template: ComponentStory<typeof StartScreen> = args => <Rules.Provider
-  value={{
-    board: 'aaaabbbbccccdddd',
-    language: 'en_US',
-    minimumVersion: 0,
-    version: 0,
-    minimumWordLength: 2,
-    score: ScoreType.Words,
-    time: 180
-  }}
->
-  <StartScreen {...args}/>
+const ComponentBuilder: React.FC<{
+  dictionary: {
+    boardDictionary: string[],
+  },
+  loading: boolean,
+  error: boolean
+}> = ({
+  dictionary,
+  loading,
+  error
+}) => <Providers dictionary={dictionary}>
   <Cheats/>
-</Rules.Provider>
+  <StartScreen {...{ loading, error, handleStart: () => {}}}/>
+</Providers>
+
+export const Template: ComponentStory<typeof ComponentBuilder> = args => <ComponentBuilder {...args}/>

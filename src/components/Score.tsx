@@ -1,7 +1,11 @@
 import { useContext } from 'react'
-import { scoreWord } from '../game'
+
+import { LetterScores, scoreWord } from '../game'
+import { Score as ScoreContext} from '../game/score'
 import { Rules } from '../game/rules'
 import './Score.css'
+import { Timer } from '../game/timer'
+import { useInterval } from '../util/hooks'
 
 const getTime = (timeInSeconds: number) => {
   const seconds = timeInSeconds % 60
@@ -11,22 +15,23 @@ const getTime = (timeInSeconds: number) => {
 }
 
 const Score: React.FC<{
-  remainingWords: string[],
-  foundWords: string[],
-  remainingTime: number,
   hideTime?: boolean,
   showPercent?: boolean
 }> = ({
-  remainingWords,
-  foundWords,
-  remainingTime,
   hideTime,
   showPercent
 }) => {
-  const { score: scoreType, language } = useContext(Rules)
+  const { score: scoreType } = useContext(Rules)
+  const letterScores = useContext(LetterScores)
 
-  const currentScore = foundWords.reduce((score: number, word: string) => scoreWord(word, scoreType, language) + score, 0)
-  const totalScore = remainingWords.reduce((score: number, word: string) => scoreWord(word, scoreType, language) + score, 0) + currentScore
+  const { foundWords, remainingWords } = useContext(ScoreContext)
+
+  const { getRemainingTime } = useContext(Timer)
+
+  const [remainingTime] = useInterval(getRemainingTime, 400)
+
+  const currentScore = foundWords.reduce((score: number, word: string) => scoreWord(word, scoreType, letterScores) + score, 0)
+  const totalScore = remainingWords.reduce((score: number, word: string) => scoreWord(word, scoreType, letterScores) + score, 0) + currentScore
   const foundCount = foundWords.length
   const totalCount = remainingWords.length + foundCount
   return (
@@ -36,7 +41,7 @@ const Score: React.FC<{
         style={hideTime ? { display: 'none'} : {}}
       >
         <div className="title">Time</div>
-        <div className="info">{getTime(remainingTime)}</div>
+        <div className="info">{getTime(remainingTime || 0)}</div>
       </div>
       <div className="section">
         <div className="title">Words</div>

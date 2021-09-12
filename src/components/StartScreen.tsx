@@ -9,6 +9,7 @@ import { ReactComponent as EmojiEvents } from '@material-design-icons/svg/round/
 import { ReactComponent as Sort } from '@material-design-icons/svg/round/sort.svg'
 import { ReactComponent as PlayCircle } from '@material-design-icons/svg/round/play_circle.svg'
 import { Rules } from '../game/rules'
+import { Dictionary } from '../game/dictionary'
 
 const getLanguageName = (languageCode: string): string => ({
   en_US: 'English (US)'
@@ -27,14 +28,12 @@ const getReadableTime = (time: number) => {
 
 export type StartScreenProps = {
   handleStart: () => any
-  dictionary: string[],
   loading: boolean,
   error: boolean
 }
 
 const StartScreen: React.FC<StartScreenProps> = ({
   handleStart,
-  dictionary,
   loading,
   error
 }) => {
@@ -42,7 +41,7 @@ const StartScreen: React.FC<StartScreenProps> = ({
 
   const { fontSize, fontSizeTitle } = useConstants()
 
-  console.log(JSON.stringify({ fontSize }))
+  const dictionary = useContext(Dictionary)
 
   const gridSize = Math.floor(Math.sqrt(rules.board.length))
 
@@ -55,7 +54,7 @@ const StartScreen: React.FC<StartScreenProps> = ({
     ? 'Loading...'
     : error
     ? 'Error loading board'
-    : `${dictionary.length} words`
+    : `${dictionary.boardDictionary.length} words`
 
   return <div className="start-screen">
     <div className="start-screen-title">Web Lexica Multiplayer Game</div>
