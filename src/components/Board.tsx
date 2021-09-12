@@ -7,7 +7,6 @@ import { getLetterScore, LetterScores,  } from '../game'
 import { Rules, ScoreType } from '../game/rules'
 import { Guess, GuessAction, GuessActionType, GuessDispatch } from '../game/guess'
 import { logger } from '../util/logger'
-import { Language } from '../game/language'
 
 type LetterProps = {
   row: number,

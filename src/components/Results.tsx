@@ -75,7 +75,7 @@ const Results: React.FC<{
   const letterScores = useContext(LetterScores)
 
   const [displayedList, updateDisplayedList] = useState(Lists.FoundWords)
-  const { score: scoreType, language } = useContext(Rules)
+  const { score: scoreType } = useContext(Rules)
   const orderedFoundWords = orderByWordScore(foundWords, scoreType, letterScores)
   const orderedMissedWords = orderByWordScore(remainingWords, scoreType, letterScores)
 

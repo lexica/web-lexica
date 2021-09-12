@@ -6,7 +6,6 @@ import { Rules } from '../game/rules'
 import './Score.css'
 import { Timer } from '../game/timer'
 import { useInterval } from '../util/hooks'
-import { Language } from '../game/language'
 
 const getTime = (timeInSeconds: number) => {
   const seconds = timeInSeconds % 60

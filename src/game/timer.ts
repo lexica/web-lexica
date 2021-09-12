@@ -119,7 +119,9 @@ export const useTimer = (totalTimeInSeconds: number, timeEndCallback: () => void
   return useMemo(() => ({ startTime, pauseTime, getRemainingTime }), [startTime, pauseTime, getRemainingTime])
 }
 
-export const Timer = createContext<{ startTime: () => void, pauseTime: () => void, getRemainingTime: () => number }>({
+export type TimerContext = UseTimer
+
+export const Timer = createContext<TimerContext>({
   startTime: () => {},
   pauseTime: () => {},
   getRemainingTime: () => 0

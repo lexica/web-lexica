@@ -95,7 +95,3 @@ export const Score = createContext<ScoreContext>({
   foundWords: [],
   remainingWords: []
 })
-
-export type LetterPointsContext = { [key: string]: number }
-
-export const LetterPoints = createContext<LetterPointsContext>({})
