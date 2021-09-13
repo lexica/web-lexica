@@ -35,7 +35,7 @@ Other similar changes have been made to the results page.
 
 ### Reporting issues
 
-Please report any issues or suggest features on the [issue tracker](https://github.com/lexica/web-lexica).
+Please report any issues or suggest features on the [issue tracker](https://github.com/lexica/web-lexica/issues).
 
 
 ## Development
