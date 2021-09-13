@@ -10,10 +10,7 @@ import { ReactComponent as Sort } from '@material-design-icons/svg/round/sort.sv
 import { ReactComponent as PlayCircle } from '@material-design-icons/svg/round/play_circle.svg'
 import { Rules } from '../game/rules'
 import { Dictionary } from '../game/dictionary'
-
-const getLanguageName = (languageCode: string): string => ({
-  en_US: 'English (US)'
-}[languageCode] as any)
+import { Translations } from '../translations'
 
 const getScoringType = (scoringType: string): string => ({
   'l': 'Letter Points',
@@ -45,6 +42,8 @@ const StartScreen: React.FC<StartScreenProps> = ({
 
   const gridSize = Math.floor(Math.sqrt(rules.board.length))
 
+  const translations = useContext(Translations)
+
   const startButtonClass = loading || error
     ? 'start-screen-start-button-disabled'
     : 'start-screen-start-button'
@@ -58,7 +57,7 @@ const StartScreen: React.FC<StartScreenProps> = ({
 
   return <div className="start-screen">
     <div className="start-screen-title">Web Lexica Multiplayer Game</div>
-    <div className="start-screen-language">{getLanguageName(rules.language)}</div>
+    <div className="start-screen-language">{translations.languageTitles[rules.language]}</div>
     <div className="start-screen-info-container">
       <div className="start-screen-info">
         <Timer
