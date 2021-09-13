@@ -1,16 +1,8 @@
 import * as R from 'ramda'
 import { createContext, useEffect, useMemo, useState } from 'react'
 import { logger } from '../util/logger'
+import { ImplementedLanguage, languageCodeToTranslationsMap } from './implemented-languages'
 
-import * as en from './en'
-
-enum ImplementedLanguage {
-  English = 'en'
-}
-
-const languageCodeToTranslationsMap: { [P in ImplementedLanguage]: { languageTitles: { [key: string]: string}}} = {
-  [ImplementedLanguage.English]: en
-}
 
 const getTranslationPreference = () => {
   const preset = localStorage.getItem('translation')
