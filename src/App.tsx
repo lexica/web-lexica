@@ -11,8 +11,8 @@ function App() {
 
   return (
       <div className="App">
-        <BrowserRouter>
-          <Route path="/">
+        <BrowserRouter basename="/web-lexica">
+          <Route exact path="/">
             <Home/>
           </Route>
           <Route path="/multiplayer">
