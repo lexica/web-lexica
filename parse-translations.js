@@ -63,15 +63,10 @@ const pipeWhileNotNull = (...args) => R.pipeWith((fn, res) => R.isNil(res) ? res
 /** @type {(file: string) => string } */
 const makeLanguageTitleTranslation = pipeWhileNotNull(
   parseXml,
-  R.tap(() => console.log('parseXml done')),
   R.path(['resources', 'string']),
-  R.tap(() => console.log('get values done')),
   R.filter(({ name }) => name.includes('pref_dict_') && !name.includes('_description')),
-  R.tap(() => console.log('filter out everything else done')),
   R.map(({ name, '#text': text }) => ({ name: name.replace('pref_dict_', ''), text })),
-  R.tap(() => console.log('make name done')),
   R.reduce((acc, { name, text }) => `${acc}  '${name}': '${text}',\n`, 'export const languageTitles = {\n'),
-  R.tap(() => console.log('reduce done')),
   file => `${file}}\n`
 )
 
@@ -85,13 +80,9 @@ const writeTranslationTS = (fileName, folderName) => file => {
 
 /** @type {(folder: string) => void} */
 const createLanguageTitleTranslation = folder => pipeWhileNotNull(
-  R.tap(console.log),
   readTranslationXML,
-  R.tap(() => console.log(`${folder} read xml done.`)),
   makeLanguageTitleTranslation,
-  R.tap(() => console.log(`${folder} makeLanguageTranslations done.`)),
   writeTranslationTS('language-titles.ts', translationFoldersMap[folder]),
-  R.tap(() => console.log(`${folder} done.`))
 )(folder)
 
 /** @type {(folder: string) => void} */
@@ -119,9 +110,9 @@ const createSuggestedImplementedLanguagesFile = folders => {
 
   /** @type {{ folder: string, suggestion: string }[]} */
   const suggestions = R.map((folder) => {
-    const bcpTag = translationFoldersMap[folder]
+    const localFolder = translationFoldersMap[folder]
 
-    const [languageCode, regionCode] = bcpTag.split(/-r?/)
+    const [languageCode, regionCode] = localFolder.split(/-r?/)
 
     const language = getDescriptionFromTag('language', languageCode)
 
@@ -129,7 +120,7 @@ const createSuggestedImplementedLanguagesFile = folders => {
 
     const suggestion = `${language}${region ? `_${region}` : ''}`
 
-    return { folder: languageCode, suggestion: sanatizeSuggestion(suggestion) }
+    return { folder: localFolder, suggestion: sanatizeSuggestion(suggestion) }
   }, folders)
 
 

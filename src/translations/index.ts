@@ -3,22 +3,35 @@ import { createContext, useEffect, useMemo, useState } from 'react'
 import { logger } from '../util/logger'
 import { ImplementedLanguage, languageCodeToTranslationsMap } from './implemented-languages'
 
-
-const getTranslationPreference = () => {
-  const preset = localStorage.getItem('translation')
-  return preset || R.head(navigator.language.split(/-_/))! || ''
-}
-
 const isImplemented = (lang: string): lang is ImplementedLanguage => {
   for (const validLang in ImplementedLanguage) {
-    if (lang === validLang) return true
+    if (lang === ImplementedLanguage[validLang as any as keyof typeof ImplementedLanguage]) {
+      return true
+    }
   }
-
   return false
 }
 
+const getClosestLanguageIfPossible = (languageCode: string) => {
+  const [language, region] = languageCode.split('-')
+
+  const bestFit = `${language}-r${region}`
+
+  if (isImplemented(bestFit)) return bestFit
+
+  if (isImplemented(language)) return language
+  
+  return ImplementedLanguage.English
+}
+
+const getBestTranslation = () => {
+  const preset = localStorage.getItem('translation')
+  if (preset && isImplemented(preset)) return preset
+  return getClosestLanguageIfPossible(navigator.language)
+}
+
 export const useTranslations = () => {
-  const [baseLanguage, setBaseLanguage] = useState(getTranslationPreference())
+  const [baseLanguage, setBaseLanguage] = useState(getBestTranslation())
 
   const language = isImplemented(baseLanguage) ? baseLanguage : ImplementedLanguage.English
 
@@ -28,7 +41,7 @@ export const useTranslations = () => {
   useEffect(() => {
     logger.debug('running translations useEffect...')
     const handleStorageUpdate = (event: StorageEvent) => {
-      if (event.key === 'translation') setBaseLanguage(getTranslationPreference())
+      if (event.key === 'translation') setBaseLanguage(getBestTranslation())
     }
 
     window.addEventListener('storage', handleStorageUpdate)

@@ -24,12 +24,12 @@ import * as ja from './languages/ja'
 import * as kmr from './languages/kmr'
 import * as lt from './languages/lt'
 import * as mr from './languages/mr'
-import * as nb from './languages/nb'
+import * as nb_rNO from './languages/nb-rNO'
 import * as nl from './languages/nl'
 import * as pl from './languages/pl'
 import * as pt from './languages/pt'
-import * as pt from './languages/pt'
-import * as pt from './languages/pt'
+import * as pt_rBR from './languages/pt-rBR'
+import * as pt_rPT from './languages/pt-rPT'
 import * as ru from './languages/ru'
 import * as sat from './languages/sat'
 import * as sk from './languages/sk'
@@ -38,8 +38,8 @@ import * as th from './languages/th'
 import * as tr from './languages/tr'
 import * as uk from './languages/uk'
 import * as vi from './languages/vi'
-import * as zh from './languages/zh'
-import * as zh from './languages/zh'
+import * as zh_rCN from './languages/zh-rCN'
+import * as zh_rTW from './languages/zh-rTW'
 
 export enum ImplementedLanguage {
   English = 'en',
@@ -66,12 +66,12 @@ export enum ImplementedLanguage {
   NorthernKurdish = 'kmr',
   Lithuanian = 'lt',
   Marathi = 'mr',
-  NorwegianBokml_Norway = 'nb',
+  NorwegianBokml_Norway = 'nb-rNO',
   Dutch = 'nl',
   Polish = 'pl',
   Portuguese = 'pt',
-  Portuguese_Brazil = 'pt',
-  Portuguese_Portugal = 'pt',
+  Portuguese_Brazil = 'pt-rBR',
+  Portuguese_Portugal = 'pt-rPT',
   Russian = 'ru',
   Santali = 'sat',
   Slovak = 'sk',
@@ -80,8 +80,8 @@ export enum ImplementedLanguage {
   Turkish = 'tr',
   Ukrainian = 'uk',
   Vietnamese = 'vi',
-  Chinese_China = 'zh',
-  Chinese_TaiwanProvinceofChina = 'zh',
+  Chinese_China = 'zh-rCN',
+  Chinese_TaiwanProvinceofChina = 'zh-rTW',
 }
 
 export const languageCodeToTranslationsMap: { [P in ImplementedLanguage]: { languageTitles: { [key: string]: string}}} = {
@@ -109,12 +109,12 @@ export const languageCodeToTranslationsMap: { [P in ImplementedLanguage]: { lang
   [ImplementedLanguage.NorthernKurdish]: kmr,
   [ImplementedLanguage.Lithuanian]: lt,
   [ImplementedLanguage.Marathi]: mr,
-  [ImplementedLanguage.NorwegianBokml_Norway]: nb,
+  [ImplementedLanguage.NorwegianBokml_Norway]: nb_rNO,
   [ImplementedLanguage.Dutch]: nl,
   [ImplementedLanguage.Polish]: pl,
   [ImplementedLanguage.Portuguese]: pt,
-  [ImplementedLanguage.Portuguese_Brazil]: pt,
-  [ImplementedLanguage.Portuguese_Portugal]: pt,
+  [ImplementedLanguage.Portuguese_Brazil]: pt_rBR,
+  [ImplementedLanguage.Portuguese_Portugal]: pt_rPT,
   [ImplementedLanguage.Russian]: ru,
   [ImplementedLanguage.Santali]: sat,
   [ImplementedLanguage.Slovak]: sk,
@@ -123,6 +123,6 @@ export const languageCodeToTranslationsMap: { [P in ImplementedLanguage]: { lang
   [ImplementedLanguage.Turkish]: tr,
   [ImplementedLanguage.Ukrainian]: uk,
   [ImplementedLanguage.Vietnamese]: vi,
-  [ImplementedLanguage.Chinese_China]: zh,
-  [ImplementedLanguage.Chinese_TaiwanProvinceofChina]: zh,
+  [ImplementedLanguage.Chinese_China]: zh_rCN,
+  [ImplementedLanguage.Chinese_TaiwanProvinceofChina]: zh_rTW,
 }
