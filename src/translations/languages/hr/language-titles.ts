@@ -18,4 +18,5 @@ export const languageTitles = {
   'fr_FR_no_diacritics': 'Francuski',
   'de_DE_no_diacritics': 'Njemački',
   'pt_BR': 'Portugalski (Brazil) (prošireno)',
+  'es_solo_enne': 'Španjolski samo Ñ',
 }

@@ -1,17 +1,11 @@
 const R = require('ramda')
-const { readFileSync, writeFileSync, readdirSync, rmdirSync, existsSync, mkdirSync } = require('fs')
+const { readFileSync, writeFileSync, readdirSync, existsSync, mkdirSync } = require('fs')
 const { parse } = require('fast-xml-parser')
-const { execSync } = require('child_process')
 const languageTags = require('language-tags')
 
-const tmpFolder = `tmp-${Date.now()}`
-
+const tmpFolder = process.argv[2]
 const translationsPath = './src/translations'
-const remoteUrl = 'git@github.com:lexica/lexica.git'
-const remoteTranslationsPath = `./${tmpFolder}/app/src/main/res`
-
-
-execSync(`git clone --depth 1 ${remoteUrl} ${tmpFolder}`)
+const remoteTranslationsPath = `./${tmpFolder}/lexica/strings/app/src/main/res`
 
 /** @type {(folder: string) => string} */
 const readTranslationXML = folder => {
@@ -19,6 +13,10 @@ const readTranslationXML = folder => {
   return existsSync(filePath) ? readFileSync(filePath, { encoding: 'utf8' }) : null
 }
 
+/** @typedef {{ resources: { string?: { name: string, '#text': string } } }} ParsedXML */
+/** @typedef {{ filename: string, contents: string }} TranslatedFile */
+
+/** @type {(file: string) => ParsedXML} */
 const parseXml = file => parse(file, {
   ignoreAttributes: false,
   parseAttributeValue: true,
@@ -44,7 +42,6 @@ const remoteTranslationsContent = readdirSync(remoteTranslationsPath)
 
 const remoteTranslationFolderNames = R.filter(folderHasTranslations, remoteTranslationsContent)
 
-
 /**
  * @type {{ [key: string]: string }}
  */
@@ -53,45 +50,71 @@ const translationFoldersMap = R.reduce((acc, folder) => {
   return { ...acc, [folder]: folder.replace(/^values-/, '') }
 }, {}, remoteTranslationFolderNames)
 
-
-/**
- * @param file {string}
- * @return {{ resources: { string: { name: string, '#text': string }[] } }}
- */
 const pipeWhileNotNull = (...args) => R.pipeWith((fn, res) => R.isNil(res) ? res : fn(res))(args)
 
-/** @type {(file: string) => string } */
-const makeLanguageTitleTranslation = pipeWhileNotNull(
-  parseXml,
+/** @type {(fileName: string, folderName: string, file: string) => void} */
+const _writeTranslationsTS = (fileName, folderName, file) => {
+  const path = `${translationsPath}/languages/${folderName}`
+  !existsSync(path) && mkdirSync(path, { recursive: true })
+  writeFileSync(`${path}/${fileName}.ts`, file)
+  return true
+}
+const writeTranslationTS = R.curryN(3, _writeTranslationsTS)
+
+/** @type {(folder: string) => void} */
+
+
+/** @type {(files: TranslatedFile[]) => string} */
+const getIndexFile = R.reduce((acc, { filename }) => `${acc}export * from './${filename}'\n`, '')
+
+
+/** @type {(translationFns: ((arg: ParsedXML) => (TranslatedFile | null))[]) => (folder: string) => void} */
+const createFilesForLanguage = translationFns => folder => {
+  const file = readTranslationXML(folder)
+  const localFolderName = translationFoldersMap[folder]
+  const parsedXML = parseXml(file)
+
+  /** @type {(file: { filename: string, contents: string }) => void} */
+  const writeFile = ({ filename, contents }) => writeTranslationTS(filename, localFolderName, contents)
+
+  /** @type {{ filename: string, contents: string }[]} */
+
+  R.pipe(
+    R.map(fn => fn(parsedXML)),
+    R.filter((result) => result && !(R.isNil(result.contents) || R.isEmpty(result.contents))),
+    R.tap(R.map(writeFile)),
+    getIndexFile,
+    writeTranslationTS('index', localFolderName)
+  )(translationFns)
+
+}
+
+/** @type {(fns: ((arg: ParsedXML) => TranslatedFile)[]) => void} */
+const createTranslationFiles = fns => R.map(createFilesForLanguage(fns), remoteTranslationFolderNames)
+
+// ----- XML to TS conversions
+
+/** @type {(parsedXML: ParsedXML) => TranslatedFile } */
+const getLanguageTitlesFile = pipeWhileNotNull(
   R.path(['resources', 'string']),
   R.filter(({ name }) => name.includes('pref_dict_') && !name.includes('_description')),
   R.map(({ name, '#text': text }) => ({ name: name.replace('pref_dict_', ''), text })),
-  R.reduce((acc, { name, text }) => `${acc}  '${name}': '${text}',\n`, 'export const languageTitles = {\n'),
-  file => `${file}}\n`
+  /** @type {({ name: string, text: string }[]) => string} */
+  titles => R.reduce(
+    (acc, { name, text }) => `${acc}  '${name}': '${text}',\n`,
+    'export const languageTitles = {\n',
+    titles
+  ),
+  file => ({ contents: `${file}}\n`, filename: 'language-titles' })
 )
 
-/** @type {(fileName: string, folderName: string) => (file: string) => void} */
-const writeTranslationTS = (fileName, folderName) => file => {
-  const path = `${translationsPath}/languages/${folderName}`
-  !existsSync(path) && mkdirSync(path, { recursive: true })
-  writeFileSync(`${path}/${fileName}`, file)
-  return true
-}
-
-/** @type {(folder: string) => void} */
-const createLanguageTitleTranslation = folder => pipeWhileNotNull(
-  readTranslationXML,
-  makeLanguageTitleTranslation,
-  writeTranslationTS('language-titles.ts', translationFoldersMap[folder]),
-)(folder)
-
-/** @type {(folder: string) => void} */
-const createIndexFileForTranslation = folder => writeTranslationTS('index.ts', translationFoldersMap[folder])("export * from './language-titles'\n")
-
-R.map(folder => createLanguageTitleTranslation(folder) && createIndexFileForTranslation(folder), remoteTranslationFolderNames)
+createTranslationFiles([
+  getLanguageTitlesFile
+])
 
 /** @type {(type: string, tag: string) => string} */
 const getDescriptionFromTag = (type, tag = '') => {
+  /** @type {import('language-tags').Subtag} */
   const subtag = languageTags[type](tag)
   if (!subtag) return tag
 
@@ -100,17 +123,17 @@ const getDescriptionFromTag = (type, tag = '') => {
   return description || tag
 }
 
-/** @type {(folders: string[]) => string} */
-const createSuggestedImplementedLanguagesFile = folders => {
-  /** @type {(suggestion: string) => string} */
-  const sanatizeSuggestion = suggestion => suggestion.replace(/[-\W ]/g, '')
-
+/** @type {(remoteFolders: string[]) => string} */
+const createImplementedLanguagesFile = remoteFolders => {
   /** @type {(folder: string) => string} */
-  const folderToVarName = folder => folder.replace(/-/g, '_')
+  const kebabToSnakeCase = folder => folder.replace(/-/g, '_')
 
-  /** @type {{ folder: string, suggestion: string }[]} */
-  const suggestions = R.map((folder) => {
-    const localFolder = translationFoldersMap[folder]
+  /** @type {(description: string) => string} */
+  const sanatizeDescription = description => description.replace(/[-\W ]/g, '')
+
+  /** @type {{ folder: string, description: string }[]} */
+  const suggestions = R.map((remoteFolder) => {
+    const localFolder = translationFoldersMap[remoteFolder]
 
     const [languageCode, regionCode] = localFolder.split(/-r?/)
 
@@ -118,30 +141,26 @@ const createSuggestedImplementedLanguagesFile = folders => {
 
     const region = getDescriptionFromTag('region', regionCode)
 
-    const suggestion = `${language}${region ? `_${region}` : ''}`
+    const description = sanatizeDescription(`${language}${region ? `_${region}` : ''}`)
 
-    return { folder: localFolder, suggestion: sanatizeSuggestion(suggestion) }
-  }, folders)
+    return { folder: localFolder, description }
+  }, remoteFolders)
 
-
-  const imports = `${R.reduce((acc, { folder }) => `${acc}import * as ${folderToVarName(folder)} from './languages/${folder}'\n`, '', suggestions)}`
+  const imports = `${R.reduce((acc, { folder }) => `${acc}import * as ${kebabToSnakeCase(folder)} from './languages/${folder}'\n`, '', suggestions)}`
 
   const enumeration = `${R.reduce(
-    (acc, { folder, suggestion }) => `${acc}  ${suggestion} = '${folder}',\n`,
+    (acc, { folder, description }) => `${acc}  ${description} = '${folder}',\n`,
     'export enum ImplementedLanguage {\n',
     suggestions
   )}}\n`
 
   const mapping = `${R.reduce(
-    (acc, { folder, suggestion}) => `${acc}  [ImplementedLanguage.${suggestion}]: ${folderToVarName(folder)},\n`,
+    (acc, { folder, description}) => `${acc}  [ImplementedLanguage.${description}]: ${kebabToSnakeCase(folder)},\n`,
     'export const languageCodeToTranslationsMap: { [P in ImplementedLanguage]: { languageTitles: { [key: string]: string}}} = {\n',
     suggestions
   )}}\n`
 
   writeFileSync(`${translationsPath}/implemented-languages.ts`, `/** Auto-generated */\n\n${imports}\n${enumeration}\n${mapping}`)
-
 }
 
-createSuggestedImplementedLanguagesFile(remoteTranslationFolderNames)
-
-rmdirSync(`./${tmpFolder}`, { recursive: true })
+createImplementedLanguagesFile(remoteTranslationFolderNames)
