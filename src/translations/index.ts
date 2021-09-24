@@ -1,27 +1,44 @@
 import * as R from 'ramda'
 import { createContext, useEffect, useMemo, useState } from 'react'
 import { logger } from '../util/logger'
-import { ImplementedLanguage, languageCodeToTranslationsMap } from './implemented-languages'
+import {
+  ImplementedLanguage,
+  languageCodeToTranslationsMap,
+  GeneralTranslation,
+  defaultTranslation
+} from './implemented-languages'
 
-type Translation = typeof languageCodeToTranslationsMap[keyof typeof languageCodeToTranslationsMap]
-
-const addTranslationDefaults = (prefered: Partial<Translation>, defaults: Translation) => R.reduce(
-  (acc: Translation, key: keyof Translation) => ({ ...acc, [key]: { ...defaults[key], ...(prefered[key] ? prefered[key] : {}) }}),
-  {} as Translation,
-  Object.keys(defaults) as any[] as (keyof Translation)[]
-)
+const addTranslationDefaults = <
+  T extends GeneralTranslation
+>(prefered: GeneralTranslation, defaults: T) => {
+  const keys: (keyof T)[] = R.uniq([...Object.keys(defaults), ...Object.keys(prefered)]) as any[]
+  return R.reduce(
+    (acc: T, key: keyof T) => {
+      const preferedKey = key as keyof GeneralTranslation
+      return {
+        ...acc,
+        [key]: {
+          ...(defaults[key] ? defaults[key] : {}),
+          ...(prefered[preferedKey] ? prefered[preferedKey] : {})
+        }
+      }
+    },
+    {} as T,
+    keys
+  )
+}
 
 const translationsWithDefaults = (lang: ImplementedLanguage) => {
   const parentLang = lang.match(/(?<parentLang>.*)-/)?.groups?.parentLang
-  const defaultTranslations = languageCodeToTranslationsMap[ImplementedLanguage.English]
   const preferedTranslations = languageCodeToTranslationsMap[lang]
 
   if (parentLang && isImplemented(parentLang)) {
-    const withParentLangDefaults = addTranslationDefaults(preferedTranslations, languageCodeToTranslationsMap[parentLang])
-    return addTranslationDefaults(withParentLangDefaults, defaultTranslations)
+    const parentTranslation = languageCodeToTranslationsMap[parentLang]
+    const withParentLangDefaults = addTranslationDefaults(preferedTranslations, parentTranslation)
+    return addTranslationDefaults(withParentLangDefaults, defaultTranslation)
   }
 
-  return addTranslationDefaults(preferedTranslations, defaultTranslations)
+  return addTranslationDefaults(preferedTranslations, defaultTranslation)
 }
 
 const isImplemented = (lang: string): lang is ImplementedLanguage => {

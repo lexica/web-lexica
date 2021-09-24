@@ -118,6 +118,16 @@ const getLanguageDescriptionFromTag = (type, tag = '') => {
   return description || tag
 }
 
+const hardCodedImplementedLanguageCode = `
+type DefaultTranslation = typeof en
+type DefaultKeys = keyof DefaultTranslation
+
+export type GeneralTranslation = { [P in DefaultKeys]?: Partial<DefaultTranslation[P]> }
+export type Translation = DefaultTranslation
+
+export const defaultTranslation = en
+
+`
 /** @type {(incomingTranslationFolders: string[]) => string} */
 const createImplementedLanguagesFile = incomingTranslationFolders => {
   /** @type {(folder: string) => string} */
@@ -141,7 +151,11 @@ const createImplementedLanguagesFile = incomingTranslationFolders => {
     return { folder: localFolder, description }
   }, incomingTranslationFolders)
 
-  const imports = `${R.reduce((acc, { folder }) => `${acc}import * as ${kebabToSnakeCase(folder)} from './languages/${folder}'\n`, '', descriptions)}`
+  const imports = `${R.reduce(
+    (acc, { folder }) => `${acc}import * as ${kebabToSnakeCase(folder)} from './languages/${folder}'\n`,
+    '',
+    descriptions
+  )}`
 
   const enumeration = `${R.reduce(
     (acc, { folder, description }) => `${acc}  ${description} = '${folder}',\n`,
@@ -151,11 +165,13 @@ const createImplementedLanguagesFile = incomingTranslationFolders => {
 
   const mapping = `${R.reduce(
     (acc, { folder, description}) => `${acc}  [ImplementedLanguage.${description}]: ${kebabToSnakeCase(folder)},\n`,
-    'export const languageCodeToTranslationsMap: { [P in ImplementedLanguage]: { languageTitles: { [key: string]: string}}} = {\n',
+    'export const languageCodeToTranslationsMap: { [P in ImplementedLanguage]: GeneralTranslation } = {\n',
     descriptions
   )}}\n`
 
-  writeFileSync(`${translationsPath}/implemented-languages.ts`, `/** Auto-generated */\n\n${imports}\n${enumeration}\n${mapping}`)
+  const file = [imports, enumeration, hardCodedImplementedLanguageCode, mapping].join('\n')
+
+  writeFileSync(`${translationsPath}/implemented-languages.ts`, `/** Auto-generated */\n\n${file}`)
 }
 
 createImplementedLanguagesFile(incomingTranslationFolderNames)

@@ -84,7 +84,17 @@ export enum ImplementedLanguage {
   Chinese_TaiwanProvinceofChina = 'zh-rTW',
 }
 
-export const languageCodeToTranslationsMap: { [P in ImplementedLanguage]: { languageTitles: { [key: string]: string}}} = {
+
+type DefaultTranslation = typeof en
+type DefaultKeys = keyof DefaultTranslation
+
+export type GeneralTranslation = { [P in DefaultKeys]?: Partial<DefaultTranslation[P]> }
+export type Translation = DefaultTranslation
+
+export const defaultTranslation = en
+
+
+export const languageCodeToTranslationsMap: { [P in ImplementedLanguage]: GeneralTranslation } = {
   [ImplementedLanguage.English]: en,
   [ImplementedLanguage.Arabic]: ar,
   [ImplementedLanguage.Bulgarian]: bg,
