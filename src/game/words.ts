@@ -16,12 +16,38 @@ export const orderWordAlphabetically = (line: string, dedupe: boolean = false) =
   return dedupe ? removeDuplicates(orderedLine) : orderedLine
 }
 
-type LetterCount = {
+export type LetterCount = {
   [key: string]: number
 }
 
-export const getLetterCounts = (word: string) => {
-  const ordered = orderWordAlphabetically(word)
+const splitWordIntoLetters = (word: string, letters: string[], sortResponse?: boolean) => {
+  const orderedLetters = R.sort(R.descend(R.prop('length')), letters)
+  let w = word
+  const response: string[] = []
+  while (w.length) {
+    const startingLength = w.length
+    for (const letter in orderedLetters) {
+      if (w.indexOf(letter) === 0) {
+        w = w.substring(letter.length)
+        response.push(letter)
+        break
+      }
+    }
+    const endingLength = w.length
+    if (startingLength === endingLength) {
+      throw new Error(`Cannot match next letter in word to given letters, remaining word: ${w}, letters: ${JSON.stringify(letters)}`)
+    }
+  }
+
+  if (sortResponse) return R.sortWith([
+    R.descend(R.prop('length')),
+    R.ascend(R.identity)
+  ], response)
+
+  return response
+}
+
+export const getLetterCounts = (word: string, validLetters: string[]) => {
   let currentChar = '\0'
 
 
@@ -32,5 +58,5 @@ export const getLetterCounts = (word: string) => {
   }
 
     return { ...acc, [letter]: acc[letter] + 1 }
-  }, {}, R.splitEvery(1, ordered))
+  }, {}, splitWordIntoLetters(word, validLetters, true))
 }

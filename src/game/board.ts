@@ -17,7 +17,7 @@ export type Coordinates = {
   column: number
 }
 
-const splitLineAlongRows = (line: string) => {
+const splitLineAlongRows = (line: string[]) => {
   const width = Math.sqrt(line.length)
 
   if (Math.floor(width) !== width) {
@@ -29,13 +29,12 @@ const splitLineAlongRows = (line: string) => {
 }
 
 
-export const getBoard = (line: string): Board => {
+export const getBoard = (line: string[]): Board => {
   const board = splitLineAlongRows(line)
 
   type Row = Omit<Board[number], 'index'>
 
-  const getColumns = R.pipe<string, string[], Board[number][number][], Row>(
-    R.splitEvery(1) as (a: string) => string[],
+  const getColumns = R.pipe<string[], Board[number][number][], Row>(
     R.addIndex<string, Board[number][number]>(R.map)((letter: string, index: number) => ({
       letter,
       visited: false,
@@ -46,7 +45,7 @@ export const getBoard = (line: string): Board => {
       [column.index]: column
     }), {})
   )
-  const getRows = R.addIndex<string, Board[number]>(R.map)((row: string, index: number) => ({
+  const getRows = R.addIndex<string[], Board[number]>(R.map)((row: string[], index: number) => ({
     ...getColumns(row),
     index
   }))
@@ -65,8 +64,24 @@ const boardMap = <T>(board: Board, callback: (letter: Letter, coordinates: Coord
   return response
 }
 
+export const boardReduce = <Acc>(
+  board: Board,
+  callback: (acc: Acc, letter: Letter, coordinates?: Coordinates) => Acc,
+  initialValue: Acc
+) => {
+  const { width } = board
+  let acc = initialValue
+
+  for(let row = 0; row < width; row++) {
+    for(let column = 0; column < width; column++) {
+      acc = callback(acc, board[row][column], { row, column })
+    }
+  }
+  return acc
+}
+
 export const getLine = (board: Board) => {
-  return boardMap(board, ({ letter }) => letter).join('')
+  return boardMap(board, ({ letter }) => letter)
 }
 
 export const deepCopyBoard = (board: Board) => {

@@ -131,9 +131,9 @@ export const guessReducer = <A extends GuessAction>(state: GuessState, action: G
 
 type GuessReducer = Reducer<GuessState, GuessActionType<GuessAction>>
 
-export const useGuesses = (board: Board | string) => {
+export const useGuesses = (board: Board | string[]) => {
   const memoizedBoard = useMemo(() => {
-    if (typeof board === 'string') return getBoard(board)
+    if (Array.isArray(board)) return getBoard(board)
     return getUnvisitedBoard(board)
   }, [board])
 

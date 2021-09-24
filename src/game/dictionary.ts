@@ -2,7 +2,7 @@ import * as R from 'ramda'
 
 import {
   getLetterCounts,
-  orderWordAlphabetically
+  LetterCount,
 } from './words'
 import {
   getBoard,
@@ -17,25 +17,66 @@ import { createContext, useCallback, useEffect, useMemo, useState } from 'react'
 import { logger } from '../util/logger'
 import { LanguageState } from './language'
 
-const removeImpossibleWords = (line: string, dictionary: string[], wordLength: number) => {
-  const orderedLine = orderWordAlphabetically(line, true)
+const orderBoardLine = R.pipe(
+  R.sortWith<string>([
+    R.descend(R.prop('length')),
+    R.ascend(R.identity)
+  ]),
+  R.uniq
+)
+
+const hasMissingLetters = (boardLine: string[], word: string) => {
+  let w = word
+  while (w.length) {
+    let foundLetter = false
+    for (const letter in boardLine) {
+      if (w.indexOf(letter) === 0) {
+        foundLetter = true
+        w = w.substring(letter.length)
+        break
+      }
+    }
+    if (!foundLetter) return true
+  }
+
+  return false
+}
+
+const removeImpossibleWords = (line: string[], dictionary: string[], wordLength: number) => {
+  const orderedLine = orderBoardLine(line)
 
   return R.filter((word: string) => {
     if (word.length < wordLength) return false
-    const missingLetters: string = R.filter((letter: string) => !orderedLine.includes(letter), word as any) as any
-    if (missingLetters.length > 0) return false
+    if (hasMissingLetters(orderedLine, word)) return false
 
     return true
   }, dictionary)
 }
 
-const removeWordsThatRequireMoreLetters = (line: string, dictionary: string[]) => {
-  const lineLetterCount = getLetterCounts(line)
+const getBoardLineLetterCounts = (line: string[]) => {
+  const ordered = orderBoardLine(line)
+  let currentChar = '\0'
+
+
+  return R.reduce((acc: LetterCount, letter: string) => {
+    if (letter !== currentChar) {
+      currentChar = letter
+      return { ...acc, [letter]: 1 }
+  }
+
+    return { ...acc, [letter]: acc[letter] + 1 }
+  }, {}, ordered)
+}
+
+const removeWordsThatRequireMoreLetters = (line: string[], dictionary: string[]) => {
+  const lineLetterCount = getBoardLineLetterCounts(line)
+
+  const boardLetters = orderBoardLine(line)
 
   return R.filter((word: string) => {
     if (word.length > line.length) return false
 
-    const wordLetterCount = getLetterCounts(word)
+    const wordLetterCount = getLetterCounts(word, boardLetters)
     const letters: string[] = Object.keys(wordLetterCount)
 
     const tooManyOfOneLetter = R.reduce((acc, letter) => {
@@ -99,7 +140,7 @@ const recursiveTraverseBoard = ({ row, column, wordSoFar, board, foundWords, dic
  , foundWords, untraveledDirections)
 }
 
-const removeWordsThatCantBeSpelledOnBoard = (line: string, dictionary: string[]) => {
+const removeWordsThatCantBeSpelledOnBoard = (line: string[], dictionary: string[]) => {
   const getFreshBoard = () => deepCopyBoard(R.once(() => getBoard(line))())
 
   const board = getFreshBoard()
@@ -125,7 +166,7 @@ const removeWordsThatCantBeSpelledOnBoard = (line: string, dictionary: string[])
   return R.sort(R.ascend<string>(R.identity), R.uniq(foundWords))
 }
 
-const loadDictionary = (line: string, fullDictionary: string[], minimumWordLength: number) => {
+const loadDictionary = (line: string[], fullDictionary: string[], minimumWordLength: number) => {
   const narrowedDictionary = removeImpossibleWords(line, fullDictionary, minimumWordLength)
   const narrowerDictionary = removeWordsThatRequireMoreLetters(line, narrowedDictionary)
 
@@ -134,7 +175,7 @@ const loadDictionary = (line: string, fullDictionary: string[], minimumWordLengt
   return dictionary
 }
 
-const resolveDictionary = (line: string, fullDictionary: string[], minimumWordLength: number) => {
+const resolveDictionary = (line: string[], fullDictionary: string[], minimumWordLength: number) => {
   const canUseWebWorkers = false
   if (canUseWebWorkers) {
     // do web worker stuff.... maybe.
@@ -147,14 +188,14 @@ export type DictionaryState = {
   loading: boolean
 }
 
-export const useBoardDictionary = (languageState: LanguageState, board: Board | string, minimumWordLength: number) => {
+export const useBoardDictionary = (languageState: LanguageState, board: Board | string[], minimumWordLength: number) => {
   const [dictionary, setDictionary] = useState<DictionaryState>({
     boardDictionary: [],
     loading: true
   })
 
   const memoizedBoard = useMemo(() => {
-    if (typeof board === 'string') return board
+    if (Array.isArray(board)) return board
     return getLine(board)
   }, [board])
 
