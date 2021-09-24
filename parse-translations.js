@@ -108,7 +108,7 @@ createTranslationFiles([
 ])
 
 /** @type {(type: string, tag: string) => string} */
-const getDescriptionFromTag = (type, tag = '') => {
+const getLanguageDescriptionFromTag = (type, tag = '') => {
   /** @type {import('language-tags').Subtag} */
   const subtag = languageTags[type](tag)
   if (!subtag) return tag
@@ -127,32 +127,32 @@ const createImplementedLanguagesFile = incomingTranslationFolders => {
   const sanatizeDescription = description => description.replace(/[-\W ]/g, '')
 
   /** @type {{ folder: string, description: string }[]} */
-  const suggestions = R.map((incomingTranslationFolder) => {
+  const descriptions = R.map((incomingTranslationFolder) => {
     const localFolder = translationFoldersMap[incomingTranslationFolder]
 
     const [languageCode, regionCode] = localFolder.split(/-r?/)
 
-    const language = getDescriptionFromTag('language', languageCode)
+    const language = getLanguageDescriptionFromTag('language', languageCode)
 
-    const region = getDescriptionFromTag('region', regionCode)
+    const region = getLanguageDescriptionFromTag('region', regionCode)
 
     const description = sanatizeDescription(`${language}${region ? `_${region}` : ''}`)
 
     return { folder: localFolder, description }
   }, incomingTranslationFolders)
 
-  const imports = `${R.reduce((acc, { folder }) => `${acc}import * as ${kebabToSnakeCase(folder)} from './languages/${folder}'\n`, '', suggestions)}`
+  const imports = `${R.reduce((acc, { folder }) => `${acc}import * as ${kebabToSnakeCase(folder)} from './languages/${folder}'\n`, '', descriptions)}`
 
   const enumeration = `${R.reduce(
     (acc, { folder, description }) => `${acc}  ${description} = '${folder}',\n`,
     'export enum ImplementedLanguage {\n',
-    suggestions
+    descriptions
   )}}\n`
 
   const mapping = `${R.reduce(
     (acc, { folder, description}) => `${acc}  [ImplementedLanguage.${description}]: ${kebabToSnakeCase(folder)},\n`,
     'export const languageCodeToTranslationsMap: { [P in ImplementedLanguage]: { languageTitles: { [key: string]: string}}} = {\n',
-    suggestions
+    descriptions
   )}}\n`
 
   writeFileSync(`${translationsPath}/implemented-languages.ts`, `/** Auto-generated */\n\n${imports}\n${enumeration}\n${mapping}`)
