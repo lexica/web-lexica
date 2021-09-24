@@ -5,7 +5,8 @@ import {
   ImplementedLanguage,
   languageCodeToTranslationsMap,
   GeneralTranslation,
-  defaultTranslation
+  defaultTranslation,
+  Translation
 } from './implemented-languages'
 
 const addTranslationDefaults = <
@@ -90,6 +91,6 @@ export const useTranslations = () => {
   return translation
 }
 
-export type TranslationsContext = typeof languageCodeToTranslationsMap[ImplementedLanguage]
+export type TranslationsContext = Translation
 
-export const Translations = createContext<TranslationsContext>(languageCodeToTranslationsMap['en'])
+export const Translations = createContext<TranslationsContext>(defaultTranslation)

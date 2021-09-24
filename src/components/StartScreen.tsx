@@ -11,6 +11,7 @@ import { ReactComponent as PlayCircle } from '@material-design-icons/svg/round/p
 import { Rules } from '../game/rules'
 import { Dictionary } from '../game/dictionary'
 import { Translations } from '../translations'
+import { Translation } from '../translations/implemented-languages'
 
 const getScoringType = (scoringType: string): string => ({
   'l': 'Letter Points',
@@ -55,9 +56,13 @@ const StartScreen: React.FC<StartScreenProps> = ({
     ? 'Error loading board'
     : `${dictionary.boardDictionary.length} words`
 
+  const languageTitle = translations.languageTitles[
+    rules.language as any as keyof Translation['languageTitles']
+  ]
+
   return <div className="start-screen">
     <div className="start-screen-title">Web Lexica Multiplayer Game</div>
-    <div className="start-screen-language">{translations.languageTitles[rules.language]}</div>
+    <div className="start-screen-language">{languageTitle}</div>
     <div className="start-screen-info-container">
       <div className="start-screen-info">
         <Timer
