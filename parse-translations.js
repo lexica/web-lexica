@@ -75,8 +75,6 @@ const createFilesForLanguage = translationFns => folder => {
   /** @type {(file: { filename: string, contents: string }) => void} */
   const writeFile = ({ filename, contents }) => writeTranslationTS(filename, localFolderName, contents)
 
-  /** @type {{ filename: string, contents: string }[]} */
-
   R.pipe(
     R.map(fn => fn(parsedXML)),
     R.filter((result) => result && !(R.isNil(result.contents) || R.isEmpty(result.contents))),
