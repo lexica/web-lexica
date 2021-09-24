@@ -5,11 +5,11 @@ const languageTags = require('language-tags')
 
 const tmpFolder = process.argv[2]
 const translationsPath = './src/translations'
-const remoteTranslationsPath = `./${tmpFolder}/lexica/strings/app/src/main/res`
+const incomingTranslationsPath = `./${tmpFolder}/lexica/strings/app/src/main/res`
 
 /** @type {(folder: string) => string} */
 const readTranslationXML = folder => {
-  const filePath = `${remoteTranslationsPath}/${folder}/strings.xml`
+  const filePath = `${incomingTranslationsPath}/${folder}/strings.xml`
   return existsSync(filePath) ? readFileSync(filePath, { encoding: 'utf8' }) : null
 }
 
@@ -38,9 +38,9 @@ const folderHasTranslations = folder => {
   return true
 }
 
-const remoteTranslationsContent = readdirSync(remoteTranslationsPath)
+const incomingTranslationsContent = readdirSync(incomingTranslationsPath)
 
-const remoteTranslationFolderNames = R.filter(folderHasTranslations, remoteTranslationsContent)
+const incomingTranslationFolderNames = R.filter(folderHasTranslations, incomingTranslationsContent)
 
 /**
  * @type {{ [key: string]: string }}
@@ -48,7 +48,7 @@ const remoteTranslationFolderNames = R.filter(folderHasTranslations, remoteTrans
 const translationFoldersMap = R.reduce((acc, folder) => {
   if (folder === 'values') return { ...acc, [folder]: 'en' }
   return { ...acc, [folder]: folder.replace(/^values-/, '') }
-}, {}, remoteTranslationFolderNames)
+}, {}, incomingTranslationFolderNames)
 
 const pipeWhileNotNull = (...args) => R.pipeWith((fn, res) => R.isNil(res) ? res : fn(res))(args)
 
@@ -86,11 +86,10 @@ const createFilesForLanguage = translationFns => folder => {
     getIndexFile,
     writeTranslationTS('index', localFolderName)
   )(translationFns)
-
 }
 
 /** @type {(fns: ((arg: ParsedXML) => TranslatedFile)[]) => void} */
-const createTranslationFiles = fns => R.map(createFilesForLanguage(fns), remoteTranslationFolderNames)
+const createTranslationFiles = fns => R.map(createFilesForLanguage(fns), incomingTranslationFolderNames)
 
 // ----- XML to TS conversions
 
@@ -123,8 +122,8 @@ const getDescriptionFromTag = (type, tag = '') => {
   return description || tag
 }
 
-/** @type {(remoteFolders: string[]) => string} */
-const createImplementedLanguagesFile = remoteFolders => {
+/** @type {(incomingTranslationFolders: string[]) => string} */
+const createImplementedLanguagesFile = incomingTranslationFolders => {
   /** @type {(folder: string) => string} */
   const kebabToSnakeCase = folder => folder.replace(/-/g, '_')
 
@@ -132,8 +131,8 @@ const createImplementedLanguagesFile = remoteFolders => {
   const sanatizeDescription = description => description.replace(/[-\W ]/g, '')
 
   /** @type {{ folder: string, description: string }[]} */
-  const suggestions = R.map((remoteFolder) => {
-    const localFolder = translationFoldersMap[remoteFolder]
+  const suggestions = R.map((incomingTranslationFolder) => {
+    const localFolder = translationFoldersMap[incomingTranslationFolder]
 
     const [languageCode, regionCode] = localFolder.split(/-r?/)
 
@@ -144,7 +143,7 @@ const createImplementedLanguagesFile = remoteFolders => {
     const description = sanatizeDescription(`${language}${region ? `_${region}` : ''}`)
 
     return { folder: localFolder, description }
-  }, remoteFolders)
+  }, incomingTranslationFolders)
 
   const imports = `${R.reduce((acc, { folder }) => `${acc}import * as ${kebabToSnakeCase(folder)} from './languages/${folder}'\n`, '', suggestions)}`
 
@@ -163,4 +162,4 @@ const createImplementedLanguagesFile = remoteFolders => {
   writeFileSync(`${translationsPath}/implemented-languages.ts`, `/** Auto-generated */\n\n${imports}\n${enumeration}\n${mapping}`)
 }
 
-createImplementedLanguagesFile(remoteTranslationFolderNames)
+createImplementedLanguagesFile(incomingTranslationFolderNames)
