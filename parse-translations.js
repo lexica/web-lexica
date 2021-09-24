@@ -59,10 +59,8 @@ const _writeTranslationsTS = (fileName, folderName, file) => {
   writeFileSync(`${path}/${fileName}.ts`, file)
   return true
 }
+
 const writeTranslationTS = R.curryN(3, _writeTranslationsTS)
-
-/** @type {(folder: string) => void} */
-
 
 /** @type {(files: TranslatedFile[]) => string} */
 const getIndexFile = R.reduce((acc, { filename }) => `${acc}export * from './${filename}'\n`, '')
