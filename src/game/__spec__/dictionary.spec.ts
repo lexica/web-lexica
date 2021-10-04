@@ -1,5 +1,3 @@
-import { AsymmetricMatcher } from 'expect/build/asymmetricMatchers'
-import { equals } from 'expect/build/jasmineUtils'
 import { getBoard } from '../board'
 import { __test } from '../dictionary'
 
