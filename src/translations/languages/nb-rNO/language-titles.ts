@@ -1,3 +1,4 @@
+/* eslint-disable */
 export const languageTitles = {
   'en_US': 'Engelsk (USA)',
   'en_GB': 'Engelsk (UK)',

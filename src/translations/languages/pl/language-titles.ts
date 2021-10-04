@@ -1,3 +1,4 @@
+/* eslint-disable */
 export const languageTitles = {
   'ca': 'Kataloński',
   'de_DE': 'Niemiecki',

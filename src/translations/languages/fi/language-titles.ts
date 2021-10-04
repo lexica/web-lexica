@@ -1,3 +1,4 @@
+/* eslint-disable */
 export const languageTitles = {
   'ca': 'katalaani',
   'de_DE': 'saksa (laajennettu)',

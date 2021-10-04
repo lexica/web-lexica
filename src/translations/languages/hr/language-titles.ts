@@ -1,3 +1,4 @@
+/* eslint-disable */
 export const languageTitles = {
   'ca': 'Katalonski',
   'ja': 'Japanski',

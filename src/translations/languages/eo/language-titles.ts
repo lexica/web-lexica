@@ -1,3 +1,4 @@
+/* eslint-disable */
 export const languageTitles = {
   'en_US': 'La angla (usona)',
   'uk': 'La ukraina',

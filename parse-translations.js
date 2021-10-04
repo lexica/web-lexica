@@ -97,7 +97,7 @@ const getLanguageTitlesFile = pipeWhileNotNull(
   /** @type {({ name: string, text: string }[]) => string} */
   titles => R.reduce(
     (acc, { name, text }) => `${acc}  '${name}': '${text}',\n`,
-    'export const languageTitles = {\n',
+    '/* eslint-disable */\nexport const languageTitles = {\n',
     titles
   ),
   file => ({ contents: `${file}}\n`, filename: 'language-titles' })

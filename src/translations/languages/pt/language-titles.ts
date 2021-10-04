@@ -1,3 +1,4 @@
+/* eslint-disable */
 export const languageTitles = {
   'ja': 'Japonês',
   'pt_BR_no_diacritics': 'Português (Brasil)',

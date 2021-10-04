@@ -1,3 +1,4 @@
+/* eslint-disable */
 export const languageTitles = {
   'en_US': 'अंग्रेज़ी (यू. एस.)',
   'uk': 'यूक्रेनी',
