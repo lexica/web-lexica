@@ -25,7 +25,7 @@ export const getLanguageMetadata = (languageCode: string) => axios.get<MetadataV
 ).then(({ data }) => data)
 
 const getDictionary = (languageCode: string) => axios.get<string[]>(
-  `${getBaseUrl()}/lexica/api/v1/language/${languageCode}/metadata.json`
+  `${getBaseUrl()}/lexica/api/v1/language/${languageCode}/dictionary.json`
 ).then(({ data }) => data)
 
 export const useLanguage = (languageCode: string) => {

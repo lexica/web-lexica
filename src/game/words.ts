@@ -1,4 +1,5 @@
 import * as R from 'ramda'
+import { logger } from '../util/logger'
 
 export const orderWordAlphabetically = (line: string, dedupe: boolean = false) => {
   const orderedLine = R.pipe<string, string[], string[], string>(
@@ -20,13 +21,22 @@ export type LetterCount = {
   [key: string]: number
 }
 
-const splitWordIntoLetters = (word: string, letters: string[], sortResponse?: boolean) => {
-  const orderedLetters = R.sort(R.descend(R.prop('length')), letters)
+export type SortFn = (letters: string[]) => string[]
+export const sort = {
+  byLength: R.sortWith([
+    R.descend(R.prop('length')),
+    R.ascend(R.identity)
+  ]) as SortFn,
+  alphabetically: R.sort(R.ascend(R.identity)) as SortFn
+}
+
+export const splitWordIntoLetters = (word: string, letters: string[], sortWith?: (letters: string[]) => string[]) => {
+  const orderedLetters = sort.byLength(letters)
   let w = word
   const response: string[] = []
   while (w.length) {
     const startingLength = w.length
-    for (const letter in orderedLetters) {
+    for (const letter of orderedLetters) {
       if (w.indexOf(letter) === 0) {
         w = w.substring(letter.length)
         response.push(letter)
@@ -39,10 +49,7 @@ const splitWordIntoLetters = (word: string, letters: string[], sortResponse?: bo
     }
   }
 
-  if (sortResponse) return R.sortWith([
-    R.descend(R.prop('length')),
-    R.ascend(R.identity)
-  ], response)
+  if (sortWith) return sortWith(response)
 
   return response
 }
@@ -58,5 +65,5 @@ export const getLetterCounts = (word: string, validLetters: string[]) => {
   }
 
     return { ...acc, [letter]: acc[letter] + 1 }
-  }, {}, splitWordIntoLetters(word, validLetters, true))
+  }, {}, splitWordIntoLetters(word, validLetters, sort.byLength))
 }

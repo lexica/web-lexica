@@ -1,178 +1,66 @@
 import * as R from 'ramda'
 
 import {
-  getLetterCounts,
-  LetterCount,
-} from './words'
-import {
   getBoard,
   deepCopyBoard,
-  getAllPossibleCoordinates,
-  getPossibleTravelDirections,
   Board,
   Coordinates,
-  getLine
+  getLine,
+  boardReduce,
+  visitNeighbors
 } from './board'
 import { createContext, useCallback, useEffect, useMemo, useState } from 'react'
 import { logger } from '../util/logger'
 import { LanguageState } from './language'
 
-const orderBoardLine = R.pipe(
-  R.sortWith<string>([
-    R.descend(R.prop('length')),
-    R.ascend(R.identity)
-  ]),
-  R.uniq
-)
+const visitNeighborsCallback = (remainingWords: string[], lettersSoFar: string, board: Board) => (square: Board[number][number], coords: Coordinates): string[] => {
+  const letterChain = `${lettersSoFar}${square.letter}`
+  const letterChainIsWord = remainingWords.includes(letterChain)
+  const wordsToFilter = letterChainIsWord ? remainingWords.filter(w => w !== letterChain) : remainingWords
 
-const hasMissingLetters = (boardLine: string[], word: string) => {
-  let w = word
-  while (w.length) {
-    let foundLetter = false
-    for (const letter in boardLine) {
-      if (w.indexOf(letter) === 0) {
-        foundLetter = true
-        w = w.substring(letter.length)
-        break
-      }
+  const toReturn = letterChainIsWord ? [letterChain] : [] as string[]
+
+  const partialLetterChainMatches = wordsToFilter.filter(w => w.indexOf(letterChain) === 0)
+  if (partialLetterChainMatches.length) {
+    const { row, column } = coords
+    const newBoard = deepCopyBoard(board)
+    newBoard[row][column].visited = true
+
+    const callback = visitNeighborsCallback(partialLetterChainMatches, letterChain, newBoard)
+
+    const visitResults = R.flatten(visitNeighbors({ callback, onlyUnvisitedNeighbors: true}, newBoard, coords))
+    return [...toReturn, ...visitResults]
+  }
+
+  return toReturn
+}
+
+const getWordsOnBoard = (board: Board, dictionary: string[], minWordLength: number) => {
+  const wordsOfValidLength = dictionary.filter(w => w.length >= minWordLength)
+  const { foundWords } = boardReduce(board, ({ remainingWords, foundWords }, square, coordinates) => {
+    if (!remainingWords.length) return { remainingWords, foundWords }
+    const { row, column } = coordinates
+
+    // edgecase of min-lenght of words being 1...
+    if (remainingWords.includes(square.letter)) {
+      foundWords.push(square.letter)
+      remainingWords.splice(remainingWords.indexOf(square.letter), 1)
     }
-    if (!foundLetter) return true
-  }
 
-  return false
-}
+    const newBoard = deepCopyBoard(board)
+    newBoard[row][column].visited = true
 
-const removeImpossibleWords = (line: string[], dictionary: string[], wordLength: number) => {
-  const orderedLine = orderBoardLine(line)
+    const callback = visitNeighborsCallback(remainingWords, square.letter, newBoard)
 
-  return R.filter((word: string) => {
-    if (word.length < wordLength) return false
-    if (hasMissingLetters(orderedLine, word)) return false
+    const newFoundWords = R.flatten(visitNeighbors({ callback, onlyUnvisitedNeighbors: true }, newBoard, coordinates))
 
-    return true
-  }, dictionary)
-}
+    const unfoundWords = R.reject(w => newFoundWords.includes(w), remainingWords)
 
-const getBoardLineLetterCounts = (line: string[]) => {
-  const ordered = orderBoardLine(line)
-  let currentChar = '\0'
+    return { remainingWords: unfoundWords, foundWords: [...foundWords, ...newFoundWords] }
 
+  }, { remainingWords: wordsOfValidLength, foundWords: [] as string[] })
 
-  return R.reduce((acc: LetterCount, letter: string) => {
-    if (letter !== currentChar) {
-      currentChar = letter
-      return { ...acc, [letter]: 1 }
-  }
-
-    return { ...acc, [letter]: acc[letter] + 1 }
-  }, {}, ordered)
-}
-
-const removeWordsThatRequireMoreLetters = (line: string[], dictionary: string[]) => {
-  const lineLetterCount = getBoardLineLetterCounts(line)
-
-  const boardLetters = orderBoardLine(line)
-
-  return R.filter((word: string) => {
-    if (word.length > line.length) return false
-
-    const wordLetterCount = getLetterCounts(word, boardLetters)
-    const letters: string[] = Object.keys(wordLetterCount)
-
-    const tooManyOfOneLetter = R.reduce((acc, letter) => {
-      if (acc) return acc
-      return wordLetterCount[letter] > lineLetterCount[letter]
-    }, false, letters)
-
-    if (tooManyOfOneLetter) return false
-
-    return true
-  }, dictionary)
-}
-
-type RecursiveTraverseBoard = {
-  row: number,
-  column: number,
-  wordSoFar: string,
-  board: Board,
-  foundWords: string[]
-  dictionary: string[]
-}
-
-const recursiveTraverseBoard = ({ row, column, wordSoFar, board, foundWords, dictionary }: RecursiveTraverseBoard): string[] => {
-  const boardCopy = deepCopyBoard(board)
-  boardCopy[row][column].visited = true
-  const { letter } = boardCopy[row][column]
-  const maybeWord = `${wordSoFar}${letter}`
-  // logger.debug(`working with word chain: ${maybeWord}`)
-  const index = wordSoFar.length
-  // logger.debug(JSON.stringify({ maybeWord, wordSoFar }))
-
-  const narrowedDictionary = R.filter((word) => {
-    if (word[index] === maybeWord[index]) {
-      if (word.length === maybeWord.length) {
-        foundWords.push(word)
-        return false
-      }
-      return true
-    }
-    return false
-  }, dictionary)
-
-  if (narrowedDictionary.length === 0) return foundWords
-
-
-  const possibleDirections: Coordinates[] = getPossibleTravelDirections({ row, column, width: boardCopy.width })
-
-  const untraveledDirections = R.filter(({ row, column }: Coordinates) => {
-    return !boardCopy[row][column].visited
-  }, possibleDirections)
-
-  if (untraveledDirections.length === 0) return foundWords 
-
-  return R.reduce((acc: string[], coords: Coordinates) => recursiveTraverseBoard({
-      ...coords,
-      board: boardCopy,
-      dictionary: narrowedDictionary,
-      foundWords: acc,
-      wordSoFar: maybeWord,
-    })
- , foundWords, untraveledDirections)
-}
-
-const removeWordsThatCantBeSpelledOnBoard = (line: string[], dictionary: string[]) => {
-  const getFreshBoard = () => deepCopyBoard(R.once(() => getBoard(line))())
-
-  const board = getFreshBoard()
-
-  const allSquares = getAllPossibleCoordinates({
-    rows: R.times(R.identity, board.width),
-    columns: R.times(R.identity, board.width)
-  })
-
-  type TraverseBoardAcc = {
-    foundWords: string[],
-    remainingDictionary: string[]
-  }
-
-  const { foundWords } = R.reduce<Coordinates, TraverseBoardAcc>((acc, { row, column }) => {
-    const foundWords = recursiveTraverseBoard({ row, column, wordSoFar: '', board: getFreshBoard(), foundWords: acc.foundWords, dictionary: acc.remainingDictionary })
-
-    const remainingDictionary = R.filter(word => !foundWords.includes(word), acc.remainingDictionary)
-
-    return { foundWords, remainingDictionary }
-  }, { foundWords: [], remainingDictionary: dictionary }, allSquares)
-
-  return R.sort(R.ascend<string>(R.identity), R.uniq(foundWords))
-}
-
-const loadDictionary = (line: string[], fullDictionary: string[], minimumWordLength: number) => {
-  const narrowedDictionary = removeImpossibleWords(line, fullDictionary, minimumWordLength)
-  const narrowerDictionary = removeWordsThatRequireMoreLetters(line, narrowedDictionary)
-
-  const dictionary = removeWordsThatCantBeSpelledOnBoard(line, narrowerDictionary)
-
-  return dictionary
+  return R.uniq(foundWords)
 }
 
 const resolveDictionary = (line: string[], fullDictionary: string[], minimumWordLength: number) => {
@@ -180,8 +68,9 @@ const resolveDictionary = (line: string[], fullDictionary: string[], minimumWord
   if (canUseWebWorkers) {
     // do web worker stuff.... maybe.
   }
-  return Promise.resolve(loadDictionary(line, fullDictionary, minimumWordLength))
+  return Promise.resolve(getWordsOnBoard(getBoard(line), fullDictionary, minimumWordLength))
 }
+
 
 export type DictionaryState = {
   boardDictionary: string[],
@@ -200,7 +89,7 @@ export const useBoardDictionary = (languageState: LanguageState, board: Board | 
   }, [board])
 
   const resolveDictionaryCallback = useCallback((dictionary: string[]) => {
-    return resolveDictionary(memoizedBoard, dictionary, minimumWordLength)
+    return resolveDictionary(memoizedBoard, dictionary, minimumWordLength).then(R.tap(d => logger.debug(JSON.stringify(d))))
   }, [memoizedBoard, minimumWordLength])
 
   useEffect(() => {
@@ -221,3 +110,7 @@ export const useBoardDictionary = (languageState: LanguageState, board: Board | 
 export type DictionaryContext = DictionaryState
 
 export const Dictionary = createContext<DictionaryContext>({ boardDictionary: [], loading: true })
+
+export const __test = {
+  getWordsOnBoard
+}

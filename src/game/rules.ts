@@ -1,8 +1,8 @@
 import { createContext, useMemo } from 'react'
 import { useLocation } from 'react-router-dom'
-import * as R from 'ramda'
 
 import { getLanguageMetadata } from './language'
+import { splitWordIntoLetters } from './words'
 import { parseURLSearch } from '../util/url'
 
 export enum ScoreType {
@@ -39,26 +39,9 @@ const getLanguageLetters = (language: string) => getLanguageMetadata(language)
   .then(({ letterScores }) => Object.keys(letterScores))
 
 const getUndelimitedBoard = async ({ board, language }: { board: string, language: string }) => {
-  const letters = R.sort(R.descend<string>(R.prop('length')), await getLanguageLetters(language))
-  let b = board
-  const parsedBoard: string[] = []
-  while (b.length) {
-    const startingLength = b.length
-    for (const letter in letters) {
-      if (b.indexOf(letter) === 0) {
-        parsedBoard.push(letter)
-        b = b.substring(letter.length)
-        break
-      }
-    }
-    const endingLength = b.length
+  const letters = await getLanguageLetters(language)
 
-    if (startingLength === endingLength) {
-      throw new Error(`cannot find next matching letter. remaining board: ${JSON.stringify(b)}, letters: ${JSON.stringify(letters)}`)
-    }
-  }
-
-  return parsedBoard
+  return splitWordIntoLetters(board, letters)
 }
 
 type GetBoardParams = {

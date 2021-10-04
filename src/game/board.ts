@@ -1,4 +1,5 @@
 import * as R from 'ramda'
+import { Function as F } from 'ts-toolbelt'
 
 type Letter = {
   letter: string,
@@ -64,9 +65,52 @@ const boardMap = <T>(board: Board, callback: (letter: Letter, coordinates: Coord
   return response
 }
 
+type VisitNeighbors<T> = (options: VisitNeighborsOptions<T>, board: Board, coordinates: Coordinates) => T[]
+
+const visitNeighbors_ = <T>({ callback, onlyUnvisitedNeighbors }: VisitNeighborsOptions<T>, board: Board, coordinates: Coordinates): T[] => {
+  const neighbors = getPossibleTravelDirections({
+    ...coordinates,
+    width: board.width
+  })
+
+  class VisitedNeighbor {}
+
+  const results = R.map<Coordinates, VisitedNeighbor | T>(
+    ({ row, column }) => {
+      const envokeCallback = () => callback(board[row][column], { row, column })
+
+      if (onlyUnvisitedNeighbors) return board[row][column].visited ? new VisitedNeighbor() : envokeCallback()
+
+      return envokeCallback()
+    }, neighbors)
+
+  return results.filter(val => !(val instanceof VisitedNeighbor)) as T[]
+}
+
+export type VisitNeighborsCallback<T> = (neighbor: Letter, coordinates: Coordinates) => T
+
+export type VisitNeighborsOptions<T> = {
+  callback: VisitNeighborsCallback<T>,
+  onlyUnvisitedNeighbors?: boolean
+}
+
+export function visitNeighbors<T>(options: VisitNeighborsOptions<T>): F.Curry<(board: Board, coordinates: Coordinates) => T[]>
+export function visitNeighbors<T>(options: VisitNeighborsOptions<T>, board: Board): F.Curry<(coordinates: Coordinates) => T[]>
+export function visitNeighbors<T>(options: VisitNeighborsOptions<T>, board: Board, coordinates: Coordinates): T[]
+export function visitNeighbors<T>(options: VisitNeighborsOptions<T>, board?: any, coordinates?: any) {
+  const curried = R.curryN(3, visitNeighbors_ as VisitNeighbors<T>)(options)
+
+  return board
+    ? coordinates
+      ? curried(board as Board, coordinates as Coordinates)
+      : curried(board as Board)
+    : curried
+}
+
+
 export const boardReduce = <Acc>(
   board: Board,
-  callback: (acc: Acc, letter: Letter, coordinates?: Coordinates) => Acc,
+  callback: (acc: Acc, letter: Letter, coordinates: Coordinates) => Acc,
   initialValue: Acc
 ) => {
   const { width } = board
