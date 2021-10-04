@@ -1,16 +1,22 @@
-import { createContext, Dispatch, Reducer, useMemo, useReducer } from 'react'
+import { createContext, Dispatch, Reducer, useEffect, useReducer, useState } from 'react'
 import { logger } from '../util/logger'
 import { Board, Coordinates, deepCopyBoard, getBoard, getPossibleTravelDirections, getUnvisitedBoard } from './board'
+import { GameRules } from './rules'
 
 export enum GuessAction {
   EnterLetter = 'enter-letter',
   BeginGuess = 'begin-guess',
-  EndGuess = 'end-guess'
+  EndGuess = 'end-guess',
+  __UpdateBoard = 'updateBoard'
 }
 
 export type GuessActionType<A extends GuessAction> = {
   type: A
-  info: A extends GuessAction.EnterLetter ? Coordinates : never
+  info: A extends GuessAction.EnterLetter
+    ? Coordinates
+    : A extends GuessAction.__UpdateBoard
+    ? Board
+    : never
 }
 
 export type GuessState = {
@@ -115,11 +121,18 @@ const handleEnterLetter = (state: GuessState, coordinates: Coordinates): GuessSt
   return state
 }
 
+const handleUpdateBoard = (state: GuessState, board: Board): GuessState => ({
+  ...state,
+  board: deepCopyBoard(board)
+})
+
 export const guessReducer = <A extends GuessAction>(state: GuessState, action: GuessActionType<A>) => {
   logger.debug(`Guess reducer called... action type: ${action.type}`)
   switch (action.type) {
+    case GuessAction.__UpdateBoard:
+      return handleUpdateBoard(state, action.info as Board)
     case GuessAction.EnterLetter:
-      return handleEnterLetter(state, action.info)
+      return handleEnterLetter(state, action.info as Coordinates)
     case GuessAction.BeginGuess:
       return handleBeginGuess(state)
     case GuessAction.EndGuess:
@@ -131,19 +144,26 @@ export const guessReducer = <A extends GuessAction>(state: GuessState, action: G
 
 type GuessReducer = Reducer<GuessState, GuessActionType<GuessAction>>
 
-export const useGuesses = (board: Board | string[]) => {
-  const memoizedBoard = useMemo(() => {
-    if (Array.isArray(board)) return getBoard(board)
-    return getUnvisitedBoard(board)
-  }, [board])
+export const useGuesses = (rules: GameRules) => {
+  const [stateBoard] = useState(getBoard(rules.board))
 
-  return useReducer<GuessReducer>(guessReducer, {
-    board: memoizedBoard,
+  const reducer = useReducer<GuessReducer>(guessReducer, {
+    board: stateBoard,
     currentGuess: '',
     guesses: [],
     currentLetter: { row: 0, column: 0 },
     isGuessing: false
   })
+
+  const dispatch = reducer[1]
+
+  useEffect(() => {
+    logger.debug('running useGuesses useEffect....', JSON.stringify({ rules }))
+    dispatch({ info: getBoard(rules.board), type: GuessAction.__UpdateBoard })
+
+  }, [rules, dispatch])
+
+  return reducer
 }
 
 export type GuessContext = GuessState

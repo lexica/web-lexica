@@ -66,7 +66,7 @@ const useMiniReducer = (originalBoard: BoardObject): [BoardObject, Dispatch<Gues
       case GuessAction.EndGuess:
         return handleClick(originalBoard, state, false)
       case GuessAction.EnterLetter:
-        return handleHover(state, action.info)
+        return handleHover(state, action.info as Coordinates)
       default:
         throw new Error(`${action.type} not implemented...`)
     }},

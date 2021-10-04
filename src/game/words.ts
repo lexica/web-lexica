@@ -1,5 +1,4 @@
 import * as R from 'ramda'
-import { logger } from '../util/logger'
 
 export const orderWordAlphabetically = (line: string, dedupe: boolean = false) => {
   const orderedLine = R.pipe<string, string[], string[], string>(
@@ -52,18 +51,4 @@ export const splitWordIntoLetters = (word: string, letters: string[], sortWith?:
   if (sortWith) return sortWith(response)
 
   return response
-}
-
-export const getLetterCounts = (word: string, validLetters: string[]) => {
-  let currentChar = '\0'
-
-
-  return R.reduce((acc: LetterCount, letter: string) => {
-    if (letter !== currentChar) {
-      currentChar = letter
-      return { ...acc, [letter]: 1 }
-  }
-
-    return { ...acc, [letter]: acc[letter] + 1 }
-  }, {}, splitWordIntoLetters(word, validLetters, sort.byLength))
 }

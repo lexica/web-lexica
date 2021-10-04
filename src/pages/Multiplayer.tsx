@@ -89,7 +89,7 @@ const Multiplayer = () => {
 
   const loading = dictionaryState.loading || language.loading
 
-  const [guessState, guessDispatch] = useGuesses(rules.board)
+  const [guessState, guessDispatch] = useGuesses(rules)
 
   const score = useScore(guessState, dictionaryState)
 
