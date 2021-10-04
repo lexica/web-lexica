@@ -12,49 +12,6 @@ const {
   getWordsOnBoard
 } = __test
 
-class ArrayWithItems extends AsymmetricMatcher<unknown[]> {
-  constructor(sample: unknown[], inverse = false) {
-    super(sample);
-    this.inverse = inverse;
-  }
-
-  asymmetricMatch(other: unknown[]) {
-    if (!Array.isArray(this.sample)) {
-      throw new Error(
-        `You must provide an array to ${this.toString()}, not '` +
-          typeof this.sample +
-          "'."
-      );
-    }
-
-    if(!Array.isArray(other)) return this.inverse ? true : false
-
-    const sampleHasAllOther = this.sample.every(item => other.some(another => (void 0, equals)(item, another)))
-    const otherHasAllSample = other.every(item => this.sample.some(another => (void 0, equals)(item, another)))
-    const lengthsEqual =  other.length === this.sample.length;
-    const result = lengthsEqual && sampleHasAllOther && otherHasAllSample
-    return this.inverse ? !result : result;
-  }
-
-  toString() {
-    return `Array${this.inverse ? 'Not' : ''}Containing`;
-  }
-
-  getExpectedType() {
-    return 'array';
-  }
-
-  toAsymmetricMatcher() {
-
-  }
-}
-
-const arrayWithItems = (sample: unknown[]) => new ArrayWithItems(sample)
-const arrayWithoutItems = (sample: unknown[]) => new ArrayWithItems(sample, true);
-
-(expect as any).arrayWithItems = arrayWithItems;
-(expect.not as any).arrayWithItems = arrayWithoutItems
-
 describe('dictionary', () => {
   describe('#getWordsOnBoard: removes all impossible words and leaves only possible words given board', () => {
     describe('with single letter board squares', () => {
@@ -62,9 +19,9 @@ describe('dictionary', () => {
         const board = getBoard(['a'])
         const dictionary = ['a', 'aaa', 'aaaa', 'aaaaa', 'aaaaaa', 'b']
         const minWordLength = 1
-        const result = getWordsOnBoard(board, dictionary, minWordLength)
+        const results = getWordsOnBoard(board, dictionary, minWordLength)
 
-        expect(result).toEqual(['a'])
+        expect(results).toEqual(['a'])
       })
       test('2x2 board', () => {
         const board = getBoard(['a', 'b', 'c', 'd'])
@@ -73,10 +30,10 @@ describe('dictionary', () => {
 
         const expected = ['ab', 'dab', 'cab', 'bad']
 
-        const result = getWordsOnBoard(board, dictionary, minWordLength)
+        const results = getWordsOnBoard(board, dictionary, minWordLength)
 
-        expect(result).toEqual(expect.arrayContaining(expected))
-        expect(result.length).toEqual(expected.length)
+        expect(results).toEqual(expect.arrayContaining(expected))
+        expect(results.length).toEqual(expected.length)
       })
 
       test('3x3 board', () => {
@@ -88,11 +45,11 @@ describe('dictionary', () => {
 
         const expected = ['dab', 'head', 'ade', 'bed']
 
-        const result = getWordsOnBoard(board, dictionary, minWordLength)
+        const results = getWordsOnBoard(board, dictionary, minWordLength)
 
-        expect(result).toEqual((expect as any).arrayWithItems(expected))
-        // expect(expected).toEqual(expect.arrayContaining(result))
-        // expect(result.length).toEqual(expected.length)
+        expect(results).toEqual(expect.arrayContaining(expected))
+        expect(expected).toEqual(expect.arrayContaining(results))
+        expect(results.length).toEqual(expected.length)
       })
       test('4x4 board', () => {
         const board = realBoard
@@ -123,7 +80,9 @@ describe('dictionary', () => {
 
         const results = getWordsOnBoard(board, dictionary, minWordLength)
 
-        expect(results).toEqual((expect as any).arrayWithItems(expected))
+        expect(results).toEqual(expect.arrayContaining(expected))
+        expect(expected).toEqual(expect.arrayContaining(results))
+        expect(results.length).toEqual(expected.length)
       })
     })
     describe('with multi-letter squares', () => {
@@ -139,7 +98,9 @@ describe('dictionary', () => {
 
         const results = getWordsOnBoard(board, dictionary, minWordLength)
 
-        expect(results).toEqual((expect as any).arrayWithItems(expected))
+        expect(results).toEqual(expect.arrayContaining(expected))
+        expect(expected).toEqual(expect.arrayContaining(results))
+        expect(results.length).toEqual(expected.length)
       })
     })
   })

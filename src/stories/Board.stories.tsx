@@ -3,8 +3,7 @@ import { Dispatch, Reducer, useContext, useEffect, useMemo, useReducer } from 'r
 
 import { Board } from '../components/Board';
 import { Board as BoardObject, Coordinates, deepCopyBoard, getBoard } from '../game/board';
-import { Guess, GuessAction, GuessActionType, GuessDispatch, GuessState } from '../game/guess';
-import { useLanguage } from '../game/language';
+import { GuessAction, GuessActionType, GuessState } from '../game/guess';
 import { Rules } from '../game/rules';
 import Providers from './Providers';
 
