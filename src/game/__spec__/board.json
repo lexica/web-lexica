@@ -1,0 +1,102 @@
+{
+  "line": ["o","f","e","t",
+           "r","e","a","t",
+           "d","e","p","i",
+           "n","n","s","l"],
+  "board": {
+    "width": 4,
+    "0": {
+      "index": 0,
+      "0": {
+        "letter": "o",
+        "visited": false,
+        "index": 0
+      },
+      "1": {
+        "letter": "f",
+        "visited": false,
+        "index": 1
+      },
+      "2": {
+        "letter": "e",
+        "visited": false,
+        "index": 2
+      },
+      "3": {
+        "letter": "t",
+        "visited": false,
+        "index": 3
+      }
+    },
+    "1": {
+      "index": 1,
+      "0": {
+        "letter": "r",
+        "visited": false,
+        "index": 0
+      },
+      "1": {
+        "letter": "e",
+        "visited": false,
+        "index": 1
+      },
+      "2": {
+        "letter": "a",
+        "visited": false,
+        "index": 2
+      },
+      "3": {
+        "letter": "t",
+        "visited": false,
+        "index": 3
+      }
+    },
+    "2": {
+      "index": 2,
+      "0": {
+        "letter": "d",
+        "visited": false,
+        "index": 0
+      },
+      "1": {
+        "letter": "e",
+        "visited": false,
+        "index": 1
+      },
+      "2": {
+        "letter": "p",
+        "visited": false,
+        "index": 2
+      },
+      "3": {
+        "letter": "i",
+        "visited": false,
+        "index": 3
+      }
+    },
+    "3": {
+      "index": 3,
+      "0": {
+        "letter": "n",
+        "visited": false,
+        "index": 0
+      },
+      "1": {
+        "letter": "n",
+        "visited": false,
+        "index": 1
+      },
+      "2": {
+        "letter": "s",
+        "visited": false,
+        "index": 2
+      },
+      "3": {
+        "letter": "l",
+        "visited": false,
+        "index": 3
+      }
+    }
+  },
+  "base64": "byxmLGUsdCxyLGUsYSx0LGQsZSxwLGksbixuLHMsbA"
+}

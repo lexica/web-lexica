@@ -20,6 +20,14 @@ export type LanguageState = {
 
 const getBaseUrl = () => `${window.location.protocol}//${window.location.host}`
 
+export const getLanguageMetadata = (languageCode: string) => axios.get<MetadataV1>(
+  `${getBaseUrl()}/lexica/api/v1/language/${languageCode}/metadata.json`
+).then(({ data }) => data)
+
+const getDictionary = (languageCode: string) => axios.get<string[]>(
+  `${getBaseUrl()}/lexica/api/v1/language/${languageCode}/dictionary.json`
+).then(({ data }) => data)
+
 export const useLanguage = (languageCode: string) => {
   const [state, setState] = useState<LanguageState>({
     loading: true,
@@ -32,9 +40,9 @@ export const useLanguage = (languageCode: string) => {
     logger.debug('running language useEffect...')
     if (languageCode.length) {
       Promise.all([
-        axios.get<MetadataV1>(`${getBaseUrl()}/lexica/api/v1/language/${languageCode}/metadata.json`),
-        axios.get<string[]>(`${getBaseUrl()}/lexica/api/v1/language/${languageCode}/dictionary.json`)
-      ]).then(([{ data: metadata }, { data: dictionary }]) => {
+        getLanguageMetadata(languageCode),
+        getDictionary(languageCode)
+      ]).then(([metadata, dictionary]) => {
         setState({
           loading: false,
           error: false,

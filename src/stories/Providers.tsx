@@ -44,7 +44,7 @@ const dictionaryDefaults: DictionaryState = {
   loading: true
 }
 const guessDefaults: GuessState = {
-  board: getBoard('aaaabbbbccccdddd'),
+  board: getBoard('aaaabbbbccccdddd'.split('')),
   currentGuess: '',
   isGuessing: false,
   currentLetter: { row: 0, column: 0 },

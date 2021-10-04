@@ -110,3 +110,13 @@ export const useOrientation = () => {
   }, [size, setOrientation])
   return orientation
 }
+
+export const usePromise = <T>(p: Promise<T>, initialValue?: T): typeof initialValue extends undefined ? T | undefined : T => {
+  const [resolved, setResolved] = useState<T>(initialValue!)
+
+  useEffect(() => {
+    p.then(val => setResolved(val))
+  }, [p])
+
+  return resolved as any
+}

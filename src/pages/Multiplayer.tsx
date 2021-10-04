@@ -6,8 +6,8 @@ import '../App.css'
 import Results, { ResultsOrientation } from '../components/Results'
 import Game from '../components/Game'
 import StartScreen from '../components/StartScreen'
-import { useRulesFromQueryString, Rules } from '../game/rules'
-import { useOrientation, ScreenOrientation } from '../util/hooks'
+import { useRulesFromQueryString, Rules, useDummyRules } from '../game/rules'
+import { useOrientation, ScreenOrientation, usePromise } from '../util/hooks'
 import { logger } from '../util/logger'
 import { Language, useLanguage } from '../game/language'
 import { Timer, useTimer } from '../game/timer'
@@ -71,7 +71,8 @@ const Multiplayer = () => {
   logger.debug('loading app...')
   const [started, updateStarted] = useState(false)
   const [finished, updateResults] = useState(false)
-  const rules = useRulesFromQueryString()
+  const dummyRules = useDummyRules()
+  const rules = usePromise(useRulesFromQueryString(), dummyRules)
 
   const language = useLanguage(rules.language)
 
@@ -88,7 +89,7 @@ const Multiplayer = () => {
 
   const loading = dictionaryState.loading || language.loading
 
-  const [guessState, guessDispatch] = useGuesses(rules.board)
+  const [guessState, guessDispatch] = useGuesses(rules)
 
   const score = useScore(guessState, dictionaryState)
 

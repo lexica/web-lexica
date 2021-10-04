@@ -1,4 +1,5 @@
 import * as R from 'ramda'
+import { Function as F } from 'ts-toolbelt'
 
 type Letter = {
   letter: string,
@@ -17,7 +18,7 @@ export type Coordinates = {
   column: number
 }
 
-const splitLineAlongRows = (line: string) => {
+const splitLineAlongRows = (line: string[]) => {
   const width = Math.sqrt(line.length)
 
   if (Math.floor(width) !== width) {
@@ -29,13 +30,12 @@ const splitLineAlongRows = (line: string) => {
 }
 
 
-export const getBoard = (line: string): Board => {
+export const getBoard = (line: string[]): Board => {
   const board = splitLineAlongRows(line)
 
   type Row = Omit<Board[number], 'index'>
 
-  const getColumns = R.pipe<string, string[], Board[number][number][], Row>(
-    R.splitEvery(1) as (a: string) => string[],
+  const getColumns = R.pipe<string[], Board[number][number][], Row>(
     R.addIndex<string, Board[number][number]>(R.map)((letter: string, index: number) => ({
       letter,
       visited: false,
@@ -46,7 +46,7 @@ export const getBoard = (line: string): Board => {
       [column.index]: column
     }), {})
   )
-  const getRows = R.addIndex<string, Board[number]>(R.map)((row: string, index: number) => ({
+  const getRows = R.addIndex<string[], Board[number]>(R.map)((row: string[], index: number) => ({
     ...getColumns(row),
     index
   }))
@@ -65,8 +65,67 @@ const boardMap = <T>(board: Board, callback: (letter: Letter, coordinates: Coord
   return response
 }
 
+type VisitNeighbors<T> = (options: VisitNeighborsOptions<T>, board: Board, coordinates: Coordinates) => T[]
+
+const visitNeighbors_ = <T>({ callback, onlyUnvisitedNeighbors }: VisitNeighborsOptions<T>, board: Board, coordinates: Coordinates): T[] => {
+  const neighbors = getPossibleTravelDirections({
+    ...coordinates,
+    width: board.width
+  })
+
+  class VisitedNeighbor {}
+
+  const results = R.map<Coordinates, VisitedNeighbor | T>(
+    ({ row, column }) => {
+      const envokeCallback = () => callback(board[row][column], { row, column })
+
+      if (onlyUnvisitedNeighbors) return board[row][column].visited ? new VisitedNeighbor() : envokeCallback()
+
+      return envokeCallback()
+    }, neighbors)
+
+  return results.filter(val => !(val instanceof VisitedNeighbor)) as T[]
+}
+
+export type VisitNeighborsCallback<T> = (neighbor: Letter, coordinates: Coordinates) => T
+
+export type VisitNeighborsOptions<T> = {
+  callback: VisitNeighborsCallback<T>,
+  onlyUnvisitedNeighbors?: boolean
+}
+
+export function visitNeighbors<T>(options: VisitNeighborsOptions<T>): F.Curry<(board: Board, coordinates: Coordinates) => T[]>
+export function visitNeighbors<T>(options: VisitNeighborsOptions<T>, board: Board): F.Curry<(coordinates: Coordinates) => T[]>
+export function visitNeighbors<T>(options: VisitNeighborsOptions<T>, board: Board, coordinates: Coordinates): T[]
+export function visitNeighbors<T>(options: VisitNeighborsOptions<T>, board?: any, coordinates?: any) {
+  const curried = R.curryN(3, visitNeighbors_ as VisitNeighbors<T>)(options)
+
+  return board
+    ? coordinates
+      ? curried(board as Board, coordinates as Coordinates)
+      : curried(board as Board)
+    : curried
+}
+
+
+export const boardReduce = <Acc>(
+  board: Board,
+  callback: (acc: Acc, letter: Letter, coordinates: Coordinates) => Acc,
+  initialValue: Acc
+) => {
+  const { width } = board
+  let acc = initialValue
+
+  for(let row = 0; row < width; row++) {
+    for(let column = 0; column < width; column++) {
+      acc = callback(acc, board[row][column], { row, column })
+    }
+  }
+  return acc
+}
+
 export const getLine = (board: Board) => {
-  return boardMap(board, ({ letter }) => letter).join('')
+  return boardMap(board, ({ letter }) => letter)
 }
 
 export const deepCopyBoard = (board: Board) => {
