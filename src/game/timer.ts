@@ -50,6 +50,7 @@ const handleResume = (state: TimerState, resumeTime: Date) => {
 }
 
 const timerReducer = (state: TimerState, action: TimerReducerAction) => {
+  logger.debug('running timer reducer', JSON.stringify({ action }))
   switch (action.type) {
     case TimerAction.Pause:
       return handlePause(state, action.info)
@@ -67,6 +68,7 @@ export type UseTimer = {
 }
 
 export const useTimer = (totalTimeInSeconds: number, timeEndCallback: () => void): UseTimer => {
+  logger.debug(JSON.stringify({ totalTimeInSeconds }))
   const [state, dispatch] = useReducer<Reducer<TimerState, TimerReducerAction>>(timerReducer, {
     remainingTime: totalTimeInSeconds,
     isPaused: true,

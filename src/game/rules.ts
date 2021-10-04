@@ -1,4 +1,4 @@
-import { createContext, useMemo } from 'react'
+import { createContext, useEffect, useMemo, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 
 import { getLanguageMetadata } from './language'
@@ -55,7 +55,7 @@ const getBoard = ({ minimumVersion, board, language }: GetBoardParams) => {
   return getUndelimitedBoard({ board, language })
 }
 
-const parseGameParameters = async (urlParams: GameURLParams) => {
+const parseGameParameters = (urlParams: GameURLParams) => {
   const language = urlParams[GameParamMap.Language]
   const minimumVersion = parseInt(urlParams[GameParamMap.MinimumVersion])
   const getBoardParams: GetBoardParams = {
@@ -64,7 +64,7 @@ const parseGameParameters = async (urlParams: GameURLParams) => {
     minimumVersion
   }
 
-  const board = await getBoard(getBoardParams)
+  const board = getBoard(getBoardParams)
 
   return {
     board,
@@ -77,33 +77,29 @@ const parseGameParameters = async (urlParams: GameURLParams) => {
   }
 }
 
-type PromiseReturnType<T extends (...args: any[]) => Promise<any>> = ReturnType<T> extends Promise<infer X> ? X : never
+type ParseGameParameters = ReturnType<typeof parseGameParameters>
+export type GameRules = Omit<ParseGameParameters, 'board'> & { board: string[] }
 
-export type GameRules = PromiseReturnType<typeof parseGameParameters>
 
-
-export const useRulesFromQueryString = (): Promise<GameRules> => {
+export const useRulesFromQueryString = (): GameRules => {
   const location = useLocation()
   const params = useMemo(() => parseGameParameters(parseURLSearch<GameURLParams>(location.search)), [location.search])
-  return params
-}
 
-export const useDummyRules = () => {
-  const location = useLocation()
-  const { l: language } = useMemo(
-    () => parseURLSearch<GameURLParams>(location.search),
-    [location.search]
-  )
+  const [rules, setRules] = useState({
+    ...params,
+    board: ['']
+  })
 
-  return {
-    board: [''],
-    language,
-    minimumVersion: 0,
-    minimumWordLength: 0,
-    score: ScoreType.Words,
-    time: 0,
-    version: 0
-  }
+  useEffect(() => {
+    params.board.then(board => {
+      setRules({
+        ...params,
+        board
+      })
+    })
+  }, [params])
+
+  return rules
 }
 
 export const Rules = createContext<GameRules>(undefined as any)

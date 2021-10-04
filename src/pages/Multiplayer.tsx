@@ -6,8 +6,8 @@ import '../App.css'
 import Results, { ResultsOrientation } from '../components/Results'
 import Game from '../components/Game'
 import StartScreen from '../components/StartScreen'
-import { useRulesFromQueryString, Rules, useDummyRules } from '../game/rules'
-import { useOrientation, ScreenOrientation, usePromise } from '../util/hooks'
+import { useRulesFromQueryString, Rules } from '../game/rules'
+import { useOrientation, ScreenOrientation } from '../util/hooks'
 import { logger } from '../util/logger'
 import { Language, useLanguage } from '../game/language'
 import { Timer, useTimer } from '../game/timer'
@@ -71,8 +71,7 @@ const Multiplayer = () => {
   logger.debug('loading app...')
   const [started, updateStarted] = useState(false)
   const [finished, updateResults] = useState(false)
-  const dummyRules = useDummyRules()
-  const rules = usePromise(useRulesFromQueryString(), dummyRules)
+  const rules = useRulesFromQueryString()
 
   const language = useLanguage(rules.language)
 
@@ -83,7 +82,9 @@ const Multiplayer = () => {
     updateResults(true)
   }, [updateResults])
 
-  const { startTime, pauseTime, getRemainingTime } = useTimer(rules.time, handleFinish)
+  const timer = useTimer(rules.time, handleFinish)
+
+  const { startTime } = timer
 
   const dictionaryState = useBoardDictionary(language, rules.board, rules.minimumWordLength)
 
@@ -108,11 +109,7 @@ const Multiplayer = () => {
           guessDispatch,
           language: R.omit(['loading', 'error'], language),
           score,
-          timer: {
-            getRemainingTime,
-            pauseTime,
-            startTime
-          },
+          timer
         }}>
           {
             finished
