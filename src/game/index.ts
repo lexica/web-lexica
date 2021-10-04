@@ -2,12 +2,13 @@ import * as R from 'ramda'
 import { createContext } from 'react'
 import { MetadataV1 } from './language'
 import { ScoreType } from './rules'
+import { splitWordIntoLetters } from './words'
 
 export const getLetterScore = (letter: string, letterScores: MetadataV1['letterScores']) => letterScores[letter]
 
 const scoreWordByLetterScores = (word: string, letterScores: { [key: string]: number }) => R.pipe<string, string[], number>(
-  R.splitEvery(1) as (a: string) => string[],
-  R.reduce<string, number>((acc, letter) => acc + letterScores[(letter as string) === 'q' ? 'qu' : letter], 0)
+  word => splitWordIntoLetters(word, Object.keys(letterScores)),
+  R.reduce<string, number>((acc, letter) => acc + letterScores[letter], 0)
 )(word)
 
 export const scoreWord = (word: string, scoreType: ScoreType, letterScores: MetadataV1['letterScores']) => {
