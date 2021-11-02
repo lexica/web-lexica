@@ -1,6 +1,7 @@
 import * as R from 'ramda'
 import { createContext, useEffect, useMemo, useState } from 'react'
 import { logger } from '../util/logger'
+import { storage } from '../util/storage'
 import {
   ImplementedLanguage,
   languageCodeToTranslationsMap,
@@ -68,7 +69,7 @@ const getClosestLanguageIfPossible = (languageCode: string) => {
 }
 
 const getBestTranslation = () => {
-  const preset = localStorage.getItem(LocalStorage.LanguageCode)
+  const preset = storage.get({ key: LocalStorage.LanguageCode, parser: R.identity })
   if (preset && isImplemented(preset)) return preset
   return getClosestLanguageIfPossible(navigator.language)
 }

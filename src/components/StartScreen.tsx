@@ -1,30 +1,15 @@
 import { useContext } from 'react'
+import { ReactComponent as PlayCircle } from '@material-design-icons/svg/round/play_circle.svg'
+
+import GameModeDetails from './GameModeDetails'
 
 import constants, { useConstants } from '../style/constants'
-
-import './StartScreen.css'
-import { ReactComponent as Timer } from '@material-design-icons/svg/round/timer.svg'
-import { ReactComponent as GridView } from '@material-design-icons/svg/round/grid_view.svg'
-import { ReactComponent as EmojiEvents } from '@material-design-icons/svg/round/emoji_events.svg'
-import { ReactComponent as Sort } from '@material-design-icons/svg/round/sort.svg'
-import { ReactComponent as PlayCircle } from '@material-design-icons/svg/round/play_circle.svg'
-import { Rules } from '../game/rules'
 import { Dictionary } from '../game/dictionary'
 import { Translations } from '../translations'
 import { Translation } from '../translations/implemented-languages'
 import { Language } from '../game/language'
-import { Duration, normalize } from 'duration-fns'
 
-const getScoringType = (scoringType: string): string => ({
-  'l': 'Letter Points',
-  'w': 'Word Length'
-}[scoringType] as any)
-
-const getReadableTime = (time: Duration) => {
-  const { minutes = 0 } = normalize(time)
-  if (minutes === 1) return '1 min'
-  return `${minutes} mins`
-}
+import './StartScreen.css'
 
 export type StartScreenProps = {
   handleStart: () => any
@@ -37,10 +22,9 @@ const StartScreen: React.FC<StartScreenProps> = ({
   loading,
   error
 }) => {
-  const rules = useContext(Rules)
   const language = useContext(Language)
 
-  const { fontSize, fontSizeTitle } = useConstants()
+  const { fontSizeTitle } = useConstants()
 
   const dictionary = useContext(Dictionary)
 
@@ -64,44 +48,7 @@ const StartScreen: React.FC<StartScreenProps> = ({
   return <div className="start-screen">
     <div className="start-screen-title">Web Lexica Multiplayer Game</div>
     <div className="start-screen-language">{languageTitle}</div>
-    <div className="start-screen-info-container">
-      <div className="start-screen-info">
-        <Timer
-          title="Time"
-          fill={constants.colorContentDark}
-          width={fontSize}
-          height={fontSize}
-        />
-        <div>{getReadableTime(rules.time)}</div>
-      </div>
-      <div className="start-screen-info">
-        <GridView
-          title="Grid-Size"
-          fill={constants.colorContentDark}
-          width={fontSize}
-          height={fontSize}
-        />
-        <div>{rules.boardWidth}x{rules.boardWidth}</div>
-      </div>
-      <div className="start-screen-info">
-        <EmojiEvents
-          title="Scoring"
-          fill={constants.colorContentDark}
-          width={fontSize}
-          height={fontSize}
-        />
-        <div>{getScoringType(rules.score)}</div>
-      </div>
-      <div className="start-screen-info">
-        <Sort
-          title="Minimum Word Length"
-          fill={constants.colorContentDark}
-          width={fontSize}
-          height={fontSize}
-        />
-        <div>&ge; {rules.minimumWordLength}</div>
-      </div>
-    </div>
+    <GameModeDetails/>
     <div className="start-screen-word-count">{wordCount}</div>
     <div className="start-screen-start-prompt">When all players are ready, you should all start the game at the same time.</div>
     <div

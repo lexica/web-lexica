@@ -1,10 +1,11 @@
 import { createContext, useEffect, useMemo, useState } from 'react'
+import * as R from 'ramda'
 import { Duration, normalize } from 'duration-fns'
 import { v4 as uuid } from 'uuid'
 
 import { ScoreType } from './score'
 import { useGameUrlParameters } from './url'
-import { getUseEffectLocalStorageListener } from '../util/local-storage'
+import { GameStorage, useStorage } from '../util/storage'
 
 export type RulesContext = {
   minimumWordLength: number,
@@ -29,7 +30,7 @@ export enum LocalStorage {
 }
 
 export enum DefaultRulesets {
-  Sprint = 'sprit',
+  Sprint = 'sprint',
   Marathon = 'marathon',
   LetterPoints = 'letter-points'
 }
@@ -58,19 +59,20 @@ const defaultRulesets: { [P in DefaultRulesets]: Ruleset } = {
   }
 }
 
-const seedDefaultRulesets = () => {
-  const defaults = JSON.stringify(defaultRulesets)
-  localStorage.setItem(LocalStorage.DefaultRulesets, defaults)
-  localStorage.setItem(LocalStorage.Rulesets, defaults)
-}
+const rulesetStorage = new GameStorage<Rulesets>({
+  key: LocalStorage.Rulesets,
+  initialValueIfNull: defaultRulesets
+})
+
+const currentRulesetIdStorage = new GameStorage<string>({
+  key: LocalStorage.CurrentRulesetId,
+  initialValueIfNull: DefaultRulesets.Sprint,
+  serializer: R.identity,
+  parser: R.identity
+})
 
 export const getRulesets = (): Rulesets => {
-  const rulesetsString = localStorage.getItem(LocalStorage.Rulesets)
-  if (!rulesetsString) {
-    seedDefaultRulesets()
-  }
-  const rules = rulesetsString ? JSON.parse(rulesetsString) as Rulesets : defaultRulesets
-  return rules
+  return rulesetStorage.get()
 }
 
 export const getRuleset = (id: string): Ruleset => {
@@ -79,29 +81,28 @@ export const getRuleset = (id: string): Ruleset => {
 }
 
 export const addRuleset = (ruleset: Ruleset) => {
-  const rulesets = getRulesets()
-  const stringified = JSON.stringify({
+  const rulesets = rulesetStorage.get()
+  rulesetStorage.set({
     ...rulesets,
     [uuid()]: ruleset
   })
-  localStorage.setItem(LocalStorage.Rulesets, stringified)
 }
 
 export const setCurrentRuleset = (id: string) => {
-  const ruleset = getRuleset(id)
-  const idToSet = ruleset ? id : DefaultRulesets.Sprint
-  localStorage.setItem(LocalStorage.CurrentRulesetId, idToSet)
+  currentRulesetIdStorage.set(id)
 }
 
-export const useRulesFromStorage = (): RulesContext => {
-  const [id, setId] = useState(localStorage.getItem(LocalStorage.CurrentRulesetId) || DefaultRulesets.Sprint)
+export const useRulesFromStorage = (): [context: RulesContext, id: string] => {
+  const id = useStorage(LocalStorage.CurrentRulesetId, DefaultRulesets.Sprint as string, R.identity)
 
-  useEffect(() => getUseEffectLocalStorageListener(
-    LocalStorage.CurrentRulesetId,
-    (val: string | null) => setId(val || DefaultRulesets.Sprint)
-  ), [setId])
+  const [ruleset, setRuleset] = useState(getRuleset(id))
 
-  return useMemo(() => getRuleset(id), [id])
+  useEffect(() => {
+    setRuleset(getRuleset(id))
+  }, [setRuleset, id])
+
+
+  return [ruleset, id]
 }
 
 export const useRulesFromQueryString = (board: string[]): RulesContext => {
@@ -120,6 +121,11 @@ export const useRulesFromQueryString = (board: string[]): RulesContext => {
 
 export const useDefaultRules = (): RulesContext => {
   return useMemo(() => getRuleset(DefaultRulesets.Sprint), [])
+}
+
+export const useRulesets = (): Rulesets => {
+  const rulesets = useStorage(LocalStorage.Rulesets, defaultRulesets)
+  return rulesets
 }
 
 export const Rules = createContext<RulesContext>(getRuleset(DefaultRulesets.Sprint))

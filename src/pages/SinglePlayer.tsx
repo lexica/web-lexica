@@ -1,11 +1,10 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import * as R from 'ramda'
 
 import '../App.css'
 
 import Results, { ResultsOrientation } from '../components/Results'
 import Game from '../components/Game'
-import StartScreen from '../components/StartScreen'
 import { Rules, useRulesFromStorage } from '../game/rules'
 import { useOrientation, ScreenOrientation } from '../util/hooks'
 import { logger } from '../util/logger'
@@ -17,6 +16,7 @@ import { Guess, GuessDispatch, useGuesses } from '../game/guess'
 import { LetterScores } from '../game'
 import { toSeconds } from 'duration-fns'
 import { useGeneratedBoard } from '../game/board/hooks'
+import GameModeDetails from '../components/GameModeDetails'
 
 const getResultsOrientation = (orientation: ScreenOrientation) => {
     switch(orientation) {
@@ -40,6 +40,15 @@ type ProvidersProps = {
   score: ProviderProps<typeof Score>,
   timer: ProviderProps<typeof Timer>,
   rules: ProviderProps<typeof Rules>
+}
+
+const LoadingScreen = (): JSX.Element => {
+  return <>
+    <div className="single-player-loading-screen">
+      <GameModeDetails />
+      Loading board...
+    </div>
+  </>
 }
 
 const Providers: React.FC<ProvidersProps> = ({
@@ -75,7 +84,7 @@ const SinglePlayer = () => {
   const [finished, updateResults] = useState(false)
 
   const language = useLanguageFromLocalStorage()
-  const rules = useRulesFromStorage()
+  const [rules] = useRulesFromStorage()
   const board = useGeneratedBoard(rules.boardWidth, language.metadata)
 
   const { error } = language
@@ -99,6 +108,10 @@ const SinglePlayer = () => {
 
   const handleStart = useCallback(() => { updateStarted(true); startTime() }, [updateStarted, startTime])
 
+  useEffect(() => {
+    if (!loading) handleStart()
+  }, [handleStart, loading])
+
   const orientation = useOrientation()
 
   const resultsOrientation = getResultsOrientation(orientation)
@@ -121,7 +134,9 @@ const SinglePlayer = () => {
                 />
               : started
                 ? <Game />
-                : <StartScreen {...{ handleStart, loading, error }}/>
+                : error
+                  ? 'Error loading board...'
+                  : <LoadingScreen />
           }
         </Providers>
       </div>

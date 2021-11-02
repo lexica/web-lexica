@@ -2,9 +2,7 @@ import axios from 'axios'
 import { createContext, useEffect, useState } from 'react'
 
 import { logger } from '../util/logger'
-import { LocalStorage as TranslationsLocalStorage } from '../translations'
-import { getUseEffectLocalStorageListener, getWithDefault } from '../util/local-storage'
-import * as R from 'ramda'
+import { useStorage } from '../util/storage'
 
 export type MetadataV1 = {
   name: string,
@@ -73,37 +71,11 @@ export const useLanguage = (languageCode: string) => {
   return state
 }
 
-const languageCodeIsSet = () => localStorage.getItem(LocalStorage.LanguageCode) != null
-
-const getDefaultLanguageCode = () => localStorage.getItem(TranslationsLocalStorage.LanguageCode) || 'en_US'
-
-const getLanguageCode = () => getWithDefault({
-  key: LocalStorage.LanguageCode,
-  parser: R.identity,
-  defaultValue: 'en_US'
-})
+const defaultLanguage = 'en_US'
 
 export const useLanguageFromLocalStorage = () => {
-  const [languageCode, setLanguageCode] = useState(getLanguageCode)
+  const languageCode = useStorage(LocalStorage.LanguageCode, defaultLanguage)
   const language = useLanguage(languageCode)
-
-  useEffect(() => {
-    const cleanup1 = getUseEffectLocalStorageListener(
-      LocalStorage.LanguageCode,
-      (newLanguageCode) => setLanguageCode(newLanguageCode || getDefaultLanguageCode())
-    )
-
-    const cleanup2 = getUseEffectLocalStorageListener(
-      TranslationsLocalStorage.LanguageCode,
-      (newLangaugeCode) => {
-        if (languageCodeIsSet()) return
-
-        setLanguageCode(newLangaugeCode || getDefaultLanguageCode())
-      }
-    )
-
-    return () => { [cleanup1, cleanup2].map(fn => fn()) }
-  }, [setLanguageCode])
   return language
 }
 

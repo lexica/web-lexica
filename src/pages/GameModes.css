@@ -1,0 +1,35 @@
+@import "../style/constants.css";
+
+.game-modes-details {
+  display: flex;
+  flex-direction: row;
+  background-color: var(--color-accent);
+  color: var(--color-background-dark);
+  justify-content: center;
+  width: 100%;
+}
+
+.game-modes-detail-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: var(--font-size-subscript);
+  margin: 1vh;
+}
+
+.game-modes-ruleset {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  cursor: pointer;
+}
+
+.game-modes-ruleset>div:first-child {
+  margin-right: auto;
+  margin-left: 1vh;
+}
+
+.game-modes-ruleset-selected {
+  color: var(--color-background-dark);
+  background-color: var(--color-accent);
+}

@@ -3,6 +3,7 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import './App.css';
 import { Language, useLanguageFromLocalStorage } from './game/language';
 import { Rules, useRulesFromStorage } from './game/rules';
+import GameModes from './pages/GameModes';
 import Home from './pages/Home';
 import Multiplayer from './pages/Multiplayer';
 import Options from './pages/Options';
@@ -15,7 +16,7 @@ function App() {
 
   const translations = useTranslations()
   const language = useLanguageFromLocalStorage()
-  const ruleset = useRulesFromStorage()
+  const [ruleset] = useRulesFromStorage()
 
   return (
       <div className="App">
@@ -38,6 +39,9 @@ function App() {
             </Route>
             <Route path="/options">
               <Options />
+            </Route>
+            <Route path="/game-modes">
+              <GameModes />
             </Route>
           </BrowserRouter>
         </Language.Provider></Rules.Provider></Translations.Provider>
