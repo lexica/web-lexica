@@ -6,7 +6,7 @@ import { Duration, normalize } from 'duration-fns'
 
 import Svg, { SvgComponent } from './Svg'
 import { useContext } from 'react'
-import { Rules } from '../game/rules'
+import { Rules, Ruleset } from '../game/rules'
 
 import './GameModeDetails.css'
 
@@ -22,32 +22,35 @@ const getReadableTime = (time: Duration) => {
 }
 
 export type GameModeDetailsProps = {
-  svgSize?: number
+  size?: number
   color?: string,
+  ruleset?: Ruleset
 }
 
-const getOverrideObject = (svgSize?: number, color?: string) => {
-  if (svgSize === undefined && color === undefined) return {}
-  return svgSize === undefined
+const getOverrideObject = (size?: number, color?: string) => {
+  if (size === undefined && color === undefined) return {}
+  return size === undefined
     ? { fill: color }
     : color === undefined
-    ? { width: svgSize, height: svgSize }
-    : { width: svgSize, height: svgSize, fill: color }
+    ? { width: size, height: size }
+    : { width: size, height: size, fill: color }
 }
 
 const GameModeDetails = ({
-  svgSize,
+  size,
   color,
+  ruleset: rulesetOverride
 }: GameModeDetailsProps): JSX.Element => {
-  const rules = useContext(Rules)
+  const defaultRules = useContext(Rules)
+  const rules = rulesetOverride || defaultRules
 
-  const overrides = getOverrideObject(svgSize, color)
+  const overrides = getOverrideObject(size, color)
 
   const getOverrides = (title: string) => ({ ...overrides, title })
 
   const getSvg = (svg: SvgComponent, title: string) => <Svg.Customizable svg={svg} props={getOverrides(title)}/>
 
-  return <div className="game-mode-details-container">
+  return <div style={size !== undefined ? { fontSize: size } : {}} className="game-mode-details-container">
       <div className="game-mode-details-info">
         {getSvg(Timer, 'Time')}
         <div>{getReadableTime(rules.time)}</div>
