@@ -1,61 +1,27 @@
 @import "../style/constants.css";
 
-/* @media (orientation: landscape) { */
-  .guess-list.vertical {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    align-items: flex-start;
-  }
-  .guess-list.vertical>div {
-    margin-bottom: 0.5em;
-  }
-  /* .guess-list>div:last-child:after {
-    position: absolute;
-    z-index: 1;
-    left: 0;
-    pointer-events: none;
-    content: "&nbsp";
-    background-color: linear-gradient(
-      to bottom,
-      rgba(255, 255, 255, 0),
-      rgba(255, 255, 255, 1) 90%
-    );
-    height: 1.4em
-  } */
-/* } */
+.guess-list.vertical {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: flex-start;
+}
 
 .guess-list>div {
   user-select: none;
 }
 
-/* @media (orientation: portrait) { */
-  .guess-list.horizontal {
-    display: flex;
-    flex-direction: row;
-    height: 100%;
-    align-items: center;
-    overflow-x: hidden;
-  }
-  .guess-list.horizontal>div {
-    margin-right: 0.5em;
-  }
-  /* .guess-list>div::after {
-    position: absolute;
-    z-index: 1;
-    right: 0;
-    pointer-events: none;
-    content: "&nbsp";
-    background: linear-gradient(
-      to right,
-      rgba(255, 255, 255, 0),
-      rgba(255, 255, 255, 1) 90%
-    );
-    height: 1.4em;
-  } */
-/* } */
+.guess-list.horizontal {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  align-items: center;
+  overflow-x: hidden;
+}
 
-
+.guess-list.horizontal>div {
+  margin-right: 0.5em;
+}
 
 .incorrect-guess {
   color: var(--color-content-low-contrast-dark);

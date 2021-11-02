@@ -9,6 +9,10 @@ import {
   Translation
 } from './implemented-languages'
 
+export enum LocalStorage {
+  LanguageCode = 'translation'
+}
+
 const addTranslationDefaults = <
   T extends GeneralTranslation
 >(prefered: GeneralTranslation, defaults: T) => {
@@ -64,7 +68,7 @@ const getClosestLanguageIfPossible = (languageCode: string) => {
 }
 
 const getBestTranslation = () => {
-  const preset = localStorage.getItem('translation')
+  const preset = localStorage.getItem(LocalStorage.LanguageCode)
   if (preset && isImplemented(preset)) return preset
   return getClosestLanguageIfPossible(navigator.language)
 }
@@ -80,7 +84,7 @@ export const useTranslations = () => {
   useEffect(() => {
     logger.debug('running translations useEffect...')
     const handleStorageUpdate = (event: StorageEvent) => {
-      if (event.key === 'translation') setBaseLanguage(getBestTranslation())
+      if (event.key === LocalStorage.LanguageCode) setBaseLanguage(getBestTranslation())
     }
 
     window.addEventListener('storage', handleStorageUpdate)

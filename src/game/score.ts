@@ -12,6 +12,11 @@ export enum ScoreAction {
   AddGuess = 'add-guess'
 }
 
+export enum ScoreType {
+  Letters = 'l',
+  Words = 'w'
+}
+
 enum InternalScoreAction {
   UpdateDictionary = 'update-dictionary'
 }

@@ -1,7 +1,7 @@
 import * as R from 'ramda'
 import { createContext } from 'react'
 import { MetadataV1 } from './language'
-import { ScoreType } from './rules'
+import { ScoreType } from './score'
 import { splitWordIntoLetters } from './words'
 
 export const getLetterScore = (letter: string, letterScores: MetadataV1['letterScores']) => letterScores[letter]

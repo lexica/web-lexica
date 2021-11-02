@@ -1,22 +1,7 @@
 import * as R from 'ramda'
 import { Function as F } from 'ts-toolbelt'
 
-type Letter = {
-  letter: string,
-  visited: boolean,
-  index: number
-}
-
-export type Board = {
-  [key: number]: {
-    [key: number]: Letter
-  } & { index: number }
-} & { width: number }
-
-export type Coordinates = {
-  row: number,
-  column: number
-}
+import { Board, Letter, Coordinates } from './types'
 
 const splitLineAlongRows = (line: string[]) => {
   const width = Math.sqrt(line.length)

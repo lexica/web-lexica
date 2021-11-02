@@ -6,18 +6,17 @@ import '../App.css'
 import Results, { ResultsOrientation } from '../components/Results'
 import Game from '../components/Game'
 import StartScreen from '../components/StartScreen'
-import { useRulesFromQueryString, Rules } from '../game/rules'
+import { Rules, useRulesFromStorage } from '../game/rules'
 import { useOrientation, ScreenOrientation } from '../util/hooks'
 import { logger } from '../util/logger'
-import { Language, useLanguage } from '../game/language'
+import { Language, useLanguageFromLocalStorage } from '../game/language'
 import { Timer, useTimer } from '../game/timer'
 import { Dictionary, useBoardDictionary } from '../game/dictionary'
 import { Score, useScore } from '../game/score'
 import { Guess, GuessDispatch, useGuesses } from '../game/guess'
 import { LetterScores } from '../game'
-import { useGameUrlParameters } from '../game/url'
 import { toSeconds } from 'duration-fns'
-import { useBoardFromUrl } from '../game/board/hooks'
+import { useGeneratedBoard } from '../game/board/hooks'
 
 const getResultsOrientation = (orientation: ScreenOrientation) => {
     switch(orientation) {
@@ -70,17 +69,14 @@ const Providers: React.FC<ProvidersProps> = ({
   </Language.Provider>
 </Rules.Provider>
 
-const Multiplayer = () => {
+const SinglePlayer = () => {
   logger.debug('loading app...')
   const [started, updateStarted] = useState(false)
   const [finished, updateResults] = useState(false)
-  const board = useBoardFromUrl()
 
-  const rules = useRulesFromQueryString(board)
-
-  const params = useGameUrlParameters()
-
-  const language = useLanguage(params.language)
+  const language = useLanguageFromLocalStorage()
+  const rules = useRulesFromStorage()
+  const board = useGeneratedBoard(rules.boardWidth, language.metadata)
 
   const { error } = language
 
@@ -132,5 +128,4 @@ const Multiplayer = () => {
   )
 }
 
-export default Multiplayer
-
+export default SinglePlayer

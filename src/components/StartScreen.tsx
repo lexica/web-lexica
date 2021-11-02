@@ -12,14 +12,16 @@ import { Rules } from '../game/rules'
 import { Dictionary } from '../game/dictionary'
 import { Translations } from '../translations'
 import { Translation } from '../translations/implemented-languages'
+import { Language } from '../game/language'
+import { Duration, normalize } from 'duration-fns'
 
 const getScoringType = (scoringType: string): string => ({
   'l': 'Letter Points',
   'w': 'Word Length'
 }[scoringType] as any)
 
-const getReadableTime = (time: number) => {
-  const minutes = Math.floor(time / 60)
+const getReadableTime = (time: Duration) => {
+  const { minutes = 0 } = normalize(time)
   if (minutes === 1) return '1 min'
   return `${minutes} mins`
 }
@@ -36,12 +38,11 @@ const StartScreen: React.FC<StartScreenProps> = ({
   error
 }) => {
   const rules = useContext(Rules)
+  const language = useContext(Language)
 
   const { fontSize, fontSizeTitle } = useConstants()
 
   const dictionary = useContext(Dictionary)
-
-  const gridSize = Math.floor(Math.sqrt(rules.board.length))
 
   const translations = useContext(Translations)
 
@@ -57,7 +58,7 @@ const StartScreen: React.FC<StartScreenProps> = ({
     : `${dictionary.boardDictionary.length} words`
 
   const languageTitle = translations.languageTitles[
-    rules.language as any as keyof Translation['languageTitles']
+    language.metadata.locale as any as keyof Translation['languageTitles']
   ]
 
   return <div className="start-screen">
@@ -80,7 +81,7 @@ const StartScreen: React.FC<StartScreenProps> = ({
           width={fontSize}
           height={fontSize}
         />
-        <div>{gridSize}x{gridSize}</div>
+        <div>{rules.boardWidth}x{rules.boardWidth}</div>
       </div>
       <div className="start-screen-info">
         <EmojiEvents

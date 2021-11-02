@@ -3,12 +3,11 @@ import * as R from 'ramda'
 import {
   getBoard,
   deepCopyBoard,
-  Board,
-  Coordinates,
   getLine,
   boardReduce,
   visitNeighbors
-} from './board'
+} from './board/util'
+import { Board, Coordinates } from './board/types'
 import { createContext, useCallback, useEffect, useMemo, useState } from 'react'
 import { logger } from '../util/logger'
 import { LanguageState } from './language'
