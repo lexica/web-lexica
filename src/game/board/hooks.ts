@@ -5,6 +5,8 @@ import { MetadataV1, getLanguageMetadata } from '../language'
 import { useGameUrlParameters } from '../url'
 import { splitWordIntoLetters } from '../words'
 
+import { b64ToUtf8 } from '../../util/base-64'
+
 const getRandomInt = (max: number) => Math.floor(Math.random() * max)
 
 const shuffle = (unshuffledBoard: string[]) => {
@@ -50,7 +52,7 @@ export const useGeneratedBoard = (width: number, languageMetadata: MetadataV1) =
 }
 
 const getB64DelimitedURLBoard = ({ board, delimiter }: { board: string, delimiter: string }) => {
-  const decoded = atob(board)
+  const decoded = b64ToUtf8(board)
   return decoded.split(delimiter)
 }
 

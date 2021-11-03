@@ -6,6 +6,7 @@ import { Rules, useRulesFromStorage } from './game/rules';
 import GameModes from './pages/GameModes';
 import Home from './pages/Home';
 import Multiplayer from './pages/Multiplayer';
+import NewMultiplayer from './pages/NewMultiplayer';
 import Options from './pages/Options';
 import SinglePlayer from './pages/SinglePlayer';
 import { Translations, useTranslations } from './translations';
@@ -36,6 +37,9 @@ function App() {
             </Route>
             <Route path="/multiplayer">
               <Multiplayer />
+            </Route>
+            <Route path="/new-multiplayer">
+              <NewMultiplayer />
             </Route>
             <Route path="/options">
               <Options />

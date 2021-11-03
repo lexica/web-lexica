@@ -5,7 +5,6 @@ import { logger } from './logger'
 const SamePageEventType = 'same-page-storage' as const
 Object.freeze(SamePageEventType)
 
-
 export type UseEffectCleanup = () => void
 
 export type Get<D> = {
@@ -27,12 +26,10 @@ const getWithDefault = <D>({ key, parser = JSON.parse, defaultValue }: GetWithDe
   return item ? parser(item) : defaultValue
 }
 
-type StoragePrimative = string
-
-const isStoragePrimative = (item: any): item is StoragePrimative => typeof item === 'string'
+const isString = (item: any): item is string => typeof item === 'string'
 
 const set = (key: string, item: any) => {
-  const value = isStoragePrimative(item) ? item : JSON.stringify(item)
+  const value = isString(item) ? item : JSON.stringify(item)
   localStorage.setItem(key, value)
   window.dispatchEvent(getSamePageEvent(key, value))
 }
@@ -57,27 +54,11 @@ export const useStorage = <I>(key: string, initialValue: I, parser: (value: stri
     }
 
     window.addEventListener(SamePageEventType as any, eventHandler)
-    
+
     return () => window.removeEventListener(SamePageEventType as any, eventHandler)
   })
 
   return item
-}
-
-const getUseEffectListener = (
-  keyToListenFor: string,
-  onKeyChange: (newValue: string | null, oldValue: string | null) => void
-): UseEffectCleanup => {
-    const handleStorageUpdate = (event: StorageEvent) => {
-      if (event.key === keyToListenFor) {
-        logger.debug(`running useEffectLocalStorageListener for key: ${keyToListenFor}`)
-        onKeyChange(event.newValue, event.oldValue)
-      }
-    }
-
-    window.addEventListener('storage', handleStorageUpdate)
-
-    return () => window.removeEventListener('storage', handleStorageUpdate)
 }
 
 type StorageConstructor<T> = {
@@ -122,5 +103,4 @@ export const storage = {
   get,
   getWithDefault,
   set,
-  getUseEffectListener
 }

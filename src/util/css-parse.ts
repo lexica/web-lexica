@@ -1,3 +1,6 @@
+import { useEffect, useState } from "react"
+import { ElementIdentifier, useElementSize } from "./hooks"
+
 const toCamelCaseReplaceFn = (_: string, wordSoFar: string, toCapitalize: string): string => {
   return `${wordSoFar}${toCapitalize.toUpperCase()}`
 }
@@ -132,12 +135,28 @@ const evaluateFunction = (expression: string): number => {
 
     return cssFunctionMap[fnName](...(values as [any, any, any]))
 
-  } catch (err) {
+  } catch (err: any) {
     throw new Error(`${err.message}, parent expression: ${expression}`)
   }
 }
 export const cssExp = ([ expression ]: TemplateStringsArray, ..._rest: string[]) => {
   if (isCssFunction(expression)) return evaluateFunction(expression)
   return evaluateArgument(expression)
+}
+
+export const useCssExp = ([ expression ]: TemplateStringsArray, ..._rest: string[]) => {
+  const initialValue = isCssFunction(expression) ? evaluateFunction(expression) : 0
+  const [result, setResult] = useState(initialValue)
+
+  const { size: { width, height } } = useElementSize(ElementIdentifier.Type, 'body')
+
+  useEffect(() => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const _ = [width, height]
+
+    if (isCssFunction(expression)) setResult(evaluateFunction(expression))
+  }, [width, height, setResult, expression])
+
+  return result
 }
 

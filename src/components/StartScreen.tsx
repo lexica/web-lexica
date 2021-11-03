@@ -10,25 +10,36 @@ import { Translation } from '../translations/implemented-languages'
 import { Language } from '../game/language'
 
 import './StartScreen.css'
+import ShareGameQrCode, { Platform } from './ShareGameQrCode'
+import { Rules } from '../game/rules'
+import { Board } from '../game/board/hooks'
 
 export type StartScreenProps = {
   handleStart: () => any
   loading: boolean,
-  error: boolean
+  error: boolean,
+  showQrCode?: boolean
 }
 
 const StartScreen: React.FC<StartScreenProps> = ({
   handleStart,
   loading,
-  error
+  error,
+  showQrCode
 }) => {
-  const language = useContext(Language)
+  const languageContext = useContext(Language)
+
+  const language = languageContext.metadata.name
 
   const { fontSizeTitle } = useConstants()
 
   const dictionary = useContext(Dictionary)
 
   const translations = useContext(Translations)
+
+  const rules = useContext(Rules)
+
+  const board = useContext(Board)
 
   const startButtonClass = loading || error
     ? 'start-screen-start-button-disabled'
@@ -42,14 +53,17 @@ const StartScreen: React.FC<StartScreenProps> = ({
     : `${dictionary.boardDictionary.length} words`
 
   const languageTitle = translations.languageTitles[
-    language.metadata.locale as any as keyof Translation['languageTitles']
+    language as any as keyof Translation['languageTitles']
   ]
+
+  const qrCode = showQrCode === true && <ShareGameQrCode {...{ rules, language, board, platform: Platform.Android,  }}/>
 
   return <div className="start-screen">
     <div className="start-screen-title">Web Lexica Multiplayer Game</div>
     <div className="start-screen-language">{languageTitle}</div>
     <GameModeDetails/>
     <div className="start-screen-word-count">{wordCount}</div>
+    <div className="start-screen-share-game-qr-code">{!loading && qrCode}</div>
     <div className="start-screen-start-prompt">When all players are ready, you should all start the game at the same time.</div>
     <div
       className={`start-screen-start-button-universal ${startButtonClass}`}
