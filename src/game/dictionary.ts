@@ -62,7 +62,7 @@ const getWordsOnBoard = (board: Board, dictionary: string[], minWordLength: numb
 }
 
 const resolveDictionary = (line: string[], fullDictionary: string[], minimumWordLength: number) => {
-  return getWordsOnBoard(getBoard(line), fullDictionary, minimumWordLength)
+  return Promise.resolve(getWordsOnBoard(getBoard(line), fullDictionary, minimumWordLength))
 }
 
 
@@ -78,10 +78,11 @@ export const useBoardDictionary = (languageState: LanguageState, board: string[]
   useEffect(() => {
     logger.debug('running dictionary useEffect')
     setLoading(true)
-    const dictionary = resolveDictionary(board, languageState.dictionary, minimumWordLength)
-    setLoading(false)
+    resolveDictionary(board, languageState.dictionary, minimumWordLength).then(dict => {
+      setDictionary(dict)
+      setLoading(false)
+    })
 
-    setDictionary(dictionary)
   }, [
     board,
     languageState,
