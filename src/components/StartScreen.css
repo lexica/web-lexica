@@ -20,6 +20,23 @@
   font-size: var(--font-size-title);
 }
 
+.start-screen-action-bar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: .5vh;
+}
+
+.start-screen-refresh-board-button {
+  background-color: var(--color-content-dark);
+  color: var(--color-background-dark);
+  padding: .5vh;
+  border-radius: .5vh;
+  margin-left: .5vw;
+  cursor: pointer;
+}
+
 .start-screen-start-prompt {
   font-weight: var(--font-weight-light);
   margin-top: auto;

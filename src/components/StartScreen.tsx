@@ -26,7 +26,8 @@ const StartScreen: React.FC<StartScreenProps> = ({
   handleStart,
   loading,
   error,
-  showQrCode
+  showQrCode,
+  handleBoardRefresh
 }) => {
   const languageContext = useContext(Language)
 
@@ -41,6 +42,8 @@ const StartScreen: React.FC<StartScreenProps> = ({
   const rules = useContext(Rules)
 
   const board = useContext(Board)
+
+  const showRefreshButton = loading === false && error === false && handleBoardRefresh !== undefined
 
   const startButtonClass = loading || error
     ? 'start-screen-start-button-disabled'
@@ -63,7 +66,15 @@ const StartScreen: React.FC<StartScreenProps> = ({
     <div className="start-screen-title">Web Lexica Multiplayer Game</div>
     <div className="start-screen-language">{languageTitle}</div>
     <GameModeDetails/>
-    <div className="start-screen-word-count">{wordCount}</div>
+    <div className="start-screen-action-bar">
+      <div className="start-screen-word-count">{wordCount}</div>
+      {showRefreshButton && <div
+        className="start-screen-refresh-board-button"
+        onClick={handleBoardRefresh}
+      >
+        Refresh Board
+      </div>}
+    </div>
     <div className="start-screen-share-game-qr-code">{!loading && qrCode}</div>
     <div className="start-screen-start-prompt">When all players are ready, you should all start the game at the same time.</div>
     <div
