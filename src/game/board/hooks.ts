@@ -36,7 +36,7 @@ const generateBoard = (letterCount: number, letters: string[], probabilities: Me
 export const useGeneratedBoard = (width: number, languageMetadata: MetadataV1) => {
   const [board, setBoard] = useState([''])
 
-  const [refreshTrigger, refreshBoard] = useReducer((state: number) => state++, 0)
+  const [refreshTrigger, refreshBoard] = useReducer((state: number) => state + 1, 0)
   useEffect(() => {
     if (!languageMetadata) return
 
