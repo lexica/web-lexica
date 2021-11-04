@@ -14,6 +14,7 @@ import StartScreen from '../components/StartScreen'
 import GameModeDetails from '../components/GameModeDetails'
 import { Guess, GuessDispatch, useGuesses } from '../game/guess'
 import { Score, useScore } from '../game/score'
+import { LetterScores } from '../game'
 
 export type GameScreenProps = {
   isMultiplayer?: boolean,
@@ -156,7 +157,9 @@ const Multiplayer = (): JSX.Element => {
   return <Board.Provider value={board}>
     <Rules.Provider value={rules}>
       <Language.Provider value={language}>
-        <Game showQrCode={false} />
+        <LetterScores.Provider value={language?.metadata?.letterScores}>
+          <Game showQrCode={false} />
+        </LetterScores.Provider>
       </Language.Provider>
     </Rules.Provider>
   </Board.Provider>

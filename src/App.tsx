@@ -1,6 +1,6 @@
 
 import { BrowserRouter, Route } from 'react-router-dom'
-import { CurrentGameType, useGameType } from './game'
+import { CurrentGameType, LetterScores, useGameType } from './game'
 import { Board, BoardRefresh, useGeneratedBoard } from './game/board/hooks'
 import { Language, useLanguageFromLocalStorage } from './game/language'
 import { Rules, useRulesFromStorage } from './game/rules'
@@ -15,6 +15,7 @@ import SinglePlayer from './pages/SinglePlayer'
 
 import './App.css'
 import Banner from './components/Banner'
+import Lexicons from './pages/Lexicons'
 
 function App() {
   logger.debug('loading app...')
@@ -33,6 +34,8 @@ function App() {
           value={ruleset}
         ><Language.Provider
           value={language}
+        ><LetterScores.Provider
+          value={language?.metadata?.letterScores}
         ><Board.Provider
           value={board}
         ><BoardRefresh.Provider
@@ -46,23 +49,27 @@ function App() {
             </Route>
             <Route path="/(.+)">
               <Banner />
-              <Route path="/singleplayer">
-                <SinglePlayer />
-              </Route>
-              <Route path="/multiplayer">
-                <Multiplayer />
-              </Route>
-              <Route path="/options">
-                <Options />
-              </Route>
-              <Route path="/game-modes">
-                <GameModes />
-              </Route>
+            </Route>
+            <Route path="/game-modes">
+              <GameModes />
+            </Route>
+            <Route path="/lexicons">
+              <Lexicons />
+            </Route>
+            <Route path="/multiplayer">
+              <Multiplayer />
+            </Route>
+            <Route path="/options">
+              <Options />
+            </Route>
+            <Route path="/singleplayer">
+              <SinglePlayer />
             </Route>
           </BrowserRouter>
         </CurrentGameType.Provider>
         </BoardRefresh.Provider>
         </Board.Provider>
+        </LetterScores.Provider>
         </Language.Provider>
         </Rules.Provider>
         </Translations.Provider>
