@@ -6,6 +6,7 @@ import { useGameUrlParameters } from '../url'
 import { splitWordIntoLetters } from '../words'
 
 import { b64ToUtf8 } from '../../util/base-64'
+import { logger } from '../../util/logger'
 
 const getRandomInt = (max: number) => Math.floor(Math.random() * max)
 
@@ -21,12 +22,17 @@ const shuffle = (unshuffledBoard: string[]) => {
   return toShuffle
 }
 
-const generateBoard = (letterCount: number, letters: string[], probabilities: MetadataV1['letterProbabilities']) => {
+const generateBoard = (letterCount: number, letters: string[], ogProbabilities: MetadataV1['letterProbabilities']) => {
+  const keys = Object.keys(ogProbabilities)
+  const probabilities = keys.reduce(
+    (acc, key) => ({ ...acc, [key]: [...ogProbabilities[key]]}),
+    {} as MetadataV1['letterProbabilities']
+  )
   const unshuffledBoard = R.times(() => {
     const mapping = R.reduce((acc, l) => [...acc, ...R.times(() => l, probabilities[l][0])], [] as string[], letters)
 
     const result = mapping[getRandomInt(mapping.length)]
-    if (probabilities[result].length > 1) probabilities[result].splice(0, 1)
+    probabilities[result].length > 1 ? probabilities[result].splice(0, 1) : probabilities[result][0] = 0
     return result
   }, letterCount)
 
@@ -40,14 +46,13 @@ export const useGeneratedBoard = (width: number, languageMetadata: MetadataV1) =
   useEffect(() => {
     if (!languageMetadata) return
 
-    const { letterProbabilities: p } = languageMetadata
-    const probabilities = { ...p }
-    const letters = Object.keys(probabilities)
+    const { letterProbabilities } = languageMetadata
+    const letters = Object.keys(letterProbabilities)
     if (letters.length === 0) return
 
     const iterations = width * width
 
-    setBoard(generateBoard(iterations, letters, probabilities))
+    setBoard(generateBoard(iterations, letters, letterProbabilities))
   }, [setBoard, width, languageMetadata, refreshTrigger])
 
   return { board, refreshBoard }
