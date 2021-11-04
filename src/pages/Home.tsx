@@ -3,14 +3,24 @@ import { Link } from 'react-router-dom'
 import { ReactComponent as EmojiEvents } from '@material-design-icons/svg/round/emoji_events.svg'
 import { ReactComponent as PlayCircle } from '@material-design-icons/svg/round/play_circle.svg'
 import { ReactComponent as GroupAdd } from '@material-design-icons/svg/round/group_add.svg'
+import { ReactComponent as Language } from '@material-design-icons/svg/round/language.svg'
 
 import Svg from '../components/Svg'
 import { Rules } from '../game/rules'
 import './Home.css'
 import { CurrentGameType, GameType } from '../game'
+import { useLanguageCodeFromLocalStorage } from '../game/language'
+import { Translation } from '../translations/implemented-languages'
+import { useTranslations } from '../translations'
 
 const Home = ({ setGameType }: { setGameType: (type: GameType) => void }) => {
   const ruleset = useContext(Rules)
+
+  const languageCode = useLanguageCodeFromLocalStorage() as any as keyof Translation['languageTitles']
+
+  const { languageTitles } = useTranslations()
+
+  const languageTitle = languageTitles[languageCode] || languageCode
 
   const gameType = useContext(CurrentGameType)
 
@@ -18,6 +28,10 @@ const Home = ({ setGameType }: { setGameType: (type: GameType) => void }) => {
 
   return <div className="Page home">
     <div className="home-game-options">
+      <Link to='/lexicons' className="home-game-option home-button-defaults">
+        <Svg.Standard svg={Language} title="Lexicon" />
+        <div>{languageTitle}</div>
+      </Link>
       <Link to='/game-modes' className="home-game-option home-button-defaults">
         <Svg.Standard svg={EmojiEvents} title="Game Mode"/>
         <div>{ruleset.name}</div>
