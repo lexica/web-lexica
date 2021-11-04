@@ -2,11 +2,11 @@ import { Context, Dispatch } from 'react'
 import * as R from 'ramda'
 
 import { Dictionary, DictionaryContext, DictionaryState } from '../game/dictionary'
-import { Guess, GuessAction, GuessActionType, GuessContext, GuessDispatch, GuessDispatchContext, GuessState } from '../game/guess'
+import { Guess, GuessContext, GuessDispatch, GuessDispatchContext, GuessState } from '../game/guess'
 import { Language, LanguageContext, LanguageState } from '../game/language'
 import { Score, ScoreContext, ScoreState } from '../game/score'
 import { Timer, TimerContext } from '../game/timer'
-import { getBoard } from '../game/board'
+import { getBoard } from '../game/board/util'
 import { logger } from '../util/logger'
 import { LetterScores, LetterScoresContext } from '../game'
 
@@ -26,6 +26,7 @@ type RequiredProviderProps = {
 
 export type ProvidersProps = {
   language: DeepPartial<LanguageContext>,
+  letterScores: LetterScoresContext,
   dictionary: Partial<DictionaryContext>,
   guess: Partial<GuessContext>,
   guessDispatch: Partial<GuessDispatchContext>,
@@ -79,7 +80,7 @@ const Providers: React.FC<Partial<ProvidersProps>> = (props) => {
     score: (overrides: Partial<ScoreState>): ScoreState => ({
       ...scoreDefaults,
       ...overrides
-    })
+    }),
   }, props)
 
   logger.debug(JSON.stringify(R.omit(['children'], evolved)))
@@ -100,9 +101,8 @@ const Providers: React.FC<Partial<ProvidersProps>> = (props) => {
   const g = guess ? <Guess.Provider children={gd} value={guess}/> : gd
   const d = dictionary ? <Dictionary.Provider children={g} value={dictionary}/> : g
   const ls = letterScores ? <LetterScores.Provider children={d} value={letterScores}/> : d
-  const l = language ? <Language.Provider children={ls} value={language}/> : d
+  const l = language ? <Language.Provider children={ls} value={language}/> : ls
 
-  logger.debug(l)
 
   return <>{l}</>
 }

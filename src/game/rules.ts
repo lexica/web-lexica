@@ -1,105 +1,131 @@
 import { createContext, useEffect, useMemo, useState } from 'react'
-import { useLocation } from 'react-router-dom'
+import * as R from 'ramda'
+import { Duration, normalize } from 'duration-fns'
+import { v4 as uuid } from 'uuid'
 
-import { getLanguageMetadata } from './language'
-import { splitWordIntoLetters } from './words'
-import { parseURLSearch } from '../util/url'
+import { ScoreType } from './score'
+import { useGameUrlParameters } from './url'
+import { GameStorage, useStorage } from '../util/storage'
 
-export enum ScoreType {
-  Letters = 'l',
-  Words = 'w'
+export type RulesContext = {
+  minimumWordLength: number,
+  time: Duration,
+  score: ScoreType,
+  boardWidth: number,
+  name: string
 }
 
-export type GameURLParams = {
-  b: string,
-  l: string,
-  t: string,
-  s: ScoreType,
-  m: string,
-  mv: string,
-  v: string
+export type Ruleset = RulesContext & { name: string, boardWidth: number }
+
+export type Rulesets = {
+  [key: string]: Ruleset
+} & {
+  [P in DefaultRulesets]: Ruleset
 }
 
-enum GameParamMap {
-  Board = 'b',
-  Language = 'l',
-  Time = 't',
-  Score = 's',
-  MinimumWordLength = 'm',
-  MinimumVersion = 'mv',
-  Version = 'v'
+export enum LocalStorage {
+  CurrentRulesetId = 'current-rule-set',
+  Rulesets = 'rulesets',
+  DefaultRulesets = 'default-rulesets'
 }
 
-const getB64DelimitedBoard = ({ board, delimiter }: { board: string, delimiter: string }) => {
-  const decoded = atob(board)
-  return decoded.split(delimiter)
+export enum DefaultRulesets {
+  Sprint = 'sprint',
+  Marathon = 'marathon',
+  LetterPoints = 'letter-points'
 }
 
-const getLanguageLetters = (language: string) => getLanguageMetadata(language)
-  .then(({ letterScores }) => Object.keys(letterScores))
-
-const getUndelimitedBoard = async ({ board, language }: { board: string, language: string }) => {
-  const letters = await getLanguageLetters(language)
-
-  return splitWordIntoLetters(board, letters)
-}
-
-type GetBoardParams = {
-  minimumVersion: number,
-  board: string,
-  language: string
-}
-
-const getBoard = ({ minimumVersion, board, language }: GetBoardParams) => {
-  if (minimumVersion >= 20017) return Promise.resolve(getB64DelimitedBoard({ board, delimiter: ',' }))
-  return getUndelimitedBoard({ board, language })
-}
-
-const parseGameParameters = (urlParams: GameURLParams) => {
-  const language = urlParams[GameParamMap.Language]
-  const minimumVersion = parseInt(urlParams[GameParamMap.MinimumVersion])
-  const getBoardParams: GetBoardParams = {
-    board: urlParams[GameParamMap.Board],
-    language,
-    minimumVersion
-  }
-
-  const board = getBoard(getBoardParams)
-
-  return {
-    board,
-    language,
-    time: parseInt(urlParams[GameParamMap.Time]),
-    score: urlParams[GameParamMap.Score],
-    minimumWordLength: parseInt(urlParams[GameParamMap.MinimumWordLength]),
-    minimumVersion,
-    version: parseInt(urlParams[GameParamMap.Version])
+const defaultRulesets: { [P in DefaultRulesets]: Ruleset } = {
+  [DefaultRulesets.Sprint]: {
+    name: 'Sprint',
+    time: { minutes: 3 } as Duration,
+    boardWidth: 4,
+    score: ScoreType.Words,
+    minimumWordLength: 3
+  },
+  [DefaultRulesets.Marathon]: {
+    name: 'Marathon',
+    time: { minutes: 30 } as Duration,
+    boardWidth: 6,
+    score: ScoreType.Words,
+    minimumWordLength: 5
+  },
+  [DefaultRulesets.LetterPoints]: {
+    name: 'Letter Points',
+    time: { minutes: 3 } as Duration,
+    boardWidth: 5,
+    score: ScoreType.Letters,
+    minimumWordLength: 4
   }
 }
 
-type ParseGameParameters = ReturnType<typeof parseGameParameters>
-export type GameRules = Omit<ParseGameParameters, 'board'> & { board: string[] }
+const rulesetStorage = new GameStorage<Rulesets>({
+  key: LocalStorage.Rulesets,
+  initialValueIfNull: defaultRulesets
+})
 
+const currentRulesetIdStorage = new GameStorage<string>({
+  key: LocalStorage.CurrentRulesetId,
+  initialValueIfNull: DefaultRulesets.Sprint,
+  serializer: R.identity,
+  parser: R.identity
+})
 
-export const useRulesFromQueryString = (): GameRules => {
-  const location = useLocation()
-  const params = useMemo(() => parseGameParameters(parseURLSearch<GameURLParams>(location.search)), [location.search])
+export const getRulesets = (): Rulesets => {
+  return rulesetStorage.get()
+}
 
-  const [rules, setRules] = useState({
-    ...params,
-    board: ['']
+export const getRuleset = (id: string): Ruleset => {
+  const rulesets = getRulesets()
+  return rulesets[id]
+}
+
+export const addRuleset = (ruleset: Ruleset) => {
+  const rulesets = rulesetStorage.get()
+  rulesetStorage.set({
+    ...rulesets,
+    [uuid()]: ruleset
   })
+}
+
+export const setCurrentRuleset = (id: string) => {
+  currentRulesetIdStorage.set(id)
+}
+
+export const useRulesFromStorage = (): [context: RulesContext, id: string] => {
+  const id = useStorage(LocalStorage.CurrentRulesetId, DefaultRulesets.Sprint as string, R.identity)
+
+  const [ruleset, setRuleset] = useState(getRuleset(id))
 
   useEffect(() => {
-    params.board.then(board => {
-      setRules({
-        ...params,
-        board
-      })
-    })
-  }, [params])
+    setRuleset(getRuleset(id))
+  }, [setRuleset, id])
 
-  return rules
+
+  return [ruleset, id]
 }
 
-export const Rules = createContext<GameRules>(undefined as any)
+export const useRulesFromQueryString = (board: string[]): RulesContext => {
+  const params = useGameUrlParameters()
+
+  return useMemo(() => {
+    return {
+      minimumWordLength: params.minimumWordLength,
+      time: normalize({ seconds: params.time }),
+      score: params.score,
+      boardWidth: Math.floor(Math.sqrt(board.length)),
+      name: 'Shared with you'
+    } as RulesContext
+  }, [params, board])
+}
+
+export const useDefaultRules = (): RulesContext => {
+  return useMemo(() => getRuleset(DefaultRulesets.Sprint), [])
+}
+
+export const useRulesets = (): Rulesets => {
+  const rulesets = useStorage(LocalStorage.Rulesets, defaultRulesets)
+  return rulesets
+}
+
+export const Rules = createContext<RulesContext>(getRuleset(DefaultRulesets.Sprint))

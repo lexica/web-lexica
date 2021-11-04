@@ -1,0 +1,29 @@
+@import "../style/constants.css";
+
+.lexicons {
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.lexicons-lexicon {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-left: 1vw;
+  width: 100%;
+  min-height: 7vh;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.lexicons-lexicon-selected {
+  background-color: var(--color-background-dark-alt);
+}
+
+.lexicons-lexicon-beta-label {
+  margin-left: 1vw;
+  font-size: var(--font-size-subscript);
+}

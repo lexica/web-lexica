@@ -1,21 +1,20 @@
 
 import { ComponentMeta, ComponentStory } from '@storybook/react'
-import Results, { ResultsOrientation } from '../components/Results'
+import Results from '../components/Results'
 import ScoredWordList from '../components/ScoredWordList'
 import Score from '../components/Score'
 import Cheats from './Cheats'
 import Providers from './Providers'
+import { ScreenOrientation } from '../util/hooks'
 
 const ComponentBuilder: React.FC<{
   score: {
     foundWords: string[],
     remainingWords: string[]
-  },
-  orientation: ResultsOrientation
+  }
 }> = ({
   score,
-  orientation
-}) => <Providers score={score}><Results orientation={orientation}/></Providers>
+}) => <Providers score={score}><Results /></Providers>
 
 const getLists = () => ({
   foundWords: [
@@ -40,15 +39,9 @@ const metadata: ComponentMeta<typeof ComponentBuilder> = {
       description: 'This component requires the score context in order to render properly',
       name: 'Score Context'
     },
-    orientation: {
-      defaultValue: undefined,
-      description: 'The orientation that the results page should use when rendering itself, the vertical orientation allows for swapping between lists to save screen realistate',
-      name: 'orientation'
-    }
   },
   args: {
     score: getLists(),
-    orientation: ResultsOrientation.Horizontal
   },
   component: Results,
   subcomponents: {
@@ -63,13 +56,3 @@ export const Template: ComponentStory<typeof ComponentBuilder> = args => <>
   <Cheats/>
   <ComponentBuilder {...args}/>
 </>
-
-export const HorizontalLayout = Template.bind({})
-HorizontalLayout.args = {
-  orientation: ResultsOrientation.Horizontal
-}
-
-export const VerticalLayout = Template.bind({})
-VerticalLayout.args = {
-  orientation: ResultsOrientation.Vertical
-}

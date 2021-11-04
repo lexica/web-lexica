@@ -2,20 +2,21 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { Dispatch, Reducer, useContext, useEffect, useMemo, useReducer } from 'react';
 
 import { Board } from '../components/Board';
-import { Board as BoardObject, Coordinates, deepCopyBoard, getBoard } from '../game/board';
+import { Board as BoardObject, Coordinates,  } from '../game/board/types';
+import { deepCopyBoard, getBoard } from '../game/board/util'
 import { GuessAction, GuessActionType, GuessState } from '../game/guess';
-import { Rules } from '../game/rules';
+import { Board as BoardCtx } from '../game/board/hooks'
 import Providers from './Providers';
 
 const metadata: ComponentMeta<typeof Board> = {
   title: 'Game Board',
   component: Board,
   argTypes: {
-    GuessContext: {
-      description: 'the Guess context is required by this component.',
-      name: 'Guess Context'
+    Contexts: {
+      description: 'This component uses the following contexts: Rule, Guess, GuessDispatch, LetterScore',
+      name: 'Contexts'
     }
-  },
+  }
 }
 
 export default metadata
@@ -75,9 +76,9 @@ const useMiniReducer = (originalBoard: BoardObject): [BoardObject, Dispatch<Gues
   return [state, dispatch]
 }
 
-export const Template: ComponentStory<typeof Board> = (args) => {
-  const rules = useContext(Rules)
-  const [board, dispatch] = useMiniReducer(getBoard(rules.board))
+export const Template: ComponentStory<typeof Board> = () => {
+  const boardCtx = useContext(BoardCtx)
+  const [board, dispatch] = useMiniReducer(getBoard(boardCtx))
 
   const letterScores = { a: 1, b: 2, c: 3, d: 4, e: 5, f: 6 }
 
@@ -85,7 +86,7 @@ export const Template: ComponentStory<typeof Board> = (args) => {
     // force board update...
     dispatch({ type: GuessAction.BeginGuess } as GuessActionType<GuessAction.BeginGuess>)
     dispatch({ type: GuessAction.EndGuess } as GuessActionType<GuessAction.EndGuess>)
-  }, [rules, dispatch])
+  }, [dispatch])
 
   const guessState = useMemo<GuessState>(() => ({
     board,

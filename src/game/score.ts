@@ -12,6 +12,11 @@ export enum ScoreAction {
   AddGuess = 'add-guess'
 }
 
+export enum ScoreType {
+  Letters = 'l',
+  Words = 'w'
+}
+
 enum InternalScoreAction {
   UpdateDictionary = 'update-dictionary'
 }
@@ -43,15 +48,9 @@ const handleAddGuess = (state: ScoreState, guess: string): ScoreState => {
 }
 
 const handleUpdateDictionary = (state: ScoreState, dictionary: string[]): ScoreState => {
-  const { foundWords, remainingWords } = state
-  const previousDictionary = [...foundWords, ...remainingWords]
-  const newDictionary = [
-    ...remainingWords,
-    ...R.filter(word => !previousDictionary.includes(word), dictionary)
-  ]
   return {
-    foundWords: state.foundWords,
-    remainingWords: newDictionary
+    foundWords: [],
+    remainingWords: dictionary
   }
 }
 

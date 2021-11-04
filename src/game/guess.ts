@@ -1,7 +1,7 @@
 import { createContext, Dispatch, Reducer, useEffect, useReducer, useState } from 'react'
 import { logger } from '../util/logger'
-import { Board, Coordinates, deepCopyBoard, getBoard, getPossibleTravelDirections, getUnvisitedBoard } from './board'
-import { GameRules } from './rules'
+import { deepCopyBoard, getBoard, getPossibleTravelDirections, getUnvisitedBoard } from './board/util'
+import { Board, Coordinates } from './board/types'
 
 export enum GuessAction {
   EnterLetter = 'enter-letter',
@@ -144,8 +144,8 @@ export const guessReducer = <A extends GuessAction>(state: GuessState, action: G
 
 type GuessReducer = Reducer<GuessState, GuessActionType<GuessAction>>
 
-export const useGuesses = (rules: GameRules) => {
-  const [stateBoard] = useState(getBoard(rules.board))
+export const useGuesses = (board: string[]) => {
+  const [stateBoard] = useState(getBoard(board))
 
   const reducer = useReducer<GuessReducer>(guessReducer, {
     board: stateBoard,
@@ -158,10 +158,10 @@ export const useGuesses = (rules: GameRules) => {
   const dispatch = reducer[1]
 
   useEffect(() => {
-    logger.debug('running useGuesses useEffect....', JSON.stringify({ rules }))
-    dispatch({ info: getBoard(rules.board), type: GuessAction.__UpdateBoard })
+    logger.debug('running useGuesses useEffect....')
+    dispatch({ info: getBoard(board), type: GuessAction.__UpdateBoard })
 
-  }, [rules, dispatch])
+  }, [board, dispatch])
 
   return reducer
 }

@@ -68,7 +68,6 @@ export type UseTimer = {
 }
 
 export const useTimer = (totalTimeInSeconds: number, timeEndCallback: () => void): UseTimer => {
-  logger.debug(JSON.stringify({ totalTimeInSeconds }))
   const [state, dispatch] = useReducer<Reducer<TimerState, TimerReducerAction>>(timerReducer, {
     remainingTime: totalTimeInSeconds,
     isPaused: true,

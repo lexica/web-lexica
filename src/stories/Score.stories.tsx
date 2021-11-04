@@ -1,4 +1,5 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react'
+import { toSeconds } from 'duration-fns'
 import { useContext, useEffect } from 'react'
 
 import Score from '../components/Score'
@@ -19,7 +20,7 @@ const ComponentBuilder: React.FC<{
   score
 }) => {
   const rules = useContext(Rules)
-  const timer = useTimer(rules.time, () => {})
+  const timer = useTimer(toSeconds(rules.time), () => {})
 
   const { startTime } = timer
 

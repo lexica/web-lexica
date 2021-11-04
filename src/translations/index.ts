@@ -1,6 +1,7 @@
 import * as R from 'ramda'
 import { createContext, useEffect, useMemo, useState } from 'react'
 import { logger } from '../util/logger'
+import { storage } from '../util/storage'
 import {
   ImplementedLanguage,
   languageCodeToTranslationsMap,
@@ -8,6 +9,10 @@ import {
   defaultTranslation,
   Translation
 } from './implemented-languages'
+
+export enum LocalStorage {
+  LanguageCode = 'translation'
+}
 
 const addTranslationDefaults = <
   T extends GeneralTranslation
@@ -64,7 +69,7 @@ const getClosestLanguageIfPossible = (languageCode: string) => {
 }
 
 const getBestTranslation = () => {
-  const preset = localStorage.getItem('translation')
+  const preset = storage.get({ key: LocalStorage.LanguageCode, parser: R.identity })
   if (preset && isImplemented(preset)) return preset
   return getClosestLanguageIfPossible(navigator.language)
 }
@@ -80,7 +85,7 @@ export const useTranslations = () => {
   useEffect(() => {
     logger.debug('running translations useEffect...')
     const handleStorageUpdate = (event: StorageEvent) => {
-      if (event.key === 'translation') setBaseLanguage(getBestTranslation())
+      if (event.key === LocalStorage.LanguageCode) setBaseLanguage(getBestTranslation())
     }
 
     window.addEventListener('storage', handleStorageUpdate)

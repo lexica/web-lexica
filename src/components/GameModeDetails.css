@@ -1,0 +1,15 @@
+.game-mode-details-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  margin-top: 1vh;
+}
+
+.game-mode-details-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 2vh;
+}

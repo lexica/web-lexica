@@ -1,0 +1,105 @@
+@import "../style/constants.css";
+
+.home {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+.home-title {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+/* .home-title>div {
+  flex: 1 1 50%;
+} */
+
+.home-title-letters {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.home-title-letter {
+  margin: .5vh;
+  padding: 1vh;
+  background-color: var(--color-accent);
+  color: var(--color-background-dark);
+  width: 4vh;
+  height: 4vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: var(--font-weight-bold);
+  vertical-align: middle;
+  font-size: var(--font-size-title);
+}
+
+.home-game-options {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  margin-right: .5vh;
+}
+
+.home-game-option {
+  background-color: var(--color-background-dark-alt);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: fit-content;
+  height: fit-content;
+  margin: .5vh;
+  padding: .5vh;
+  justify-self: flex-end;
+  border-radius: 1vh;
+}
+
+.home-game-option>div {
+  font-size: var(--font-size);
+  margin-left: .5vh;
+  margin-right: .5vh;
+}
+
+.home-button-defaults {
+  text-decoration: none;
+
+  color: var(--color-content-dark);
+}
+
+.home-play-game-button {
+  padding: 1vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.home-play-game-button>svg {
+  margin-right: .5vh;
+}
+
+.home-game-buttons {
+  margin-top: auto;
+  display: flex;
+  flex-direction: row;
+  align-self: center;
+  background-color: var(--color-background-dark-alt);
+  width: max-content;
+  justify-content: center;
+}
+
+.home-game-buttons>a {
+  border: 0 solid var(--color-background-dark);
+  border-right-width: 1px;
+}
+.home-game-buttons>a:last-child {
+  border-right-width: 0;
+}

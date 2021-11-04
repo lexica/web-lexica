@@ -3,13 +3,11 @@ import * as R from 'ramda'
 import {
   getBoard,
   deepCopyBoard,
-  Board,
-  Coordinates,
-  getLine,
   boardReduce,
   visitNeighbors
-} from './board'
-import { createContext, useCallback, useEffect, useMemo, useState } from 'react'
+} from './board/util'
+import { Board, Coordinates } from './board/types'
+import { createContext, useEffect, useMemo, useState } from 'react'
 import { logger } from '../util/logger'
 import { LanguageState } from './language'
 
@@ -64,10 +62,6 @@ const getWordsOnBoard = (board: Board, dictionary: string[], minWordLength: numb
 }
 
 const resolveDictionary = (line: string[], fullDictionary: string[], minimumWordLength: number) => {
-  const canUseWebWorkers = false
-  if (canUseWebWorkers) {
-    // do web worker stuff.... maybe.
-  }
   return Promise.resolve(getWordsOnBoard(getBoard(line), fullDictionary, minimumWordLength))
 }
 
@@ -77,34 +71,27 @@ export type DictionaryState = {
   loading: boolean
 }
 
-export const useBoardDictionary = (languageState: LanguageState, board: Board | string[], minimumWordLength: number) => {
-  const [dictionary, setDictionary] = useState<DictionaryState>({
-    boardDictionary: [],
-    loading: true
-  })
-
-  const memoizedBoard = useMemo(() => {
-    if (Array.isArray(board)) return board
-    return getLine(board)
-  }, [board])
-
-  const resolveDictionaryCallback = useCallback((dictionary: string[]) => {
-    return resolveDictionary(memoizedBoard, dictionary, minimumWordLength).then(R.tap(d => logger.debug(JSON.stringify(d))))
-  }, [memoizedBoard, minimumWordLength])
+export const useBoardDictionary = (languageState: LanguageState, board: string[], minimumWordLength: number) => {
+  const [loading, setLoading] = useState(true)
+  const [boardDictionary, setDictionary] = useState<string[]>([])
 
   useEffect(() => {
     logger.debug('running dictionary useEffect')
-    resolveDictionaryCallback(languageState.dictionary).then(boardDictionary => setDictionary({
-      loading: boardDictionary.length === 0,
-      boardDictionary
-    }))
+    setLoading(true)
+    resolveDictionary(board, languageState.dictionary, minimumWordLength).then(dict => {
+      setDictionary(dict)
+      setLoading(false)
+    })
+
   }, [
+    board,
     languageState,
     setDictionary,
-    resolveDictionaryCallback
+    setLoading,
+    minimumWordLength
   ])
 
-  return dictionary
+  return useMemo(() => ({ boardDictionary, loading }), [boardDictionary, loading])
 }
 
 export type DictionaryContext = DictionaryState
