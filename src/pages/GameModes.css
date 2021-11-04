@@ -1,5 +1,12 @@
 @import "../style/constants.css";
 
+.game-modes {
+  display: flex;
+  margin-top: .5vh;
+  align-items: stretch;
+  width: 100%;
+}
+
 .game-modes-details {
   display: flex;
   flex-direction: row;
@@ -24,12 +31,16 @@
   cursor: pointer;
 }
 
+.game-modes-ruleset-list {
+  width: 100%;
+}
+
 .game-modes-ruleset>div:first-child {
   margin-right: auto;
   margin-left: 1vh;
 }
 
 .game-modes-ruleset-selected {
-  color: var(--color-background-dark);
-  background-color: var(--color-accent);
+  color: var(--color-content-dark);
+  background-color: var(--color-background-dark-alt);
 }

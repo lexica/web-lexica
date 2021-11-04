@@ -30,13 +30,13 @@ const Mode = ({
     className={classNames}
     onClick={() => handleOnClick(id)}
   >
-    <div>
+    <div className="game-mode-ruleset-name">
       {ruleset.name}
     </div>
     {isSelected ? <GameModeDetails
       ruleset={rulesetTuple[1]}
       size={fontSizeSubscript}
-      color={constants.colorBackgroundDark}
+      color={constants.colorContentDark}
       /> : ''}
   </div>
 }

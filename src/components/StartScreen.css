@@ -31,7 +31,7 @@
 .start-screen-refresh-board-button {
   background-color: var(--color-content-dark);
   color: var(--color-background-dark);
-  padding: .5vh;
+  padding: 0 .5vh;
   border-radius: .5vh;
   margin-left: .5vw;
   cursor: pointer;

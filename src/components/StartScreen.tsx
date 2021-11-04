@@ -43,7 +43,7 @@ const StartScreen: React.FC<StartScreenProps> = ({
 
   const board = useContext(Board)
 
-  const showRefreshButton = loading === false && error === false && handleBoardRefresh !== undefined
+  const showRefreshButton = loading === false && error === false && typeof handleBoardRefresh === 'function'
 
   const startButtonClass = loading || error
     ? 'start-screen-start-button-disabled'
@@ -70,7 +70,7 @@ const StartScreen: React.FC<StartScreenProps> = ({
       <div className="start-screen-word-count">{wordCount}</div>
       {showRefreshButton && <div
         className="start-screen-refresh-board-button"
-        onClick={handleBoardRefresh}
+        onClick={() => (handleBoardRefresh!)()}
       >
         Refresh Board
       </div>}
