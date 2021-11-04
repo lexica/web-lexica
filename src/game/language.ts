@@ -79,7 +79,12 @@ export const useLanguageFromLocalStorage = () => {
   return language
 }
 
-export type LanguageContext = { metadata: MetadataV1, dictionary: string[] }
+export type LanguageContext = {
+  metadata: MetadataV1,
+  dictionary: string[],
+  loading: boolean,
+  error: boolean
+}
 
 export const Language = createContext<LanguageContext>({
   metadata: {
@@ -90,5 +95,7 @@ export const Language = createContext<LanguageContext>({
     isBeta: true,
     definitionUrl: ''
   },
-  dictionary: []
+  dictionary: [],
+  loading: true,
+  error: false
 })

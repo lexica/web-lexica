@@ -1,5 +1,5 @@
 import * as R from 'ramda'
-import { createContext, useEffect, useMemo, useState } from 'react'
+import { createContext, useEffect, useMemo, useReducer, useState } from 'react'
 
 import { MetadataV1, getLanguageMetadata } from '../language'
 import { useGameUrlParameters } from '../url'
@@ -35,6 +35,8 @@ const generateBoard = (letterCount: number, letters: string[], probabilities: Me
 
 export const useGeneratedBoard = (width: number, languageMetadata: MetadataV1) => {
   const [board, setBoard] = useState([''])
+
+  const [refreshTrigger, refreshBoard] = useReducer((state: number) => state++, 0)
   useEffect(() => {
     if (!languageMetadata) return
 
@@ -46,9 +48,9 @@ export const useGeneratedBoard = (width: number, languageMetadata: MetadataV1) =
     const iterations = width * width
 
     setBoard(generateBoard(iterations, letters, probabilities))
-  }, [setBoard, width, languageMetadata])
+  }, [setBoard, width, languageMetadata, refreshTrigger])
 
-  return board
+  return { board, refreshBoard }
 }
 
 const getB64DelimitedURLBoard = ({ board, delimiter }: { board: string, delimiter: string }) => {
@@ -89,3 +91,5 @@ export const useBoardFromUrl = () => {
 }
 
 export const Board = createContext<string[]>([''])
+
+export const BoardRefresh = createContext<() => void>(() => {})

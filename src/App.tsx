@@ -1,16 +1,19 @@
 
-import { BrowserRouter, Route } from 'react-router-dom';
-import './App.css';
-import { Language, useLanguageFromLocalStorage } from './game/language';
-import { Rules, useRulesFromStorage } from './game/rules';
-import GameModes from './pages/GameModes';
-import Home from './pages/Home';
-import Multiplayer from './pages/Multiplayer';
-import NewMultiplayer from './pages/NewMultiplayer';
-import Options from './pages/Options';
-import SinglePlayer from './pages/SinglePlayer';
-import { Translations, useTranslations } from './translations';
-import { logger } from './util/logger';
+import { BrowserRouter, Route } from 'react-router-dom'
+import { CurrentGameType, useGameType } from './game'
+import { Board, BoardRefresh, useGeneratedBoard } from './game/board/hooks'
+import { Language, useLanguageFromLocalStorage } from './game/language'
+import { Rules, useRulesFromStorage } from './game/rules'
+import { Translations, useTranslations } from './translations'
+import { logger } from './util/logger'
+
+import GameModes from './pages/GameModes'
+import Home from './pages/Home'
+import Multiplayer from './pages/Multiplayer'
+import Options from './pages/Options'
+import SinglePlayer from './pages/SinglePlayer'
+
+import './App.css'
 
 function App() {
   logger.debug('loading app...')
@@ -18,6 +21,8 @@ function App() {
   const translations = useTranslations()
   const language = useLanguageFromLocalStorage()
   const [ruleset] = useRulesFromStorage()
+  const { board, refreshBoard } = useGeneratedBoard(ruleset.boardWidth, language.metadata)
+  const { gameType, setGameType } = useGameType()
 
   return (
       <div className="App">
@@ -27,19 +32,22 @@ function App() {
           value={ruleset}
         ><Language.Provider
           value={language}
+        ><Board.Provider
+          value={board}
+        ><BoardRefresh.Provider
+          value={refreshBoard}
+        ><CurrentGameType.Provider
+          value={gameType}
         >
           <BrowserRouter basename="/web-lexica">
             <Route exact path="/">
-              <Home/>
+              <Home setGameType={setGameType}/>
             </Route>
             <Route path="/singleplayer">
               <SinglePlayer />
             </Route>
             <Route path="/multiplayer">
               <Multiplayer />
-            </Route>
-            <Route path="/new-multiplayer">
-              <NewMultiplayer />
             </Route>
             <Route path="/options">
               <Options />
@@ -48,9 +56,14 @@ function App() {
               <GameModes />
             </Route>
           </BrowserRouter>
-        </Language.Provider></Rules.Provider></Translations.Provider>
+        </CurrentGameType.Provider>
+        </BoardRefresh.Provider>
+        </Board.Provider>
+        </Language.Provider>
+        </Rules.Provider>
+        </Translations.Provider>
       </div>
-  );
+  )
 }
 
-export default App;
+export default App

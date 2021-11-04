@@ -11,6 +11,7 @@ import Score from './Score'
 import { Rules } from '../game/rules'
 import { Score as ScoreContext } from '../game/score'
 import { makeClasses } from '../util/classes'
+import { ScreenOrientation, useOrientation } from '../util/hooks'
 
 enum Lists {
   FoundWords = 'found',
@@ -21,7 +22,7 @@ type ListSelectorProps = {
   listName: Lists,
   displayedList: Lists,
   updateDisplayedList: (list: Lists) => void,
-  orientation: ResultsOrientation
+  orientation: ScreenOrientation
 }
 
 const ListSelector: React.FC<ListSelectorProps> = ({
@@ -61,16 +62,8 @@ const ListSelector: React.FC<ListSelectorProps> = ({
     </div>
 }
 
-export enum ResultsOrientation {
-  Vertical = 'vertical',
-  Horizontal = 'horizontal'
-}
-
-const Results: React.FC<{ 
-  orientation: ResultsOrientation
-}> = ({
-  orientation
-}) => {
+const Results: React.FC = () => {
+  const orientation = useOrientation()
   const { foundWords, remainingWords } = useContext(ScoreContext)
   const letterScores = useContext(LetterScores)
 

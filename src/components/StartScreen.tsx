@@ -18,7 +18,8 @@ export type StartScreenProps = {
   handleStart: () => any
   loading: boolean,
   error: boolean,
-  showQrCode?: boolean
+  showQrCode?: boolean,
+  handleBoardRefresh?: () => void
 }
 
 const StartScreen: React.FC<StartScreenProps> = ({
