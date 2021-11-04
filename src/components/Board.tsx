@@ -106,6 +106,9 @@ export const Board: React.FC = () => {
     onMouseDown={() => { handleClick(true); /* logger.debug('start click') */ }}
     onMouseUp={() => { handleClick(false); /* logger.debug('end click') */ }}
     onTouchStart={(e) => {
+      // Should prevent accidental triggering of ios swipe to go back
+      e.preventDefault()
+
       const lastTouch = getLast(e.touches)
       maybeDispatchMove(lastTouch, 1)
       handleClick(true)
