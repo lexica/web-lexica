@@ -1,0 +1,22 @@
+@import "../style/constants.css";
+
+.banner {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: var(--color-accent);
+  width: 100%;
+  height: fit-content;
+}
+
+.banner-button-area {
+  background-color: var(--color-background-dark);
+  border-radius: 50%;
+  width: calc(var(--font-size) + .5vh);
+  height: calc(var(--font-size) + .5vh);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: .5vh;
+  cursor: pointer;
+}

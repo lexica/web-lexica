@@ -14,6 +14,7 @@ import Options from './pages/Options'
 import SinglePlayer from './pages/SinglePlayer'
 
 import './App.css'
+import Banner from './components/Banner'
 
 function App() {
   logger.debug('loading app...')
@@ -43,17 +44,20 @@ function App() {
             <Route exact path="/">
               <Home setGameType={setGameType}/>
             </Route>
-            <Route path="/singleplayer">
-              <SinglePlayer />
-            </Route>
-            <Route path="/multiplayer">
-              <Multiplayer />
-            </Route>
-            <Route path="/options">
-              <Options />
-            </Route>
-            <Route path="/game-modes">
-              <GameModes />
+            <Route path="/(.+)">
+              <Banner />
+              <Route path="/singleplayer">
+                <SinglePlayer />
+              </Route>
+              <Route path="/multiplayer">
+                <Multiplayer />
+              </Route>
+              <Route path="/options">
+                <Options />
+              </Route>
+              <Route path="/game-modes">
+                <GameModes />
+              </Route>
             </Route>
           </BrowserRouter>
         </CurrentGameType.Provider>
