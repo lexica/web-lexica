@@ -6,7 +6,6 @@ import { useGameUrlParameters } from '../url'
 import { splitWordIntoLetters } from '../words'
 
 import { b64ToUtf8 } from '../../util/base-64'
-import { logger } from '../../util/logger'
 
 const getRandomInt = (max: number) => Math.floor(Math.random() * max)
 
