@@ -8,18 +8,14 @@ on:
 jobs:
 
   generate-and-publish:
-
     runs-on: ubuntu-latest
-
     steps:
-
       - uses: actions/checkout@v2
-
       - uses: actions/setup-node@v2
         with:
           node-version: 16.x
 
-      - name: Install dependencies, c
+      - name: Install dependencies and build production bundle
         run: |
           yarn install
           yarn build

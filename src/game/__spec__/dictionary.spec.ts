@@ -1,4 +1,4 @@
-import { getBoard } from '../board'
+import { getBoard } from '../board/util'
 import { __test } from '../dictionary'
 
 import { board as realBoard } from './board.json'
