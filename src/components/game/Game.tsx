@@ -2,7 +2,7 @@ import { useContext } from 'react'
 
 import { ScreenOrientation, useOrientation } from '../util/hooks'
 
-import { Score as ScoreContext } from '../game/score'
+import { Score as ScoreContext } from '../../game/score'
 
 import Board from './Board'
 import Score from './Score'
