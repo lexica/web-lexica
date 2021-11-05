@@ -4,14 +4,14 @@ import { LetterScores, orderByWordScore } from "../game"
 import ScoredWordList from './ScoredWordList'
 import { useConstants } from '../style/constants'
 
-import './Results.css'
+import './ResultsScreen.css'
 import { ReactComponent as CheckCircle } from '@material-design-icons/svg/round/check_circle.svg'
 import { ReactComponent as HighlightOff } from '@material-design-icons/svg/round/highlight_off.svg'
 import Score from './Score'
 import { Rules } from '../../game/rules'
 import { Score as ScoreContext } from '../../game/score'
-import { makeClasses } from '../util/classes'
-import { ScreenOrientation, useOrientation } from '../util/hooks'
+import { makeClasses } from '../../util/classes'
+import { ScreenOrientation, useOrientation } from '../../util/hooks'
 
 enum Lists {
   FoundWords = 'found',

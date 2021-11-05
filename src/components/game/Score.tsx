@@ -5,7 +5,7 @@ import { Score as ScoreContext} from '../../game/score'
 import { Rules } from '../../game/rules'
 import './Score.css'
 import { Timer } from '../../game/timer'
-import { useInterval } from '../util/hooks'
+import { useInterval } from '../../util/hooks'
 
 const getTime = (timeInSeconds: number) => {
   const seconds = timeInSeconds % 60
