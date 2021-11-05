@@ -1,4 +1,4 @@
-@import "../style/constants.css";
+@import "../../style/constants.css";
 
 .row {
   display: flex;

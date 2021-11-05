@@ -2,7 +2,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react'
 import { toSeconds } from 'duration-fns'
 import { useContext, useEffect } from 'react'
 
-import Score from '../components/Score'
+import Score from '../components/game/Score'
 import { Rules } from '../game/rules'
 import { useTimer } from '../game/timer'
 import Providers from './Providers'
