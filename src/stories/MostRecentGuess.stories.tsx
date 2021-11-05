@@ -1,6 +1,6 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 
-import MostRecentGuess from '../components/MostRecentGuess'
+import MostRecentGuess from '../components/game/MostRecentGuess'
 import Providers from './Providers'
 
 const defaults = {

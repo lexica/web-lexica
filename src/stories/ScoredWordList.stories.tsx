@@ -1,6 +1,6 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react'
 
-import ScoredWords from '../components/ScoredWordList'
+import ScoredWords from '../components/game/ScoredWordList'
 
 const metadata: ComponentMeta<typeof ScoredWords> = {
   title: 'ScoredWords',

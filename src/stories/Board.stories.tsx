@@ -1,7 +1,7 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { Dispatch, Reducer, useContext, useEffect, useMemo, useReducer } from 'react';
 
-import { Board } from '../components/Board';
+import { Board } from '../components/game/Board';
 import { Board as BoardObject, Coordinates,  } from '../game/board/types';
 import { deepCopyBoard, getBoard } from '../game/board/util'
 import { GuessAction, GuessActionType, GuessState } from '../game/guess';

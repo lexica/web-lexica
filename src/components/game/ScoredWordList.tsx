@@ -4,7 +4,6 @@ import { LetterScores, orderByWordScore, scoreWord } from '../../game';
 import { Rules } from '../../game/rules'
 
 import './ScoredWordList.css'
-import '../style/scrollbar.css'
 import { useContext } from 'react';
 
 export type ScoredWordsProps = { scoredWords: string[] }

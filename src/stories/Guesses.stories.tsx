@@ -1,8 +1,7 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { useContext } from 'react'
 
 import Providers from './Providers'
-import Guesses, { GuessOrientation } from '../components/Guesses'
+import Guesses, { GuessOrientation } from '../components/game/Guesses'
 
 const GuessesBuilder: React.FC<{
   guesses: string[],

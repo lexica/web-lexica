@@ -1,9 +1,9 @@
 import { Ruleset } from '../../game/rules'
 import { getSearchString } from '../../game/url'
-import constants from '../style/constants'
+import constants from '../../style/constants'
 import { useCssExp } from '../../util/css-parse'
 import { ScreenOrientation, useOrientation } from '../../util/hooks'
-import QrCode from './QrCode'
+import QrCode from '../QrCode'
 
 export enum Platform {
   Android = 'android',

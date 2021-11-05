@@ -4,15 +4,15 @@ import { ReactComponent as PlayCircle } from '@material-design-icons/svg/round/p
 import GameModeDetails from './GameModeDetails'
 
 import constants, { useConstants } from '../style/constants'
-import { Dictionary } from '../../game/dictionary'
+import { Dictionary } from '../game/dictionary'
 import { Translations } from '../translations'
 import { Translation } from '../translations/implemented-languages'
-import { Language } from '../../game/language'
+import { Language } from '../game/language'
 
 import './StartScreen.css'
-import ShareGameQrCode, { Platform } from './ShareGameQrCode'
-import { Rules } from '../../game/rules'
-import { Board } from '../../game/board/hooks'
+import ShareGameQrCode, { Platform } from './game/ShareGameQrCode'
+import { Rules } from '../game/rules'
+import { Board } from '../game/board/hooks'
 
 export type StartScreenProps = {
   handleStart: () => any

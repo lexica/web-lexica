@@ -14,6 +14,7 @@ import Options from './pages/Options'
 import SinglePlayer from './pages/SinglePlayer'
 
 import './App.css'
+import './style/scrollbar.css'
 import Banner from './components/Banner'
 import Lexicons from './pages/Lexicons'
 
