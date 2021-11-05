@@ -3,7 +3,6 @@ name: Build and Deploy Web Lexica
 on:
   push:
     branches: [ master ]
-  workflow_dispatch:
 
 jobs:
 
@@ -19,7 +18,7 @@ jobs:
         with:
           node-version: 16.x
 
-      - name: Install dependencies, c
+      - name: Install dependencies and build production bundle
         run: |
           yarn install
           yarn build

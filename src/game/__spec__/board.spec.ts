@@ -1,4 +1,4 @@
-import { getBoard } from '../board'
+import { getBoard } from '../board/util'
 import board from './board.json'
 
 const { line: testFlat, board: testBoard } = board
