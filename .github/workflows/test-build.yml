@@ -1,8 +1,6 @@
 name: Run tests and Build
 
 on:
-  push:
-    branches: [ github-workflows ]
   pull_request:
     branches: [ master ]
 
