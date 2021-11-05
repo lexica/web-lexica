@@ -3,7 +3,7 @@ import { useContext } from 'react'
 
 import './Guesses.css'
 import { Guess as GuessContext } from '../../game/guess'
-import { makeClasses } from '../util/classes'
+import { makeClasses } from '../../util/classes'
 import { Score } from '../../game/score'
 
 type GuessProps = {

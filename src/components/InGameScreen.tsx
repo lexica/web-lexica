@@ -2,13 +2,13 @@ import { useContext } from 'react'
 
 import { ScreenOrientation, useOrientation } from '../util/hooks'
 
-import { Score as ScoreContext } from '../../game/score'
+import { Score as ScoreContext } from '../game/score'
 
-import Board from './Board'
-import Score from './Score'
-import Guesses, { GuessOrientation } from './Guesses'
-import MostRecentGuess from './MostRecentGuess'
-import ScoredWordList from './ScoredWordList'
+import Board from './game/Board'
+import Score from './game/Score'
+import Guesses, { GuessOrientation } from './game/Guesses'
+import MostRecentGuess from './game/MostRecentGuess'
+import ScoredWordList from './game/ScoredWordList'
 import { HorizontalContainer, VerticalContainer } from './game/layouts'
 
 const Game: React.FC = () => {

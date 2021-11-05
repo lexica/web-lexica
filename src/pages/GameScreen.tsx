@@ -1,7 +1,7 @@
 import { useCallback, useContext, useEffect, useState } from 'react'
 import { useHistory, useLocation } from 'react-router'
-import Results from '../components/Results'
-import GameComponent from '../components/Game'
+import ResultsScreen from '../components/ResultsScreen'
+import InGameScreen from '../components/InGameScreen'
 import { Board, BoardRefresh, useBoardFromUrl } from '../game/board/hooks'
 import { Language, useLanguage } from '../game/language'
 import { Rules, useRulesFromQueryString } from '../game/rules'
@@ -47,9 +47,9 @@ const getNextScreenLogic = ({
   startScreenProps, autoStart, started, finished
 }: GetNextScreenParameters) => {
 
-  if (finished) return <Results />
+  if (finished) return <ResultsScreen />
 
-  if (started) return <GameComponent />
+  if (started) return <InGameScreen />
 
   if (autoStart) return <LoadingScreen />
 

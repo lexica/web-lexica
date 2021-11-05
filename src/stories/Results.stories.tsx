@@ -1,11 +1,10 @@
 
 import { ComponentMeta, ComponentStory } from '@storybook/react'
-import Results from '../components/Results'
-import ScoredWordList from '../components/ScoredWordList'
-import Score from '../components/Score'
+import Results from '../components/ResultsScreen'
+import ScoredWordList from '../components/game/ScoredWordList'
+import Score from '../components/game/Score'
 import Cheats from './Cheats'
 import Providers from './Providers'
-import { ScreenOrientation } from '../util/hooks'
 
 const ComponentBuilder: React.FC<{
   score: {

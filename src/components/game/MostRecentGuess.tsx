@@ -3,7 +3,7 @@ import * as R from 'ramda'
 
 import { LetterScores, scoreWord } from '../../game'
 import { Rules } from '../../game/rules'
-import { makeClasses } from '../util/classes'
+import { makeClasses } from '../../util/classes'
 
 import './MostRecentGuess.css'
 import { Guess } from '../../game/guess'
