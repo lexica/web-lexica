@@ -3,10 +3,10 @@ import * as R from 'ramda'
 
 import './Board.css'
 import { getPointOnGridInfo, GetPointOnGridInfoArguments } from '../util/touch'
-import { getLetterScore, LetterScores,  } from '../game'
-import { Rules } from '../game/rules'
-import { ScoreType } from '../game/score'
-import { Guess, GuessAction, GuessActionType, GuessDispatch } from '../game/guess'
+import { getLetterScore, LetterScores,  } from '../../game'
+import { Rules } from '../../game/rules'
+import { ScoreType } from '../../game/score'
+import { Guess, GuessAction, GuessActionType, GuessDispatch } from '../../game/guess'
 import { logger } from '../util/logger'
 
 type LetterProps = {

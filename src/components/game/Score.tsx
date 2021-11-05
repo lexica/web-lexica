@@ -1,10 +1,10 @@
 import { useContext } from 'react'
 
-import { LetterScores, scoreWord } from '../game'
-import { Score as ScoreContext} from '../game/score'
-import { Rules } from '../game/rules'
+import { LetterScores, scoreWord } from '../../game'
+import { Score as ScoreContext} from '../../game/score'
+import { Rules } from '../../game/rules'
 import './Score.css'
-import { Timer } from '../game/timer'
+import { Timer } from '../../game/timer'
 import { useInterval } from '../util/hooks'
 
 const getTime = (timeInSeconds: number) => {
