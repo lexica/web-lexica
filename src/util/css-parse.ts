@@ -1,5 +1,7 @@
+import * as R from "ramda"
 import { useEffect, useState } from "react"
 import { ElementIdentifier, useElementSize } from "./hooks"
+import { logger } from "./logger"
 
 const toCamelCaseReplaceFn = (_: string, wordSoFar: string, toCapitalize: string): string => {
   return `${wordSoFar}${toCapitalize.toUpperCase()}`
@@ -95,25 +97,70 @@ const isCssFunction = (arg: string) => {
 const isValidUint = (arg: string): arg is keyof typeof unitMap => unitMap.hasOwnProperty(arg)
 
 const getUnit = (arg: string): Unit => {
-  const unit = /([a-z%]+)/.exec(arg)![0]
+  const result = /([a-z%]+)/.exec(arg)
+  const unit = result && result.length ? result[0] : ''
 
   if (!isValidUint(unit)) throw new Error(`${unit} is not a supported/valid css unit. argument: ${arg}`)
 
   return unit
 }
 
-const evaluateArgument = (arg: string): number => {
-  if (isCssFunction(arg)) return evaluateFunction(arg)
-  // assume numeric value of some sort
+const factor = (ops: string[]): [number, string[]] => {
+  const arg = ops.shift()
+  if (!arg?.length) return [0, []]
 
   const number = arg.replace(/([\d.]*)/, '$1')
   const unit = getUnit(arg)
   const parsedNumber = parseFloat(number)
 
-  if (unit.length === 0 && parsedNumber !== 0) throw new Error(`${number} assumed to be numeric, ${parsedNumber} is not zero, needs unit`)
-  if (unit.length === 0) return 0
+  if (!unit.length) return [parsedNumber, ops]
 
-  return unitMap[unit](parsedNumber)
+  return [unitMap[unit](parsedNumber), ops]
+}
+
+const isTerm = (op: string) => ['*', '/'].includes(op)
+
+const term = (ops: string[]): [number, string[]] => {
+  let [result, remainingOps] = factor(ops)
+  while (remainingOps.length && isTerm(remainingOps[0])) {
+    const operation = remainingOps.shift()
+    const [factorResult, unusedOps] = factor(ops)
+    remainingOps = unusedOps
+    if (operation === '*') {
+      result *= factorResult
+    } else {
+      result /= factorResult
+    }
+  }
+
+  return [result, remainingOps]
+}
+
+const isExpression = (op: string) => ['+', '-'].includes(op)
+
+const expression = (ops: string[]): [number, string[]] => {
+  let [result, remainingOps] = factor(ops)
+  while (remainingOps.length && isExpression(remainingOps[0])) {
+    const op = remainingOps.shift()
+    const [termResult, unusedOps] = term(remainingOps)
+    remainingOps = unusedOps
+    result = result + (op === '+' ? termResult : -termResult)
+  }
+  return [result, remainingOps]
+}
+
+const evaluateStatement = (arg: string): number => {
+  if (isCssFunction(arg)) return evaluateFunction(arg)
+
+  const ops = arg
+    .replace(/([\d\w.]+)/g, ' $1 ')
+    .split(' ')
+    .filter(({ length }) => length)
+    .map(op => op.trim())
+
+  const [result] = expression(ops)
+
+  return result
 }
 
 const evaluateFunction = (expression: string): number => {
@@ -126,8 +173,9 @@ const evaluateFunction = (expression: string): number => {
     .filter(w => w.length > 0)
     .reduce<string[]>(stitchParensReducer, [] as string[])
     .map(w => w.trim())
+
   try {
-    const values = args.map(evaluateArgument)
+    const values = args.map(evaluateStatement)
 
     if (fnName === 'clamp' && values.length !== 3) throw new Error(`${values} is not the right number of arguments for ${fnName}, ${expression}`)
     if (fnName === 'max' && values.length !== 2) throw new Error(`${values} is not the right number of arguments for ${fnName}, ${expression}`)
@@ -139,14 +187,36 @@ const evaluateFunction = (expression: string): number => {
     throw new Error(`${err.message}, parent expression: ${expression}`)
   }
 }
-export const cssExp = ([ expression ]: TemplateStringsArray, ..._rest: string[]) => {
-  if (isCssFunction(expression)) return evaluateFunction(expression)
-  return evaluateArgument(expression)
+
+const argToString = (arg: any, expression: string) => {
+  const keys = Object.keys(unitMap).filter(({ length }) => length)
+
+
+  const isUnit = RegExp(`^(${keys.join('|')})\\s`)
+  if (R.isNil(arg)) return isUnit.test(expression) ? '0' : ''
+
+  return arg.toString()
 }
 
-export const useCssExp = ([ expression ]: TemplateStringsArray, ..._rest: string[]) => {
-  const initialValue = isCssFunction(expression) ? evaluateFunction(expression) : 0
-  const [result, setResult] = useState(initialValue)
+const makeExpression = (strings: TemplateStringsArray, ...args: any[]) => {
+  let expression = ''
+  for (let i = args.length; i > 0; i--) {
+    expression = `${strings[i]}${expression}`
+    const arg = args[i - 1]
+    const argString = argToString(arg, strings[i])
+    expression = `${argString}${expression}`
+  }
+  return `${strings[0]}${expression}`
+}
+
+export const cssExp = (strings: TemplateStringsArray, ...args: any[]) => {
+  const expression = makeExpression(strings, ...args)
+  if (isCssFunction(expression)) return evaluateFunction(expression)
+  return evaluateStatement(expression)
+}
+
+export const useCssExp = (expression: TemplateStringsArray, ...args: any[]) => {
+  const [result, setResult] = useState(cssExp(expression, ...args))
 
   const { size: { width, height } } = useElementSize(ElementIdentifier.Type, 'body')
 
@@ -154,9 +224,16 @@ export const useCssExp = ([ expression ]: TemplateStringsArray, ..._rest: string
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const _ = [width, height]
 
-    if (isCssFunction(expression)) setResult(evaluateFunction(expression))
-  }, [width, height, setResult, expression])
+    logger.debug('running useCssExp useEffect...')
+
+    setResult(cssExp(expression, ...args))
+  }, [width, height, setResult, expression, args])
 
   return result
 }
 
+export const __test = {
+  makeExpression,
+  evaluateStatement,
+  getHeight
+}

@@ -1,9 +1,15 @@
-import { Ruleset, Rulesets, setCurrentRuleset, useRulesets, useRulesFromStorage } from "../game/rules"
+import { useContext, useEffect } from 'react'
+import { ReactComponent as Add } from '@material-design-icons/svg/round/add.svg'
+
+import { Ruleset, Rulesets, setCurrentRuleset, useRulesets, useRulesFromStorage } from '../game/rules'
+import GameModeDetails from '../components/GameModeDetails'
+import Svg from "../components/Svg"
 import constants, { useConstants } from "../style/constants"
+import { makeClasses } from '../util/classes'
 
 import './GameModes.css'
-import { makeClasses } from '../util/classes'
-import GameModeDetails from '../components/GameModeDetails'
+import { Renderable, RenderInBanner } from '../components/Banner'
+import { Link } from 'react-router-dom'
 
 type ModeProps = {
   rulesetTuple: [string, Ruleset]
@@ -66,10 +72,48 @@ const ModesList = ({
   </div>
 }
 
+const shouldAddPropmt = (height: number, width: number) => {
+  return width / height > 6.5
+}
+
+const AddGameMode: Renderable = ({ maxHeight, maxWidth }) => <Link
+  className="game-modes-add-game-mode-button"
+  style={{
+    height: maxHeight,
+    maxHeight: maxHeight,
+    paddingRight: shouldAddPropmt(maxHeight, maxWidth) ? '0.5vh' : 0,
+    borderRadius: maxHeight / 2,
+  }}
+  to="/new-game-mode"
+>
+  <Svg.Customizable
+    svg={Add}
+    props={{
+      title: 'Add new game mode',
+      width: maxHeight - 1,
+      height: maxHeight - 1
+    }}
+  />
+  {shouldAddPropmt(maxHeight, maxWidth) ? <div className="game-modes-add-game-mode-prompt">
+    Add game mode
+  </div> : ''}
+</Link>
+
+
 const GameModes = (): JSX.Element => {
 
   const rulesets = useRulesets()
   const selectedRulesetId = useRulesFromStorage()[1]
+
+  const renderInBanner = useContext(RenderInBanner)
+
+  useEffect(() => {
+    const { setElement, cleanUp } = renderInBanner
+
+    setElement(AddGameMode)
+
+    return cleanUp
+  }, [renderInBanner])
 
   return <div className="Page game-modes">
     <ModesList

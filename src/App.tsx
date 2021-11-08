@@ -15,8 +15,12 @@ import SinglePlayer from './pages/SinglePlayer'
 
 import './App.css'
 import './style/scrollbar.css'
-import Banner from './components/Banner'
+import Banner, {
+  RenderInBanner,
+  useBannerContext
+} from './components/Banner'
 import Lexicons from './pages/Lexicons'
+import NewGameMode from './pages/NewGameMode'
 
 function App() {
   logger.debug('loading app...')
@@ -26,6 +30,7 @@ function App() {
   const [ruleset] = useRulesFromStorage()
   const { board, refreshBoard } = useGeneratedBoard(ruleset.boardWidth, language.metadata)
   const { gameType, setGameType } = useGameType()
+  const { renderState, context } = useBannerContext()
 
   return (
       <div className="App">
@@ -43,16 +48,21 @@ function App() {
           value={refreshBoard}
         ><CurrentGameType.Provider
           value={gameType}
+        ><RenderInBanner.Provider
+          value={context}
         >
           <BrowserRouter basename="/web-lexica">
             <Route exact path="/">
               <Home setGameType={setGameType}/>
             </Route>
             <Route path="/(.+)">
-              <Banner />
+              <Banner { ...renderState}/>
             </Route>
             <Route path="/game-modes">
               <GameModes />
+            </Route>
+            <Route path="/new-game-mode">
+              <NewGameMode />
             </Route>
             <Route path="/lexicons">
               <Lexicons />
@@ -67,6 +77,7 @@ function App() {
               <SinglePlayer />
             </Route>
           </BrowserRouter>
+        </RenderInBanner.Provider>
         </CurrentGameType.Provider>
         </BoardRefresh.Provider>
         </Board.Provider>

@@ -81,6 +81,26 @@ export const useElementSize = (identifierType: ElementIdentifier, identifier: st
   return size
 }
 
+export const useScreenSize = () => {
+  const [size, setSize] = useState({
+    width: document.documentElement.clientWidth,
+    height: document.documentElement.clientHeight
+  })
+
+  useEffect(() => {
+    const callback = () => setSize({
+      width: document.documentElement.clientWidth,
+      height: document.documentElement.clientHeight
+    })
+
+    window.addEventListener('resize', callback)
+
+    return () => window.removeEventListener('resize', callback)
+  }, [setSize])
+
+  return size
+}
+
 export enum ScreenOrientation {
   Landscape = 'landscape',
   Portrait = 'portrait'
