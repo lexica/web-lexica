@@ -10,6 +10,7 @@ import { makeClasses } from '../util/classes'
 import './GameModes.css'
 import { Renderable, RenderInBanner } from '../components/Banner'
 import { Link } from 'react-router-dom'
+import { logger } from '../util/logger'
 
 type ModeProps = {
   rulesetTuple: [string, Ruleset]
@@ -59,6 +60,8 @@ const ModesList = ({
   handleOnClick
 }: ModesListProps): JSX.Element => {
   const rulesets = Object.entries(rulesetsObject)
+
+  logger.debug(rulesets)
 
   const getMode = (ruleset: typeof rulesets[number]) => <Mode
     rulesetTuple={ruleset}

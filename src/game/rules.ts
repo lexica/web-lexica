@@ -81,11 +81,13 @@ export const getRuleset = (id: string): Ruleset => {
 }
 
 export const addRuleset = (ruleset: Ruleset) => {
+  const id = uuid()
   const rulesets = rulesetStorage.get()
   rulesetStorage.set({
     ...rulesets,
-    [uuid()]: ruleset
+    [id]: ruleset
   })
+  return id
 }
 
 export const setCurrentRuleset = (id: string) => {
