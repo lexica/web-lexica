@@ -37,6 +37,7 @@ type GetNextScreenParameters = {
     showQrCode: boolean
     handleStart: () => void,
     handleBoardRefresh?: () => void,
+    pageTitle: string
   }
   autoStart: boolean,
   started: boolean,
@@ -59,7 +60,8 @@ const getNextScreenLogic = ({
 type GameProps = {
   autoStart?: boolean,
   showQrCode: boolean,
-  handleBoardRefresh?: () => void
+  handleBoardRefresh?: () => void,
+  isMultiplayer: boolean,
 }
 
 const useAutoStart = (shouldAutoStart: boolean, condition: boolean, handleStart: () => void) =>  {
@@ -74,7 +76,12 @@ const useAutoStart = (shouldAutoStart: boolean, condition: boolean, handleStart:
   }, [shouldAutoStart, condition, handleStart, triggered, setTriggered])
 }
 
-const Game = ({ autoStart: shouldAutoStart, handleBoardRefresh, showQrCode }: GameProps): JSX.Element => {
+const Game = ({
+  autoStart: shouldAutoStart,
+  handleBoardRefresh,
+  showQrCode,
+  isMultiplayer
+}: GameProps): JSX.Element => {
   const autoStart = shouldAutoStart === true
   const [finished, updateFinished] = useState(false)
   const [started, updateStarted] = useState(false)
@@ -103,8 +110,17 @@ const Game = ({ autoStart: shouldAutoStart, handleBoardRefresh, showQrCode }: Ga
 
   useAutoStart(autoStart, loading && !error, handleStart)
 
+  const pageTitle = `Web Lexica ${showQrCode ? 'New ' : ''}${isMultiplayer ? 'Multiplayer Game' : ''}`
+
   const toRender = getNextScreenLogic({
-    startScreenProps: { loading, error, handleStart, handleBoardRefresh, showQrCode },
+    startScreenProps: {
+      loading,
+      error,
+      handleStart,
+      handleBoardRefresh,
+      showQrCode,
+      pageTitle
+    },
     autoStart,
     started,
     finished
@@ -145,7 +161,12 @@ const NewGame = ({ isMultiplayer }: { isMultiplayer: boolean }): JSX.Element => 
 
   useUpdatingSearchString(isMultiplayer)
 
-  return <Game handleBoardRefresh={handleBoardRefresh} showQrCode={isMultiplayer} />
+  return <Game
+    handleBoardRefresh={handleBoardRefresh}
+    showQrCode={isMultiplayer}
+    isMultiplayer={isMultiplayer}
+    autoStart={!isMultiplayer}
+  />
 }
 
 const Multiplayer = (): JSX.Element => {
@@ -158,7 +179,7 @@ const Multiplayer = (): JSX.Element => {
     <Rules.Provider value={rules}>
       <Language.Provider value={language}>
         <LetterScores.Provider value={language?.metadata?.letterScores}>
-          <Game showQrCode={false} />
+          <Game showQrCode={false} isMultiplayer />
         </LetterScores.Provider>
       </Language.Provider>
     </Rules.Provider>

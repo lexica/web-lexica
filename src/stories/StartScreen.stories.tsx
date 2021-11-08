@@ -48,7 +48,7 @@ const ComponentBuilder: React.FC<{
   error
 }) => <Providers dictionary={dictionary}>
   <Cheats/>
-  <StartScreen {...{ loading, error, handleStart: () => {}}}/>
+  <StartScreen {...{ loading, error, pageTitle: 'Storybook Example', handleStart: () => {}}}/>
 </Providers>
 
 export const Template: ComponentStory<typeof ComponentBuilder> = args => <ComponentBuilder {...args}/>

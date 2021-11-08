@@ -19,7 +19,8 @@ export type StartScreenProps = {
   loading: boolean,
   error: boolean,
   showQrCode?: boolean,
-  handleBoardRefresh?: () => void
+  handleBoardRefresh?: () => void,
+  pageTitle: string
 }
 
 const StartScreen: React.FC<StartScreenProps> = ({
@@ -27,6 +28,7 @@ const StartScreen: React.FC<StartScreenProps> = ({
   loading,
   error,
   showQrCode,
+  pageTitle,
   handleBoardRefresh
 }) => {
   const languageContext = useContext(Language)
@@ -63,7 +65,7 @@ const StartScreen: React.FC<StartScreenProps> = ({
   const qrCode = showQrCode === true && <ShareGameQrCode {...{ rules, language, board, platform: Platform.Android,  }}/>
 
   return <div className="start-screen">
-    <div className="start-screen-title">Web Lexica Multiplayer Game</div>
+    <div className="start-screen-title">{pageTitle}</div>
     <div className="start-screen-language">{languageTitle}</div>
     <GameModeDetails/>
     <div className="start-screen-action-bar">

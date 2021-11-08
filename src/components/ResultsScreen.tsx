@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 
 import { LetterScores, orderByWordScore } from "../game"
 import ScoredWordList from './game/ScoredWordList'
@@ -12,6 +12,7 @@ import { Rules } from '../game/rules'
 import { Score as ScoreContext } from '../game/score'
 import { makeClasses } from '../util/classes'
 import { ScreenOrientation, useOrientation } from '../util/hooks'
+import { BoardRefresh } from '../game/board/hooks'
 
 enum Lists {
   FoundWords = 'found',
@@ -72,6 +73,10 @@ const Results: React.FC = () => {
   const orderedFoundWords = orderByWordScore(foundWords, scoreType, letterScores)
   const orderedMissedWords = orderByWordScore(remainingWords, scoreType, letterScores)
 
+  const refreshBoard = useContext(BoardRefresh)
+  useEffect(() => {
+    return refreshBoard
+  }, [refreshBoard])
 
   let foundWordsClass = makeClasses(
     'results-found-words',
