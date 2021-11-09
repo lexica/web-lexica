@@ -1,3 +1,4 @@
+import { createContext, useMemo, useState, useEffect } from 'react'
 import { ReactComponent as ArrowBack } from '@material-design-icons/svg/round/arrow_back.svg'
 
 import Svg from './Svg'
@@ -5,24 +6,78 @@ import Svg from './Svg'
 import './Banner.css'
 import { useHistory, useLocation } from 'react-router'
 import { useCallback } from 'react'
+import { ElementIdentifier, useElementSize, useScreenSize } from '../util/hooks'
+import { logger } from '../util/logger'
+import { useCssExp } from '../util/css-parse'
+import { useConstants } from '../style/constants'
 
 const getPageName = (path: string): string => {
   const segment = path.split('/').filter(s => s.length).pop()
   if (!segment) return ''
 
-  // note: check the css, it may be doing the titlecaseing via a text-transform
   return segment.replace(/-/g, ' ')
 }
 
-const Banner = (): JSX.Element => {
-  const history = useHistory()
-  const location = useLocation()
+export type RenderInBannerContext = {
+  cleanUp: () => void,
+  setElement: (toRender: Renderable) => void
+}
 
-  const pageName = getPageName(location.pathname)
+export type Renderable = (size: { maxHeight: number, maxWidth: number }) => JSX.Element
+
+export type RenderState = {
+  toRender: Renderable
+}
+
+
+
+export const useBannerContext = (): { renderState: RenderState, context: RenderInBannerContext } => {
+  const [renderState, setState] = useState<RenderState>({
+    toRender: () => <></>
+  })
+
+  const cleanUp = useCallback(() => setState({ toRender: () => <></> }), [setState])
+
+  const setElement = useCallback((toRender: Renderable) => setState({ toRender }), [setState])
+
+  const context = useMemo(() => ({ cleanUp, setElement }), [cleanUp, setElement])
+
+  return useMemo(() => ({ renderState, context }), [renderState, context])
+}
+
+export const RenderInBanner = createContext<RenderInBannerContext>({
+  setElement: (_: any) => {},
+  cleanUp: () => {}
+})
+
+const Banner = ({ toRender: RenderProp }: { toRender: Renderable }): JSX.Element => {
+  const history = useHistory()
+  const { pathname } = useLocation()
+
+  const pageName = getPageName(pathname)
 
   const onClickHandler = useCallback(() => {
-    history.push('/')
+    history.goBack()
   }, [history])
+
+  const { location: { right: leftBound } } = useElementSize(ElementIdentifier.Class, 'banner-page-title')
+
+  const { width } = useScreenSize()
+
+  const { fontSize } = useConstants()
+  const maxHeight = useCssExp`${fontSize} + 0.5vh`
+
+  logger.debug({
+    fontSize,
+    point5vh: useCssExp`0.5vh`,
+    maxHeight
+  })
+
+  const maxWidth = width - leftBound - useCssExp`0.5vh`
+
+  useEffect(() => {
+    logger.debug({ maxHeight, maxWidth })
+  }, [maxWidth, maxHeight])
 
   return <div className="banner">
     <div
@@ -31,7 +86,12 @@ const Banner = (): JSX.Element => {
     >
       <Svg.Standard svg={ArrowBack} title="Return home"/>
     </div>
-    {pageName}
+    <div className="banner-page-title">
+      {pageName}
+    </div>
+    <div className="banner-rendered-prop">
+      <RenderProp maxHeight={maxHeight} maxWidth={maxWidth}/>
+    </div>
   </div>
 }
 

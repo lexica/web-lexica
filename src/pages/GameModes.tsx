@@ -1,9 +1,16 @@
-import { Ruleset, Rulesets, setCurrentRuleset, useRulesets, useRulesFromStorage } from "../game/rules"
+import { useContext, useEffect } from 'react'
+import { ReactComponent as Add } from '@material-design-icons/svg/round/add.svg'
+
+import { Ruleset, Rulesets, setCurrentRuleset, useRulesets, useRulesFromStorage } from '../game/rules'
+import GameModeDetails from '../components/GameModeDetails'
+import Svg from "../components/Svg"
 import constants, { useConstants } from "../style/constants"
+import { makeClasses } from '../util/classes'
 
 import './GameModes.css'
-import { makeClasses } from '../util/classes'
-import GameModeDetails from '../components/GameModeDetails'
+import { Renderable, RenderInBanner } from '../components/Banner'
+import { Link } from 'react-router-dom'
+import { logger } from '../util/logger'
 
 type ModeProps = {
   rulesetTuple: [string, Ruleset]
@@ -54,6 +61,8 @@ const ModesList = ({
 }: ModesListProps): JSX.Element => {
   const rulesets = Object.entries(rulesetsObject)
 
+  logger.debug(rulesets)
+
   const getMode = (ruleset: typeof rulesets[number]) => <Mode
     rulesetTuple={ruleset}
     isSelected={ruleset[0] === selectedRulesetId}
@@ -66,10 +75,54 @@ const ModesList = ({
   </div>
 }
 
+const shouldAddPrompt = (height: number, width: number) => {
+  return width / height > 6.75
+}
+
+const AddGameMode: Renderable = ({ maxHeight, maxWidth }) => <Link
+  className={makeClasses(
+    'game-modes-add-game-mode-button',
+    'banner-rendered-prop-container'
+  )}
+  style={{
+    height: maxHeight,
+    maxHeight: maxHeight,
+  }}
+  to="/new-game-mode"
+>
+  <Svg.Customizable
+    svg={Add}
+    props={{
+      title: 'Add new game mode',
+      width: maxHeight,
+      height: maxHeight
+    }}
+  />
+  {shouldAddPrompt(maxHeight, maxWidth) ? <div
+    className={makeClasses(
+      'game-modes-add-game-mode-prompt',
+      'banner-rendered-prop-label'
+      )}
+  >
+    Add Game Mode
+  </div> : ''}
+</Link>
+
+
 const GameModes = (): JSX.Element => {
 
   const rulesets = useRulesets()
   const selectedRulesetId = useRulesFromStorage()[1]
+
+  const renderInBanner = useContext(RenderInBanner)
+
+  useEffect(() => {
+    const { setElement, cleanUp } = renderInBanner
+
+    setElement(AddGameMode)
+
+    return cleanUp
+  }, [renderInBanner])
 
   return <div className="Page game-modes">
     <ModesList

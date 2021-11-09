@@ -53,10 +53,14 @@ export const useStorage = <I>(key: string, initialValue: I, parser: (value: stri
       setItem(parser(e.detail.value))
     }
 
+    const item = get({ key, parser })
+    
+    if (item) setItem(item)
+
     window.addEventListener(SamePageEventType as any, eventHandler)
 
     return () => window.removeEventListener(SamePageEventType as any, eventHandler)
-  })
+  }, [setItem, parser, key])
 
   return item
 }
