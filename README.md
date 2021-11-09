@@ -1,6 +1,6 @@
-# web-lexica
+# `web-lexica` (beta)
 
-## A web version of Lexica!
+## A web version of Lexica
 
 ### [Try it out!](https://lexica.github.io/web-lexica)
 
@@ -16,8 +16,12 @@ Currently, this is what the web version of Lexica can do:
 
 Here are a list of its noteworthy shortcomings:
 
-1. It has not been translated to other languages, despite being able to play games in other languages
+1. The game has not been translated to other languages, despite being able to play games in other languages
 1. There are no preferences (Language, theme, etc)
+
+Less important, but still missing, items are:
+
+1. Several poor App layouts/styles/interactions. If you enjoy `web-lexica`, but get tripped up by something in the design, please feel free to [submit an issue](https://github.com/lexica/web-lexica/issues) detailing the problem and suggested improvements
 1. When creating a multiplayer game, the QR code leads to the Android App's landing page, with no option for a direct link to a `web-lexica` game (The page's URL does dynamically update though, and can be used to share games)
 1. Board rotation has not been implemented
 1. A post-game `Share` option has not been implemented
