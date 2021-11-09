@@ -76,6 +76,7 @@
 }
 
 .home-play-game-button {
+  flex: 1 1;
   padding: 1vh;
   display: flex;
   justify-content: center;
@@ -93,7 +94,8 @@
   align-self: center;
   background-color: var(--color-background-dark-alt);
   width: max-content;
-  justify-content: center;
+  justify-content: stretch;
+  width: 100%;
 }
 
 .home-game-buttons>a {
