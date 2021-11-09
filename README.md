@@ -12,15 +12,16 @@ Currently, this is what the web version of Lexica can do:
 
 1. Play singleplayer games in most, maybe all, Lexica supported languages
 1. Play, and share multiplayer games in most, maybe all, Lexica supported languages
-1. Play `Letter Score` and `Word Lenght` games.
-1. Play games of grid sizes 4, 5, and 6
+1. Create and play custom game modes
 
 Here are a list of its noteworthy shortcomings:
 
 1. It has not been translated to other languages, despite being able to play games in other languages
 1. There are no preferences (Language, theme, etc)
-1. There are no ways of creating custom game modes
-1. When creating a multiplayer game, there is no option for a web-lexica version of the code (although the URL can be copied and sent)
+1. When creating a multiplayer game, the QR code leads to the Android App's landing page, with no option for a direct link to a `web-lexica` game (The page's URL does dynamically update though, and can be used to share games)
+1. Board rotation has not been implemented
+1. A post-game `Share` option has not been implemented
+1. The post-game `Missed Words` list does not include dictionary links or a preview board
 
 The app currently uses the excellent [`Solarized`](https://github.com/altercation/solarized) color scheme, the licence to which can be found [here](https://raw.githubusercontent.com/altercation/solarized/master/LICENSE)
 
@@ -52,7 +53,7 @@ This project uses `create-react-app` and can be spun up by running `yarn start` 
 
 For production-ready builds, `yarn build` can be run.
 
-The project also uses [`Storybook`](https://storybook.js.org) for individual `React` component tweaking and documentation. this can be started by running `yarn storybook`
+The project also uses [`Storybook`](https://storybook.js.org) for individual `React` component tweaking and documentation. The `Storybook` stories have been neglected lately and may or may not have up-to-date settings and documentation. `Storybook` can be started by running `yarn storybook`
 
 The app uses `lexica.github.io`'s language API in order to load dictionaries and other language metadata.
 
