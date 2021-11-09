@@ -75,17 +75,18 @@ const ModesList = ({
   </div>
 }
 
-const shouldAddPropmt = (height: number, width: number) => {
-  return width / height > 6.5
+const shouldAddPrompt = (height: number, width: number) => {
+  return width / height > 6.75
 }
 
 const AddGameMode: Renderable = ({ maxHeight, maxWidth }) => <Link
-  className="game-modes-add-game-mode-button"
+  className={makeClasses(
+    'game-modes-add-game-mode-button',
+    'banner-rendered-prop-container'
+  )}
   style={{
     height: maxHeight,
     maxHeight: maxHeight,
-    paddingRight: shouldAddPropmt(maxHeight, maxWidth) ? '0.5vh' : 0,
-    borderRadius: maxHeight / 2,
   }}
   to="/new-game-mode"
 >
@@ -93,12 +94,17 @@ const AddGameMode: Renderable = ({ maxHeight, maxWidth }) => <Link
     svg={Add}
     props={{
       title: 'Add new game mode',
-      width: maxHeight - 1,
-      height: maxHeight - 1
+      width: maxHeight,
+      height: maxHeight
     }}
   />
-  {shouldAddPropmt(maxHeight, maxWidth) ? <div className="game-modes-add-game-mode-prompt">
-    Add game mode
+  {shouldAddPrompt(maxHeight, maxWidth) ? <div
+    className={makeClasses(
+      'game-modes-add-game-mode-prompt',
+      'banner-rendered-prop-label'
+      )}
+  >
+    Add Game Mode
   </div> : ''}
 </Link>
 

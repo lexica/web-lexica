@@ -9,9 +9,8 @@ const TimeLimit = ({ handleTimeUpdate }: { handleTimeUpdate: (time: number) => v
   const handleTimeLimitChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     setRawTimeLimit(e?.target?.value)
     const time = parseInt(e?.target?.value)
-    if (Number.isNaN(time)) return
 
-    handleTimeUpdate(time)
+    handleTimeUpdate(Number.isNaN(time) ? 0 : time)
   }, [setRawTimeLimit, handleTimeUpdate])
 
   return <Description {...{ title, svg: Schedule }} >

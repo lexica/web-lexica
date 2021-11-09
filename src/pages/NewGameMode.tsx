@@ -6,7 +6,6 @@ import Name from '../components/new-game-mode/Name'
 import TimeLimit from '../components/new-game-mode/TimeLimit'
 import ScoringType from '../components/new-game-mode/ScoringType'
 
-import './NewGameMode.css'
 import { makeClasses } from '../util/classes'
 import { ScoreType } from '../game/score'
 import { logger } from '../util/logger'
@@ -18,11 +17,44 @@ import { useHistory } from 'react-router'
 import BoardSize from '../components/new-game-mode/BoardSize'
 import MinimumWordLength from '../components/new-game-mode/MinimumWordLength'
 
+import './NewGameMode.css'
+
 const validTimeLimit = (time: number) => time > 0
 const validName = (name: string) => /([\w\s\d_-]+)/.test(name)
 const boardSizes = [4, 5, 6]
 const scoreTypes = [ScoreType.Words, ScoreType.Letters]
 const wordLengths = [3, 4, 5, 6]
+
+type SaveGameModeProps = { isValid: boolean, handleSave: () => void }
+
+const SaveGameMode = ({ isValid, handleSave }: SaveGameModeProps): Renderable => ({
+  maxWidth,
+  maxHeight
+}) => {
+  const showName = maxWidth / maxHeight > 7.5
+
+  const classes = makeClasses(
+    'new-game-mode-submit-button',
+    'banner-rendered-prop-container',
+    { condition: !isValid, name: 'new-game-mode-submit-button-disabled' }
+  )
+
+  return <div className={classes} onClick={handleSave} >
+    <Svg.Customizable
+      svg={Save}
+      props={{
+        title: 'Save Game Mode',
+        fill: isValid ? constants.colorContentDark : constants.colorContentLowContrastDark,
+        width: maxHeight * .8,
+        height: maxHeight * .8
+      }}
+    />
+    {showName ? <div className={makeClasses(
+      'new-game-mode-submit-label',
+      'banner-rendered-prop-label'
+    )}> Save Game Mode </div> : ''}
+  </div>
+}
 
 const NewGameMode = (): JSX.Element => {
   const [name, setName] = useState('')
@@ -43,14 +75,10 @@ const NewGameMode = (): JSX.Element => {
   }, [timeLimit, boardSize, name, scoreType, minimumWordLength])
 
   const handleSave = useCallback(() => {
-    logger.debug('handling save...', {
-      isValid,
-      timeLimit,
-      boardSize,
-      name,
-      scoreType,
-      minimumWordLength,
-    })
+    logger.debug(
+      'handling save...',
+      { isValid, timeLimit, boardSize, name, scoreType, minimumWordLength, }
+    )
     if (!isValid) return
     const id = addRuleset({
       boardWidth: boardSize,
@@ -63,51 +91,9 @@ const NewGameMode = (): JSX.Element => {
     setCurrentRuleset(id)
 
     history.push('/')
-  }, [
-    isValid,
-    timeLimit,
-    boardSize,
-    name,
-    scoreType,
-    minimumWordLength,
-    history
-  ])
+  }, [isValid, timeLimit, boardSize, name, scoreType, minimumWordLength, history])
 
-  const BannerElement = useCallback<Renderable>(({ maxWidth, maxHeight }) => {
-    const showName = maxWidth / maxHeight > 6.5
-
-    const classes = makeClasses(
-      'new-game-mode-submit-button',
-      {
-        condition: !isValid,
-        name: 'new-game-mode-submit-button-disabled'
-      }
-    )
-
-    return <div
-      className={classes}
-      onClick={handleSave}
-    >
-      <Svg.Customizable
-        svg={Save}
-        props={{
-          title: 'Save Game Mode',
-          fill: isValid
-            ? constants.colorContentLowContrastDark
-            : constants.colorBackgroundDark,
-          width: maxHeight,
-          height: maxHeight
-        }}
-      />
-      {
-        showName
-          ? <div className="new-game-mode-submit-label">
-              Save Game Mode
-            </div>
-          : ''
-      }
-    </div>
-  }, [isValid, handleSave])
+  const BannerElement = useMemo(() => SaveGameMode({ isValid, handleSave }), [isValid, handleSave])
 
   const { setElement, cleanUp } = useContext(RenderInBanner)
 

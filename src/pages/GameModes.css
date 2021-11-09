@@ -47,16 +47,18 @@
 
 .game-modes-add-game-mode-button {
   text-decoration: none;
-  width: fit-content;
   background-color: var(--color-background-dark);
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  border-radius: var(--font-size);
 }
 
 .game-modes-add-game-mode-prompt {
+  display: flex;
+  align-content: center;
   text-decoration: none;
   color: var(--color-content-dark);
-  font-size: calc(var(--font-size) - 2px);
+  font-size: var(--font-size);
 }

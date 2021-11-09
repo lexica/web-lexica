@@ -32,9 +32,24 @@
 
 .banner-rendered-prop {
   height: calc(var(--font-size) + .5vh);
+  min-height: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-left: auto;
   margin-right: .5vh;
+}
+
+.banner-rendered-prop-container {
+  display: flex;
+  min-height: 0;
+  height: inherit;
+  padding-inline-start: 0.75vw;
+  padding-inline-end: 0.75vw;
+  box-sizing: border-box;
+}
+
+.banner-rendered-prop-label {
+  margin-inline-start: 0.5vw;
+  line-height: var(--font-size);
 }

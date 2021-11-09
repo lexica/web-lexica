@@ -124,3 +124,19 @@
 .new-game-mode-minimum-word-length-option input[type="radio"]+label {
   margin-inline-start: 0.5vh;
 }
+
+.new-game-mode-submit-button {
+  display: flex;
+  flex-direction: row;
+  background-color: var(--color-background-dark);
+  border-radius: var(--font-size);
+  color: var(--color-content-dark);
+  align-items: center;
+  cursor: pointer;
+}
+
+.new-game-mode-submit-button-disabled {
+  background-color: var(--color-background-dark);
+  color: var(--color-content-low-contrast-dark);
+  cursor: not-allowed;
+}
