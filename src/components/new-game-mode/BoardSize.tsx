@@ -21,8 +21,6 @@ const BoardSize = ({
 }: BoardSizeProps) => {
   const [boardSize, setBoardSize] = useState(0)
   const title = 'Board Size'
-  const prefix = 'new-game-mode'
-  const ruleClass = title.toLowerCase().replace(/\s+/g, '-')
 
   const handleChange = useCallback((size: number) => {
     if (!sizes.includes(size)) return
@@ -30,24 +28,23 @@ const BoardSize = ({
     handleBoardSizeChange(size)
   }, [handleBoardSizeChange, setBoardSize, sizes])
 
-  return <div className={`${prefix}-container ${prefix}-${ruleClass}-container`}>
-    <Description {...{ title, svg: GridView }}/>
+  return <Description title={title} svg={GridView}>
     <div>
-        {sizes.map(size => {
-          const id = `${size}x${size}`
-          return <div className={optionClass('board-size')}>
-            <Radio
-              group="board-size"
-              value={size}
-              id={id}
-              title={id}
-              onChange={handleChange}
-              checked={boardSize===size}
-            />
-          </div>
-        })}
+      {sizes.map(size => {
+        const id = `${size}x${size}`
+        return <div className={optionClass('board-size')}>
+          <Radio
+            group="board-size"
+            value={size}
+            id={id}
+            title={id}
+            onChange={handleChange}
+            checked={boardSize===size}
+          />
+        </div>
+      })}
     </div>
-  </div>
+  </Description>
 }
 
 export default BoardSize

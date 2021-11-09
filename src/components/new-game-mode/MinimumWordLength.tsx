@@ -1,10 +1,10 @@
 import { useState, useCallback  } from 'react'
 import { ReactComponent as Sort } from '@material-design-icons/svg/round/sort.svg'
 
-import Description from '../components/new-game-mode/Description'
-import Radio from '../components/Radio'
+import Description from './Description'
+import Radio from '../Radio'
 
-import { getClass } from '../components/new-game-mode/util'
+import { getClass } from './util'
 
 const {
   optionClass,
@@ -22,8 +22,6 @@ const MinimumWordLength = ({
 }: MinimumWordLengthProps): JSX.Element => {
   const [minimumWordLength, setMinimumWordLength] = useState(0)
   const title = 'Minimum Word Length'
-  const prefix = 'new-game-mode'
-  const ruleClass = title.toLowerCase().replace(/\s+/g, '-')
 
   const handleChange = useCallback((length: number) => {
     if (!wordLengths.includes(length)) return
@@ -32,8 +30,7 @@ const MinimumWordLength = ({
     setMinimumWordLength(length)
   }, [wordLengths, handleLengthUpdate])
 
-  return <div className={`${prefix}-container ${prefix}-${ruleClass}-container`}>
-    <Description {...{ title, svg: Sort }}/>
+  return <Description title={title} svg={Sort}>
     <div className={optionsClass('minimum-word-length')}>
       {wordLengths.map(l => <div
         className={optionClass('minimum-word-length')}
@@ -48,7 +45,7 @@ const MinimumWordLength = ({
         />
       </div>)}
     </div>
-  </div>
+  </Description>
 }
 
 export default MinimumWordLength

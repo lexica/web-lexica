@@ -15,9 +15,7 @@ const isScoreType = (type: any): type is ScoreType => [ScoreType.Letters, ScoreT
 
 const ScoringType = ({ handleScoreUpdate, scoreTypes }: { handleScoreUpdate: (type: ScoreType) => void, scoreTypes: ScoreType[] }): JSX.Element => {
   const [scoreType, setScoreType] = useState<ScoreType>('' as any)
-  const prefix = 'new-game-mode'
   const title = 'Score Type'
-  const ruleClass = title.toLowerCase().replace(/\s+/g, '-')
 
   const handleChange = useCallback((value: string) => {
     if (!isScoreType(value)) return
@@ -25,28 +23,27 @@ const ScoringType = ({ handleScoreUpdate, scoreTypes }: { handleScoreUpdate: (ty
     handleScoreUpdate(value)
   }, [handleScoreUpdate, setScoreType])
 
-  return <div className={`${prefix}-container ${prefix}-${ruleClass}-container`}>
-    <Description {...{ title, svg: EmojiEvents }}/>
+  return <Description title={title} svg={EmojiEvents}>
     <div>
-    {scoreTypes.map(type => {
-      const title = {
-        [ScoreType.Letters]: 'Letter Points',
-        [ScoreType.Words]: 'Word Length'
-      }[type]
+      {scoreTypes.map(type => {
+        const title = {
+          [ScoreType.Letters]: 'Letter Points',
+          [ScoreType.Words]: 'Word Length'
+        }[type]
 
-      return <div className={optionClass('score-type')}>
-        <Radio
-          group="score-type"
-          value={type}
-          id={type}
-          title={title}
-          onChange={handleChange}
-          checked={scoreType===type}
-        />
-      </div>
-    }) }
-  </div>
-  </div>
+        return <div className={optionClass('score-type')}>
+          <Radio
+            group="score-type"
+            value={type}
+            id={type}
+            title={title}
+            onChange={handleChange}
+            checked={scoreType===type}
+          />
+        </div>
+      }) }
+    </div>
+  </Description>
 }
 
 export default ScoringType

@@ -14,8 +14,7 @@ const TimeLimit = ({ handleTimeUpdate }: { handleTimeUpdate: (time: number) => v
     handleTimeUpdate(time)
   }, [setRawTimeLimit, handleTimeUpdate])
 
-  return <div className="new-game-mode-container new-game-mode-time-limit-container">
-    <Description {...{ title, svg: Schedule }} />
+  return <Description {...{ title, svg: Schedule }} >
     <input
         type="text"
         className="new-game-mode-text-input new-game-mode-time-limit-text-input"
@@ -23,7 +22,7 @@ const TimeLimit = ({ handleTimeUpdate }: { handleTimeUpdate: (time: number) => v
         onChange={handleTimeLimitChange}
         value={rawTimeLimit}
     />
-  </div>
+  </Description>
 }
 
 export default TimeLimit

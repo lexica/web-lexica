@@ -16,7 +16,7 @@ import { addRuleset, setCurrentRuleset } from '../game/rules'
 import { Duration } from 'duration-fns'
 import { useHistory } from 'react-router'
 import BoardSize from '../components/new-game-mode/BoardSize'
-import MinimumWordLength from './MinimumWordLength'
+import MinimumWordLength from '../components/new-game-mode/MinimumWordLength'
 
 const validTimeLimit = (time: number) => time > 0
 const validName = (name: string) => /([\w\s\d_-]+)/.test(name)
@@ -35,7 +35,11 @@ const NewGameMode = (): JSX.Element => {
   const history = useHistory()
 
   const isValid = useMemo(() => {
-    return validTimeLimit(timeLimit) && boardSizes.includes(boardSize) && validName(name) && scoreTypes.includes(scoreType) && wordLengths.includes(minimumWordLength)
+    return validTimeLimit(timeLimit) &&
+      boardSizes.includes(boardSize) &&
+      validName(name) &&
+      scoreTypes.includes(scoreType) &&
+      wordLengths.includes(minimumWordLength)
   }, [timeLimit, boardSize, name, scoreType, minimumWordLength])
 
   const handleSave = useCallback(() => {
