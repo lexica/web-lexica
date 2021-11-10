@@ -1,14 +1,10 @@
-import { getBoard } from '../board/util'
-import { __test } from '../dictionary'
+import { getBoard } from '../../board/util'
+import { getWordsOnBoard } from '../util'
 
-import { board as realBoard } from './board.json'
+import { board as realBoard } from '../../__spec__/board.json'
 import {
   full,
 } from './dictionary.json'
-
-const {
-  getWordsOnBoard
-} = __test
 
 describe('dictionary', () => {
   describe('#getWordsOnBoard: removes all impossible words and leaves only possible words given board', () => {
@@ -103,3 +99,4 @@ describe('dictionary', () => {
     })
   })
 })
+
