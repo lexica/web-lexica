@@ -16,6 +16,8 @@ const Name = ({ handleNameUpdate }: { handleNameUpdate: (name: string) => void})
       onChange={handleChange}
       placeholder="Name"
       value={rawName}
+      required
+      minLength={1}
     />
     <div className={`${prefix}-name-explanation`}>For choosing game mode</div>
   </div>
