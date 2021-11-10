@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext, useMemo } from 'react'
 
 import { LetterScores, scoreWord } from '../../game'
 import { Score as ScoreContext} from '../../game/score'
@@ -30,8 +30,14 @@ const Score: React.FC<{
 
   const [remainingTime] = useInterval(getRemainingTime, 400)
 
-  const currentScore = foundWords.reduce((score: number, word: string) => scoreWord(word, scoreType, letterScores) + score, 0)
-  const totalScore = remainingWords.reduce((score: number, word: string) => scoreWord(word, scoreType, letterScores) + score, 0) + currentScore
+  const currentScore = useMemo(() => foundWords.reduce(
+    (score: number, word: string) => scoreWord(word, scoreType, letterScores) + score,
+    0
+  ), [scoreType, letterScores, foundWords])
+  const totalScore = useMemo(() => remainingWords.reduce(
+    (score: number, word: string) => scoreWord(word, scoreType, letterScores) + score,
+    0
+  ), [scoreType, letterScores, remainingWords]) + currentScore
   const foundCount = foundWords.length
   const totalCount = remainingWords.length + foundCount
   return (

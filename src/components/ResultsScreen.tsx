@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useMemo, useState } from 'react'
 
 import { LetterScores, orderByWordScore } from "../game"
 import ScoredWordList from './game/ScoredWordList'
@@ -13,6 +13,7 @@ import { Score as ScoreContext } from '../game/score'
 import { makeClasses } from '../util/classes'
 import { ScreenOrientation, useOrientation } from '../util/hooks'
 import { BoardRefresh } from '../game/board/hooks'
+import { logger } from '../util/logger'
 
 enum Lists {
   FoundWords = 'found',
@@ -70,11 +71,12 @@ const Results: React.FC = () => {
 
   const [displayedList, updateDisplayedList] = useState(Lists.FoundWords)
   const { score: scoreType } = useContext(Rules)
-  const orderedFoundWords = orderByWordScore(foundWords, scoreType, letterScores)
-  const orderedMissedWords = orderByWordScore(remainingWords, scoreType, letterScores)
+  const orderedFoundWords = useMemo(() => orderByWordScore(foundWords, scoreType, letterScores), [foundWords, scoreType, letterScores])
+  const orderedMissedWords = useMemo(() => orderByWordScore(remainingWords, scoreType, letterScores), [remainingWords, scoreType, letterScores])
 
   const refreshBoard = useContext(BoardRefresh)
   useEffect(() => {
+    logger.debug('running ResultsScreen useEffect...')
     return refreshBoard
   }, [refreshBoard])
 
