@@ -1,12 +1,50 @@
-import { Reducer, useCallback, useEffect, useMemo, useReducer, useState } from 'react'
+import { Reducer, useCallback, useEffect, useMemo, useReducer, useRef, useState } from 'react'
+import { v4 as uuid } from 'uuid'
 
 import { logger } from './logger'
 
+// enum IntervalAction {
+//   Reset = 'reset'
+// }
+
+type IntervalState = {
+  intervalReference: NodeJS.Timeout | undefined,
+  callback: (...args: any[]) => void,
+  interval: number
+}
+
+type IntervalAction = IntervalState
+
+const intervalReducer = (state: IntervalState, action: IntervalAction | string) => {
+  state.intervalReference && clearInterval(state.intervalReference)
+  if (typeof action === 'string') {
+    const newState = { ...state, intervalReference: undefined }
+    return newState
+  }
+  const id = uuid()
+  action.intervalReference = setInterval(() => { logger.debug('running interval...', { id }); action.callback() }, action.interval)
+  return action
+}
+
 export const useInterval = <T extends any>(callback: (...args: any[]) => T, interval: number, initialValue?: T): [T, () => void] => {
   const [value, setValue] = useState<T | undefined>(initialValue)
-  const [intervalValue] = useState(setInterval(() => setValue(callback), interval))
+  const dispatch = useReducer(intervalReducer, {
+    intervalReference: setInterval(() => setValue(callback()), interval),
+    interval,
+    callback: () => setValue(callback())
+  })[1]
 
-  const stopInterval = useCallback(() => clearInterval(intervalValue), [intervalValue])
+  const stopInterval = useCallback(() => dispatch('stop'), [dispatch])
+
+  useEffect(() => {
+    logger.debug('running useInterval useEffect...')
+
+    dispatch({
+      callback: () => setValue(callback()),
+      interval,
+      intervalReference: undefined
+    })
+  }, [callback, interval, dispatch, setValue])
 
   return [value as T, stopInterval]
 }

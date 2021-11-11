@@ -1,4 +1,4 @@
-import { useCallback, useContext, useEffect, useState, useMemo } from 'react'
+import { useCallback, useContext, useEffect, useState, useMemo, useReducer } from 'react'
 import { ReactComponent as Save } from '@material-design-icons/svg/round/save.svg'
 
 import Svg from '../components/Svg'
@@ -18,6 +18,7 @@ import BoardSize from '../components/new-game-mode/BoardSize'
 import MinimumWordLength from '../components/new-game-mode/MinimumWordLength'
 
 import './NewGameMode.css'
+import TimeAttack from '../components/new-game-mode/TimeAttack'
 
 const validTimeLimit = (time: number) => time > 0
 const validName = (name: string) => /([\w\s\d_-]+)/.test(name)
@@ -57,6 +58,8 @@ const SaveGameMode = ({ isValid, handleSave }: SaveGameModeProps): Renderable =>
 }
 
 const NewGameMode = (): JSX.Element => {
+  const [timeAttack, toggleTimeAttack] = useReducer((state: boolean) => !state, false)
+
   const [name, setName] = useState('')
   const [timeLimit, setTimeLimit] = useState(0)
   const [boardSize, setBoardSize] = useState(0)
@@ -85,13 +88,14 @@ const NewGameMode = (): JSX.Element => {
       minimumWordLength,
       score: scoreType,
       name,
-      time: { minutes: timeLimit } as Duration
+      time: { minutes: timeLimit } as Duration,
+      timeAttack
     })
 
     setCurrentRuleset(id)
 
     history.push('/')
-  }, [isValid, timeLimit, boardSize, name, scoreType, minimumWordLength, history])
+  }, [isValid, timeLimit, boardSize, name, scoreType, minimumWordLength, history, timeAttack])
 
   const BannerElement = useMemo(() => SaveGameMode({ isValid, handleSave }), [isValid, handleSave])
 
@@ -108,6 +112,7 @@ const NewGameMode = (): JSX.Element => {
     <BoardSize handleBoardSizeChange={setBoardSize} sizes={boardSizes} />
     <ScoringType handleScoreUpdate={setScoreType} scoreTypes={scoreTypes} />
     <MinimumWordLength handleLengthUpdate={setMinimumWordLength} wordLengths={wordLengths} />
+    <TimeAttack handleTimeAttackToggle={toggleTimeAttack} />
   </div>
 }
 
