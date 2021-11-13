@@ -1,4 +1,5 @@
-import {
+import { Duration, sum, toSeconds } from 'duration-fns'
+import React, {
   createContext,
   Reducer,
   useCallback,
@@ -17,15 +18,18 @@ type TimerState = {
 
 enum TimerAction {
   Pause = 'pause',
-  Resume = 'resume'
+  Resume = 'resume',
+  AddTime = 'add-time'
 }
 
 type TimerReducerAction = {
   type: TimerAction,
-  info: Date
+  info: Date | Duration
 }
 
-const secondsBetweenDates = (start: Date, end: Date) => Math.round((end.getTime() - start.getTime()) / 1000)
+const TIMER_INTERVAL = 400
+
+export const secondsBetweenDates = (start: Date, end: Date) => Math.round((end.getTime() - start.getTime()) / 1000)
 
 const handlePause = (state: TimerState, pauseTime: Date) => {
   const { isPaused, remainingTime, startTime } = state
@@ -49,13 +53,24 @@ const handleResume = (state: TimerState, resumeTime: Date) => {
   }
 }
 
+const handleAddTime = (state: TimerState, time: Duration) => {
+  const { remainingTime: oldRemainingTime } = state
+  const remainingTime = toSeconds(sum({ seconds: oldRemainingTime }, time))
+  return {
+    ...state,
+    remainingTime
+  }
+}
+
 const timerReducer = (state: TimerState, action: TimerReducerAction) => {
   logger.debug('running timer reducer', JSON.stringify({ action }))
   switch (action.type) {
     case TimerAction.Pause:
-      return handlePause(state, action.info)
+      return handlePause(state, action.info as Date)
     case TimerAction.Resume:
-      return handleResume(state, action.info)
+      return handleResume(state, action.info as Date)
+    case TimerAction.AddTime:
+      return handleAddTime(state, action.info as Duration)
     default:
       throw new Error(`${action.type} has not been implemented yet`)
   }
@@ -64,7 +79,28 @@ const timerReducer = (state: TimerState, action: TimerReducerAction) => {
 export type UseTimer = {
   startTime: () => void,
   pauseTime: () => void,
-  getRemainingTime: () => number
+  addTime: (time: Duration) => void,
+  getRemainingTime: () => number,
+  state: TimerState
+}
+
+const getIntervalCallback = (state: TimerState, intervalRef: React.MutableRefObject<NodeJS.Timeout | undefined>, timeEndCallback: () => void) => {
+  // const id = uuid()
+  return () => {
+    if (state.isPaused) {
+      intervalRef.current && clearInterval(intervalRef.current)
+      intervalRef.current = undefined
+      return
+    }
+
+    const remainingTime = state.remainingTime - secondsBetweenDates(state.startTime, new Date())
+    // logger.debug(`timer interval running... remaining time: ${remainingTime}`, { id })
+    if (remainingTime <= 0) {
+      timeEndCallback()
+      intervalRef.current && clearInterval(intervalRef.current)
+      intervalRef.current = undefined
+    }
+  }
 }
 
 export const useTimer = (totalTimeInSeconds: number, timeEndCallback: () => void): UseTimer => {
@@ -82,10 +118,27 @@ export const useTimer = (totalTimeInSeconds: number, timeEndCallback: () => void
   const pauseTime = useCallback(() => {
     dispatch({ type: TimerAction.Pause, info: new Date() })
   }, [dispatch])
+  const addTime = useCallback((time: Duration) => {
+    dispatch({ type: TimerAction.AddTime, info: time })
+  }, [dispatch])
 
   const getRemainingTime = useCallback(() => state.remainingTime - secondsBetweenDates(state.startTime, new Date()), [state])
 
   const intervalRef = useRef<NodeJS.Timeout | undefined>(undefined)
+  const remainingTimeRef = useRef(totalTimeInSeconds)
+
+  useEffect(() => {
+    if (state.remainingTime === remainingTimeRef.current) return
+
+    const actualRemainingTime = state.remainingTime - secondsBetweenDates(state.startTime, new Date())
+    if (actualRemainingTime <= 0) return
+
+    logger.debug('timer addTime useEffect running...', { actualRemainingTime, remainingTimeRef: remainingTimeRef.current, stateRemainingTime: state.remainingTime })
+    remainingTimeRef.current = state.remainingTime
+
+    intervalRef.current && clearInterval(intervalRef.current)
+    intervalRef.current = setInterval(getIntervalCallback(state, intervalRef, memoizedTimeEndCallback), TIMER_INTERVAL)
+  }, [state, intervalRef, remainingTimeRef, memoizedTimeEndCallback])
 
   useEffect(() => {
     const remainingTime = state.remainingTime - secondsBetweenDates(state.startTime, new Date())
@@ -95,29 +148,28 @@ export const useTimer = (totalTimeInSeconds: number, timeEndCallback: () => void
 
     logger.debug('timer useEffect setInterval running...', JSON.stringify({ remainingTime, shouldSetInterval, state }))
     if (shouldSetInterval) {
-      intervalRef.current = setInterval(() => {
-        if (state.isPaused) {
-          intervalRef.current && clearInterval(intervalRef.current)
-          intervalRef.current = undefined
-          return
-        }
-
-        const remainingTime = state.remainingTime - secondsBetweenDates(state.startTime, new Date())
-        logger.debug(`timer interval running... remaining time: ${remainingTime}`)
-        if (remainingTime <= 0) {
-          memoizedTimeEndCallback()
-          intervalRef.current && clearInterval(intervalRef.current)
-          intervalRef.current = undefined
-        }
-
-      }, 400)
+      intervalRef.current = setInterval(getIntervalCallback(state, intervalRef, memoizedTimeEndCallback), TIMER_INTERVAL)
     }
 
     // interval cleanup
     return () => intervalRef.current && clearInterval(intervalRef.current)
   }, [intervalRef, state, memoizedTimeEndCallback])
 
-  return useMemo(() => ({ startTime, pauseTime, getRemainingTime }), [startTime, pauseTime, getRemainingTime])
+  return useMemo(
+    () => ({
+      startTime,
+      pauseTime,
+      getRemainingTime,
+      addTime,
+      state
+      }),
+    [startTime,
+    pauseTime,
+    getRemainingTime,
+    addTime,
+    state
+    ]
+  )
 }
 
 export type TimerContext = UseTimer
@@ -125,5 +177,11 @@ export type TimerContext = UseTimer
 export const Timer = createContext<TimerContext>({
   startTime: () => {},
   pauseTime: () => {},
-  getRemainingTime: () => 0
+  addTime: (_: Duration) => {},
+  getRemainingTime: () => 0,
+  state: {
+    isPaused: true,
+    startTime: new Date(),
+    remainingTime: 0
+  }
 })

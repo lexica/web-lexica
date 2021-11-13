@@ -13,7 +13,8 @@ enum GameParamMap {
   Score = 's',
   MinimumWordLength = 'm',
   MinimumVersion = 'mv',
-  Version = 'v'
+  Version = 'v',
+  TimeAttack = 'ta'
 }
 
 const encodeBoard = (board: string[]): string => {
@@ -28,6 +29,7 @@ export type GetSearchStringArgs = {
   time: Duration,
   score: ScoreType,
   minimumWordLength: number
+  timeAttack?: number
 }
 
 export const getSearchString = ({
@@ -35,12 +37,13 @@ export const getSearchString = ({
   language,
   time: duration,
   score,
-  minimumWordLength
+  minimumWordLength,
+  timeAttack
 }: GetSearchStringArgs) => {
   const board = encodeBoard(boardArray)
   const time = toSeconds(duration)
 
-  const keyValuePairs = [
+  const keyValuePairs: ([string, string | number])[] = [
     [GameParamMap.Board, board],
     [GameParamMap.Language, language],
     [GameParamMap.Time, time],
@@ -49,6 +52,8 @@ export const getSearchString = ({
     [GameParamMap.MinimumVersion, HighestSupportedMinimumVersion],
     [GameParamMap.Version, HighestSupportedMinimumVersion]
   ]
+
+  timeAttack && keyValuePairs.push([GameParamMap.TimeAttack, timeAttack])
 
   return `?${keyValuePairs.map(kv => kv.join('=')).join('&')}`
 }
@@ -60,13 +65,14 @@ export type GameURLParams = {
   s: ScoreType,
   m: string,
   mv: string,
-  v: string
+  v: string,
+  ta?: string
 }
 
 const parseGameParameters = (urlParams: GameURLParams) => {
   const language = urlParams[GameParamMap.Language]
   const minimumVersion = parseInt(urlParams[GameParamMap.MinimumVersion])
-
+  const timeAttack = urlParams?.ta && parseInt(urlParams.ta)
 
   return {
     board: urlParams[GameParamMap.Board],
@@ -75,7 +81,8 @@ const parseGameParameters = (urlParams: GameURLParams) => {
     score: urlParams[GameParamMap.Score],
     minimumWordLength: parseInt(urlParams[GameParamMap.MinimumWordLength]),
     minimumVersion,
-    version: parseInt(urlParams[GameParamMap.Version])
+    version: parseInt(urlParams[GameParamMap.Version]),
+    timeAttack
   }
 }
 

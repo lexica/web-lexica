@@ -26,7 +26,8 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-width: 25vw;
+  min-width: 10vw;
+  max-width: 10vw;
 }
 
 .new-game-mode-description-container>div {
@@ -55,7 +56,7 @@
   flex-direction: column;
   align-items: flex-start;
   margin-top: 1vh;
-  margin-bottom: 0.5vh;
+  margin-bottom: 1vh;
   margin-left: 5vw;
   margin-right: 5vw;
   display: flex;
@@ -139,4 +140,39 @@
   background-color: var(--color-background-dark);
   color: var(--color-content-low-contrast-dark);
   cursor: not-allowed;
+}
+
+
+.new-game-mode-time-attack-input-holder {
+  display: flex;
+  flex-direction: column;
+}
+
+.new-game-mode-time-attack-input-holder>div {
+  display: flex;
+  line-height: var(--font-size);
+  margin-top: 0.5vh;
+  margin-bottom: 0.5vh;
+}
+
+.new-game-mode-time-attack-options {
+  display: flex;
+  flex-direction: row;
+  line-height: var(--font-size);
+  font-size: var(--font-size);
+}
+
+
+.new-game-mode-time-attack-options>input[type="radio"]+label {
+  line-height: var(--font-size);
+  margin-inline-start: min(0.25vw, 0.25vh);
+  margin-inline-end: min(1vw, 1vh);
+}
+.new-game-mode-time-attack-options>div:first-child {
+  margin-inline-start: min(2vw, 2vh);
+}
+
+.new-game-mode-time-attack-example {
+  display: flex;
+  text-align: left;
 }

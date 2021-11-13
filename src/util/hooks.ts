@@ -2,15 +2,6 @@ import { Reducer, useCallback, useEffect, useMemo, useReducer, useState } from '
 
 import { logger } from './logger'
 
-export const useInterval = <T extends any>(callback: (...args: any[]) => T, interval: number, initialValue?: T): [T, () => void] => {
-  const [value, setValue] = useState<T | undefined>(initialValue)
-  const [intervalValue] = useState(setInterval(() => setValue(callback), interval))
-
-  const stopInterval = useCallback(() => clearInterval(intervalValue), [intervalValue])
-
-  return [value as T, stopInterval]
-}
-
 export enum ElementIdentifier {
   Class = 'class',
   Id = 'id',

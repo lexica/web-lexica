@@ -15,6 +15,7 @@ import GameModeDetails from '../components/GameModeDetails'
 import { Guess, GuessDispatch, useGuesses } from '../game/guess'
 import { Score, useScore } from '../game/score'
 import { LetterScores } from '../game'
+import { useTimeAttack } from '../game/time-attack'
 
 export type GameScreenProps = {
   isMultiplayer?: boolean,
@@ -109,6 +110,8 @@ const Game = ({
   const handleStart = useCallback(() => { updateStarted(true); startTime() }, [updateStarted, startTime])
 
   useAutoStart(autoStart, loading && !error, handleStart)
+
+  useTimeAttack(rules, timer, score)
 
   const pageTitle = `Web Lexica ${showQrCode ? 'New ' : ''}${isMultiplayer ? 'Multiplayer Game' : ''}`
 

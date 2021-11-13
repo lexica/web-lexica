@@ -1,5 +1,6 @@
 import { ReactComponent as Timer } from '@material-design-icons/svg/round/timer.svg'
 import { ReactComponent as GridView } from '@material-design-icons/svg/round/grid_view.svg'
+import { ReactComponent as DirectionsRun } from '@material-design-icons/svg/round/directions_run.svg'
 import { ReactComponent as EmojiEvents } from '@material-design-icons/svg/round/emoji_events.svg'
 import { ReactComponent as Sort } from '@material-design-icons/svg/round/sort.svg'
 import { Duration, normalize } from 'duration-fns'
@@ -44,6 +45,8 @@ const GameModeDetails = ({
   const defaultRules = useContext(Rules)
   const rules = rulesetOverride || defaultRules
 
+  const timeAttack = rules.timeAttack !== undefined ? rules.timeAttack : 0
+
   const overrides = getOverrideObject(size, color)
 
   const getOverrides = (title: string) => ({ ...overrides, title })
@@ -67,6 +70,13 @@ const GameModeDetails = ({
         {getSvg(Sort, 'Minimum Word Length')}
         <div>&ge; {rules.minimumWordLength}</div>
       </div>
+      {timeAttack > 0
+        ? <div className="game-mode-details-info">
+          {getSvg(DirectionsRun, 'Time Attack')}
+          <div>x{timeAttack}</div>
+        </div>
+        : ''
+      }
     </div>
 }
 
