@@ -5,7 +5,7 @@ import { Score as ScoreContext} from '../../game/score'
 import { Rules } from '../../game/rules'
 import './Score.css'
 import { Timer } from '../../game/timer'
-import { useInterval } from '../../util/hooks'
+import { useInterval } from '../../util/interval'
 
 const getTime = (timeInSeconds: number) => {
   const seconds = timeInSeconds % 60
@@ -28,7 +28,7 @@ const Score: React.FC<{
 
   const { getRemainingTime } = useContext(Timer)
 
-  const [remainingTime] = useInterval(getRemainingTime, 400)
+  const remainingTime = useInterval(getRemainingTime, 400)
 
   const currentScore = useMemo(() => foundWords.reduce(
     (score: number, word: string) => scoreWord(word, scoreType, letterScores) + score,

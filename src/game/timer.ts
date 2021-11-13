@@ -1,5 +1,4 @@
 import { Duration, sum, toSeconds } from 'duration-fns'
-import {v4 as uuid } from 'uuid'
 import React, {
   createContext,
   Reducer,
@@ -85,7 +84,7 @@ export type UseTimer = {
 }
 
 const getIntervalCallback = (state: TimerState, intervalRef: React.MutableRefObject<NodeJS.Timeout | undefined>, timeEndCallback: () => void) => {
-  const id = uuid()
+  // const id = uuid()
   return () => {
     if (state.isPaused) {
       intervalRef.current && clearInterval(intervalRef.current)

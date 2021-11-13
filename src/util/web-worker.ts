@@ -16,7 +16,7 @@ export const promisifyWorker = <T extends ToWorkerPayload, F>(worker: InstanceTy
     worker!.postMessage({ ...payload, requestId })
     worker!.addEventListener('message', (e: MessageEvent<FromWorkerPayload<F>>) => {
       const { data } = e
-      if (data.requestId !== requestId) return
+      if (data?.requestId !== requestId) return
 
       if (data.error) {
         reject(e)
