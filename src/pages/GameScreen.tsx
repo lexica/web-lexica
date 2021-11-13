@@ -191,6 +191,15 @@ const Multiplayer = (): JSX.Element => {
 
 const GameScreen = ({ isMultiplayer: m, isNewGame: n }: GameScreenProps): JSX.Element => {
   const [isMultiplayer, isNewGame] = [m === true, n === true]
+
+
+  const refreshBoard = useContext(BoardRefresh)
+  useEffect(() => {
+    logger.debug('running GameScreen useEffect...')
+    return refreshBoard
+  }, [refreshBoard])
+
+
   if (isNewGame) return <NewGame isMultiplayer={isMultiplayer} />
   return <Multiplayer/>
 }
