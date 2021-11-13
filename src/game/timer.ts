@@ -29,7 +29,7 @@ type TimerReducerAction = {
 
 const TIMER_INTERVAL = 400
 
-const secondsBetweenDates = (start: Date, end: Date) => Math.round((end.getTime() - start.getTime()) / 1000)
+export const secondsBetweenDates = (start: Date, end: Date) => Math.round((end.getTime() - start.getTime()) / 1000)
 
 const handlePause = (state: TimerState, pauseTime: Date) => {
   const { isPaused, remainingTime, startTime } = state
@@ -80,7 +80,8 @@ export type UseTimer = {
   startTime: () => void,
   pauseTime: () => void,
   addTime: (time: Duration) => void,
-  getRemainingTime: () => number
+  getRemainingTime: () => number,
+  state: TimerState
 }
 
 const getIntervalCallback = (state: TimerState, intervalRef: React.MutableRefObject<NodeJS.Timeout | undefined>, timeEndCallback: () => void) => {
@@ -155,8 +156,19 @@ export const useTimer = (totalTimeInSeconds: number, timeEndCallback: () => void
   }, [intervalRef, state, memoizedTimeEndCallback])
 
   return useMemo(
-    () => ({ startTime, pauseTime, getRemainingTime, addTime }),
-    [startTime, pauseTime, getRemainingTime, addTime]
+    () => ({
+      startTime,
+      pauseTime,
+      getRemainingTime,
+      addTime,
+      state
+      }),
+    [startTime,
+    pauseTime,
+    getRemainingTime,
+    addTime,
+    state
+    ]
   )
 }
 
@@ -166,5 +178,10 @@ export const Timer = createContext<TimerContext>({
   startTime: () => {},
   pauseTime: () => {},
   addTime: (_: Duration) => {},
-  getRemainingTime: () => 0
+  getRemainingTime: () => 0,
+  state: {
+    isPaused: true,
+    startTime: new Date(),
+    remainingTime: 0
+  }
 })
