@@ -30,7 +30,8 @@ export const useRulesFromQueryString = (board: string[]): RulesContext => {
       time: normalize({ seconds: params.time }),
       score: params.score,
       boardWidth: Math.floor(Math.sqrt(board.length)),
-      name: 'Shared with you'
+      name: 'Shared with you',
+      timeAttack: params.timeAttack
     } as RulesContext
   }, [params, board])
 }
