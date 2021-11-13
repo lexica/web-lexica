@@ -7,7 +7,7 @@ export type RulesContext = {
   score: ScoreType,
   boardWidth: number,
   name: string
-  timeAttack?: boolean
+  timeAttack?: number
 }
 
 export type Ruleset = RulesContext & { name: string, boardWidth: number }
@@ -27,5 +27,6 @@ export enum LocalStorage {
 export enum DefaultRulesets {
   Sprint = 'sprint',
   Marathon = 'marathon',
-  LetterPoints = 'letter-points'
+  LetterPoints = 'letter-points',
+  TimeAttack = 'time-attack'
 }

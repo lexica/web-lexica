@@ -142,17 +142,37 @@
   cursor: not-allowed;
 }
 
-.new-game-mode-time-attack-check-box {
-  cursor: pointer;
+
+.new-game-mode-time-attack-input-holder {
   display: flex;
-  width: fit-content;
-  height: fit-content;
-  align-items: center;
-  margin: 0.5vh;
+  flex-direction: column;
 }
 
-.new-game-mode-time-attack-check-box>div {
+.new-game-mode-time-attack-input-holder>div {
   display: flex;
-  min-height: 0;
-  margin-inline-start: 0.5vh;
+  line-height: var(--font-size);
+  margin-top: 0.5vh;
+  margin-bottom: 0.5vh;
+}
+
+.new-game-mode-time-attack-options {
+  display: flex;
+  flex-direction: row;
+  line-height: var(--font-size);
+  font-size: var(--font-size);
+}
+
+
+.new-game-mode-time-attack-options>input[type="radio"]+label {
+  line-height: var(--font-size);
+  margin-inline-start: min(0.25vw, 0.25vh);
+  margin-inline-end: min(1vw, 1vh);
+}
+.new-game-mode-time-attack-options>div:first-child {
+  margin-inline-start: min(2vw, 2vh);
+}
+
+.new-game-mode-time-attack-example {
+  display: flex;
+  text-align: left;
 }

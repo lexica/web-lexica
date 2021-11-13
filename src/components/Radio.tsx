@@ -8,7 +8,7 @@ export type RadioProps<T extends string | number | readonly string[]> = {
   title: string,
   value: T,
   group: string,
-  id: string,
+  id?: string,
   checked: boolean,
   className?: string
   onChange: (value: T) => void

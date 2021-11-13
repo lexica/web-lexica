@@ -1,4 +1,4 @@
-import { useCallback, useContext, useEffect, useState, useMemo, useReducer } from 'react'
+import { useCallback, useContext, useEffect, useState, useMemo, } from 'react'
 import { ReactComponent as Save } from '@material-design-icons/svg/round/save.svg'
 
 import Svg from '../components/Svg'
@@ -25,6 +25,9 @@ const validName = (name: string) => /([\w\s\d_-]+)/.test(name)
 const boardSizes = [4, 5, 6]
 const scoreTypes = [ScoreType.Words, ScoreType.Letters]
 const wordLengths = [3, 4, 5, 6]
+const timeAttackMultipliers = [0, 1, 2, 3, 4, 5]
+
+const isValidTimeAttackMultiplier = (multiplier: number) => multiplier >= 0
 
 type SaveGameModeProps = { isValid: boolean, handleSave: () => void }
 
@@ -58,7 +61,7 @@ const SaveGameMode = ({ isValid, handleSave }: SaveGameModeProps): Renderable =>
 }
 
 const NewGameMode = (): JSX.Element => {
-  const [timeAttack, toggleTimeAttack] = useReducer((state: boolean) => !state, false)
+  const [timeAttack, setTimeAttack] = useState(0)
 
   const [name, setName] = useState('')
   const [timeLimit, setTimeLimit] = useState(0)
@@ -74,8 +77,9 @@ const NewGameMode = (): JSX.Element => {
       boardSizes.includes(boardSize) &&
       validName(name) &&
       scoreTypes.includes(scoreType) &&
-      wordLengths.includes(minimumWordLength)
-  }, [timeLimit, boardSize, name, scoreType, minimumWordLength])
+      wordLengths.includes(minimumWordLength) &&
+      isValidTimeAttackMultiplier(timeAttack)
+  }, [timeLimit, boardSize, name, scoreType, minimumWordLength, timeAttack])
 
   const handleSave = useCallback(() => {
     logger.debug(
@@ -112,7 +116,7 @@ const NewGameMode = (): JSX.Element => {
     <BoardSize handleBoardSizeChange={setBoardSize} sizes={boardSizes} />
     <ScoringType handleScoreUpdate={setScoreType} scoreTypes={scoreTypes} />
     <MinimumWordLength handleLengthUpdate={setMinimumWordLength} wordLengths={wordLengths} />
-    <TimeAttack handleTimeAttackToggle={toggleTimeAttack} />
+    <TimeAttack handleTimeAttackUpdate={setTimeAttack} timeAttackMultipliers={timeAttackMultipliers} selectedMultiplier={timeAttack} />
   </div>
 }
 

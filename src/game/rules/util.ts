@@ -27,6 +27,14 @@ export const defaultRulesets: { [P in DefaultRulesets]: Ruleset } = {
     boardWidth: 5,
     score: ScoreType.Letters,
     minimumWordLength: 4
+  },
+  [DefaultRulesets.TimeAttack]: {
+    name: 'Time Attack',
+    time: { minutes: 1 } as Duration,
+    boardWidth: 6,
+    score: ScoreType.Words,
+    minimumWordLength: 3,
+    timeAttack: 2
   }
 }
 
