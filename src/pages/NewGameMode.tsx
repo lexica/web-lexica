@@ -1,4 +1,4 @@
-import { useCallback, useContext, useEffect, useState, useMemo, } from 'react'
+import { useCallback, useState, useMemo } from 'react'
 import { ReactComponent as Save } from '@material-design-icons/svg/round/save.svg'
 
 import Svg from '../components/Svg'
@@ -9,7 +9,7 @@ import ScoringType from '../components/new-game-mode/ScoringType'
 import { makeClasses } from '../util/classes'
 import { ScoreType } from '../game/score'
 import { logger } from '../util/logger'
-import { Renderable, RenderInBanner } from '../components/Banner'
+import { Renderable, useRenderInBanner } from '../components/Banner'
 import constants from '../style/constants'
 import { addRuleset, setCurrentRuleset } from '../game/rules'
 import { Duration } from 'duration-fns'
@@ -103,12 +103,7 @@ const NewGameMode = (): JSX.Element => {
 
   const BannerElement = useMemo(() => SaveGameMode({ isValid, handleSave }), [isValid, handleSave])
 
-  const { setElement, cleanUp } = useContext(RenderInBanner)
-
-  useEffect(() => {
-    setElement(BannerElement)
-    return cleanUp
-  }, [BannerElement, setElement, cleanUp])
+  useRenderInBanner(BannerElement)
 
   return <div className="Page new-game-mode">
     <Name handleNameUpdate={setName} />
