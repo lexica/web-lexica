@@ -1,4 +1,4 @@
-@import "../../style/constants.css";
+@import "../../../style/constants.css";
 
 .row {
   display: flex;
@@ -248,4 +248,55 @@
 .visited {
   background-color: var(--color-accent);
   color: var(--color-background-dark);
+}
+
+.board-letter-incorrect {
+  animation-duration: 250ms;
+  animation-name: incorrect-flash;
+}
+
+@keyframes incorrect-flash {
+  from {
+    background-color: var(--color-accent);
+  }
+  50% {
+    background-color: var(--color-red);
+  }
+  to {
+    background-color: inherit;
+  }
+}
+
+.board-letter-stale {
+  animation-duration: 250ms;
+  animation-name: stale-flash;
+}
+
+@keyframes stale-flash {
+  from {
+    background-color: var(--color-accent);
+  }
+  50% {
+    background-color: var(--color-yellow);
+  }
+  to {
+    background-color: inherit;
+  }
+}
+
+.board-letter-correct {
+  animation-duration: 250ms;
+  animation-name: correct-flash;
+}
+
+@keyframes correct-flash {
+  from {
+    background-color: var(--color-accent);
+  }
+  50% {
+    background-color: var(--color-green);
+  }
+  to {
+    background-color: inherit;
+  }
 }

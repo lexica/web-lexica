@@ -21,7 +21,10 @@ const getConstants = () => ({
   colorBackgroundDarkAlt: '#073642',
   colorBackgroundLightAlt: '#fdf6e3',
 
-  colorAccent: '#268bd2'
+  colorAccent: '#268bd2',
+  colorGreen: '#2aa198',
+  colorRed: '#dc322f',
+  colorYellow: '#b58900'
 })
 
 const useUnits = () => {
@@ -75,7 +78,10 @@ const constants = {
   colorBackgroundDarkAlt: '#073642',
   colorBackgroundLightAlt: '#fdf6e3',
 
-  colorAccent: '#268bd2'
+  colorAccent: '#268bd2',
+  colorGreen: '#2aa198',
+  colorRed: '#dc322f',
+  colorYellow: '#b58900'
 }
 
 export default constants
