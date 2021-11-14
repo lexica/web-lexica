@@ -1,13 +1,16 @@
-import React, { useContext } from 'react'
+import React, { useContext, } from 'react'
 import * as R from 'ramda'
 
 import './Board.css'
-import { getPointOnGridInfo, GetPointOnGridInfoArguments } from '../../util/touch'
-import { getLetterScore, LetterScores,  } from '../../game'
-import { Rules } from '../../game/rules'
-import { ScoreType } from '../../game/score'
-import { Guess, GuessAction, GuessActionType, GuessDispatch } from '../../game/guess'
-import { logger } from '../../util/logger'
+import { useConfirmationEffect } from './hooks'
+
+import { getPointOnGridInfo, GetPointOnGridInfoArguments } from '../../../util/touch'
+import { getLetterScore, LetterScores,  } from '../../../game'
+import { Rules } from '../../../game/rules'
+import { ScoreType } from '../../../game/score'
+import { Guess, GuessAction, GuessActionType, GuessDispatch } from '../../../game/guess'
+import { logger } from '../../../util/logger'
+import { makeClasses } from '../../../util/classes'
 
 type LetterProps = {
   row: number,
@@ -22,26 +25,28 @@ const Letter: React.FC<LetterProps> = ({
   letter,
   visited,
 }) => {
-  const dispatch = useContext(GuessDispatch)
+  const feedbackClasses = useConfirmationEffect(visited)
+
+  const guessDispatch = useContext(GuessDispatch)
 
   const { score: scoreType } = useContext(Rules)
 
   const letterScores = useContext(LetterScores)
 
-  const classes = ['spacer']
+  const classes = makeClasses('spacer', { condition: visited, name: 'visited' }, feedbackClasses)
 
-  if (visited) classes.push('visited')
-  const dispatchMoveEvent = () => { dispatch({ type: GuessAction.EnterLetter, info: { row, column } }); logger.debug(`${row}-${column} hover`) }
+  const dispatchMoveEvent = () => { guessDispatch({ type: GuessAction.EnterLetter, info: { row, column } }); logger.debug(`${row}-${column} hover`) }
 
   const showScore = scoreType === ScoreType.Letters || undefined
 
   return <div
-    className={classes.join(' ')}
+    className={classes}
     key={`spacer-${row}-${column}`}
   >
     <div
       className="activator"
       onMouseOver={dispatchMoveEvent}
+      onTouchStart={e => e.preventDefault()}
     >
       <div className="letter">{letter.toUpperCase()}</div>
     </div>
