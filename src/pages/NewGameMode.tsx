@@ -23,7 +23,7 @@ import TimeAttack from '../components/new-game-mode/TimeAttack'
 const validTimeLimit = (time: number) => time > 0
 const validName = (name: string) => /([\w\s\d_-]+)/.test(name)
 const boardSizes = [4, 5, 6]
-const scoreTypes = [ScoreType.Words, ScoreType.Letters]
+const scoreTypes = [ScoreType.Length, ScoreType.Letters]
 const wordLengths = [3, 4, 5, 6]
 const timeAttackMultipliers = [0, 1, 2, 3, 4, 5]
 

@@ -11,7 +11,7 @@ const {
   optionClass
 } = getClass
 
-const isScoreType = (type: any): type is ScoreType => [ScoreType.Letters, ScoreType.Words].includes(type)
+const isScoreType = (type: any): type is ScoreType => [ScoreType.Letters, ScoreType.Length].includes(type)
 
 const ScoringType = ({ handleScoreUpdate, scoreTypes }: { handleScoreUpdate: (type: ScoreType) => void, scoreTypes: ScoreType[] }): JSX.Element => {
   const [scoreType, setScoreType] = useState<ScoreType>('' as any)
@@ -28,7 +28,7 @@ const ScoringType = ({ handleScoreUpdate, scoreTypes }: { handleScoreUpdate: (ty
       {scoreTypes.map(type => {
         const title = {
           [ScoreType.Letters]: 'Letter Points',
-          [ScoreType.Words]: 'Word Length'
+          [ScoreType.Length]: 'Word Length'
         }[type]
 
         return <div className={optionClass('score-type')}>

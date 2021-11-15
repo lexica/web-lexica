@@ -9,7 +9,7 @@ const defaults = {
   currentGuess: '',
 }
 
-const ComponentBulder: React.FC<{
+const ComponentBuilder: React.FC<{
   foundWords: string[],
   guesses: string[],
   currentGuess: string,
@@ -35,7 +35,7 @@ const ComponentBulder: React.FC<{
   </Providers>
 }
 
-const componentMeta: ComponentMeta<typeof ComponentBulder> = {
+const componentMeta: ComponentMeta<typeof ComponentBuilder> = {
   title: 'Most Recent Guess',
   argTypes: {
     GuessContext: {
@@ -55,7 +55,7 @@ const componentMeta: ComponentMeta<typeof ComponentBulder> = {
 
 export default componentMeta
 
-export const Template: ComponentStory<typeof ComponentBulder> = args => <ComponentBulder {...args}/>
+export const Template: ComponentStory<typeof ComponentBuilder> = args => <ComponentBuilder {...args}/>
 
 export const CorrectFirstGuess = Template.bind({})
 CorrectFirstGuess.args = {

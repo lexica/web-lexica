@@ -20,10 +20,10 @@ const applySize = (size: number, svg: string) => {
 }
 
 const applyColor = ({ foreground, background }: Colors, svg: string) => {
-  const forgroundRx = /fill="black"/
+  const foregroundRx = /fill="black"/
   const backgroundRx = /fill="white"/
 
-  return svg.replace(forgroundRx, `fill="${foreground}"`).replace(backgroundRx, `fill="${background}"`)
+  return svg.replace(foregroundRx, `fill="${foreground}"`).replace(backgroundRx, `fill="${background}"`)
 }
 
 const applyProps = ({ size, colors }: { size?: number, colors?: Colors}, svg: string) => {

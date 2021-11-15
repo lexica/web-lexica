@@ -23,7 +23,7 @@ export const useTimeAttack = (rules: Ruleset, timer: TimerContext, score: ScoreC
 
 
     foundWordCountRef.current += 1
-    const timeToAdd = normalize({ seconds: scoreWord(lastWordFound, ScoreType.Words, {}) * timeAttackMultiplier })
+    const timeToAdd = normalize({ seconds: scoreWord(lastWordFound, ScoreType.Length, {}) * timeAttackMultiplier })
 
     timer.addTime(timeToAdd)
   }, [rules, score, timer, foundWordCountRef])

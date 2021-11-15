@@ -18,7 +18,7 @@ const Guess: React.FC<GuessProps> = ({ guess, isFirstGuess, isInDictionary, inde
 
   const className = correct
     ? firstAndCorrect
-      ? 'correct-gues'
+      ? 'correct-guess'
       : 'repeat-guess'
     : 'incorrect-guess'
 
