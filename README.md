@@ -2,17 +2,26 @@
 
 ## A web version of Lexica
 
+### New game mode: Time Attack
+
+Race against the clock, gaining more time with each word found! [Give it a try](https://lexica.github.io/web-lexica/multiplayer?b=cix4LGcsZSx0LHQscCxzLG4saSxvLHosbCxuLHIsYSxvLGUsaSx1LGEsdyxuLHYscw&l=en_US&t=120&s=w&m=4&mv=20017&v=20017&ta=3).
+
+Note, this game mode is not currently compatible with [Lexica](https://github.com/lexica/lexica), but this could change in the future.
+
 ### [Try it out!](https://lexica.github.io/web-lexica)
 
 The goal of this project is to fully replicate everything Lexica can do.
 
 There are still a lot of rough edges with the project, but, all in all, it is in a playable state for both desktop and mobile users.
 
-Currently, this is what the web version of Lexica can do:
+While it is still in beta, `web-lexica` is compatible with the core features of Lexica: game modes, languages, and game-play
 
-1. Play singleplayer games in most, maybe all, Lexica supported languages
-1. Play, and share multiplayer games in most, maybe all, Lexica supported languages
-1. Create and play custom game modes
+Here are some things that `web-lexica` adds to Lexica:
+
+1. Visual feedback: When guessing, the letters will flash to show if the guess is correct, incorrect, or a repeat guess
+1. Time Attack game mode
+1. Visible game details while in-game. Never forget the minimum word length again
+1. Cross-platform compatibility. Anyone with a modern browser and a web connection can join in the fun.
 
 Here are a list of its noteworthy shortcomings:
 
@@ -29,7 +38,7 @@ Less important, but still missing, items are:
 
 The app currently uses the excellent [`Solarized`](https://github.com/altercation/solarized) color scheme, the licence to which can be found [here](https://raw.githubusercontent.com/altercation/solarized/master/LICENSE)
 
-Some changes to the layout have been made depending on the device being used. If the game is in portrait, it will display very similarly to what the lexica app will display:
+Some changes to the layout have been made depending on the device being used. If the game is in portrait, it's display is very reminicient of Lexica's layout:
 
 ![Portrait Image](/portrait.png)
 
@@ -51,9 +60,9 @@ Please report any issues or suggest features on the [issue tracker](https://gith
 
 ## Development
 
-You will need [`NodeJS`](https://nodejs.org/) in order to run and compile this project
+You will need to install [`NodeJS`](https://nodejs.org/) as well as [`YarnJS`](https://classic.yarnpkg.com/en/docs/install) in order to run and compile this project
 
-This project uses `create-react-app` and can be spun up by running `yarn start` for development.
+This project uses `create-react-app` and, after running `yarn` at the project's root folder, can be spun up by running `yarn start` for development.
 
 For production-ready builds, `yarn build` can be run.
 
