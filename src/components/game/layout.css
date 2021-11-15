@@ -105,6 +105,18 @@
 }
 
 .game-vertical-container>.score-holder {
+  margin-top: 1vh;
+  margin-bottom: 1vh;
+}
+
+.game-vertical-container>.most-recent-guess-holder {
+  min-height: var(--font-size);
+  height: var(--font-size);
+  line-height: var(--font-size);
+  margin-bottom: 1vh;
+}
+
+.game-layout-game-mode-details-holder {
   margin-top: auto;
   margin-bottom: 1vh;
 }

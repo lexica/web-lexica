@@ -1,3 +1,4 @@
+import GameModeDetails from '../GameModeDetails'
 import './layout.css'
 
 type VerticalContainerProps = {
@@ -22,6 +23,7 @@ export const HorizontalContainer: React.FC<HorizontalContainerProps> = ({
     <div className="left-pane">
       <div className="board-holder">{Board}</div>
       <div className="most-recent-guess-holder">{MostRecentGuess}</div>
+      <div className="game-layout-game-mode-details-holder"><GameModeDetails /></div>
     </div>
     <div className="right-pane">
       <div className="score-holder">{Score}</div>
@@ -44,9 +46,10 @@ export const VerticalContainer: React.FC<VerticalContainerProps> = ({
   Score
 }) => {
   return <div className="game-vertical-container">
-    <div className="board-holder">{Board}</div>
-    <div className="most-recent-guess-holder">{MostRecentGuess}</div>
-    <div className="guesses-holder">{Guesses}</div>
     <div className="score-holder">{Score}</div>
+    <div className="most-recent-guess-holder">{MostRecentGuess}</div>
+    <div className="board-holder">{Board}</div>
+    <div className="guesses-holder">{Guesses}</div>
+    <div className="game-layout-game-mode-details-holder"><GameModeDetails /></div>
   </div>
 }
