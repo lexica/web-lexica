@@ -1,17 +1,20 @@
-import { useContext } from 'react'
+import { useContext, useEffect, useMemo, useState } from 'react'
 
 import { LetterScores, scoreWord } from '../../game'
 import { Score as ScoreContext} from '../../game/score'
 import { Rules } from '../../game/rules'
 import './Score.css'
-import { Timer } from '../../game/timer'
-import { useInterval } from '../../util/hooks'
+import { secondsBetweenDates, Timer, TimerContext } from '../../game/timer'
 
 const getTime = (timeInSeconds: number) => {
   const seconds = timeInSeconds % 60
   const minutes = Math.floor(timeInSeconds / 60)
   const getFormatted = (num: number) => (num < 0 ? 0 : num).toString().padStart(2, '0')
   return `${getFormatted(minutes)}:${getFormatted(seconds)}`
+}
+
+const getRemainingTime = (remainingTime: number, { startTime }: TimerContext['state']) => {
+  return remainingTime - secondsBetweenDates(startTime, new Date())
 }
 
 const Score: React.FC<{
@@ -24,14 +27,28 @@ const Score: React.FC<{
   const { score: scoreType } = useContext(Rules)
   const letterScores = useContext(LetterScores)
 
+  const { state } = useContext(Timer)
+
+  const [remainingTime, setRemainingTime] = useState(getRemainingTime(state.remainingTime, state))
+
   const { foundWords, remainingWords } = useContext(ScoreContext)
 
-  const { getRemainingTime } = useContext(Timer)
 
-  const [remainingTime] = useInterval(getRemainingTime, 400)
+  useEffect(() => {
+    const { remainingTime } = state
+    const interval = setInterval((() => setRemainingTime(getRemainingTime(remainingTime, state))), 400)
 
-  const currentScore = foundWords.reduce((score: number, word: string) => scoreWord(word, scoreType, letterScores) + score, 0)
-  const totalScore = remainingWords.reduce((score: number, word: string) => scoreWord(word, scoreType, letterScores) + score, 0) + currentScore
+    return () => interval && clearInterval(interval)
+  }, [state, setRemainingTime, state.remainingTime])
+
+  const currentScore = useMemo(() => foundWords.reduce(
+    (score: number, word: string) => scoreWord(word, scoreType, letterScores) + score,
+    0
+  ), [scoreType, letterScores, foundWords])
+  const totalScore = useMemo(() => remainingWords.reduce(
+    (score: number, word: string) => scoreWord(word, scoreType, letterScores) + score,
+    0
+  ), [scoreType, letterScores, remainingWords]) + currentScore
   const foundCount = foundWords.length
   const totalCount = remainingWords.length + foundCount
   return (

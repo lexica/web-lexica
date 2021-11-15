@@ -15,6 +15,7 @@ import GameModeDetails from '../components/GameModeDetails'
 import { Guess, GuessDispatch, useGuesses } from '../game/guess'
 import { Score, useScore } from '../game/score'
 import { LetterScores } from '../game'
+import { useTimeAttack } from '../game/time-attack'
 
 export type GameScreenProps = {
   isMultiplayer?: boolean,
@@ -110,6 +111,8 @@ const Game = ({
 
   useAutoStart(autoStart, loading && !error, handleStart)
 
+  useTimeAttack(rules, timer, score)
+
   const pageTitle = `Web Lexica ${showQrCode ? 'New ' : ''}${isMultiplayer ? 'Multiplayer Game' : ''}`
 
   const toRender = getNextScreenLogic({
@@ -188,6 +191,15 @@ const Multiplayer = (): JSX.Element => {
 
 const GameScreen = ({ isMultiplayer: m, isNewGame: n }: GameScreenProps): JSX.Element => {
   const [isMultiplayer, isNewGame] = [m === true, n === true]
+
+
+  const refreshBoard = useContext(BoardRefresh)
+  useEffect(() => {
+    logger.debug('running GameScreen useEffect...')
+    return refreshBoard
+  }, [refreshBoard])
+
+
   if (isNewGame) return <NewGame isMultiplayer={isMultiplayer} />
   return <Multiplayer/>
 }

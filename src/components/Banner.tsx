@@ -1,4 +1,4 @@
-import { createContext, useMemo, useState, useEffect } from 'react'
+import { createContext, useMemo, useState, useEffect, useContext } from 'react'
 import { ReactComponent as ArrowBack } from '@material-design-icons/svg/round/arrow_back.svg'
 
 import Svg from './Svg'
@@ -43,6 +43,15 @@ export const useBannerContext = (): { renderState: RenderState, context: RenderI
   const context = useMemo(() => ({ cleanUp, setElement }), [cleanUp, setElement])
 
   return useMemo(() => ({ renderState, context }), [renderState, context])
+}
+
+export const useRenderInBanner = (renderable: Renderable) => {
+  const { setElement, cleanUp } = useContext(RenderInBanner)
+
+  useEffect(() => {
+    setElement(renderable)
+    return cleanUp
+  }, [setElement, cleanUp, renderable])
 }
 
 export const RenderInBanner = createContext<RenderInBannerContext>({

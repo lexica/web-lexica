@@ -1,4 +1,3 @@
-import { useContext, useEffect } from 'react'
 import { ReactComponent as Add } from '@material-design-icons/svg/round/add.svg'
 
 import { Ruleset, Rulesets, setCurrentRuleset, useRulesets, useRulesFromStorage } from '../game/rules'
@@ -8,9 +7,10 @@ import constants, { useConstants } from "../style/constants"
 import { makeClasses } from '../util/classes'
 
 import './GameModes.css'
-import { Renderable, RenderInBanner } from '../components/Banner'
-import { Link } from 'react-router-dom'
+import { Renderable, useRenderInBanner } from '../components/Banner'
+import { Link, useHistory } from 'react-router-dom'
 import { logger } from '../util/logger'
+import { useCallback } from 'react'
 
 type ModeProps = {
   rulesetTuple: [string, Ruleset]
@@ -114,21 +114,24 @@ const GameModes = (): JSX.Element => {
   const rulesets = useRulesets()
   const selectedRulesetId = useRulesFromStorage()[1]
 
-  const renderInBanner = useContext(RenderInBanner)
+  useRenderInBanner(AddGameMode)
 
-  useEffect(() => {
-    const { setElement, cleanUp } = renderInBanner
+  const history = useHistory()
 
-    setElement(AddGameMode)
+  const handleOnClick = useCallback((id: string) => {
+    if (id === selectedRulesetId) {
+      history.push('/')
+      return
+    }
 
-    return cleanUp
-  }, [renderInBanner])
+    setCurrentRuleset(id)
+  }, [selectedRulesetId, history])
 
   return <div className="Page game-modes">
     <ModesList
       rulesets={rulesets}
       selectedRulesetId={selectedRulesetId}
-      handleOnClick={setCurrentRuleset}
+      handleOnClick={handleOnClick}
     />
   </div>
 }
