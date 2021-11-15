@@ -5,10 +5,28 @@
 }
 
 .section {
+  position: relative;
   display: flex;
   flex-direction: column;
 }
 
+.score-time-addition {
+  position: absolute;
+  left: 101%;
+  bottom: 0;
+  animation: fade-up-and-out 1s;
+}
+
+@keyframes fade-up-and-out {
+  from {
+    margin-bottom: 0;
+    opacity: 1;
+  }
+  to {
+    margin-bottom: var(--font-size);
+    opacity: 0.2;
+  }
+}
 .section:first-child {
   margin-right: auto;
   margin-left: 5px;
