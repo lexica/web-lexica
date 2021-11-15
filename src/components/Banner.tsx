@@ -73,14 +73,8 @@ const Banner = ({ toRender: RenderProp }: { toRender: Renderable }): JSX.Element
 
   const { width } = useScreenSize()
 
-  const { fontSize } = useConstants()
-  const maxHeight = useCssExp`${fontSize} + 0.5vh`
-
-  logger.debug({
-    fontSize,
-    point5vh: useCssExp`0.5vh`,
-    maxHeight
-  })
+  const { fontSizeTitle } = useConstants()
+  const maxHeight = fontSizeTitle
 
   const maxWidth = width - leftBound - useCssExp`0.5vh`
 
