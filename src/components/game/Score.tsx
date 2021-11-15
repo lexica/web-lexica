@@ -1,4 +1,4 @@
-import { useContext, useEffect, useMemo, useState } from 'react'
+import { useContext, useEffect, useMemo, useRef, useState } from 'react'
 
 import { LetterScores, scoreWord } from '../../game'
 import { Score as ScoreContext} from '../../game/score'
@@ -28,8 +28,13 @@ const Score: React.FC<{
   const letterScores = useContext(LetterScores)
 
   const { state } = useContext(Timer)
+  const rules = useContext(Rules)
+
+  const remainingTimeRef = useRef(state.remainingTime)
 
   const [remainingTime, setRemainingTime] = useState(getRemainingTime(state.remainingTime, state))
+  const [showTimeAddition, setShowTimeAddition] = useState(false)
+  const [timeAddition, setTimeAddition] = useState(0)
 
   const { foundWords, remainingWords } = useContext(ScoreContext)
 
@@ -40,6 +45,18 @@ const Score: React.FC<{
 
     return () => interval && clearInterval(interval)
   }, [state, setRemainingTime, state.remainingTime])
+
+  useEffect(() => {
+    if (!rules.timeAttack || state.remainingTime === remainingTimeRef.current)
+      return
+
+    const timeChange = state.remainingTime - remainingTimeRef.current
+    remainingTimeRef.current = state.remainingTime
+    setTimeAddition(timeChange)
+
+    setShowTimeAddition(true)
+    setTimeout(() => setShowTimeAddition(false), 1000)
+  }, [rules, state.remainingTime, remainingTimeRef, setTimeAddition])
 
   const currentScore = useMemo(() => foundWords.reduce(
     (score: number, word: string) => scoreWord(word, scoreType, letterScores) + score,
@@ -59,6 +76,7 @@ const Score: React.FC<{
       >
         <div className="title">Time</div>
         <div className="info">{getTime(remainingTime || 0)}</div>
+        {showTimeAddition ? <div className="score-time-addition">+{timeAddition}</div> : ''}
       </div>
       <div className="section">
         <div className="title">Words</div>
