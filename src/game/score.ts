@@ -14,7 +14,7 @@ export enum ScoreAction {
 
 export enum ScoreType {
   Letters = 'l',
-  Words = 'w'
+  Length = 'w'
 }
 
 enum InternalScoreAction {
@@ -81,7 +81,7 @@ export const useScore = (guessState: GuessState, boardDictionaryState: { boardDi
   }, [lastGuess, dispatch])
 
   useEffect(() => {
-    logger.debug('running second useScore use effect... update dictonary')
+    logger.debug('running second useScore use effect... update dictionary')
     dispatch({ type: InternalScoreAction.UpdateDictionary, info: boardDictionaryState.boardDictionary })
   }, [boardDictionaryState, dispatch])
 

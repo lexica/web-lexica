@@ -30,7 +30,7 @@ export const scoreWord = (word: string, scoreType: ScoreType, letterScores: Meta
   switch (scoreType) {
     case ScoreType.Letters:
       return scoreWordByLetterScores(word, letterScores)
-    case ScoreType.Words:
+    case ScoreType.Length:
       return scoreWordByLength(word)
     default:
       return 0

@@ -11,14 +11,14 @@ export const defaultRulesets: { [P in DefaultRulesets]: Ruleset } = {
     name: 'Sprint',
     time: { minutes: 3 } as Duration,
     boardWidth: 4,
-    score: ScoreType.Words,
+    score: ScoreType.Length,
     minimumWordLength: 3
   },
   [DefaultRulesets.Marathon]: {
     name: 'Marathon',
     time: { minutes: 30 } as Duration,
     boardWidth: 6,
-    score: ScoreType.Words,
+    score: ScoreType.Length,
     minimumWordLength: 5
   },
   [DefaultRulesets.LetterPoints]: {
@@ -32,7 +32,7 @@ export const defaultRulesets: { [P in DefaultRulesets]: Ruleset } = {
     name: 'Time Attack',
     time: { minutes: 1 } as Duration,
     boardWidth: 6,
-    score: ScoreType.Words,
+    score: ScoreType.Length,
     minimumWordLength: 3,
     timeAttack: 2
   }

@@ -199,6 +199,8 @@
 }
 
 .new-game-mode-time-attack-example {
+  font-size: var(--font-size-subscript);
   display: flex;
   text-align: left;
+  align-self: center;
 }

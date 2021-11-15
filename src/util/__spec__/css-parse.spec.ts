@@ -3,7 +3,6 @@ import { cssExp, __test } from '../css-parse'
 const {
   makeExpression,
   evaluateStatement,
-  getHeight
 } = __test
 
 enum Names {
