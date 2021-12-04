@@ -10,6 +10,7 @@ import Guesses, { GuessOrientation } from './game/Guesses'
 import MostRecentGuess from './game/MostRecentGuess'
 import ScoredWordList from './game/ScoredWordList'
 import { HorizontalContainer, VerticalContainer } from './game/layouts'
+import { useUpdateHighScore } from '../game/high-scores'
 
 const Game: React.FC = () => {
 
@@ -18,6 +19,8 @@ const Game: React.FC = () => {
   const orientation = useOrientation()
 
   const useVerticalLayout = orientation === ScreenOrientation.Portrait
+
+  useUpdateHighScore()
 
   const guessOrientation = useVerticalLayout ? GuessOrientation.Horizontal : GuessOrientation.Vertical
 
