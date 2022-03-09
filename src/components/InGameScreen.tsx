@@ -11,6 +11,7 @@ import MostRecentGuess from './game/MostRecentGuess'
 import ScoredWordList from './game/ScoredWordList'
 import { HorizontalContainer, VerticalContainer } from './game/layouts'
 import { useUpdateHighScore } from '../game/high-scores'
+import { ConfirmationEffect, useConfirmationEffect } from './game/Board/hooks'
 
 const Game: React.FC = () => {
 
@@ -47,7 +48,11 @@ const Game: React.FC = () => {
   />
 
   const layout = useVerticalLayout ? verticalLayout : horizontalLayout;
-  return <div className="game-container" style={{ height: '100%' }}>{layout}</div>
+  return <div className="game-container" style={{ height: '100%' }}>
+    <ConfirmationEffect.Provider value={useConfirmationEffect}>
+      {layout}
+    </ConfirmationEffect.Provider>
+  </div>
 }
 
 export default Game

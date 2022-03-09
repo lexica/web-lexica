@@ -1,5 +1,5 @@
 import * as R from 'ramda'
-import { createContext, Reducer, useEffect, useMemo, useReducer } from 'react'
+import { createContext, Reducer, useCallback, useEffect, useMemo, useReducer } from 'react'
 import { logger } from '../util/logger'
 import { GuessState } from './guess'
 
@@ -65,27 +65,32 @@ const scoreReducer = <A extends ScoreAction | InternalScoreAction>(state: ScoreS
   }
 }
 
-export const useScore = (guessState: GuessState, boardDictionaryState: { boardDictionary: string[] }) => {
+export const useScore = (boardDictionaryState: { boardDictionary: string[] }): [ScoreState, (guess: string) => void] => {
 
   const [state, dispatch] = useReducer<Reducer<ScoreState, InternalScoreReducerAction<ScoreAction | InternalScoreAction>>>(scoreReducer, {
     foundWords: [],
     remainingWords: []
   })
 
-  const lastGuess = useMemo(() => guessState.guesses[guessState.guesses.length - 1], [guessState])
+  const dispatchScoreUpdate = useCallback((guess: string) => {
+    dispatch({ type: ScoreAction.AddGuess, info: guess })
+  }, [dispatch])
 
-  useEffect(() => {
-    logger.debug('running score useEffect, dispatch score update...')
-    logger.debug(`Last Guess: ${lastGuess}`)
-    dispatch({ type: ScoreAction.AddGuess, info: lastGuess })
-  }, [lastGuess, dispatch])
+
+  // const lastGuess = useMemo(() => guessState.guesses[guessState.guesses.length - 1], [guessState])
+
+  // useEffect(() => {
+  //   logger.debug('running score useEffect, dispatch score update...')
+  //   logger.debug(`Last Guess: ${lastGuess}`)
+  //   dispatch({ type: ScoreAction.AddGuess, info: lastGuess })
+  // }, [lastGuess, dispatch])
 
   useEffect(() => {
     logger.debug('running second useScore use effect... update dictionary')
     dispatch({ type: InternalScoreAction.UpdateDictionary, info: boardDictionaryState.boardDictionary })
   }, [boardDictionaryState, dispatch])
 
-  return state
+  return [state, dispatchScoreUpdate]
 }
 
 export type ScoreContext = ScoreState

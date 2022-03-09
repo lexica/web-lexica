@@ -1,4 +1,4 @@
-import { useContext, useEffect, useMemo, useReducer, useState } from 'react'
+import { createContext, useContext, useEffect, useMemo, useReducer, useState } from 'react'
 
 import { Score } from '../../../game/score'
 import { Guess } from '../../../game/guess'
@@ -19,6 +19,10 @@ const getConfirmationType = (lastGuess: string, { foundWords, remainingWords }: 
 
   if (foundWords.includes(lastGuess)) return ConfirmationType.Stale
   return ConfirmationType.Incorrect
+}
+
+export const noConfirmationEffect = (_: boolean) => {
+  return ''
 }
 
 export const useConfirmationEffect = (visited: boolean) => {
@@ -57,4 +61,6 @@ export const useConfirmationEffect = (visited: boolean) => {
 
   return feedbackClasses
 }
+
+export const ConfirmationEffect = createContext<(visited: boolean) => string>(() => '')
 
