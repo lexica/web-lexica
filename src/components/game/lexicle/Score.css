@@ -10,6 +10,7 @@
 .lexicle-score-word-container {
   display: flex;
   flex-direction: row;
+  user-select: none;
 }
 
 .lexicle-score-letter-container.in-word {
@@ -21,7 +22,12 @@
 }
 
 .lexicle-score-letter-container.not-in-word {
-  background-color: var(--color-red);
+  background-color: var(--color-background-dark-alt);
+  color: var(--color-background-dark)
+}
+
+.lexicle-score-letter-container.empty {
+  background-color: var(--color-background-dark-alt);
 }
 
 .lexicle-score-letter-container {

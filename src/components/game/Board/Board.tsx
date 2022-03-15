@@ -26,7 +26,7 @@ const Letter: React.FC<LetterProps> = ({
   visited,
 }) => {
   const useConfirmationEffect = useContext(ConfirmationEffect)
-  const feedbackClasses = useConfirmationEffect(visited)
+  const feedbackClasses = useConfirmationEffect(visited, letter)
 
   const guessDispatch = useContext(GuessDispatch)
 
