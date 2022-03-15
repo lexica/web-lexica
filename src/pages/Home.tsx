@@ -15,6 +15,7 @@ import { useTranslations } from '../translations'
 import { makeClasses } from '../util/classes'
 import { useHighScore } from '../game/high-scores'
 import { useConstants } from '../style/constants'
+import { useSavedGame, useSavedGameList } from '../game/save-game'
 
 const GameSettings = (): JSX.Element => {
   const classes = makeClasses('home-game-option', 'home-button-defaults')
@@ -88,6 +89,14 @@ const HighScore = (): JSX.Element => {
   </div>
 }
 
+const ResumeGameButton = (): JSX.Element => {
+  const savedGames = useSavedGameList()
+
+  if (savedGames.length === 0) return <></>
+
+  return <Link
+}
+
 const Home = ({ setGameType }: { setGameType: (type: GameType) => void }) => {
 
   const gameType = useContext(CurrentGameType)
@@ -100,6 +109,7 @@ const Home = ({ setGameType }: { setGameType: (type: GameType) => void }) => {
     <div className="home-buttons-container">
       <PlayGameButtons />
       <GameSettings />
+      <ResumeGameButton/>
     </div>
   </div>
 }

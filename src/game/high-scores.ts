@@ -64,7 +64,7 @@ const useMemoizedComputedScore = (score: ScoreContext, rules: RulesContext, lett
 }
 
 export const useHighScore = (id: string) => {
-  const highScores = useStorage(LocalStorage.HighScores, {} as HighScores)
+  const highScores = useStorage(LocalStorage.HighScores, useMemo(() => ({}), []) as HighScores)
   if (highScores[id] !== undefined) return highScores[id]
 
   return 0

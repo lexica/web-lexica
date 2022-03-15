@@ -144,13 +144,13 @@ export const guessReducer = <A extends GuessAction>(state: GuessState, action: G
 
 type GuessReducer = Reducer<GuessState, GuessActionType<GuessAction>>
 
-export const useGuesses = (board: string[]) => {
+export const useGuesses = (board: string[], preexistingGuesses: string[] = []) => {
   const [stateBoard] = useState(getBoard(board))
 
   const reducer = useReducer<GuessReducer>(guessReducer, {
     board: stateBoard,
     currentGuess: '',
-    guesses: [],
+    guesses: preexistingGuesses,
     currentLetter: { row: 0, column: 0 },
     isGuessing: false
   })

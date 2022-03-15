@@ -1,10 +1,10 @@
-import { useCallback, useContext, useEffect, useState } from 'react'
+import { useCallback, useContext, useEffect, useState, useMemo } from 'react'
 import { useHistory, useLocation } from 'react-router'
 import ResultsScreen from '../components/ResultsScreen'
 import InGameScreen from '../components/InGameScreen'
 import { Board, BoardRefresh, useBoardFromUrl } from '../game/board/hooks'
 import { Language, useLanguage } from '../game/language'
-import { Rules, useRulesFromQueryString } from '../game/rules'
+import { Rules, useDefaultRules, useRulesFromQueryString } from '../game/rules'
 import { getSearchString, useGameUrlParameters } from '../game/url'
 import { Dictionary, useBoardDictionary } from '../game/dictionary'
 import { logger } from '../util/logger'
@@ -16,10 +16,13 @@ import { Guess, GuessDispatch, useGuesses } from '../game/guess'
 import { Score, useScore } from '../game/score'
 import { LetterScores } from '../game'
 import { useTimeAttack } from '../game/time-attack'
+import { storage } from '../util/storage'
+import { getSavedGamesWithUrl, SavedGame } from '../game/save-game'
 
 export type GameScreenProps = {
   isMultiplayer?: boolean,
   isNewGame?: boolean
+  isResumedGame?: boolean
 }
 
 const LoadingScreen = (): JSX.Element => {
@@ -189,16 +192,83 @@ const Multiplayer = (): JSX.Element => {
   </Board.Provider>
 }
 
+const ResumedGame = ({ gameId }: { gameId: string }): JSX.Element => {
+  const [finished, updateFinished] = useState(false)
+  const defaultRules = useDefaultRules()
+  const savedGame = useMemo(() => storage.getWithDefault<SavedGame>({
+    key: gameId,
+    defaultValue: {
+      board: [],
+      foundWords: [],
+      gameUrl: '',
+      guesses: [],
+      languageMetadata: { letterScores: {} } as any,
+      remainingTime: { seconds: 0 },
+      remainingWords: [],
+      rules: defaultRules
+    }
+  }), [defaultRules, gameId])
+  const [guessState, guessDispatch] = useGuesses(savedGame.board, savedGame.guesses)
+
+  const handleFinish = useCallback(() => {
+    logger.debug('handling finish...')
+    updateFinished(true)
+  }, [updateFinished])
+
+  const boardDictionary = useMemo(() => [...savedGame.foundWords, ...savedGame.remainingWords], [savedGame])
+  const dictionaryState = useMemo(() => ({ boardDictionary, loading: false }), [boardDictionary])
+  const score = useScore(guessState, dictionaryState, savedGame)
+  const timer = useTimer(toSeconds(savedGame.remainingTime), handleFinish)
+
+  useAutoStart(true, true, timer.startTime)
+
+  const toRender = getNextScreenLogic({
+    startScreenProps: {} as any,
+    autoStart: true,
+    started: true,
+    finished
+  })
+
+  return <Board.Provider value={savedGame.board}>
+    <Rules.Provider value={savedGame.rules}>
+      <Dictionary.Provider value={dictionaryState}>
+        <LetterScores.Provider value={savedGame.languageMetadata.letterScores}>
+          <Guess.Provider value={guessState}>
+            <GuessDispatch.Provider value={guessDispatch}>
+              <Score.Provider value={score}>
+                <Timer.Provider value={timer}>
+                  {toRender}
+                </Timer.Provider>
+              </Score.Provider>
+            </GuessDispatch.Provider>
+          </Guess.Provider>
+        </LetterScores.Provider>
+      </Dictionary.Provider>
+    </Rules.Provider>
+  </Board.Provider>
+}
+
+const getIdOfGameWithSameUrl = (location: ReturnType<typeof useLocation>) => {
+  const currentUrl = `${location.pathname}${location.search}`
+
+  const [matchingGame] = getSavedGamesWithUrl(currentUrl)
+
+  if (!matchingGame) return undefined
+
+  return matchingGame.gameId
+}
+
 const GameScreen = ({ isMultiplayer: m, isNewGame: n }: GameScreenProps): JSX.Element => {
   const [isMultiplayer, isNewGame] = [m === true, n === true]
-
 
   const refreshBoard = useContext(BoardRefresh)
   useEffect(() => {
     logger.debug('running GameScreen useEffect...')
     return refreshBoard
   }, [refreshBoard])
-
+  const location = useLocation()
+  const gameId = getIdOfGameWithSameUrl(location)
+  if (gameId) return <ResumedGame gameId={gameId} />
 
   if (isNewGame) return <NewGame isMultiplayer={isMultiplayer} />
   return <Multiplayer/>

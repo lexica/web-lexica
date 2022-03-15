@@ -48,6 +48,7 @@ const handleAddGuess = (state: ScoreState, guess: string): ScoreState => {
 }
 
 const handleUpdateDictionary = (state: ScoreState, dictionary: string[]): ScoreState => {
+  if (state.foundWords.length) return state
   return {
     foundWords: [],
     remainingWords: dictionary
@@ -65,11 +66,11 @@ const scoreReducer = <A extends ScoreAction | InternalScoreAction>(state: ScoreS
   }
 }
 
-export const useScore = (guessState: GuessState, boardDictionaryState: { boardDictionary: string[] }) => {
+export const useScore = (guessState: GuessState, boardDictionaryState: { boardDictionary: string[] }, { foundWords, remainingWords }: ScoreState = { foundWords: [], remainingWords: [] }) => {
 
   const [state, dispatch] = useReducer<Reducer<ScoreState, InternalScoreReducerAction<ScoreAction | InternalScoreAction>>>(scoreReducer, {
-    foundWords: [],
-    remainingWords: []
+    foundWords,
+    remainingWords
   })
 
   const lastGuess = useMemo(() => guessState.guesses[guessState.guesses.length - 1], [guessState])
