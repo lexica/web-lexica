@@ -1,6 +1,6 @@
 import { useCallback, useContext } from 'react'
 import { Guess } from '../../../game/guess'
-import { LetterCorrectness, Score as ScoreContext, useScore } from '../../../game/lexicle/score'
+import { LetterCorrectness, Score as ScoreContext } from '../../../game/lexicle/score'
 
 import StaticBoard from '../../StaticBoard'
 import Score from './Score'

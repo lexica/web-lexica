@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { ReactComponent as EmojiEvents } from '@material-design-icons/svg/round/emoji_events.svg'
 import { ReactComponent as PlayCircle } from '@material-design-icons/svg/round/play_circle.svg'
 import { ReactComponent as GroupAdd } from '@material-design-icons/svg/round/group_add.svg'
+import { ReactComponent as Grid } from '@material-design-icons/svg/round/grid_on.svg'
 import { ReactComponent as Language } from '@material-design-icons/svg/round/language.svg'
 
 import Svg from '../components/Svg'
@@ -75,6 +76,17 @@ const PlayGameButtons = (): JSX.Element => {
         width: fontSizeTitle,
       }}/>
       Multiplayer
+    </Link>
+    <Link
+      to='/lexicle'
+      className={classes}
+    >
+      <Svg.Customizable svg={Grid} props={{
+        title: 'Lexicle',
+        height: fontSizeTitle,
+        width: fontSizeTitle
+      }}/>
+      Try Lexicle
     </Link>
   </div>
 }

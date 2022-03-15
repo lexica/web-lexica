@@ -1,5 +1,5 @@
 import * as R from 'ramda'
-import { useCallback, useContext, useEffect, useMemo, useReducer, useState } from 'react'
+import { useContext, useEffect, useMemo, useReducer, useState } from 'react'
 import { logger } from '../../util/logger'
 import { Dictionary } from '../dictionary'
 import { Guess } from '../guess'

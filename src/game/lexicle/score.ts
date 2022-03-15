@@ -1,8 +1,4 @@
 import { createContext, useCallback, useEffect, useMemo, useState } from 'react'
-import { splitWordIntoLetters } from '../words'
-
-// Determines win condition...?
-// Determines the score of a given guess (Letters in correct spot, letters in word but incorrect spot)
 
 export enum LetterCorrectness {
   Perfect = 'perfect',
@@ -92,10 +88,10 @@ const determineGuessScore = (desiredWord: string, guess: string, letterCounts: L
   }
 }
 
-export const useScore = (desiredWord: string, boardDictionaryState: { boardDictionary: string[] }, letters: string[], saveScoreState: GuessScore[] = []): [ScoreState, (guess: string) => void] => {
+export const useScore = (desiredWord: string, boardDictionaryState: { boardDictionary: string[] }, saveScoreState: GuessScore[] = []): [ScoreState, (guess: string) => void] => {
   const [dictionary, updateDictionary] = useState(boardDictionaryState.boardDictionary)
   const [score, updateScore] = useState(saveScoreState)
-  const letterCounts = useMemo(() => letters && letters.length ? getLetterCounts(desiredWord) : {}, [desiredWord, letters])
+  const letterCounts = useMemo(() => getLetterCounts(desiredWord), [desiredWord])
   const [usedLetters, setUsedLetters] = useState<string[]>([])
 
   useEffect(() => {
@@ -109,6 +105,6 @@ export const useScore = (desiredWord: string, boardDictionaryState: { boardDicti
       return [...previous, ...toAdd]
     })
     updateScore((previousScore) => [...previousScore, determineGuessScore(desiredWord, guess, letterCounts)])
-  }, [dictionary, updateScore, desiredWord, letterCounts, letters, setUsedLetters])
+  }, [dictionary, updateScore, desiredWord, letterCounts, setUsedLetters])
   return useMemo(() => [{ desiredWord, guessScores: score, usedLetters }, dispatchScoreUpdate], [score, desiredWord, usedLetters, dispatchScoreUpdate])
 }

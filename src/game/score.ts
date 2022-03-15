@@ -1,7 +1,6 @@
 import * as R from 'ramda'
-import { createContext, Reducer, useCallback, useEffect, useMemo, useReducer } from 'react'
+import { createContext, Reducer, useCallback, useEffect, useReducer } from 'react'
 import { logger } from '../util/logger'
-import { GuessState } from './guess'
 
 export type ScoreState = {
   foundWords: string[],

@@ -47,9 +47,7 @@ const Lexicle = (): JSX.Element => {
     }
   }, [dictionaryState])
 
-  const letters = useMemo(() => Object.keys(language?.metadata?.letterScores), [language])
-
-  const [score, dispatchScoreUpdate] = useScore(minimizedDictionary.boardDictionary[2] || '', minimizedDictionary, letters)
+  const [score, dispatchScoreUpdate] = useScore(minimizedDictionary.boardDictionary[2] || '', minimizedDictionary)
 
   const [guesses, dispatchGuess] = useGuesses(board)
 
