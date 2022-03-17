@@ -16,6 +16,7 @@ import { useTranslations } from '../translations'
 import { makeClasses } from '../util/classes'
 import { useHighScore } from '../game/high-scores'
 import { useConstants } from '../style/constants'
+import MainTitle from '../components/MainTitle'
 
 const GameSettings = (): JSX.Element => {
   const classes = makeClasses('home-game-option', 'home-button-defaults')
@@ -41,14 +42,6 @@ const GameSettings = (): JSX.Element => {
 
 }
 
-const Title = (): JSX.Element => {
-  return <div className="home-title">
-    <div className="home-title-letters">
-      {'LEXICA'.split('').map(l => <div className="home-title-letter">{l}</div>)}
-    </div>
-    <div className="home-sub-title">online</div>
-  </div>
-}
 
 const PlayGameButtons = (): JSX.Element => {
   const { fontSizeTitle } = useConstants()
@@ -108,7 +101,7 @@ const Home = ({ setGameType }: { setGameType: (type: GameType) => void }) => {
 
   return <div className="Page home">
     <HighScore />
-    <Title />
+    <MainTitle title='lexica' subtitle='online' />
     <div className="home-buttons-container">
       <PlayGameButtons />
       <GameSettings />

@@ -1,4 +1,4 @@
-import { useCallback, useContext } from 'react'
+import { useCallback, useContext, useMemo } from 'react'
 import { Guess } from '../../../game/guess'
 import { LetterCorrectness, Score as ScoreContext } from '../../../game/lexicle/score'
 
@@ -14,16 +14,22 @@ const correctnessMap: { [C in LetterCorrectness]: string } = {
   [LetterCorrectness.NotInWord]: '⬛'
 }
 
-const Share = (): JSX.Element => {
+const Share = ({ wordOfTheDay }: { wordOfTheDay: boolean }): JSX.Element => {
   const score = useContext(ScoreContext)
+  const wordOfTheDayDisplay = useMemo(
+    () => wordOfTheDay
+      ? `Word of the Day ${(new Date()).toLocaleDateString()} `
+      : '',
+    [wordOfTheDay]
+  )
   const onClick = useCallback(() => {
     const scoreBreakdown = score.guessScores
       .map(guess => guess.wordBreakdown.map(
         ({ correctness }) => correctnessMap[correctness]
       ).join(''))
       .join('\n')
-    navigator.clipboard.writeText(`Lexicle ${score.guessScores.length}/6\n\n${scoreBreakdown}`)
-  }, [score])
+    navigator.clipboard.writeText(`Lexicle ${wordOfTheDayDisplay}${score.guessScores.length}/6\n\n${scoreBreakdown}`)
+  }, [score, wordOfTheDayDisplay])
   return <div
     className='lexicle-results-share-button'
     onClick={onClick}
@@ -32,7 +38,7 @@ const Share = (): JSX.Element => {
   </div>
 }
 
-const Results = (): JSX.Element => {
+const Results = ({ wordOfTheDay }: { wordOfTheDay: boolean }): JSX.Element => {
   const orientation = useOrientation()
   const score = useContext(ScoreContext)
   const { board } = useContext(Guess)
@@ -40,7 +46,7 @@ const Results = (): JSX.Element => {
     <div className='lexicle-results-board-container'><StaticBoard board={board}/></div>
     <div className='lexicle-results-landscape-container'>
       <div className='lexicle-results-desired-word'>{score.desiredWord.toLocaleUpperCase()}</div>
-      <Share/>
+      <Share wordOfTheDay={wordOfTheDay}/>
     </div>
     <div className='lexicle-results-score-container'><Score/></div>
   </div>
@@ -51,7 +57,7 @@ const Results = (): JSX.Element => {
       <div className='lexicle-results-score-container'><Score/></div>
       <div className='lexicle-results-score-container'><Score/></div>
     </div>
-    <Share/>
+    <Share wordOfTheDay={wordOfTheDay}/>
   </div>
 
   return orientation === ScreenOrientation.Landscape ? Landscape : Portrait

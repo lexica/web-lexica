@@ -27,6 +27,7 @@ export const Score = createContext<ScoreState>({
 })
 
 const getLetterCounts = (desiredWord: string) => {
+  if (!desiredWord.length) return {}
   return desiredWord
     .split('')
     .reduce(
