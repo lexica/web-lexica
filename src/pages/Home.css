@@ -92,8 +92,12 @@
   line-height: var(--font-size-title);
 }
 
-.home-game-buttons>a:last-child {
+.home-game-buttons>a {
   margin-top: 2vh;
+}
+
+.home-game-buttons>a:first-child {
+  margin-top: 0;
 }
 
 .home-game-options  {

@@ -66,6 +66,9 @@ const Banner = ({ toRender: RenderProp }: { toRender: Renderable }): JSX.Element
   const pageName = getPageName(pathname)
 
   const onClickHandler = useCallback(() => {
+    // kind of a hack, but check to see if the real history object has state, if so, then go back
+    // otherwise, we've navigated here from somewhere else, so don't go back, go to the root of the page
+    // window.history.state ? history.goBack() : history.push('/')
     history.goBack()
   }, [history])
 

@@ -1,0 +1,34 @@
+
+.main-title {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: auto;
+}
+
+.main-title {
+  margin-bottom: 5vh;
+}
+
+.main-title-letters {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.main-title-letter {
+  margin: .5vh;
+  padding: 1vh;
+  background-color: var(--color-accent);
+  color: var(--color-background-dark);
+  width: 4vh;
+  height: 4vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: var(--font-weight-bold);
+  vertical-align: middle;
+  font-size: var(--font-size-title);
+}

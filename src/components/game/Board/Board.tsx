@@ -2,7 +2,7 @@ import React, { useContext, } from 'react'
 import * as R from 'ramda'
 
 import './Board.css'
-import { useConfirmationEffect } from './hooks'
+import { ConfirmationEffect } from './hooks'
 
 import { getPointOnGridInfo, GetPointOnGridInfoArguments } from '../../../util/touch'
 import { getLetterScore, LetterScores,  } from '../../../game'
@@ -25,7 +25,8 @@ const Letter: React.FC<LetterProps> = ({
   letter,
   visited,
 }) => {
-  const feedbackClasses = useConfirmationEffect(visited)
+  const useConfirmationEffect = useContext(ConfirmationEffect)
+  const feedbackClasses = useConfirmationEffect(visited, letter)
 
   const guessDispatch = useContext(GuessDispatch)
 

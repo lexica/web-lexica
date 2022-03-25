@@ -1,4 +1,4 @@
-import { useCallback, useContext, useEffect, useState } from 'react'
+import { useCallback, useContext, useEffect, useMemo, useState } from 'react'
 import { useHistory, useLocation } from 'react-router'
 import ResultsScreen from '../components/ResultsScreen'
 import InGameScreen from '../components/InGameScreen'
@@ -105,7 +105,7 @@ const Game = ({
 
   const { startTime } = timer
 
-  const score = useScore(guess, dictionary)
+  const [score, dispatchScoreUpdate] = useScore(dictionary)
 
   const handleStart = useCallback(() => { updateStarted(true); startTime() }, [updateStarted, startTime])
 
@@ -114,6 +114,12 @@ const Game = ({
   useTimeAttack(rules, timer, score)
 
   const pageTitle = `Web Lexica ${showQrCode ? 'New ' : ''}${isMultiplayer ? 'Multiplayer Game' : ''}`
+
+  const lastGuess = useMemo(() => guess.guesses[guess.guesses.length - 1], [guess])
+
+  useEffect(() => {
+    dispatchScoreUpdate(lastGuess)
+  }, [dispatchScoreUpdate, lastGuess])
 
   const toRender = getNextScreenLogic({
     startScreenProps: {

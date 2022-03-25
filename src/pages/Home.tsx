@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { ReactComponent as EmojiEvents } from '@material-design-icons/svg/round/emoji_events.svg'
 import { ReactComponent as PlayCircle } from '@material-design-icons/svg/round/play_circle.svg'
 import { ReactComponent as GroupAdd } from '@material-design-icons/svg/round/group_add.svg'
+import { ReactComponent as Grid } from '@material-design-icons/svg/round/grid_on.svg'
 import { ReactComponent as Language } from '@material-design-icons/svg/round/language.svg'
 
 import Svg from '../components/Svg'
@@ -15,6 +16,7 @@ import { useTranslations } from '../translations'
 import { makeClasses } from '../util/classes'
 import { useHighScore } from '../game/high-scores'
 import { useConstants } from '../style/constants'
+import MainTitle from '../components/MainTitle'
 
 const GameSettings = (): JSX.Element => {
   const classes = makeClasses('home-game-option', 'home-button-defaults')
@@ -40,14 +42,6 @@ const GameSettings = (): JSX.Element => {
 
 }
 
-const Title = (): JSX.Element => {
-  return <div className="home-title">
-    <div className="home-title-letters">
-      {'LEXICA'.split('').map(l => <div className="home-title-letter">{l}</div>)}
-    </div>
-    <div className="home-sub-title">online</div>
-  </div>
-}
 
 const PlayGameButtons = (): JSX.Element => {
   const { fontSizeTitle } = useConstants()
@@ -76,6 +70,17 @@ const PlayGameButtons = (): JSX.Element => {
       }}/>
       Multiplayer
     </Link>
+    <Link
+      to='/lexicle'
+      className={classes}
+    >
+      <Svg.Customizable svg={Grid} props={{
+        title: 'Lexicle',
+        height: fontSizeTitle,
+        width: fontSizeTitle
+      }}/>
+      Try Lexicle
+    </Link>
   </div>
 }
 
@@ -96,7 +101,7 @@ const Home = ({ setGameType }: { setGameType: (type: GameType) => void }) => {
 
   return <div className="Page home">
     <HighScore />
-    <Title />
+    <MainTitle title='lexica' subtitle='online' />
     <div className="home-buttons-container">
       <PlayGameButtons />
       <GameSettings />
