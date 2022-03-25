@@ -61,9 +61,9 @@ const Results = ({ wordOfTheDay }: { wordOfTheDay: boolean }): JSX.Element => {
     <div className='lexicle-results-desired-word'>{score?.desiredWord?.toLocaleUpperCase()}</div>
     <div className='lexicle-results-portrait-container'>
       <div className='lexicle-results-score-container'><Score/></div>
-      <div className='lexicle-results-score-container'><Score/></div>
     </div>
     <Share wordOfTheDay={wordOfTheDay}/>
+    <div className='lexicle-results-board-container'><StaticBoard board={board}/></div>
   </div>
 
   return orientation === ScreenOrientation.Landscape ? Landscape : Portrait
