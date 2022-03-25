@@ -78,8 +78,9 @@ const GameSetup = ({ wordOfTheDay, children, onGameFinish }: { wordOfTheDay: boo
   useEffect(() => {
     if (onGameFinishCalled) return
     const { guessScores, desiredWord } = score
-    const mostRecentGuess = guessScores[0]?.word
-    if (!!!(desiredWord?.length)) return
+    const guessLength = guessScores?.length
+    if (!!!(desiredWord?.length) || !!!(guessLength)) return
+    const mostRecentGuess = guessScores[guessLength-1].word
     if (guessScores.length >= 6 || mostRecentGuess === desiredWord) {
       handleGameFinish()
     }
