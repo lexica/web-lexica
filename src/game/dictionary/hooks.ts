@@ -32,6 +32,29 @@ export type DictionaryState = {
   loading: boolean
 }
 
+export const useCustomDictionaryWithBoard = (dictionary: string[], board: string[], minimumWordLength: number) => {
+  const [loading, setLoading] = useState(true)
+  const [boardDictionary, setDictionary] = useState<string[]>([])
+
+  useEffect(() => {
+    logger.debug('running dictionary useEffect')
+    setLoading(true)
+    resolveDictionary(board, dictionary, minimumWordLength).then(dict => {
+      setDictionary(dict)
+      setLoading(false)
+    })
+
+  }, [
+    board,
+    dictionary,
+    setDictionary,
+    setLoading,
+    minimumWordLength
+  ])
+
+  return useMemo(() => ({ boardDictionary, loading }), [boardDictionary, loading])
+}
+
 export const useBoardDictionary = (languageState: LanguageState, board: string[], minimumWordLength: number) => {
   const [loading, setLoading] = useState(true)
   const [boardDictionary, setDictionary] = useState<string[]>([])

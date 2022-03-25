@@ -25,6 +25,8 @@ print_available_languages() {
   done
 }
 
+mkdir -p $MOCK_PATH
+
 populate_base_languages_file
 
 AVAILABLE_LANGUAGES=`get_available_languages`

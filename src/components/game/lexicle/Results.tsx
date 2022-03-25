@@ -1,4 +1,4 @@
-import { useCallback, useContext, useMemo } from 'react'
+import { useCallback, useContext, useState, useMemo } from 'react'
 import { Guess } from '../../../game/guess'
 import { LetterCorrectness, Score as ScoreContext } from '../../../game/lexicle/score'
 
@@ -22,6 +22,7 @@ const Share = ({ wordOfTheDay }: { wordOfTheDay: boolean }): JSX.Element => {
       : '',
     [wordOfTheDay]
   )
+  const [clickFeedbackClass, setClickFeedbackClass] = useState('')
   const onClick = useCallback(() => {
     const scoreBreakdown = score.guessScores
       .map(guess => guess.wordBreakdown.map(
@@ -29,13 +30,18 @@ const Share = ({ wordOfTheDay }: { wordOfTheDay: boolean }): JSX.Element => {
       ).join(''))
       .join('\n')
     navigator.clipboard.writeText(`Lexicle ${wordOfTheDayDisplay}${score.guessScores.length}/6\n\n${scoreBreakdown}`)
-  }, [score, wordOfTheDayDisplay])
-  return <div
-    className='lexicle-results-share-button'
-    onClick={onClick}
-  >
-    Share
-  </div>
+    setClickFeedbackClass('clicked')
+    setTimeout(() => setClickFeedbackClass(''), 1010)
+  }, [score, wordOfTheDayDisplay, setClickFeedbackClass])
+  return <>
+    <div className={`lexicle-results-share-confirmation ${clickFeedbackClass}`}>Score Copied to Clipboard!</div>
+    <div
+      className={`lexicle-results-share-button ${clickFeedbackClass}`}
+      onClick={onClick}
+    >
+      Share
+    </div>
+  </>
 }
 
 const Results = ({ wordOfTheDay }: { wordOfTheDay: boolean }): JSX.Element => {
@@ -45,14 +51,14 @@ const Results = ({ wordOfTheDay }: { wordOfTheDay: boolean }): JSX.Element => {
   const Landscape = <div className='lexicle-results'>
     <div className='lexicle-results-board-container'><StaticBoard board={board}/></div>
     <div className='lexicle-results-landscape-container'>
-      <div className='lexicle-results-desired-word'>{score.desiredWord.toLocaleUpperCase()}</div>
+      <div className='lexicle-results-desired-word'>{score?.desiredWord?.toLocaleUpperCase()}</div>
       <Share wordOfTheDay={wordOfTheDay}/>
     </div>
     <div className='lexicle-results-score-container'><Score/></div>
   </div>
 
   const Portrait = <div>
-    <div className='lexicle-results-desired-word'>{score.desiredWord.toLocaleUpperCase()}</div>
+    <div className='lexicle-results-desired-word'>{score?.desiredWord?.toLocaleUpperCase()}</div>
     <div className='lexicle-results-portrait-container'>
       <div className='lexicle-results-score-container'><Score/></div>
       <div className='lexicle-results-score-container'><Score/></div>

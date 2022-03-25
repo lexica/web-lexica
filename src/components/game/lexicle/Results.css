@@ -27,6 +27,7 @@
   padding-left: 1vw;
   padding-right: 1vw;
   border-radius: calc(var(--font-size) / 4);
+  user-select: none;
 }
 
 @media screen and (orientation: portrait) {
@@ -50,3 +51,47 @@
   } */
 }
 
+@keyframes click-confirmation-flash {
+  from {
+    color: var(--color-background-dark);
+  }
+  25% {
+    color: var(--color-content-dark);
+  }
+  75%{
+    color: var(--color-content-dark);
+  }
+  to {
+    color: var(--color-background-dark);
+  }
+}
+
+@keyframes click-flash {
+  from {
+    background-color: var(--color-accent);
+  }
+  25% {
+    background-color: var(--color-green);
+  }
+  75%{
+    background-color: var(--color-green);
+  }
+  to {
+    background-color: var(--color-accent);
+  }
+}
+
+.lexicle-results-share-button.clicked {
+  animation-duration: 1000ms;
+  animation-name: click-flash;
+}
+
+.lexicle-results-share-confirmation {
+  color: var(--color-background-dark);
+  margin: 0.5vh;
+}
+
+.lexicle-results-share-confirmation.clicked {
+  animation-duration: 1000ms;
+  animation-name: click-confirmation-flash;
+}

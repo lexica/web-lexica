@@ -124,10 +124,36 @@ export const useOrientation = () => {
 
 export const usePromise = <T>(p: Promise<T>, initialValue?: T): typeof initialValue extends undefined ? T | undefined : T => {
   const [resolved, setResolved] = useState<T>(initialValue!)
-
   useEffect(() => {
+    logger.debug('change to promise')
     p.then(val => setResolved(val))
   }, [p])
 
   return resolved as any
+}
+
+export const usePromiseWithMetadata = <T>(p: Promise<T>, initialValue: T): { loading: boolean, error: boolean, ready: boolean, value: T } => {
+  const [state, setState] = useState<{ value: T, loading: boolean, error: boolean, ready: boolean }>({
+    loading: true,
+    error: false,
+    ready: false,
+    value: initialValue!
+  })
+
+  useEffect(() => {
+    logger.debug('change to promise')
+    p.then(val => setState({
+      loading: false,
+      error: false,
+      ready: true,
+      value: val
+    })).catch(() => setState(previous => ({
+      ...previous,
+      loading: false,
+      error: true,
+      ready: false
+    })))
+  }, [p, setState])
+
+  return state as any
 }

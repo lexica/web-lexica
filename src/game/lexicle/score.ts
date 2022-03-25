@@ -26,8 +26,10 @@ export const Score = createContext<ScoreState>({
   usedLetters: []
 })
 
+export const ValidAnswers = createContext<string[]>([])
+
 const getLetterCounts = (desiredWord: string) => {
-  if (!desiredWord.length) return {}
+  if (!desiredWord || !desiredWord.length) return {}
   return desiredWord
     .split('')
     .reduce(

@@ -1,15 +1,7 @@
-.lexicle {
-  display: flex;
-  overflow-y: clip;
-  width: 100%;
-  height: 100%;
-  align-items: center;
-}
-
-
 @media screen and (orientation: portrait) {
   .lexicle {
     flex-direction: column;
+    justify-content: center;
   }
   .lexicle-score-container {
     width: 100%;
@@ -19,6 +11,7 @@
 @media screen and (orientation: landscape) {
   .lexicle {
     flex-direction: row;
+    justify-content: center;
   }
   .lexicle-score-container {
     min-width: 33%;
@@ -53,7 +46,7 @@
   color: var(--color-background-dark-alt)
 }
 
-.spacer.used {
+.used {
   background-color: var(--color-background-dark-alt)
 }
 
@@ -66,3 +59,4 @@
   animation-duration: 250ms;
   animation-name: correct-flash;
 }
+
