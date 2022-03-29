@@ -17,7 +17,7 @@ enum GameParamMap {
   TimeAttack = 'ta'
 }
 
-const encodeBoard = (board: string[]): string => {
+export const encodeBoard = (board: string[]): string => {
   const stringified = board.join(',')
 
   return utf8ToB64(stringified).replace(/=+$/, '')

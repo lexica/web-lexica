@@ -9,7 +9,6 @@ import { getLetterScore, LetterScores,  } from '../../../game'
 import { Rules } from '../../../game/rules'
 import { ScoreType } from '../../../game/score'
 import { Guess, GuessAction, GuessActionType, GuessDispatch } from '../../../game/guess'
-import { logger } from '../../../util/logger'
 import { makeClasses } from '../../../util/classes'
 
 type LetterProps = {
@@ -36,7 +35,7 @@ const Letter: React.FC<LetterProps> = ({
 
   const classes = makeClasses('spacer', { condition: visited, name: 'visited' }, feedbackClasses)
 
-  const dispatchMoveEvent = () => { guessDispatch({ type: GuessAction.EnterLetter, info: { row, column } }); logger.debug(`${row}-${column} hover`) }
+  const dispatchMoveEvent = () => guessDispatch({ type: GuessAction.EnterLetter, info: { row, column } })
 
   const showScore = scoreType === ScoreType.Letters || undefined
 

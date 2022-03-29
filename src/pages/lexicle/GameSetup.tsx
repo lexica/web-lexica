@@ -1,11 +1,11 @@
-import { useCallback, useEffect, ReactNode, useContext, useMemo, useState } from 'react'
+import { useCallback, useEffect, ReactNode, useContext, useMemo, useState, useReducer } from 'react'
 import { ConfirmationEffect } from '../../components/game/Board/hooks'
 import { Board, useGeneratedBoard } from '../../game/board/hooks'
 import { Dictionary, DictionaryState, useBoardDictionary } from '../../game/dictionary/hooks'
 import { Guess, GuessDispatch, useGuesses } from '../../game/guess'
 import { Language } from '../../game/language'
 import { useConfirmationEffect } from '../../game/lexicle/confirmation-effect'
-import { Score, useScore, ValidAnswers } from '../../game/lexicle/score'
+import { Score, ScoreState, useScore, ValidAnswers } from '../../game/lexicle/score'
 import { Rules, useDefaultRules } from '../../game/rules/hooks'
 import { logger } from '../../util/logger'
 import { getRandomNumberGenerator, randomInt } from '../../util/random'
@@ -29,6 +29,28 @@ const getDesiredWord = (dictionaryState: DictionaryState, answers: string[], _: 
   return validAnswers[index]
 }
 
+export const useOnGameFinishedCallback = (callback: () => void, score: ScoreState) => {
+  const [onGameFinishCalled, setOnGameFinishCalled] = useState(false)
+
+  const handleGameFinish = useCallback(() => {
+    logger.debug('Lexicle: calling game finish')
+    setOnGameFinishCalled(true)
+    callback()
+  }, [setOnGameFinishCalled, callback])
+
+  useEffect(() => {
+    logger.debug('running useOnGameFinishCallback...')
+    if (onGameFinishCalled) return
+    const { guessScores, desiredWord } = score
+    const guessLength = guessScores?.length
+    if (!!!(desiredWord?.length) || !!!(guessLength)) return
+    const mostRecentGuess = guessScores[guessLength-1].word
+    if (guessScores.length >= 6 || mostRecentGuess === desiredWord) {
+      handleGameFinish()
+    }
+  }, [onGameFinishCalled, score, handleGameFinish])
+}
+
 // Using a memoized version (outside of react) helps with consistancy
 const getDesiredWordMemoized = R.memoizeWith((dictionaryState: DictionaryState, answers: string[], board: string[]) => {
   if (dictionaryState.loading || !!!(board?.length)) return 'loading'
@@ -37,14 +59,7 @@ const getDesiredWordMemoized = R.memoizeWith((dictionaryState: DictionaryState, 
   return `${stringifiedDictionary}:${stringifiedAnswers}:${board.join('/')}`
 }, getDesiredWord)
 
-
 const GameSetup = ({ wordOfTheDay, children, onGameFinish }: { wordOfTheDay: boolean, children: ReactNode, onGameFinish: () => void }) => {
-  const [onGameFinishCalled, setOnGameFinishCalled] = useState(false)
-  const handleGameFinish = useCallback(() => {
-    logger.debug('Lexicle: calling game finish')
-    setOnGameFinishCalled(true)
-    onGameFinish()
-  }, [setOnGameFinishCalled, onGameFinish])
   const language = useContext(Language)
   const rules = useDefaultRules()
   const { metadata } = language
@@ -69,22 +84,13 @@ const GameSetup = ({ wordOfTheDay, children, onGameFinish }: { wordOfTheDay: boo
 
   const [guesses, dispatchGuess] = useGuesses(board)
 
+  useOnGameFinishedCallback(onGameFinish, score)
+
   const latestGuess = useMemo(() => guesses.guesses[guesses.guesses.length - 1], [guesses])
 
   useEffect(() => {
     dispatchScoreUpdate(latestGuess)
   }, [latestGuess, dispatchScoreUpdate])
-
-  useEffect(() => {
-    if (onGameFinishCalled) return
-    const { guessScores, desiredWord } = score
-    const guessLength = guessScores?.length
-    if (!!!(desiredWord?.length) || !!!(guessLength)) return
-    const mostRecentGuess = guessScores[guessLength-1].word
-    if (guessScores.length >= 6 || mostRecentGuess === desiredWord) {
-      handleGameFinish()
-    }
-  }, [onGameFinishCalled, score, handleGameFinish])
 
   return <>
     <ConfirmationEffect.Provider value={useConfirmationEffect}>

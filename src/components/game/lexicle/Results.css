@@ -18,6 +18,11 @@
   height: 100%;
 }
 
+.lexicle-results-share-button-container {
+  display: flex;
+  flex-direction: row;
+}
+
 .lexicle-results-share-button {
   cursor: pointer;
   background-color: var(--color-accent);
@@ -84,7 +89,7 @@
   }
 }
 
-.lexicle-results-share-button.clicked {
+.lexicle-results-share-button.share-link-clicked, .lexicle-results-share-button.share-score-clicked {
   animation-duration: 1000ms;
   animation-name: click-flash;
 }
@@ -94,7 +99,7 @@
   margin: 0.5vh;
 }
 
-.lexicle-results-share-confirmation.clicked {
+.lexicle-results-share-confirmation.share-link-clicked, .lexicle-results-share-confirmation.share-score-clicked {
   animation-duration: 1000ms;
   animation-name: click-confirmation-flash;
 }
