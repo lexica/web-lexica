@@ -22,10 +22,13 @@
   font-size: var(--font-size-title);
   align-items: center;
   justify-content: center;
+  user-select: none;
 }
+
 .static-board-letter:last-child {
   border-right: 1px solid var(--color-content-low-contrast-dark);
 }
+
 .static-board-row:last-child>.static-board-letter {
   border-bottom: 1px solid var(--color-content-low-contrast-dark)
 }

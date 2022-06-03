@@ -25,7 +25,7 @@ const correctnessMap: { [C in LetterCorrectness]: string } = {
 
 enum ShareType {
   Score = 'Score',
-  Link = 'Score & Game Link'
+  Link = 'Game Link'
 }
 
 const useShareLink = (wordOfTheDay: boolean) => {
