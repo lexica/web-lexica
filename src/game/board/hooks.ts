@@ -56,7 +56,7 @@ export const useGeneratedBoard = (width: number, languageMetadata: MetadataV1, p
   return { board, refreshBoard }
 }
 
-const getB64DelimitedURLBoard = ({ board, delimiter }: { board: string, delimiter: string }) => {
+export const getB64DelimitedURLBoard = ({ board, delimiter }: { board: string, delimiter: string }) => {
   const decoded = b64ToUtf8(board)
   return decoded.split(delimiter)
 }

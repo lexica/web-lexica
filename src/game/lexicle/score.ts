@@ -6,7 +6,7 @@ export enum LetterCorrectness {
   NotInWord = 'not-in-word'
 }
 
-type LetterScore = { letter: string, correctness: LetterCorrectness }
+export type LetterScore = { letter: string, correctness: LetterCorrectness }
 
 export type GuessScore = {
     word: string,

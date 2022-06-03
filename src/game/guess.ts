@@ -28,14 +28,14 @@ export type GuessState = {
 }
 
 const handleBeginGuess = (state: GuessState): GuessState => {
+  logger.debug('[Guess] beginning guess...')
+
   const {
     currentLetter: { row, column },
     board
   } = state
 
   const newBoard = deepCopyBoard(board)
-
-  logger.debug('handling begin guess...')
 
   newBoard[row][column].visited = true
 
@@ -51,6 +51,7 @@ const handleBeginGuess = (state: GuessState): GuessState => {
 }
 
 const handleEndGuess = (state: GuessState): GuessState => {
+  logger.debug('[Guess] ending guess...')
   const {
     board,
     currentGuess,
@@ -127,7 +128,7 @@ const handleUpdateBoard = (state: GuessState, board: Board): GuessState => ({
 })
 
 export const guessReducer = <A extends GuessAction>(state: GuessState, action: GuessActionType<A>) => {
-  logger.debug(`Guess reducer called... action type: ${action.type}`)
+  // logger.debug(`Guess reducer called... action type: ${action.type}`)
   switch (action.type) {
     case GuessAction.__UpdateBoard:
       return handleUpdateBoard(state, action.info as Board)

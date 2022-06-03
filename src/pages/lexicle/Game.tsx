@@ -7,7 +7,7 @@ import WithWordleWords from './WithWordleWords'
 
 import './Game.css'
 
-const GameBoard = (): JSX.Element => <>
+export const GameBoard = (): JSX.Element => <>
   <Board/>
   <div className='lexicle-score-container scrollbar'>
     <Score/>
