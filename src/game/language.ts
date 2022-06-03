@@ -5,6 +5,7 @@ import { usePromise } from '../util/hooks'
 
 import { logger } from '../util/logger'
 import { storage, useStorage } from '../util/storage'
+import { getBaseUrl } from '../util/url'
 
 export type MetadataV1 = {
   name: string,
@@ -25,8 +26,6 @@ export type LanguageState = {
 export enum LocalStorage {
   LanguageCode = 'game-language'
 }
-
-const getBaseUrl = () => `${window.location.protocol}//${window.location.host}`
 
 const getAvailableLanguages = () => axios.get<string[]>(
   `${getBaseUrl()}/lexica/api/v1/languages.json`

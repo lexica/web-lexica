@@ -21,7 +21,7 @@ const ChooseGameMode = (): JSX.Element => {
 
   const [useWordleWords, setUseWordleWords] = useState(/^en\b/.test(navigator.language))
 
-  const baseUrl = useMemo(
+  const basePath = useMemo(
     () => `${useWordleWords ? '/with-wordle-words' : ''}`,
     [useWordleWords]
   )
@@ -32,7 +32,7 @@ const ChooseGameMode = (): JSX.Element => {
     </div>
     <div className="lexicle-game-buttons">
         <Link
-          to={`${baseUrl}/word-of-the-day`}
+          to={`${basePath}/word-of-the-day`}
           className={classes}
         >
           <Svg.Customizable svg={Calendar} props={{
@@ -43,7 +43,7 @@ const ChooseGameMode = (): JSX.Element => {
           Word of the Day
         </Link>
         <Link
-          to={`${baseUrl}/random`}
+          to={`${basePath}/random`}
           className={classes}
         >
           <Svg.Customizable svg={Shuffle} props={{

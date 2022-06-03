@@ -15,6 +15,7 @@ import { Board } from '../../../game/board/hooks'
 import { useLocation } from 'react-router'
 import { Language } from '../../../game/language'
 import { makeClasses } from '../../../util/classes'
+import { getBaseUrl } from '../../../util/url'
 
 const correctnessMap: { [C in LetterCorrectness]: string } = {
   [LetterCorrectness.Perfect]: '🟩',
@@ -24,7 +25,7 @@ const correctnessMap: { [C in LetterCorrectness]: string } = {
 
 enum ShareType {
   Score = 'Score',
-  Link = 'Score+Link'
+  Link = 'Score & Game Link'
 }
 
 const useShareLink = (wordOfTheDay: boolean) => {
@@ -45,7 +46,7 @@ const useShareLink = (wordOfTheDay: boolean) => {
       wordIndex,
       wordOfTheDay,
       useWordleWords,
-      host: window.location.protocol + '//' + window.location.hostname,
+      host: getBaseUrl(),
       language: language.metadata.locale
     })
   }, [score, dictionary, board, language, location, wordOfTheDay])
@@ -126,7 +127,7 @@ const Share = ({ wordOfTheDay }: { wordOfTheDay: boolean }): JSX.Element => {
         className={shareLinkClasses}
         onClick={onClickShareScoreAndLink}
       >
-        Share Score+Word
+        Share Game
       </div>
     </div>
   </>
