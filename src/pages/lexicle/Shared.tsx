@@ -16,18 +16,6 @@ import WithWordleWords from './WithWordleWords'
 import Results from '../../components/game/lexicle/Results'
 import { useOnGameFinishedCallback } from './GameSetup'
 
-// const useUpdatingUrl = (config: GameConfig) => {
-//   const history = useHistory()
-//   const host = `${window.location.protocol}//${window.location.hostname}`
-//   const url = useMemo(() => getGameUrl({ ...config, host }), [host, config])
-//   logger.debug({ url })
-//   const path = url.replace(/https?:\/\/.*\/web-lexica\/lexicle\//, '')
-
-//   useEffect(() => {
-//     history.replace(path)
-//   }, [history, path])
-// }
-
 const SharedGameSetup = ({ children, onGameFinish }: { children: ReactNode, onGameFinish: () => void }): JSX.Element => {
   const gameConfig = useGameConfigFromUrl()
   const board = useMemo(() => getB64DelimitedURLBoard({ board: gameConfig.encodedBoard, delimiter: ',' }), [gameConfig])
