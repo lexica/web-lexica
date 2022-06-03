@@ -1,4 +1,4 @@
-import { useCallback, useContext, useEffect, useState, useMemo } from 'react'
+import { useCallback, useContext, useEffect, useMemo, useState } from 'react'
 import { useHistory, useLocation } from 'react-router'
 import ResultsScreen from '../components/ResultsScreen'
 import InGameScreen from '../components/InGameScreen'
@@ -108,7 +108,7 @@ const Game = ({
 
   const { startTime } = timer
 
-  const score = useScore(guess, dictionary)
+  const [score, dispatchScoreUpdate] = useScore(dictionary)
 
   const handleStart = useCallback(() => { updateStarted(true); startTime() }, [updateStarted, startTime])
 
@@ -117,6 +117,12 @@ const Game = ({
   useTimeAttack(rules, timer, score)
 
   const pageTitle = `Web Lexica ${showQrCode ? 'New ' : ''}${isMultiplayer ? 'Multiplayer Game' : ''}`
+
+  const lastGuess = useMemo(() => guess.guesses[guess.guesses.length - 1], [guess])
+
+  useEffect(() => {
+    dispatchScoreUpdate(lastGuess)
+  }, [dispatchScoreUpdate, lastGuess])
 
   const toRender = getNextScreenLogic({
     startScreenProps: {
@@ -209,16 +215,27 @@ const ResumedGame = ({ gameId }: { gameId: string }): JSX.Element => {
     }
   }), [defaultRules, gameId])
   const [guessState, guessDispatch] = useGuesses(savedGame.board, savedGame.guesses)
+  const [guessCount, setGuessCount] = useState(guessState.guesses.length)
 
   const handleFinish = useCallback(() => {
     logger.debug('handling finish...')
     updateFinished(true)
   }, [updateFinished])
 
+  useEffect(() => {
+
+  })
+
   const boardDictionary = useMemo(() => [...savedGame.foundWords, ...savedGame.remainingWords], [savedGame])
   const dictionaryState = useMemo(() => ({ boardDictionary, loading: false }), [boardDictionary])
-  const score = useScore(guessState, dictionaryState, savedGame)
+  const [score, dispatchScoreUpdate] = useScore(dictionaryState, savedGame)
   const timer = useTimer(toSeconds(savedGame.remainingTime), handleFinish)
+
+  const latestGuess = useMemo(() => guessState.guesses[guessState.guesses.length - 1], [guessState])
+
+  useEffect(() => {
+    dispatchScoreUpdate(latestGuess)
+  }, [latestGuess, dispatchScoreUpdate])
 
   useAutoStart(true, true, timer.startTime)
 

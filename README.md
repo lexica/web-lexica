@@ -2,13 +2,17 @@
 
 ## A web version of Lexica
 
+### New game/game mode: Lexicle
+
+Love playing [Wordle](https://www.nytimes.com/games/wordle/index.html)? Try playing with a Lexica twist! [Give it a try](https://lexica.github.io/web-lexica/lexicle/).
+
 ### New game mode: Time Attack
 
 Race against the clock, gaining more time with each word found! [Give it a try](https://lexica.github.io/web-lexica/multiplayer?b=cix4LGcsZSx0LHQscCxzLG4saSxvLHosbCxuLHIsYSxvLGUsaSx1LGEsdyxuLHYscw&l=en_US&t=120&s=w&m=4&mv=20017&v=20017&ta=3).
 
 Note, this game mode is not currently compatible with [Lexica](https://github.com/lexica/lexica), but this could change in the future.
 
-### [Try it out!](https://lexica.github.io/web-lexica)
+### [Try Web-Lexica!](https://lexica.github.io/web-lexica)
 
 The goal of this project is to fully replicate everything Lexica can do.
 
@@ -71,3 +75,9 @@ The project also uses [`Storybook`](https://storybook.js.org) for individual `Re
 The app uses `lexica.github.io`'s language API in order to load dictionaries and other language metadata.
 
 For offline development, you can use the `populate-mock-api.sh` script to populate the `mock-api` folder with a local copy of `Lexica`'s api retreieved from `lexica.github.io`. you will then need to host that folder (`npx serve ./mock-api` for example) and, unfortunately, change the `proxy` field in `package.json` to point to your static server.
+
+## Attribution
+
+[Wordle word list: Valid words](https://gist.github.com/cfreshman/cdcdf777450c5b5301e439061d29694c)
+
+[Wordle word list: Answers](https://gist.github.com/cfreshman/a03ef2cba789d8cf00c08f767e0fad7b)

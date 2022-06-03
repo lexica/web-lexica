@@ -4,10 +4,12 @@ export type Letter = {
   index: number
 }
 
+export type Row = {
+  [key: number]: Letter
+} & { index: number }
+
 export type Board = {
-  [key: number]: {
-    [key: number]: Letter
-  } & { index: number }
+  [key: number]: Row
 } & { width: number }
 
 export type Coordinates = {

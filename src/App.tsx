@@ -9,6 +9,7 @@ import { logger } from './util/logger'
 
 import GameModes from './pages/GameModes'
 import Home from './pages/Home'
+import Lexicle from './pages/Lexicle'
 import Multiplayer from './pages/Multiplayer'
 import Options from './pages/Options'
 import SinglePlayer from './pages/SinglePlayer'
@@ -75,6 +76,9 @@ function App() {
             </Route>
             <Route path="/singleplayer">
               <SinglePlayer />
+            </Route>
+            <Route path="/lexicle">
+              <Lexicle/>
             </Route>
           </BrowserRouter>
         </RenderInBanner.Provider>

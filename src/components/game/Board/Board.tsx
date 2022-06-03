@@ -2,14 +2,13 @@ import React, { useContext, } from 'react'
 import * as R from 'ramda'
 
 import './Board.css'
-import { useConfirmationEffect } from './hooks'
+import { ConfirmationEffect } from './hooks'
 
 import { getPointOnGridInfo, GetPointOnGridInfoArguments } from '../../../util/touch'
 import { getLetterScore, LetterScores,  } from '../../../game'
 import { Rules } from '../../../game/rules'
 import { ScoreType } from '../../../game/score'
 import { Guess, GuessAction, GuessActionType, GuessDispatch } from '../../../game/guess'
-import { logger } from '../../../util/logger'
 import { makeClasses } from '../../../util/classes'
 
 type LetterProps = {
@@ -25,7 +24,8 @@ const Letter: React.FC<LetterProps> = ({
   letter,
   visited,
 }) => {
-  const feedbackClasses = useConfirmationEffect(visited)
+  const useConfirmationEffect = useContext(ConfirmationEffect)
+  const feedbackClasses = useConfirmationEffect(visited, letter)
 
   const guessDispatch = useContext(GuessDispatch)
 
@@ -35,7 +35,7 @@ const Letter: React.FC<LetterProps> = ({
 
   const classes = makeClasses('spacer', { condition: visited, name: 'visited' }, feedbackClasses)
 
-  const dispatchMoveEvent = () => { guessDispatch({ type: GuessAction.EnterLetter, info: { row, column } }); logger.debug(`${row}-${column} hover`) }
+  const dispatchMoveEvent = () => guessDispatch({ type: GuessAction.EnterLetter, info: { row, column } })
 
   const showScore = scoreType === ScoreType.Letters || undefined
 

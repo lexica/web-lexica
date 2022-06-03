@@ -10,3 +10,5 @@ export const stringArraysAreEqual = (arrA: string[], arrB: string[]) => {
 
   return compareLists(arrA, arrB)
 }
+
+export const sort = <T>(list: T[]) => [...list].sort()

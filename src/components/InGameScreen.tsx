@@ -18,6 +18,7 @@ import { Guess } from '../game/guess'
 import { useSaveGameOnBlur } from '../game/save-game'
 import { Timer } from '../game/timer'
 import { useLocation } from 'react-router'
+import { ConfirmationEffect, useConfirmationEffect } from './game/Board/hooks'
 
 const Game: React.FC = () => {
 
@@ -73,7 +74,11 @@ const Game: React.FC = () => {
   />
 
   const layout = useVerticalLayout ? verticalLayout : horizontalLayout;
-  return isPaused ? <div>Game Paused</div> : <div className="game-container" style={{ height: '100%' }}>{layout}</div>
+  return isPaused ? <div>Game Paused</div> : <div className="game-container" style={{ height: '100%' }}>
+    <ConfirmationEffect.Provider value={useConfirmationEffect}>
+      {layout}
+    </ConfirmationEffect.Provider>
+  </div>
 }
 
 export default Game

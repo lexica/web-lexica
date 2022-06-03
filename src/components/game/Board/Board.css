@@ -245,7 +245,7 @@
 }
 
 
-.visited {
+.spacer.visited {
   background-color: var(--color-accent);
   color: var(--color-background-dark);
 }

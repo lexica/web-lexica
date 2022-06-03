@@ -1,0 +1,62 @@
+@media screen and (orientation: portrait) {
+  .lexicle {
+    flex-direction: column;
+    justify-content: center;
+  }
+  .lexicle-score-container {
+    width: 100%;
+  }
+}
+
+@media screen and (orientation: landscape) {
+  .lexicle {
+    flex-direction: row;
+    justify-content: center;
+  }
+  .lexicle-score-container {
+    min-width: 33%;
+  }
+}
+
+@keyframes incorrect-flash {
+  from {
+    background-color: var(--color-accent);
+  }
+  50% {
+    background-color: var(--color-red);
+  }
+  to {
+    background-color: inherit;
+  }
+}
+
+@keyframes correct-flash {
+  from {
+    background-color: var(--color-accent);
+  }
+  50% {
+    background-color: var(--color-green);
+  }
+  to {
+    background-color: inherit;
+  }
+}
+
+.spacer.unused {
+  color: var(--color-background-dark-alt)
+}
+
+.used {
+  background-color: var(--color-background-dark-alt)
+}
+
+.lexicle-board-letter-incorrect {
+  animation-duration: 250ms;
+  animation-name: incorrect-flash;
+}
+
+.lexicle-board-letter-correct {
+  animation-duration: 250ms;
+  animation-name: correct-flash;
+}
+

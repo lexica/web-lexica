@@ -1,0 +1,45 @@
+@import "../../../style/constants.css";
+
+.lexicle-score {
+  flex-direction: column;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.lexicle-score-word-container {
+  display: flex;
+  flex-direction: row;
+  user-select: none;
+}
+
+.lexicle-score-letter-container.in-word {
+  background-color: var(--color-yellow);
+}
+
+.lexicle-score-letter-container.perfect {
+  background-color: var(--color-green);
+}
+
+.lexicle-score-letter-container.not-in-word {
+  background-color: var(--color-background-dark-alt);
+  color: var(--color-background-dark)
+}
+
+.lexicle-score-letter-container.empty {
+  background-color: var(--color-background-dark-alt);
+}
+
+.lexicle-score-letter-container {
+  margin: .5vh;
+  padding: 1vh;
+  color: var(--color-background-dark);
+  width: 4vh;
+  height: 4vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: var(--font-weight-bold);
+  vertical-align: middle;
+  font-size: var(--font-size-title);
+}

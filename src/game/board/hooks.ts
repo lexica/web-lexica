@@ -6,13 +6,12 @@ import { useGameUrlParameters } from '../url'
 import { splitWordIntoLetters } from '../words'
 
 import { b64ToUtf8 } from '../../util/base-64'
+import { randomInt } from '../../util/random'
 
-const getRandomInt = (max: number) => Math.floor(Math.random() * max)
-
-const shuffle = (unshuffledBoard: string[]) => {
+const shuffle = (unshuffledBoard: string[], prng: () => number) => {
   const toShuffle = [...unshuffledBoard]
   for (let currentIndex = toShuffle.length - 1; currentIndex > 0; currentIndex--) {
-    const randomIndex = Math.floor(Math.random() * (currentIndex + 1))
+    const randomIndex = Math.floor(prng() * (currentIndex + 1))
     const randomLetter = toShuffle[randomIndex]
     const currentLetter = toShuffle[currentIndex]
     toShuffle[randomIndex] = currentLetter
@@ -21,7 +20,7 @@ const shuffle = (unshuffledBoard: string[]) => {
   return toShuffle
 }
 
-const generateBoard = (letterCount: number, letters: string[], ogProbabilities: MetadataV1['letterProbabilities']) => {
+const generateBoard = (letterCount: number, letters: string[], ogProbabilities: MetadataV1['letterProbabilities'], prng: () => number) => {
   const keys = Object.keys(ogProbabilities)
   const probabilities = keys.reduce(
     (acc, key) => ({ ...acc, [key]: [...ogProbabilities[key]]}),
@@ -30,15 +29,15 @@ const generateBoard = (letterCount: number, letters: string[], ogProbabilities: 
   const unshuffledBoard = R.times(() => {
     const mapping = R.reduce((acc, l) => [...acc, ...R.times(() => l, probabilities[l][0])], [] as string[], letters)
 
-    const result = mapping[getRandomInt(mapping.length)]
+    const result = mapping[randomInt({ wholeNumber: true, max: mapping.length, generator: prng })]
     probabilities[result].length > 1 ? probabilities[result].splice(0, 1) : probabilities[result][0] = 0
     return result
   }, letterCount)
 
-  return shuffle(unshuffledBoard)
+  return shuffle(unshuffledBoard, prng)
 }
 
-export const useGeneratedBoard = (width: number, languageMetadata: MetadataV1) => {
+export const useGeneratedBoard = (width: number, languageMetadata: MetadataV1, prng: () => number = Math.random) => {
   const [board, setBoard] = useState([''])
 
   const [refreshTrigger, refreshBoard] = useReducer((state: number) => state + 1, 0)
@@ -51,13 +50,13 @@ export const useGeneratedBoard = (width: number, languageMetadata: MetadataV1) =
 
     const iterations = width * width
 
-    setBoard(generateBoard(iterations, letters, letterProbabilities))
-  }, [setBoard, width, languageMetadata, refreshTrigger])
+    setBoard(generateBoard(iterations, letters, letterProbabilities, prng))
+  }, [setBoard, width, languageMetadata, refreshTrigger, prng])
 
   return { board, refreshBoard }
 }
 
-const getB64DelimitedURLBoard = ({ board, delimiter }: { board: string, delimiter: string }) => {
+export const getB64DelimitedURLBoard = ({ board, delimiter }: { board: string, delimiter: string }) => {
   const decoded = b64ToUtf8(board)
   return decoded.split(delimiter)
 }
