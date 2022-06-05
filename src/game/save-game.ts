@@ -12,6 +12,7 @@ import { parseURLSearch, useGamePath } from '../util/url'
 import { encodeBoard, GameURLParams } from './url'
 import { Board, getB64DelimitedURLBoard } from './board/hooks'
 import { usePageVisibility, VisibilityState } from '../util/page-visibility-api'
+import { logger } from '../util/logger'
 
 export type UseSaveGameOnBlurArguments = {
   board: string[],
@@ -125,30 +126,68 @@ export const clearSaveGameData = (gameUrl: string) => {
 
 const useLocalStorageKey = (storageKey: GameLocalStorage) => getGameLocalStorageKey(useGamePath(), storageKey)
 
+const useSavedGames = () => {
+  const memoizedDefault = useMemo<string[]>(() => [], [])
+  const rawSavedGames = useStorage(LocalStorage.SavedGames, memoizedDefault)
+  // const [savedGames, setSavedGames] = useState(rawSavedGames)
+
+  // // Prevent retrigger since local storage isn't memoized
+  // useEffect(() => {
+  //   setSavedGames(previous => {
+  //     if (stringArraysAreEqual(previous, rawSavedGames)) return previous
+
+  //     return rawSavedGames
+  //   })
+  // }, [rawSavedGames])
+
+  return rawSavedGames
+}
+
+const shouldSaveGameData = (gamePath: string, savedGames: string[]) => !keyIsInvalid(gamePath) && savedGames.includes(gamePath)
+
+const useSaveGameWriteGuard = () => {
+  const gamePath = useGamePath()
+  const savedGames = useSavedGames()
+  const [writeEnabled, setWriteEnabled] = useState(shouldSaveGameData(gamePath, savedGames))
+
+  useEffect(() => {
+    const writeEnabled = shouldSaveGameData(gamePath, savedGames)
+    logger.debug(`Running useSaveGameWriteGuard useEffect... writeEnabled: ${writeEnabled}`, gamePath, savedGames)
+    setWriteEnabled(writeEnabled)
+  }, [gamePath, savedGames])
+
+  return writeEnabled
+}
+
 const useSaveLanguageMetadata = (): void => {
   const key = useLocalStorageKey(GameLocalStorage.Language)
+  const shouldWrite = useSaveGameWriteGuard()
   const languageState = useContext(Language)
 
   useEffect(() => {
-    if (keyIsInvalid(key)) return
+    if (!shouldWrite) return
     storage.set(key, languageState.metadata)
-  }, [languageState, key])
+  }, [languageState, shouldWrite, key])
 }
 
 const useSaveTime = () => {
   const key = useLocalStorageKey(GameLocalStorage.Timer)
+  const shouldWrite = useSaveGameWriteGuard()
   const { getRemainingTime, state: { isPaused } } = useContext(Timer)
   const intervalRef = useRef<undefined | number>()
   useEffect(() => {
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current)
+      intervalRef.current = undefined
+    }
     if (isPaused) return
-    if (keyIsInvalid(key)) return
+    if (!shouldWrite) return
     
     const storeTime = () => {
       const remainingSeconds = Math.max(getRemainingTime(), 0)
       storage.set(key, remainingSeconds)
     }
 
-    if (intervalRef.current) clearInterval(intervalRef.current)
     intervalRef.current = setInterval(storeTime, 1000) as any as number
 
     return () => {
@@ -158,57 +197,63 @@ const useSaveTime = () => {
         intervalRef.current = undefined
       }
     }
-  }, [key, getRemainingTime, isPaused, intervalRef])
+  }, [shouldWrite, key, getRemainingTime, isPaused, intervalRef])
   return intervalRef
 }
 
 const useSaveGuesses = (): void => {
   const key = useLocalStorageKey(GameLocalStorage.Guesses)
+  const shouldWrite = useSaveGameWriteGuard()
 
   const guessState = useContext(Guess)
 
   const guessCount = useRef(guessState?.guesses?.length || 0)
 
   useEffect(() => {
-    if (keyIsInvalid(key)) return
+    if (!shouldWrite) return
     const length = guessState?.guesses?.length || 0
     if (guessCount.current === length) return
     guessCount.current = length
 
     storage.set(key, guessState.guesses)
-  }, [key, guessState, guessCount])
+  }, [shouldWrite, key, guessState, guessCount])
 }
 
 const useSaveBoard = () => {
   const board = useContext(Board)
   const key = useLocalStorageKey(GameLocalStorage.Board)
+  const shouldWrite = useSaveGameWriteGuard()
 
   useEffect(() => {
-    if (keyIsInvalid(key)) return
+    if (!shouldWrite) return
     if (!board?.length) return
     const encodedBoard = encodeBoard(board)
     storage.set(key, encodedBoard)
-  }, [key, board])
+  }, [shouldWrite, key, board])
 }
 
 const useSaveScore = (): void => {
   const scoreState = useContext(Score)
   const key = useLocalStorageKey(GameLocalStorage.Score)
+  const shouldWrite = useSaveGameWriteGuard()
+
   useEffect(() => {
-    if (keyIsInvalid(key)) return
+    if (!shouldWrite) return
     if (!scoreState?.remainingWords?.length) return
     storage.set(key, scoreState)
-  }, [key, scoreState])
+  }, [shouldWrite, key, scoreState])
 }
 
 const useSaveGameRuleset = (): void => {
   const rules = useContext(Rules)
   const key = useLocalStorageKey(GameLocalStorage.Rules)
+  const shouldWrite = useSaveGameWriteGuard()
+
   useEffect(() => {
-    if (keyIsInvalid(key)) return
+    if (!shouldWrite) return
     if (!rules.time) return
     storage.set(key, rules)
-  }, [key, rules])
+  }, [shouldWrite, key, rules])
 }
 
 export const usePauseGameOnBlur = (timer: TimerContext) => {
