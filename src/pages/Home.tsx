@@ -5,6 +5,7 @@ import { ReactComponent as PlayCircle } from '@material-design-icons/svg/round/p
 import { ReactComponent as GroupAdd } from '@material-design-icons/svg/round/group_add.svg'
 import { ReactComponent as Grid } from '@material-design-icons/svg/round/grid_on.svg'
 import { ReactComponent as Language } from '@material-design-icons/svg/round/language.svg'
+import { ReactComponent as Redo } from '@material-design-icons/svg/round/redo.svg'
 
 import Svg from '../components/Svg'
 import { Rules, useRulesFromStorage } from '../game/rules'
@@ -16,8 +17,9 @@ import { useTranslations } from '../translations'
 import { makeClasses } from '../util/classes'
 import { useHighScore } from '../game/high-scores'
 import { useConstants } from '../style/constants'
-import { useSavedGame, useSavedGameList } from '../game/save-game'
+import { useSavedGameList } from '../game/save-game'
 import MainTitle from '../components/MainTitle'
+import { logger } from '../util/logger'
 
 const GameSettings = (): JSX.Element => {
   const classes = makeClasses('home-game-option', 'home-button-defaults')
@@ -43,6 +45,24 @@ const GameSettings = (): JSX.Element => {
 
 }
 
+const ResumeGameButton = (): JSX.Element => {
+  const savedGames = useSavedGameList()
+  const { fontSizeTitle } = useConstants()
+  // const savedGames = []
+
+  if (savedGames.length === 0) return <></>
+
+  logger.debug('hi')
+
+  return <Link className='home-button-defaults home-play-game-button' to="/saved-games">
+    <Svg.Customizable svg={Redo} props={{
+      title: 'Resume Game',
+        height: fontSizeTitle,
+        width: fontSizeTitle
+    }}/>
+    Resume Game
+  </Link>
+}
 
 const PlayGameButtons = (): JSX.Element => {
   const { fontSizeTitle } = useConstants()
@@ -82,6 +102,7 @@ const PlayGameButtons = (): JSX.Element => {
       }}/>
       Try Lexicle
     </Link>
+    <ResumeGameButton/>
   </div>
 }
 
@@ -92,14 +113,6 @@ const HighScore = (): JSX.Element => {
     <div>Mode: {name}</div>
     <div>High Score: {highScore}</div>
   </div>
-}
-
-const ResumeGameButton = (): JSX.Element => {
-  const savedGames = useSavedGameList()
-
-  if (savedGames.length === 0) return <></>
-
-  return <Link to="/"/>
 }
 
 const Home = ({ setGameType }: { setGameType: (type: GameType) => void }) => {
@@ -114,7 +127,6 @@ const Home = ({ setGameType }: { setGameType: (type: GameType) => void }) => {
     <div className="home-buttons-container">
       <PlayGameButtons />
       <GameSettings />
-      <ResumeGameButton/>
     </div>
   </div>
 }

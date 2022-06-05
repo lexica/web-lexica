@@ -40,6 +40,24 @@
   margin-right: .5vh;
 }
 
+.banner-rendered-prop-badge {
+  display: flex;
+  flex-direction: row;
+  background-color: var(--color-background-dark);
+  border-radius: var(--font-size);
+  color: var(--color-content-dark);
+  align-items: center;
+}
+
+.banner-rendered-prop-badge-clickable {
+  cursor: pointer;
+}
+
+.banner-rendered-prop-badge.banner-rendered-prop-badge-disabled {
+  cursor: not-allowed;
+  color: var(--color-content-low-contrast-dark)
+}
+
 .banner-rendered-prop-container {
   display: flex;
   min-height: 0;

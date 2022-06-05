@@ -1,15 +1,17 @@
-import { createContext, useMemo, useState, useEffect, useContext } from 'react'
+import { createContext, useMemo, useState, useEffect, useContext, MouseEvent } from 'react'
 import { ReactComponent as ArrowBack } from '@material-design-icons/svg/round/arrow_back.svg'
 
-import Svg from './Svg'
+import Svg, { SvgComponent } from './Svg'
 
 import './Banner.css'
-import { useHistory, useLocation } from 'react-router'
+import { useLocation } from 'react-router'
 import { useCallback } from 'react'
 import { ElementIdentifier, useElementSize, useScreenSize } from '../util/hooks'
 import { logger } from '../util/logger'
 import { useCssExp } from '../util/css-parse'
-import { useConstants } from '../style/constants'
+import constants, { useConstants } from '../style/constants'
+import { useSafeNavigateBack } from '../util/url'
+import { makeClasses } from '../util/classes'
 
 const getPageName = (path: string): string => {
   const segment = path.split('/').filter(s => s.length).pop()
@@ -59,18 +61,53 @@ export const RenderInBanner = createContext<RenderInBannerContext>({
   cleanUp: () => {}
 })
 
+export type RenderableBadgeProps = {
+  svgTitle: string,
+  prompt?: string,
+  svg?: SvgComponent,
+  disabled?: boolean,
+  onClick?: (e: MouseEvent<HTMLDivElement>) => void
+}
+
+export const makeRenderableBadge = ({ svgTitle, prompt, svg, disabled, onClick }: RenderableBadgeProps): Renderable => ({
+  maxWidth,
+  maxHeight
+}) => {
+  const showPrompt = prompt && maxWidth / maxHeight > (prompt.length + 1)/2
+  const isClickable = !disabled && onClick !== undefined
+
+  const BadgeSvg = svg ? () => <Svg.Customizable
+      svg={svg}
+      props={{
+        title: svgTitle,
+        fill: disabled ? constants.colorContentDark : constants.colorContentLowContrastDark,
+        width: maxHeight * .8,
+        height: maxHeight * .8
+      }}
+    /> : () => <></>
+  const classes = makeClasses(
+    'banner-rendered-prop-badge',
+    'banner-rendered-prop-container',
+    { condition: !!disabled , name: 'banner-rendered-prop-badge-disabled' },
+    { condition: isClickable, name: 'banner-rendered-prop-badge-clickable' }
+  )
+
+  return <div className={classes} onClick={onClick} >
+    <BadgeSvg />
+    {showPrompt ? <div className={makeClasses(
+      'banner-rendered-prop-label'
+    )}>{prompt}</div> : ''}
+  </div>
+}
 const Banner = ({ toRender: RenderProp }: { toRender: Renderable }): JSX.Element => {
-  const history = useHistory()
+  const back = useSafeNavigateBack()
   const { pathname } = useLocation()
 
   const pageName = getPageName(pathname)
 
   const onClickHandler = useCallback(() => {
-    // kind of a hack, but check to see if the real history object has state, if so, then go back
-    // otherwise, we've navigated here from somewhere else, so don't go back, go to the root of the page
-    // window.history.state ? history.goBack() : history.push('/')
-    history.goBack()
-  }, [history])
+    back()
+  }, [back])
 
   const { location: { right: leftBound } } = useElementSize(ElementIdentifier.Class, 'banner-page-title')
 

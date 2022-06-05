@@ -1,13 +1,13 @@
 import * as R from 'ramda'
 
 export const orderWordAlphabetically = (line: string, dedupe: boolean = false) => {
-  const orderedLine = R.pipe<string, string[], string[], string>(
+  const orderedLine = R.pipe<[string], string[], string[], string>(
     R.splitEvery(1) as any as (a: string) => string[],
     R.sort((a: string, b: string) => a.charCodeAt(0) - b.charCodeAt(0)),
     R.join('')
   )(line)
 
-  const removeDuplicates = R.pipe<string, string[], string[], string>(
+  const removeDuplicates = R.pipe<[string], string[], string[], string>(
     R.splitEvery(1) as any as (a: string) => string[],
     R.uniq as (a: string[]) => string[],
     R.join('')

@@ -1,6 +1,6 @@
 import * as R from 'ramda'
 
-const compareLists = R.pipe<string[], string[], ([string, string])[], boolean>(
+const compareLists = R.pipe<[string[], string[]], ([string, string])[], boolean>(
   R.zip as (a: string[], b: string[]) => ([a: string, b: string])[],
   R.reduceWhile<[string, string], boolean>(R.identity, (_, [a, b]) => a === b, true)
 )

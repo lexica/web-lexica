@@ -1,5 +1,5 @@
 import { useCallback } from 'react'
-import { useHistory } from 'react-router'
+import { useNavigate } from 'react-router'
 
 import {
   MetadataV1,
@@ -34,13 +34,13 @@ const Lexicon = ({
   const beta = getBetaLabel(metadata)
   const currentCode = useLanguageCodeFromLocalStorage()
 
-  const history = useHistory()
+  const navigate = useNavigate()
 
   const handleOnClick = useCallback(() => {
     logger.debug('setting language code...', languageCode)
     setLanguageInLocalStorage(languageCode)
-    history.push('/')
-  }, [languageCode, history])
+    navigate('/')
+  }, [languageCode, navigate])
 
   const classes = makeClasses('lexicons-lexicon', {
     condition: currentCode === languageCode,

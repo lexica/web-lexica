@@ -69,6 +69,8 @@ export const useStorage = <I>(key: string, initialValue: I, parser: (value: stri
       setItem(parser(value))
     }
 
+    logger.debug(`running useStorage useEffect for key: ${key}`)
+
     const item = get({ key, parser })
     
     if (item) setItem(item)

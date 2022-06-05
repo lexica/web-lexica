@@ -1,4 +1,4 @@
-import { useContext } from 'react' 
+import { useContext, useMemo } from 'react' 
 
 import { ScreenOrientation, useOrientation } from '../util/hooks'
 
@@ -11,35 +11,22 @@ import MostRecentGuess from './game/MostRecentGuess'
 import ScoredWordList from './game/ScoredWordList'
 import { HorizontalContainer, VerticalContainer } from './game/layouts'
 import { useUpdateHighScore } from '../game/high-scores'
-import { Rules } from '../game/rules'
-import { Board as BoardContext } from '../game/board/hooks'
-import { Language } from '../game/language'
-import { Guess } from '../game/guess'
-import { useSaveGameOnBlur } from '../game/save-game'
+import { usePauseGameOnBlur, useSaveGame } from '../game/save-game'
 import { Timer } from '../game/timer'
-import { useLocation } from 'react-router'
 import { ConfirmationEffect, useConfirmationEffect } from './game/Board/hooks'
 
 const Game: React.FC = () => {
 
-  const rules = useContext(Rules)
-  const language = useContext(Language)
   const scoreContext = useContext(ScoreContext)
-  const guessesContext = useContext(Guess)
-  const boardContext = useContext(BoardContext)
   const timer = useContext(Timer)
-  const location = useLocation()
 
-  const isPaused = useSaveGameOnBlur({
-    board: boardContext,
-    guess: guessesContext,
-    language,
-    timer,
-    rules,
-    score: scoreContext,
-    url: `${location.pathname}${location.search}`
-  })
+  const onGameOver = useSaveGame()
 
+  useMemo(() => {
+    timer.addTimerEndCallback(onGameOver)
+  }, [timer, onGameOver])
+
+  const isPaused = usePauseGameOnBlur(timer)
 
   const { foundWords } = scoreContext
 

@@ -1,0 +1,90 @@
+@import "../style/constants.css";
+
+.SavedGames {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.saved-games-game-details.saved-games-game-details-selected {
+  background-color: var(--color-background-dark);
+}
+
+.saved-games-game-details,
+.saved-games-game-details-action-menu {
+  user-select: none;
+  cursor: pointer;
+}
+
+.saved-games-game-details-action-menu {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-evenly;
+}
+
+.saved-games-game-details-action-menu-button {
+  cursor: pointer;
+  user-select: none;
+  background-color: var(--color-background-dark-alt);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1vh;
+  padding-inline-end: .5vh;
+  padding-inline-start: .5vh;
+  padding-block: .5vh;
+  width: 35%;
+  max-width: 35%;
+  line-height: var(--font-size);
+  margin: .5vh;
+}
+
+.saved-games-game-details-action-menu-button>svg {
+  margin-right: .5vh;
+}
+
+/* .saved-games-game-details-action-menu-button {
+  width: 100%;
+  max-width: none;
+  line-height: var(--font-size);
+  margin: .5vh;
+} */
+
+.saved-games-game-details {
+  display: flex;
+  border-radius: 3px;
+  background-color: var(--color-background-dark-alt);
+  align-items: center;
+  align-content: space-around;
+}
+
+.saved-games-game-details-headers {
+  background-color: var(--color-background-dark-alt);
+  display: flex;
+}
+
+.saved-games-game-details-ruleset-name,
+.saved-games-game-details-remaining-time,
+.saved-games-game-details-header-1 {
+  flex: 1;
+}
+
+.saved-games-game-details-ruleset-name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.saved-games-game-details-rules-wrapper,
+.saved-games-game-details-header-3 {
+  flex: 3;
+}
+
+.saved-games-game-details-headers {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  align-content: space-around;
+}

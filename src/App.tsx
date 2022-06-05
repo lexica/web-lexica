@@ -1,5 +1,5 @@
 
-import { BrowserRouter, Route } from 'react-router-dom'
+import { BrowserRouter, Route, Routes,  } from 'react-router-dom'
 import { CurrentGameType, LetterScores, useGameType } from './game'
 import { Board, BoardRefresh, useGeneratedBoard } from './game/board/hooks'
 import { Language, useLanguageFromLocalStorage } from './game/language'
@@ -22,6 +22,7 @@ import Banner, {
 } from './components/Banner'
 import Lexicons from './pages/Lexicons'
 import NewGameMode from './pages/NewGameMode'
+import SavedGames from './pages/SavedGames'
 
 function App() {
   logger.debug('loading app...')
@@ -53,33 +54,22 @@ function App() {
           value={context}
         >
           <BrowserRouter basename="/web-lexica">
-            <Route exact path="/">
-              <Home setGameType={setGameType}/>
-            </Route>
-            <Route path="/(.+)">
-              <Banner { ...renderState}/>
-            </Route>
-            <Route path="/game-modes">
-              <GameModes />
-            </Route>
-            <Route path="/new-game-mode">
-              <NewGameMode />
-            </Route>
-            <Route path="/lexicons">
-              <Lexicons />
-            </Route>
-            <Route path="/multiplayer">
-              <Multiplayer />
-            </Route>
-            <Route path="/options">
-              <Options />
-            </Route>
-            <Route path="/singleplayer">
-              <SinglePlayer />
-            </Route>
-            <Route path="/lexicle">
-              <Lexicle/>
-            </Route>
+            <Routes>
+              <Route  path="/" element={<Home setGameType={setGameType}/>}/>
+              <Route path="/*" element={<>
+                <Banner { ...renderState}/>
+                <Routes>
+                  <Route path="/game-modes" element={ <GameModes />} />
+                  <Route path="/new-game-mode" element={ <NewGameMode />} />
+                  <Route path="/lexicons" element={ <Lexicons />} />
+                  <Route path="/multiplayer" element={ <Multiplayer />} />
+                  <Route path="/options" element={ <Options />} />
+                  <Route path="/singleplayer" element={ <SinglePlayer />} />
+                  <Route path="/lexicle/*" element={ <Lexicle/>} />
+                  <Route path='/saved-games' element={ <SavedGames />} />
+                </Routes>
+              </>} />
+            </Routes>
           </BrowserRouter>
         </RenderInBanner.Provider>
         </CurrentGameType.Provider>

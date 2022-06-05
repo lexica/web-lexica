@@ -6,7 +6,8 @@ import React, {
   useEffect,
   useMemo,
   useReducer,
-  useRef
+  useRef,
+  useState
 } from 'react'
 import { logger } from '../util/logger'
 
@@ -80,11 +81,13 @@ export type UseTimer = {
   startTime: () => void,
   pauseTime: () => void,
   addTime: (time: Duration) => void,
+  addTimerEndCallback: (callback: () => void ) => void,
+  removeTimerEndCallback: (callback: () => void) => void,
   getRemainingTime: () => number,
   state: TimerState
 }
 
-const getIntervalCallback = (state: TimerState, intervalRef: React.MutableRefObject<NodeJS.Timeout | undefined>, timeEndCallback: () => void) => {
+const getIntervalCallback = (state: TimerState, intervalRef: React.MutableRefObject<NodeJS.Timeout | undefined>, timeEndCallbacks: (() => void)[]) => {
   // const id = uuid()
   return () => {
     if (state.isPaused) {
@@ -96,21 +99,36 @@ const getIntervalCallback = (state: TimerState, intervalRef: React.MutableRefObj
     const remainingTime = state.remainingTime - secondsBetweenDates(state.startTime, new Date())
     // logger.debug(`timer interval running... remaining time: ${remainingTime}`, { id })
     if (remainingTime <= 0) {
-      timeEndCallback()
+      timeEndCallbacks.forEach(cb => cb())
+      while (timeEndCallbacks.length) {
+        timeEndCallbacks.pop()
+      }
       intervalRef.current && clearInterval(intervalRef.current)
       intervalRef.current = undefined
     }
   }
 }
 
-export const useTimer = (totalTimeInSeconds: number, timeEndCallback: () => void): UseTimer => {
+export const useTimer = (totalTimeInSeconds: number): UseTimer => {
   const [state, dispatch] = useReducer<Reducer<TimerState, TimerReducerAction>>(timerReducer, {
     remainingTime: totalTimeInSeconds,
     isPaused: true,
     startTime: new Date()
   })
+  const [callbacks, setCallbacks] = useState<(() => void)[]>([])
 
-  const memoizedTimeEndCallback = useCallback(timeEndCallback, [timeEndCallback])
+  const addTimerEndCallback = useCallback((callback: () => void) => setCallbacks(callbacks => {
+    if (callbacks.includes(callback)) return callbacks
+    callbacks.push(callback)
+    return callbacks
+  }), [setCallbacks])
+  const removeTimerEndCallback = useCallback((callback: () => void) => setCallbacks(callbacks => {
+    const callbackIndex = callbacks.indexOf(callback)
+    if (callbackIndex < 0) return callbacks
+    callbacks.splice(callbackIndex, 1)
+    return callbacks
+  }), [setCallbacks])
+  // const memoizedTimeEndCallback = useCallback(timeEndCallback, [timeEndCallback])
 
   const startTime = useCallback(() => {
     dispatch({ type: TimerAction.Resume, info: new Date() })
@@ -137,8 +155,8 @@ export const useTimer = (totalTimeInSeconds: number, timeEndCallback: () => void
     remainingTimeRef.current = state.remainingTime
 
     intervalRef.current && clearInterval(intervalRef.current)
-    intervalRef.current = setInterval(getIntervalCallback(state, intervalRef, memoizedTimeEndCallback), TIMER_INTERVAL)
-  }, [state, intervalRef, remainingTimeRef, memoizedTimeEndCallback])
+    intervalRef.current = setInterval(getIntervalCallback(state, intervalRef, callbacks), TIMER_INTERVAL)
+  }, [state, intervalRef, remainingTimeRef, callbacks])
 
   useEffect(() => {
     const remainingTime = state.remainingTime - secondsBetweenDates(state.startTime, new Date())
@@ -148,18 +166,20 @@ export const useTimer = (totalTimeInSeconds: number, timeEndCallback: () => void
 
     logger.debug('timer useEffect setInterval running...', JSON.stringify({ remainingTime, shouldSetInterval, state }))
     if (shouldSetInterval) {
-      intervalRef.current = setInterval(getIntervalCallback(state, intervalRef, memoizedTimeEndCallback), TIMER_INTERVAL)
+      intervalRef.current = setInterval(getIntervalCallback(state, intervalRef, callbacks), TIMER_INTERVAL)
     }
 
     // interval cleanup
     return () => intervalRef.current && clearInterval(intervalRef.current)
-  }, [intervalRef, state, memoizedTimeEndCallback])
+  }, [intervalRef, state, callbacks])
 
   return useMemo(
     () => ({
       startTime,
       pauseTime,
       getRemainingTime,
+      addTimerEndCallback,
+      removeTimerEndCallback,
       addTime,
       state
       }),
@@ -167,7 +187,9 @@ export const useTimer = (totalTimeInSeconds: number, timeEndCallback: () => void
     pauseTime,
     getRemainingTime,
     addTime,
-    state
+    state,
+    addTimerEndCallback,
+    removeTimerEndCallback
     ]
   )
 }
@@ -178,6 +200,8 @@ export const Timer = createContext<TimerContext>({
   startTime: () => {},
   pauseTime: () => {},
   addTime: (_: Duration) => {},
+  addTimerEndCallback: (_: any) => undefined,
+  removeTimerEndCallback: (_: any) => undefined,
   getRemainingTime: () => 0,
   state: {
     isPaused: true,
