@@ -20,7 +20,7 @@ const ComponentBuilder: React.FC<{
   score
 }) => {
   const rules = useContext(Rules)
-  const timer = useTimer(toSeconds(rules.time), () => {})
+  const timer = useTimer(toSeconds(rules.time))
 
   const { startTime } = timer
 

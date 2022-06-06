@@ -8,7 +8,7 @@ import { makeClasses } from '../util/classes'
 
 import './GameModes.css'
 import { Renderable, useRenderInBanner } from '../components/Banner'
-import { Link, useHistory } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { logger } from '../util/logger'
 import { useCallback } from 'react'
 
@@ -116,16 +116,16 @@ const GameModes = (): JSX.Element => {
 
   useRenderInBanner(AddGameMode)
 
-  const history = useHistory()
+  const navigate = useNavigate()
 
   const handleOnClick = useCallback((id: string) => {
     if (id === selectedRulesetId) {
-      history.push('/')
+      navigate('/')
       return
     }
 
     setCurrentRuleset(id)
-  }, [selectedRulesetId, history])
+  }, [selectedRulesetId, navigate])
 
   return <div className="Page game-modes">
     <ModesList

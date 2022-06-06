@@ -1,9 +1,8 @@
-import { toSeconds } from 'duration-fns'
 import { useContext, useEffect, useMemo, useReducer, useState } from 'react'
 import { LetterScores, LetterScoresContext, scoreWord } from '.'
 import { logger } from '../util/logger'
 import { storage, useStorage } from '../util/storage'
-import { Rules, RulesContext, Ruleset, Rulesets, useRulesets } from './rules'
+import { findRulesetId, Rules, RulesContext, useRulesets } from './rules'
 import { Score, ScoreContext } from './score'
 
 export enum LocalStorage {
@@ -27,24 +26,6 @@ export const setHighScore = (id: string, score: number) => {
   storage.set(LocalStorage.HighScores, { ...scores, [id]: score })
 }
 
-const rulesetsAreEquivalent = (a: Ruleset, b: Ruleset) => {
-  return a.boardWidth === b.boardWidth
-    && a.minimumWordLength === b.minimumWordLength
-    && a.score === b.score
-    && toSeconds(a.time) === toSeconds(b.time)
-    && a.timeAttack === b.timeAttack
-}
-
-const findRulesetId = (rulesets: Rulesets, rules: Ruleset) => {
-  const keys = Object.keys(rulesets)
-  for (let i = 0; i < keys.length; i++) {
-    const key = keys[i]
-    const toCompare = rulesets[key]
-    logger.debug('comparing rulesets', { toCompare, compareAgainst: rules })
-    if (rulesetsAreEquivalent(toCompare, rules)) return key
-  }
-}
-
 const useMemoizedComputedScore = (score: ScoreContext, rules: RulesContext, letterScores: LetterScoresContext) => {
   const [scoredWords, setScoredWords] = useState(0)
   const [computedScore, dispatchComputedScore] = useReducer((state: number, action: number) => state + action, 0)
@@ -64,7 +45,7 @@ const useMemoizedComputedScore = (score: ScoreContext, rules: RulesContext, lett
 }
 
 export const useHighScore = (id: string) => {
-  const highScores = useStorage(LocalStorage.HighScores, {} as HighScores)
+  const highScores = useStorage(LocalStorage.HighScores, useMemo(() => ({}), []) as HighScores)
   if (highScores[id] !== undefined) return highScores[id]
 
   return 0

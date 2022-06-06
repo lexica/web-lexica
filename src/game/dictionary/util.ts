@@ -45,7 +45,7 @@ export const getWordsOnBoard = (board: Board, dictionary: string[], minWordLengt
 
     const newFoundWords = R.flatten(visitNeighbors({ callback, onlyUnvisitedNeighbors: true }, newBoard, coordinates))
 
-    const undiscoveredWords = R.reject(w => newFoundWords.includes(w), remainingWords)
+    const undiscoveredWords = R.reject((w: unknown) => newFoundWords.includes(w as any), remainingWords)
 
     return { remainingWords: undiscoveredWords, foundWords: [...foundWords, ...newFoundWords] }
 

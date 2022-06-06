@@ -47,6 +47,7 @@ const handleAddGuess = (state: ScoreState, guess: string): ScoreState => {
 }
 
 const handleUpdateDictionary = (state: ScoreState, dictionary: string[]): ScoreState => {
+  if (state.foundWords.length) return state
   return {
     foundWords: [],
     remainingWords: dictionary
@@ -64,11 +65,13 @@ const scoreReducer = <A extends ScoreAction | InternalScoreAction>(state: ScoreS
   }
 }
 
-export const useScore = (boardDictionaryState: { boardDictionary: string[] }): [ScoreState, (guess: string) => void] => {
-
+export const useScore = (
+  boardDictionaryState: { boardDictionary: string[] },
+  { foundWords, remainingWords }: ScoreState = { foundWords: [], remainingWords: [] }
+): [ScoreState, (guess: string) => void] => {
   const [state, dispatch] = useReducer<Reducer<ScoreState, InternalScoreReducerAction<ScoreAction | InternalScoreAction>>>(scoreReducer, {
-    foundWords: [],
-    remainingWords: []
+    foundWords,
+    remainingWords
   })
 
   const dispatchScoreUpdate = useCallback((guess: string) => {

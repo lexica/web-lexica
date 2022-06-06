@@ -1,4 +1,4 @@
-import { useContext } from 'react' 
+import { useContext, useEffect, useState } from 'react' 
 
 import { ScreenOrientation, useOrientation } from '../util/hooks'
 
@@ -11,11 +11,33 @@ import MostRecentGuess from './game/MostRecentGuess'
 import ScoredWordList from './game/ScoredWordList'
 import { HorizontalContainer, VerticalContainer } from './game/layouts'
 import { useUpdateHighScore } from '../game/high-scores'
+import { usePauseGameOnHidden } from '../game/pause-game'
+import { useSaveGame } from '../game/save-game'
+import { Timer } from '../game/timer'
 import { ConfirmationEffect, useConfirmationEffect } from './game/Board/hooks'
+
+import './InGameScreen.css'
 
 const Game: React.FC = () => {
 
-  const { foundWords } = useContext(ScoreContext)
+  const scoreContext = useContext(ScoreContext)
+  const timer = useContext(Timer)
+
+  const useSaveGameState = useSaveGame()
+  const setUseSaveGameStateWrapper = useState(useSaveGameState)[1]
+
+  // Weird way of removing callbacks...
+  useEffect(() => {
+    setUseSaveGameStateWrapper(previous => {
+      timer.removeTimerEndCallback(previous.onGameFinishCallback)
+      timer.addTimerEndCallback(useSaveGameState.onGameFinishCallback)
+      return useSaveGameState
+    })
+  }, [useSaveGameState, setUseSaveGameStateWrapper, timer])
+
+  const isPaused = usePauseGameOnHidden(timer)
+
+  const { foundWords } = scoreContext
 
   const orientation = useOrientation()
 
@@ -48,7 +70,7 @@ const Game: React.FC = () => {
   />
 
   const layout = useVerticalLayout ? verticalLayout : horizontalLayout;
-  return <div className="game-container" style={{ height: '100%' }}>
+  return isPaused ? <div>Game Paused</div> : <div className="game-container" style={{ height: '100%' }}>
     <ConfirmationEffect.Provider value={useConfirmationEffect}>
       {layout}
     </ConfirmationEffect.Provider>

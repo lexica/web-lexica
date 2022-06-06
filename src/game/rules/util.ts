@@ -1,4 +1,4 @@
-import { Duration } from 'duration-fns'
+import { Duration, toSeconds } from 'duration-fns'
 import * as R from 'ramda'
 import { v4 as uuid } from 'uuid'
 
@@ -73,3 +73,19 @@ export const setCurrentRuleset = (id: string) => {
   currentRulesetIdStorage.set(id)
 }
 
+const rulesetsAreEquivalent = (a: Ruleset, b: Ruleset) => {
+  return a.boardWidth === b.boardWidth
+    && a.minimumWordLength === b.minimumWordLength
+    && a.score === b.score
+    && toSeconds(a.time) === toSeconds(b.time)
+    && a.timeAttack === b.timeAttack
+}
+
+export const findRulesetId = (rulesets: Rulesets, rules: Ruleset) => {
+  const keys = Object.keys(rulesets)
+  for (let i = 0; i < keys.length; i++) {
+    const key = keys[i]
+    const toCompare = rulesets[key]
+    if (rulesetsAreEquivalent(toCompare, rules)) return key
+  }
+}

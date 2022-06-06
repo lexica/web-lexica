@@ -34,24 +34,42 @@ const set = (key: string, item: any) => {
   window.dispatchEvent(getSamePageEvent(key, value))
 }
 
+export class Removed {}
+
+const remove = (key: string) => {
+  localStorage.removeItem(key)
+  window.dispatchEvent(getSamePageEvent(key, new Removed()))
+}
+
 type SamePageEvent = ReturnType<typeof getSamePageEvent>
 
-const getSamePageEvent = (key: string, value: string) => new CustomEvent(SamePageEventType, {
+export const valueIsRemoved = (value: any): value is InstanceType<typeof Removed> => value instanceof Removed
+
+const getSamePageEvent = (key: string, value: string | Removed) => new CustomEvent(SamePageEventType, {
   bubbles: true,
   cancelable: false,
   detail: { key, value }
 })
 
 export const useStorage = <I>(key: string, initialValue: I, parser: (value: string) => I = JSON.parse) => {
-  const [item, setItem] = useState(initialValue)
+  const [item, setItem] = useState<I>(initialValue)
 
   useEffect(() => {
     const eventHandler = (e: SamePageEvent) => {
       if (e.detail.key !== key) return
       logger.debug(`handling event for key: ${key}`)
 
-      setItem(parser(e.detail.value))
+      const value = e.detail.value
+
+      if (valueIsRemoved(value)) {
+        setItem(initialValue)
+        return
+      }
+
+      setItem(parser(value))
     }
+
+    logger.debug(`running useStorage useEffect for key: ${key}`)
 
     const item = get({ key, parser })
     
@@ -60,7 +78,7 @@ export const useStorage = <I>(key: string, initialValue: I, parser: (value: stri
     window.addEventListener(SamePageEventType as any, eventHandler)
 
     return () => window.removeEventListener(SamePageEventType as any, eventHandler)
-  }, [setItem, parser, key])
+  }, [setItem, parser, key, initialValue])
 
   return item
 }
@@ -107,4 +125,5 @@ export const storage = {
   get,
   getWithDefault,
   set,
+  remove
 }

@@ -1,7 +1,7 @@
 import {ReactComponent as Calendar } from '@material-design-icons/svg/round/calendar_today.svg'
 import {ReactComponent as Shuffle } from '@material-design-icons/svg/round/shuffle.svg'
 import { useState, useMemo } from 'react'
-import { BrowserRouter, Link, Route } from 'react-router-dom'
+import { Link, Route, Routes } from 'react-router-dom'
 import { ReactComponent as Unchecked } from '@material-design-icons/svg/round/check_box_outline_blank.svg'
 import { ReactComponent as Checked } from '@material-design-icons/svg/round/check_box.svg'
 import MainTitle from '../components/MainTitle'
@@ -22,7 +22,7 @@ const ChooseGameMode = (): JSX.Element => {
   const [useWordleWords, setUseWordleWords] = useState(/^en\b/.test(navigator.language))
 
   const basePath = useMemo(
-    () => `${useWordleWords ? '/with-wordle-words' : ''}`,
+    () => `/lexicle/${useWordleWords ? '/with-wordle-words' : ''}`,
     [useWordleWords]
   )
 
@@ -71,26 +71,14 @@ const ChooseGameMode = (): JSX.Element => {
 const Lexicle = (): JSX.Element => {
   logger.debug('Reloading lexicle main screen')
   return <div className='lexicle'>
-    <BrowserRouter basename="/web-lexica/lexicle">
-      <Route exact path="/">
-        <ChooseGameMode/>
-      </Route>
-      <Route path="/random">
-        <Random />
-      </Route>
-      <Route path="/with-wordle-words/random">
-        <Random useWordleWords/>
-      </Route>
-      <Route path="/word-of-the-day">
-        <WordOfTheDay />
-      </Route>
-      <Route path="/with-wordle-words/word-of-the-day">
-        <WordOfTheDay useWordleWords/>
-      </Route>
-      <Route path="/shared">
-        <Shared/>
-      </Route>
-    </BrowserRouter>
+    <Routes >
+      <Route path="/" element={<ChooseGameMode/>} />
+      <Route path="/random" element={<Random />} />
+      <Route path="/with-wordle-words/random" element={<Random useWordleWords/>} />
+      <Route path="/word-of-the-day" element={<WordOfTheDay />} />
+      <Route path="/with-wordle-words/word-of-the-day" element={<WordOfTheDay useWordleWords/>} />
+      <Route path="/shared/*" element={<Shared/>} />
+    </Routes>
   </div>
 }
 

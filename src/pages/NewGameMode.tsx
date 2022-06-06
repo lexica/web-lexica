@@ -13,7 +13,7 @@ import { Renderable, useRenderInBanner } from '../components/Banner'
 import constants from '../style/constants'
 import { addRuleset, setCurrentRuleset } from '../game/rules'
 import { Duration } from 'duration-fns'
-import { useHistory } from 'react-router'
+import { useNavigate } from 'react-router-dom'
 import BoardSize from '../components/new-game-mode/BoardSize'
 import MinimumWordLength from '../components/new-game-mode/MinimumWordLength'
 
@@ -70,7 +70,7 @@ const NewGameMode = (): JSX.Element => {
   const [minimumWordLength, setMinimumWordLength] = useState(0)
 
 
-  const history = useHistory()
+  const navigate = useNavigate()
 
   const isValid = useMemo(() => {
     return validTimeLimit(timeLimit) &&
@@ -98,8 +98,8 @@ const NewGameMode = (): JSX.Element => {
 
     setCurrentRuleset(id)
 
-    history.push('/')
-  }, [isValid, timeLimit, boardSize, name, scoreType, minimumWordLength, history, timeAttack])
+    navigate('/')
+  }, [isValid, timeLimit, boardSize, name, scoreType, minimumWordLength, navigate, timeAttack])
 
   const BannerElement = useMemo(() => SaveGameMode({ isValid, handleSave }), [isValid, handleSave])
 

@@ -6,7 +6,7 @@ import { splitWordIntoLetters } from './words'
 
 export const getLetterScore = (letter: string, letterScores: MetadataV1['letterScores']) => letterScores[letter]
 
-const scoreWordByLetterScores = (word: string, letterScores: { [key: string]: number }) => R.pipe<string, string[], number>(
+const scoreWordByLetterScores = (word: string, letterScores: { [key: string]: number }) => R.pipe<[string], string[], number>(
   word => splitWordIntoLetters(word, Object.keys(letterScores)),
   R.reduce<string, number>((acc, letter) => acc + letterScores[letter], 0)
 )(word)

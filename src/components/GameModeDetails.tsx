@@ -68,7 +68,9 @@ const GameModeDetails = ({
       </div>
       <div className="game-mode-details-info">
         {getSvg(Sort, 'Minimum Word Length')}
-        <div>&ge; {rules.minimumWordLength}</div>
+        <div className='game-mode-details-min-word-length'>
+          &ge;{rules.minimumWordLength}
+        </div>
       </div>
       {timeAttack > 0
         ? <div className="game-mode-details-info">

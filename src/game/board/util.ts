@@ -20,8 +20,10 @@ export const getBoard = (line: string[]): Board => {
 
   type Row = Omit<Board[number], 'index'>
 
-  const getColumns = R.pipe<string[], Board[number][number][], Row>(
-    R.addIndex<string, Board[number][number]>(R.map)((letter: string, index: number) => ({
+  const indexedMap = R.addIndex<string, Board[number][number]>(R.map)
+
+  const getColumns = R.pipe<[string[]], Board[number][number][], Row>(
+    indexedMap((letter: string, index: number) => ({
       letter,
       visited: false,
       index
@@ -155,6 +157,6 @@ export const getPossibleTravelDirections = ({ row, column, width }: { row: numbe
 
   const coordinates = getAllPossibleCoordinates({ rows, columns })
 
-  return R.filter<Coordinates>(({ row: currentRow, column: currentColumn }) => !(row === currentRow && column === currentColumn), coordinates)
+  return R.filter(({ row: currentRow, column: currentColumn }) => !(row === currentRow && column === currentColumn), coordinates)
 }
 
