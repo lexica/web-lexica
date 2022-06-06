@@ -16,6 +16,8 @@ import { useSaveGame } from '../game/save-game'
 import { Timer } from '../game/timer'
 import { ConfirmationEffect, useConfirmationEffect } from './game/Board/hooks'
 
+import './InGameScreen.css'
+
 const Game: React.FC = () => {
 
   const scoreContext = useContext(ScoreContext)
