@@ -1,5 +1,7 @@
 import { useCallback, useEffect, useState } from "react"
 import { useLocation, useNavigate } from "react-router"
+import { getB64DelimitedURLBoard } from "../game/board/hooks"
+import { GameParamMap, GameURLParams } from "../game/url"
 
 export const parseURLSearch = <T = any>(search: string): T => {
   const keyValuePairs = search.replace('?', '').split('&')
@@ -58,4 +60,51 @@ export const useSafeNavigateBack = () => {
     }
     navigate(-1)
   }, [navigate])
+}
+
+const basePathRegex = /^(?:\/?web-lexica)?/
+
+// Careful, check the tests before using this.
+const stripBasepathFromPath = (path: string) => path
+  .replace(basePathRegex, '')
+  .replace(/^\//, '')
+  .replace(/\/$/, '')
+
+/**
+ * Validates a game url, will return false if it doesn't match
+ *  what a normal url should have:
+ *  `/singleplayer?b=...wl=...` etc
+ *
+ * Also validates the contents of the queary string to make sure
+ * nothing is missing, and that the board is a standard shape
+ * 
+ * Not picky about including or excluding `/web-lexica/` or `web-lexica/`
+ *
+ * @param gamePath the path to validate
+ * @returns {boolean}
+ */
+export const isValidGamePath = (gamePath: string) => {
+  const segments = gamePath.split('?')
+  if (segments.length !== 2) return false
+  const [basePath, queryString] = segments
+
+  const path = stripBasepathFromPath(basePath)
+  if (!['singleplayer', 'multiplayer'].includes(path)) return false
+
+  const params = parseURLSearch<GameURLParams>(queryString)
+  if (!params?.b?.length) return false
+  if (!params[GameParamMap.Language]) return false
+  if (!params[GameParamMap.MinimumWordLength]) return false
+  if (!params[GameParamMap.Score]) return false
+  if (!params[GameParamMap.Time]) return false
+
+  const board = getB64DelimitedURLBoard({ board: params[GameParamMap.Board], delimiter: ',' })
+  if (![4*4, 5*5, 6*6].includes(board.length)) return false
+  return true
+
+}
+
+export const __test = {
+  basePathRegex,
+  stripBasepathFromPath
 }

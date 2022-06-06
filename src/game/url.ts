@@ -6,7 +6,7 @@ import { HighestSupportedMinimumVersion } from '../util/compatibility-android'
 import { parseURLSearch } from '../util/url'
 import { ScoreType } from './score'
 
-enum GameParamMap {
+export enum GameParamMap {
   Board = 'b',
   Language = 'l',
   Time = 't',

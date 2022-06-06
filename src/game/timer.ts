@@ -1,4 +1,4 @@
-import { Duration, sum, toSeconds } from 'duration-fns'
+import { Duration, sum, toSeconds, normalize } from 'duration-fns'
 import React, {
   createContext,
   Reducer,
@@ -20,7 +20,8 @@ type TimerState = {
 enum TimerAction {
   Pause = 'pause',
   Resume = 'resume',
-  AddTime = 'add-time'
+  AddTime = 'add-time',
+  Reset = 'reset',
 }
 
 type TimerReducerAction = {
@@ -63,6 +64,14 @@ const handleAddTime = (state: TimerState, time: Duration) => {
   }
 }
 
+const handleResetTime = (state: TimerState, time: Duration) => {
+  const remainingTime = toSeconds(time)
+  return {
+    ...state,
+    remainingTime
+  }
+}
+
 const timerReducer = (state: TimerState, action: TimerReducerAction) => {
   logger.debug('running timer reducer', JSON.stringify({ action }))
   switch (action.type) {
@@ -72,6 +81,8 @@ const timerReducer = (state: TimerState, action: TimerReducerAction) => {
       return handleResume(state, action.info as Date)
     case TimerAction.AddTime:
       return handleAddTime(state, action.info as Duration)
+    case TimerAction.Reset:
+      return handleResetTime(state, action.info as Duration)
     default:
       throw new Error(`${action.type} has not been implemented yet`)
   }
@@ -144,6 +155,12 @@ export const useTimer = (totalTimeInSeconds: number): UseTimer => {
 
   const intervalRef = useRef<NodeJS.Timeout | undefined>(undefined)
   const remainingTimeRef = useRef(totalTimeInSeconds)
+
+  useEffect(() => {
+    logger.debug(`running useTimer reset totalTimeInSeconds useEffect... new time: ${totalTimeInSeconds}`)
+    const duration = normalize({ seconds: totalTimeInSeconds })
+    dispatch({ type: TimerAction.Reset, info: duration })
+  }, [totalTimeInSeconds, dispatch])
 
   useEffect(() => {
     if (state.remainingTime === remainingTimeRef.current) return

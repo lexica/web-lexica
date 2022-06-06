@@ -1,5 +1,5 @@
 import { normalize } from 'duration-fns'
-import { useContext, useState, useCallback, useMemo } from 'react'
+import { useContext, useState, useCallback, useMemo, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import GameModeDetails from '../components/GameModeDetails'
@@ -14,6 +14,7 @@ import './SavedGames.css'
 import Svg from '../components/Svg'
 import { useSafeNavigateBack } from '../util/url'
 import { makeRenderableBadge, useRenderInBanner } from '../components/Banner'
+import { logger } from '../util/logger'
 
 const getTime = ({ timer }: SavedGameType) => {
   const { minutes, seconds } = normalize({ seconds: timer })
@@ -87,39 +88,20 @@ const SavedGame = ({
   </>
 }
 
-// const ClearAllSavedGames: Renderable = ({ maxHeight, maxWidth }) => {
-//   const { fontSizeTitle, colorContentDark } = useConstants()
-//   const height = Math.min(maxHeight*4/5, fontSizeTitle)
-//   return <div
-//     style={{
-//       height: maxHeight,
-//       maxWidth,
-//       borderRadius: maxHeight/3,
-//       lineHeight: height,
-//       fontSize: height,
-//       paddingInline: maxHeight/2
-//     }}
-//     className='saved-games-clear-saved-games'
-//     onClick={handleClearAllSavedGames}
-//   >
-//     <Svg.Customizable
-//       svg={Delete}
-//       props={{
-//         title: 'Clear all saved games',
-//         fill: colorContentDark,
-//         height,
-//       }}
-//     />
-//     Clear All
-//   </div>
-// }
-
 const SavedGames = (): JSX.Element => {
   const savedRulesets = useRulesets()
   const savedGames = useSavedGameList()
   const [selectedGame, setSelectedGame] = useState('')
   const navigate = useNavigate()
   const goBack = useSafeNavigateBack()
+
+  useEffect(() => {
+    const gameList = getSavedGameList()
+    if (!gameList.length) {
+      logger.debug('running SavedGames useEffect: navigate home if there are no saved games')
+      navigate('/')
+    }
+  }, [navigate])
 
   const handleDelete = useCallback((url: string) => {
     clearSaveGameData(url)

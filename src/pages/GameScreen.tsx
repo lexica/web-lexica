@@ -16,9 +16,9 @@ import { Guess, GuessDispatch, useGuesses } from '../game/guess'
 import { Score, useScore } from '../game/score'
 import { LetterScores } from '../game'
 import { useTimeAttack } from '../game/time-attack'
-import { GameLocalStorage, savedGameExistsForUrl, useResumedGame, keyIsInvalid } from '../game/save-game'
+import { GameLocalStorage, savedGameExistsForUrl, useResumedGame } from '../game/save-game'
 import { sort } from '../util'
-import { getGamePath } from '../util/url'
+import { getGamePath, isValidGamePath } from '../util/url'
 
 export type GameScreenProps = {
   isMultiplayer?: boolean,
@@ -78,6 +78,13 @@ const useAutoStart = (shouldAutoStart: boolean, condition: boolean, handleStart:
 
   useEffect(() => {
     if (!shouldAutoStart || triggered) return
+
+    // if (!statefulCondition) {
+    //   setTriggered(false)
+    //   return
+    // }
+
+    // if (triggered) return
 
     if (statefulCondition) {
       handleStart()
@@ -194,9 +201,7 @@ const Game = ({
     setError(language.error)
   }, [language, dictionary, setLoading, setError])
 
-
   const timer = useContext(Timer)
-
   const { startTime } = timer
 
   const score = useContext(Score)
@@ -210,7 +215,9 @@ const Game = ({
     return () => timer.removeTimerEndCallback(handleFinish)
   }, [timer, handleFinish])
 
-  useAutoStart(autoStart, loading && !error, handleStart)
+  const ready = useMemo(() => !loading && !error, [loading, error])
+
+  useAutoStart(autoStart, ready, handleStart)
 
   useTimeAttack(rules, timer, score)
 
@@ -332,7 +339,7 @@ const GameScreen = ({ isMultiplayer: m, isNewGame: n }: GameScreenProps): JSX.El
 
   useEffect(() => {
     const gamePath = getGamePath()
-    if (keyIsInvalid(gamePath)) return
+    if (!isValidGamePath(gamePath)) return
 
     const savedGameExists = savedGameExistsForUrl(gamePath)
     if (!savedGameExists) return

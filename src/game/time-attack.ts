@@ -9,7 +9,7 @@ import { logger } from '../util/logger'
 
 export const useTimeAttack = (rules: Ruleset, timer: TimerContext, score: ScoreContext) => {
   // const [foundWordCount, dispatch] = useReducer<Reducer<number, FoundWordCountAction>>(foundWordCountReducer, 0)
-  const foundWordCountRef = useRef(0)
+  const foundWordCountRef = useRef(score?.foundWords?.length || 0)
   useEffect(() => {
     logger.debug('running useTimeAttack useEffect...', { foundWordLength: score.foundWords.length, count: foundWordCountRef.current })
     const timeAttackMultiplier = rules?.timeAttack ? rules?.timeAttack : 0

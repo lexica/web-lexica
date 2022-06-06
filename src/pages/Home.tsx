@@ -19,7 +19,6 @@ import { useHighScore } from '../game/high-scores'
 import { useConstants } from '../style/constants'
 import { useSavedGameList } from '../game/save-game'
 import MainTitle from '../components/MainTitle'
-import { logger } from '../util/logger'
 
 const GameSettings = (): JSX.Element => {
   const classes = makeClasses('home-game-option', 'home-button-defaults')
@@ -51,8 +50,6 @@ const ResumeGameButton = (): JSX.Element => {
   // const savedGames = []
 
   if (savedGames.length === 0) return <></>
-
-  logger.debug('hi')
 
   return <Link className='home-button-defaults home-play-game-button' to="/saved-games">
     <Svg.Customizable svg={Redo} props={{

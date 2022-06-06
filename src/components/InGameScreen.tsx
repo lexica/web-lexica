@@ -1,4 +1,4 @@
-import { useContext, useMemo } from 'react' 
+import { useContext, useEffect, useState } from 'react' 
 
 import { ScreenOrientation, useOrientation } from '../util/hooks'
 
@@ -11,7 +11,8 @@ import MostRecentGuess from './game/MostRecentGuess'
 import ScoredWordList from './game/ScoredWordList'
 import { HorizontalContainer, VerticalContainer } from './game/layouts'
 import { useUpdateHighScore } from '../game/high-scores'
-import { usePauseGameOnBlur, useSaveGame } from '../game/save-game'
+import { usePauseGameOnHidden } from '../game/pause-game'
+import { useSaveGame } from '../game/save-game'
 import { Timer } from '../game/timer'
 import { ConfirmationEffect, useConfirmationEffect } from './game/Board/hooks'
 
@@ -20,13 +21,19 @@ const Game: React.FC = () => {
   const scoreContext = useContext(ScoreContext)
   const timer = useContext(Timer)
 
-  const onGameOver = useSaveGame()
+  const useSaveGameState = useSaveGame()
+  const setUseSaveGameStateWrapper = useState(useSaveGameState)[1]
 
-  useMemo(() => {
-    timer.addTimerEndCallback(onGameOver)
-  }, [timer, onGameOver])
+  // Weird way of removing callbacks...
+  useEffect(() => {
+    setUseSaveGameStateWrapper(previous => {
+      timer.removeTimerEndCallback(previous.onGameFinishCallback)
+      timer.addTimerEndCallback(useSaveGameState.onGameFinishCallback)
+      return useSaveGameState
+    })
+  }, [useSaveGameState, setUseSaveGameStateWrapper, timer])
 
-  const isPaused = usePauseGameOnBlur(timer)
+  const isPaused = usePauseGameOnHidden(timer)
 
   const { foundWords } = scoreContext
 
