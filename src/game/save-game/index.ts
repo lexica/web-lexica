@@ -17,6 +17,7 @@ export {
 
 export {
   clearSaveGameData,
+  clearAllSaveGameData,
   getSavedGameList,
   savedGameExistsForUrl,
 } from './util'

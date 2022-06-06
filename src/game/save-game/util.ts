@@ -1,6 +1,8 @@
 import { normalize } from "duration-fns"
+import { getIndexMatchingArrayOfLength } from "../../util"
 import { splice } from "../../util/splice"
 import { storage } from "../../util/storage"
+import { isValidGamePath } from "../../util/url"
 import { getB64DelimitedURLBoard } from "../board/hooks"
 import { ScoreType } from "../score"
 import { gameLocalStorage, GameLocalStorage, LocalStorage, SavedGame } from "./types"
@@ -81,6 +83,33 @@ export const savedGameExistsForUrl = (gameUrl: string) => {
 export const clearSaveGameData = (gameUrl: string) => {
   gameLocalStorage.forEach(key => storage.remove(getGameLocalStorageKey(gameUrl, key)))
   removeGameFromSavedGames(gameUrl)
+}
+
+const isGameLocalStorageBaseKey = (maybeKey: string): maybeKey is GameLocalStorage => gameLocalStorage.includes(maybeKey as any)
+
+const isGameLocalStorageKey = (maybeKey: string) => {
+  const baseKey = maybeKey.split('-')[0]
+  if (!isGameLocalStorageBaseKey(baseKey)) return false
+
+  const path = maybeKey.replace(`${baseKey}-`, '')
+
+  return isValidGamePath(path)
+}
+
+export const clearAllSaveGameData = () => {
+  const storageKeyCount = window.localStorage.length
+  const toRemove = getIndexMatchingArrayOfLength(storageKeyCount).reduce((acc, keyIndex) => {
+    const key = window.localStorage.key(keyIndex)
+    if (key === null) return acc
+    if (isGameLocalStorageKey(key)) return [...acc, key]
+    return acc
+  }, [] as string[])
+  
+  for (const key of toRemove) {
+    storage.remove(key)
+  }
+
+  storage.set(LocalStorage.SavedGames, [])
 }
 
 export const getSavedGameList = () => storage.getWithDefault({

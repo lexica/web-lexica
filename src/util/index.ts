@@ -12,3 +12,7 @@ export const stringArraysAreEqual = (arrA: string[], arrB: string[]) => {
 }
 
 export const sort = <T>(list: T[]) => [...list].sort()
+
+export const getIndexMatchingArrayOfLength = (length: number): number[] => {
+  return Array.apply(null, { length } as any).map((_, i) => i)
+}

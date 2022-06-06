@@ -7,7 +7,14 @@ import { useConstants } from '../style/constants'
 import { ReactComponent as PlayCircle } from '@material-design-icons/svg/round/play_circle.svg'
 import { ReactComponent as Delete } from '@material-design-icons/svg/round/delete.svg'
 import { findRulesetId, SavedRulesets, useRulesets } from '../game/rules'
-import { clearSaveGameData, getSavedGameList, SavedGame as SavedGameType, useResumedGame, useSavedGameList } from '../game/save-game'
+import {
+  clearSaveGameData,
+  clearAllSaveGameData,
+  getSavedGameList,
+  SavedGame as SavedGameType,
+  useResumedGame,
+  useSavedGameList
+} from '../game/save-game'
 import { utf8ToB64 } from '../util/base-64'
 
 import './SavedGames.css'
@@ -126,10 +133,7 @@ const SavedGames = (): JSX.Element => {
   }, [navigate, selectedGame, setSelectedGame])
 
   const handleClearAllSavedGames = useCallback(() => {
-    const games = getSavedGameList()
-    for (const game of games) {
-      clearSaveGameData(game)
-    }
+    clearAllSaveGameData()
     goBack()
   }, [goBack])
 
