@@ -55,7 +55,7 @@ export const getSearchString = ({
 
   timeAttack && keyValuePairs.push([GameParamMap.TimeAttack, timeAttack])
 
-  return `?${keyValuePairs.map(kv => kv.join('=')).join('&')}`
+  return `${keyValuePairs.map(kv => kv.join('=')).join('&')}`
 }
 
 export type GameURLParams = {

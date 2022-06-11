@@ -1,5 +1,5 @@
 import * as R from 'ramda'
-import { createContext, useState } from 'react'
+import { createContext } from 'react'
 import { MetadataV1 } from './language'
 import { ScoreType } from './score'
 import { splitWordIntoLetters } from './words'
@@ -45,19 +45,3 @@ export const orderByWordScore = (dictionary: string[], scoreType: ScoreType, let
 export type LetterScoresContext = { [key: string]: number }
 
 export const LetterScores = createContext<LetterScoresContext>({})
-
-export enum GameType {
-  Invite = 'invite',
-  Create = 'create'
-}
-
-export const useGameType = () => {
-  const [gameType, setGameType] = useState(GameType.Invite)
-
-  return {
-    gameType,
-    setGameType
-  }
-}
-
-export const CurrentGameType = createContext<GameType>(GameType.Invite)

@@ -72,7 +72,7 @@ const StartScreen: React.FC<StartScreenProps> = ({
       <div className="start-screen-word-count">{wordCount}</div>
       {showRefreshButton && <div
         className="start-screen-refresh-board-button"
-        onClick={() => (handleBoardRefresh!)()}
+        onClick={handleBoardRefresh}
       >
         Refresh Board
       </div>}

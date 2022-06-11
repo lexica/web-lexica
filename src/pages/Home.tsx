@@ -1,4 +1,3 @@
-import { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { ReactComponent as EmojiEvents } from '@material-design-icons/svg/round/emoji_events.svg'
 import { ReactComponent as PlayCircle } from '@material-design-icons/svg/round/play_circle.svg'
@@ -10,7 +9,6 @@ import { ReactComponent as Redo } from '@material-design-icons/svg/round/redo.sv
 import Svg from '../components/Svg'
 import { useRulesFromStorage } from '../game/rules'
 import './Home.css'
-import { CurrentGameType, GameType } from '../game'
 import { useLanguageCodeFromLocalStorage } from '../game/language'
 import { Translation } from '../translations/implemented-languages'
 import { useTranslations } from '../translations'
@@ -112,12 +110,7 @@ const HighScore = (): JSX.Element => {
   </div>
 }
 
-const Home = ({ setGameType }: { setGameType: (type: GameType) => void }) => {
-
-  const gameType = useContext(CurrentGameType)
-
-  if (gameType !== GameType.Create) setGameType(GameType.Create)
-
+const Home = () => {
   return <div className="Page home">
     <HighScore />
     <MainTitle title='lexica' subtitle='online' />
