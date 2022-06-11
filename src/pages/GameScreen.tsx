@@ -1,24 +1,21 @@
-import { ReactNode, useCallback, useContext, useEffect, useMemo, useState } from 'react'
+import { useCallback, useContext, useEffect, useMemo, useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import ResultsScreen from '../components/ResultsScreen'
 import InGameScreen from '../components/InGameScreen'
-import { Board, BoardRefresh, useBoardFromUrl } from '../game/board/hooks'
-import { Language, LanguageState, useLanguage } from '../game/language'
-import { Rules, useRulesFromQueryString } from '../game/rules'
-import { getSearchString, useGameUrlParameters } from '../game/url'
-import { Dictionary, DictionaryState, useBoardDictionary } from '../game/dictionary'
+import { Board, BoardRefresh } from '../game/board/hooks'
+import { Language } from '../game/language'
+import { Rules } from '../game/rules'
+import { getSearchString } from '../game/url'
+import { Dictionary } from '../game/dictionary'
 import { logger } from '../util/logger'
-import { toSeconds } from 'duration-fns'
-import { Timer, useTimer } from '../game/timer'
+import { Timer } from '../game/timer'
 import StartScreen from '../components/StartScreen'
 import GameModeDetails from '../components/GameModeDetails'
-import { Guess, GuessDispatch, useGuesses } from '../game/guess'
-import { Score, useScore } from '../game/score'
-import { LetterScores } from '../game'
+import { Score } from '../game/score'
 import { useTimeAttack } from '../game/time-attack'
-import { GameLocalStorage, savedGameExistsForUrl, useResumedGame } from '../game/save-game'
-import { sort } from '../util'
+import { savedGameExistsForUrl } from '../game/save-game'
 import { getGamePath, isValidGamePath } from '../util/url'
+import { NewGameProviders, ResumedGameProviders, SharedGameProviders } from '../components/GameProviders'
 
 export type GameScreenProps = {
   isMultiplayer?: boolean,
@@ -79,102 +76,11 @@ const useAutoStart = (shouldAutoStart: boolean, condition: boolean, handleStart:
   useEffect(() => {
     if (!shouldAutoStart || triggered) return
 
-    // if (!statefulCondition) {
-    //   setTriggered(false)
-    //   return
-    // }
-
-    // if (triggered) return
-
     if (statefulCondition) {
       handleStart()
       setTriggered(true)
     }
   }, [shouldAutoStart, statefulCondition, handleStart, triggered, setTriggered])
-}
-
-const ResumedGameProviders = ({ gamePath, children }: { gamePath: string, children: ReactNode }) => {
-  const resumedGame = useResumedGame(gamePath)
-  const board = useMemo(() => resumedGame.board, [resumedGame])
-  const dictionary = useMemo(() => {
-    const { foundWords, remainingWords } = resumedGame[GameLocalStorage.Score]
-    return sort([...foundWords, ...remainingWords])
-  }, [resumedGame])
-  const boardDictionary: DictionaryState = useMemo(() => ({
-    boardDictionary: dictionary,
-    loading: false
-  }), [dictionary])
-  const language: LanguageState = useMemo(() => ({
-    loading: false,
-    error: false,
-    metadata: resumedGame.language,
-    dictionary: dictionary
-  }), [resumedGame, dictionary])
-
-  const rules = useMemo(() => resumedGame.rules, [resumedGame])
-  const [guess, dispatchGuess] = useGuesses(board, resumedGame.guesses)
-
-  const timer = useTimer(resumedGame.timer)
-
-  const [score, dispatchScoreUpdate] = useScore(boardDictionary, resumedGame[GameLocalStorage.Score])
-
-  const lastGuess = useMemo(() => guess.guesses[guess.guesses.length - 1], [guess])
-
-  useEffect(() => {
-    dispatchScoreUpdate(lastGuess)
-  }, [dispatchScoreUpdate, lastGuess])
-
-  return <Language.Provider value={language}>
-    <Rules.Provider value={rules}>
-      <LetterScores.Provider value={language.metadata.letterScores}>
-        <Board.Provider value={board}>
-          {/* Begin standard providers */}
-          <Guess.Provider value={guess}>
-            <GuessDispatch.Provider value={dispatchGuess}>
-              <Dictionary.Provider value={boardDictionary}>
-                <Score.Provider value={score}>
-                  <Timer.Provider value={timer}>
-                    {children}
-                  </Timer.Provider>
-                </Score.Provider>
-              </Dictionary.Provider>
-            </GuessDispatch.Provider>
-          </Guess.Provider>
-          {/* End standard providers */}
-        </Board.Provider>
-      </LetterScores.Provider>
-    </Rules.Provider>
-  </Language.Provider>
-}
-
-const StandardGameProviders = ({ children }: { children: ReactNode }) => {
-  const board = useContext(Board)
-  const language = useContext(Language)
-  const rules= useContext(Rules)
-  const dictionary = useBoardDictionary(language, board, rules.minimumWordLength)
-  const [guess, dispatchGuess] = useGuesses(board)
-
-  const timer = useTimer(toSeconds(rules.time))
-
-  const [score, dispatchScoreUpdate] = useScore(dictionary)
-
-  const lastGuess = useMemo(() => guess.guesses[guess.guesses.length - 1], [guess])
-
-  useEffect(() => {
-    dispatchScoreUpdate(lastGuess)
-  }, [dispatchScoreUpdate, lastGuess])
-
-  return <Guess.Provider value={guess}>
-    <GuessDispatch.Provider value={dispatchGuess}>
-      <Dictionary.Provider value={dictionary}>
-        <Score.Provider value={score}>
-          <Timer.Provider value={timer}>
-            {children}
-          </Timer.Provider>
-        </Score.Provider>
-      </Dictionary.Provider>
-    </GuessDispatch.Provider>
-  </Guess.Provider>
 }
 
 const Game = ({
@@ -225,22 +131,18 @@ const Game = ({
 
   useUpdatingSearchString(!loading && !error)
 
-  const toRender = getNextScreenLogic({
-    startScreenProps: {
-      loading,
-      error,
-      handleStart,
-      handleBoardRefresh,
-      showQrCode,
-      pageTitle,
-    },
-    autoStart,
-    started,
-    finished
-  }) // ,[loading, error, handleStart, handleBoardRefresh, showQrCode, pageTitle, autoStart, started, finished])
+  const startScreenProps = {
+    loading,
+    error,
+    handleStart,
+    handleBoardRefresh,
+    showQrCode,
+    pageTitle,
+  }
+
+  const toRender = getNextScreenLogic({ startScreenProps, autoStart, started, finished })
 
   return <>{toRender}</>
-  // return <ToRender />
 }
 
 const useUpdatingSearchString = (shouldUpdateSearch: boolean) => {
@@ -263,33 +165,21 @@ const NewGame = ({ isMultiplayer }: { isMultiplayer: boolean }): JSX.Element => 
 
   const handleBoardRefresh = useContext(BoardRefresh)
 
-  return <StandardGameProviders>
+  return <NewGameProviders>
     <Game
       handleBoardRefresh={handleBoardRefresh}
       showQrCode={isMultiplayer}
       isMultiplayer={isMultiplayer}
       autoStart={!isMultiplayer}
     />
-  </StandardGameProviders>
+  </NewGameProviders>
 }
 
 const Multiplayer = (): JSX.Element => {
-  const board = useBoardFromUrl()
-  const rules = useRulesFromQueryString(board)
-  const params = useGameUrlParameters()
-  const language = useLanguage(params.language)
 
-  return <Board.Provider value={board}>
-    <Rules.Provider value={rules}>
-      <Language.Provider value={language}>
-        <LetterScores.Provider value={language?.metadata?.letterScores}>
-          <StandardGameProviders>
-            <Game showQrCode={false} isMultiplayer />
-          </StandardGameProviders>
-        </LetterScores.Provider>
-      </Language.Provider>
-    </Rules.Provider>
-  </Board.Provider>
+  return <SharedGameProviders>
+    <Game showQrCode={false} isMultiplayer />
+  </SharedGameProviders>
 }
 
 const ResumedGame = ({ gameUrl }: { gameUrl: string }): JSX.Element => {

@@ -25,13 +25,16 @@ const ScoringType = ({ handleScoreUpdate, scoreTypes }: { handleScoreUpdate: (ty
 
   return <Description title={title} svg={EmojiEvents}>
     <div>
-      {scoreTypes.map(type => {
+      {scoreTypes.map((type, index) => {
         const title = {
           [ScoreType.Letters]: 'Letter Points',
           [ScoreType.Length]: 'Word Length'
         }[type]
 
-        return <div className={optionClass('score-type')}>
+        return <div
+          className={optionClass('score-type')}
+          key={`scoring-type-${index}`}
+        >
           <Radio
             group="score-type"
             value={type}

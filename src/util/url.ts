@@ -23,7 +23,7 @@ export type Location = {
 }
 
 export const getBaseUrl = ({ hostname, port, protocol }: Location = window.location) => {
-  const usePort = !(port === '443' || port === '80')
+  const usePort = !(`${port}` === '443' || `${port}` === '80' || `${port}` === '')
   return `${protocol}//${hostname}${usePort ? `:${port}` : ''}`
 }
 

@@ -32,8 +32,9 @@ const MinimumWordLength = ({
 
   return <Description title={title} svg={Sort}>
     <div className={optionsClass('minimum-word-length')}>
-      {wordLengths.map(l => <div
+      {wordLengths.map((l, index) => <div
         className={optionClass('minimum-word-length')}
+        key={`minimum-word-length-${index}`}
       >
         <Radio
           group="minimum-word-length"
