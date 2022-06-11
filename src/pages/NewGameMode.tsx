@@ -1,16 +1,13 @@
 import { useCallback, useState, useMemo } from 'react'
 import { ReactComponent as Save } from '@material-design-icons/svg/round/save.svg'
 
-import Svg from '../components/Svg'
 import Name from '../components/new-game-mode/Name'
 import TimeLimit from '../components/new-game-mode/TimeLimit'
 import ScoringType from '../components/new-game-mode/ScoringType'
 
-import { makeClasses } from '../util/classes'
 import { ScoreType } from '../game/score'
 import { logger } from '../util/logger'
-import { Renderable, useRenderInBanner } from '../components/Banner'
-import constants from '../style/constants'
+import { useBannerBadge } from '../components/Banner'
 import { addRuleset, setCurrentRuleset } from '../game/rules'
 import { Duration } from 'duration-fns'
 import { useNavigate } from 'react-router-dom'
@@ -28,37 +25,6 @@ const wordLengths = [3, 4, 5, 6]
 const timeAttackMultipliers = [0, 1, 2, 3, 4, 5]
 
 const isValidTimeAttackMultiplier = (multiplier: number) => multiplier >= 0
-
-type SaveGameModeProps = { isValid: boolean, handleSave: () => void }
-
-const SaveGameMode = ({ isValid, handleSave }: SaveGameModeProps): Renderable => ({
-  maxWidth,
-  maxHeight
-}) => {
-  const showName = maxWidth / maxHeight > 7.5
-
-  const classes = makeClasses(
-    'new-game-mode-submit-button',
-    'banner-rendered-prop-container',
-    { condition: !isValid, name: 'new-game-mode-submit-button-disabled' }
-  )
-
-  return <div className={classes} onClick={handleSave} >
-    <Svg.Customizable
-      svg={Save}
-      props={{
-        title: 'Save Game Mode',
-        fill: isValid ? constants.colorContentDark : constants.colorContentLowContrastDark,
-        width: maxHeight * .8,
-        height: maxHeight * .8
-      }}
-    />
-    {showName ? <div className={makeClasses(
-      'new-game-mode-submit-label',
-      'banner-rendered-prop-label'
-    )}> Save Game Mode </div> : ''}
-  </div>
-}
 
 const NewGameMode = (): JSX.Element => {
   const [timeAttack, setTimeAttack] = useState(0)
@@ -101,9 +67,13 @@ const NewGameMode = (): JSX.Element => {
     navigate('/')
   }, [isValid, timeLimit, boardSize, name, scoreType, minimumWordLength, navigate, timeAttack])
 
-  const BannerElement = useMemo(() => SaveGameMode({ isValid, handleSave }), [isValid, handleSave])
-
-  useRenderInBanner(BannerElement)
+  useBannerBadge({
+    disabled: !isValid,
+    svg: Save,
+    svgTitle: 'Save Game Mode',
+    onClick: handleSave,
+    prompt: 'Save Game Mode'
+  })
 
   return <div className="Page new-game-mode">
     <Name handleNameUpdate={setName} />

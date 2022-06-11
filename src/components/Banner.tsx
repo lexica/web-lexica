@@ -69,7 +69,7 @@ export type RenderableBadgeProps = {
   onClick?: (e: MouseEvent<HTMLDivElement>) => void
 }
 
-export const makeRenderableBadge = ({ svgTitle, prompt, svg, disabled, onClick }: RenderableBadgeProps): Renderable => ({
+const makeRenderableBadge = ({ svgTitle, prompt, svg, disabled = false, onClick }: RenderableBadgeProps): Renderable => ({
   maxWidth,
   maxHeight
 }) => {
@@ -80,7 +80,7 @@ export const makeRenderableBadge = ({ svgTitle, prompt, svg, disabled, onClick }
       svg={svg}
       props={{
         title: svgTitle,
-        fill: disabled ? constants.colorContentDark : constants.colorContentLowContrastDark,
+        fill: disabled ? constants.colorContentLowContrastDark : constants.colorContentDark,
         width: maxHeight * .8,
         height: maxHeight * .8
       }}
@@ -88,7 +88,7 @@ export const makeRenderableBadge = ({ svgTitle, prompt, svg, disabled, onClick }
   const classes = makeClasses(
     'banner-rendered-prop-badge',
     'banner-rendered-prop-container',
-    { condition: !!disabled , name: 'banner-rendered-prop-badge-disabled' },
+    { condition: disabled , name: 'banner-rendered-prop-badge-disabled' },
     { condition: isClickable, name: 'banner-rendered-prop-badge-clickable' }
   )
 
@@ -99,6 +99,20 @@ export const makeRenderableBadge = ({ svgTitle, prompt, svg, disabled, onClick }
     )}>{prompt}</div> : ''}
   </div>
 }
+
+export const useBannerBadge = ({ svgTitle, prompt, svg, disabled = false, onClick }: RenderableBadgeProps) => {
+  const { setElement, cleanUp } = useContext(RenderInBanner)
+  const renderable = useMemo(
+    () => makeRenderableBadge({ svgTitle, prompt, svg, disabled, onClick }),
+    [svgTitle, prompt, disabled, onClick, svg]
+  )
+
+  useEffect(() => {
+    setElement(renderable)
+    return cleanUp
+  }, [setElement, cleanUp, renderable])
+}
+
 const Banner = ({ toRender: RenderProp }: { toRender: Renderable }): JSX.Element => {
   const back = useSafeNavigateBack()
   const { pathname } = useLocation()

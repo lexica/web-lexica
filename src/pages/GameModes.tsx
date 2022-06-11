@@ -1,16 +1,15 @@
+import { useCallback } from 'react'
 import { ReactComponent as Add } from '@material-design-icons/svg/round/add.svg'
 
 import { Ruleset, Rulesets, setCurrentRuleset, useRulesets, useRulesFromStorage } from '../game/rules'
 import GameModeDetails from '../components/GameModeDetails'
-import Svg from "../components/Svg"
 import constants, { useConstants } from "../style/constants"
 import { makeClasses } from '../util/classes'
+import { useBannerBadge } from '../components/Banner'
+import { useNavigate } from 'react-router-dom'
+import { logger } from '../util/logger'
 
 import './GameModes.css'
-import { Renderable, useRenderInBanner } from '../components/Banner'
-import { Link, useNavigate } from 'react-router-dom'
-import { logger } from '../util/logger'
-import { useCallback } from 'react'
 
 type ModeProps = {
   rulesetTuple: [string, Ruleset]
@@ -75,48 +74,21 @@ const ModesList = ({
   </div>
 }
 
-const shouldAddPrompt = (height: number, width: number) => {
-  return width / height > 6.75
-}
-
-const AddGameMode: Renderable = ({ maxHeight, maxWidth }) => <Link
-  className={makeClasses(
-    'game-modes-add-game-mode-button',
-    'banner-rendered-prop-container'
-  )}
-  style={{
-    height: maxHeight,
-    maxHeight: maxHeight,
-  }}
-  to="/new-game-mode"
->
-  <Svg.Customizable
-    svg={Add}
-    props={{
-      title: 'Add new game mode',
-      width: maxHeight,
-      height: maxHeight
-    }}
-  />
-  {shouldAddPrompt(maxHeight, maxWidth) ? <div
-    className={makeClasses(
-      'game-modes-add-game-mode-prompt',
-      'banner-rendered-prop-label'
-      )}
-  >
-    Add Game Mode
-  </div> : ''}
-</Link>
-
-
 const GameModes = (): JSX.Element => {
 
   const rulesets = useRulesets()
   const selectedRulesetId = useRulesFromStorage()[1]
-
-  useRenderInBanner(AddGameMode)
-
   const navigate = useNavigate()
+
+  const handleAddGameModeOnClick = useCallback(() => navigate('/new-game-mode'), [navigate])
+
+  useBannerBadge({
+    svgTitle: 'Add new game mode',
+    svg: Add,
+    onClick: handleAddGameModeOnClick,
+    prompt: 'Add Game Mode'
+  })
+
 
   const handleOnClick = useCallback((id: string) => {
     if (id === selectedRulesetId) {

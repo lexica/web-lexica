@@ -44,21 +44,3 @@
   color: var(--color-content-dark);
   background-color: var(--color-background-dark-alt);
 }
-
-.game-modes-add-game-mode-button {
-  text-decoration: none;
-  background-color: var(--color-background-dark);
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  border-radius: var(--font-size);
-}
-
-.game-modes-add-game-mode-prompt {
-  display: flex;
-  align-content: center;
-  text-decoration: none;
-  color: var(--color-content-dark);
-  font-size: var(--font-size);
-}

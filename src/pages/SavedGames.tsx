@@ -1,5 +1,5 @@
 import { normalize } from 'duration-fns'
-import { useContext, useState, useCallback, useMemo, useEffect } from 'react'
+import { useContext, useState, useCallback, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import GameModeDetails from '../components/GameModeDetails'
@@ -20,7 +20,7 @@ import { utf8ToB64 } from '../util/base-64'
 import './SavedGames.css'
 import Svg from '../components/Svg'
 import { useSafeNavigateBack } from '../util/url'
-import { makeRenderableBadge, useRenderInBanner } from '../components/Banner'
+import { useBannerBadge } from '../components/Banner'
 import { logger } from '../util/logger'
 
 const getTime = ({ timer }: SavedGameType) => {
@@ -137,14 +137,12 @@ const SavedGames = (): JSX.Element => {
     goBack()
   }, [goBack])
 
-  const renderable = useMemo(() => makeRenderableBadge({
+  useBannerBadge({
     svgTitle: 'Clear All Saved Games',
     svg: Delete,
     onClick: handleClearAllSavedGames,
     prompt: 'Clear All'
-  }), [handleClearAllSavedGames])
-
-  useRenderInBanner(renderable)
+  })
 
   return <div className='SavedGames Page'>
     <div className='saved-games-game-details-headers'>

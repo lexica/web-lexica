@@ -30,9 +30,12 @@ const BoardSize = ({
 
   return <Description title={title} svg={GridView}>
     <div>
-      {sizes.map(size => {
+      {sizes.map((size, index) => {
         const id = `${size}x${size}`
-        return <div className={optionClass('board-size')}>
+        return <div
+          className={optionClass('board-size')}
+          key={`board-size-${index}`}
+        >
           <Radio
             group="board-size"
             value={size}

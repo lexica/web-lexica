@@ -8,7 +8,7 @@ import { ReactComponent as Language } from '@material-design-icons/svg/round/lan
 import { ReactComponent as Redo } from '@material-design-icons/svg/round/redo.svg'
 
 import Svg from '../components/Svg'
-import { Rules, useRulesFromStorage } from '../game/rules'
+import { useRulesFromStorage } from '../game/rules'
 import './Home.css'
 import { CurrentGameType, GameType } from '../game'
 import { useLanguageCodeFromLocalStorage } from '../game/language'
@@ -22,8 +22,8 @@ import MainTitle from '../components/MainTitle'
 
 const GameSettings = (): JSX.Element => {
   const classes = makeClasses('home-game-option', 'home-button-defaults')
+  const [ruleset] = useRulesFromStorage()
 
-  const ruleset = useContext(Rules)
 
   const languageCode = useLanguageCodeFromLocalStorage() as any as keyof Translation['languageTitles']
 
