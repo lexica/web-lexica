@@ -18,10 +18,10 @@ import {
 import { utf8ToB64 } from '../util/base-64'
 
 import './SavedGames.css'
-import Svg from '../components/Svg'
 import { useSafeNavigateBack } from '../util/url'
 import { useBannerBadge } from '../components/Banner'
 import { logger } from '../util/logger'
+import Button from '../components/Button'
 
 const getTime = ({ timer }: SavedGameType) => {
   const { minutes, seconds } = normalize({ seconds: timer })
@@ -70,26 +70,8 @@ const SavedGame = ({
     </div>
     {
       !isSelected ? '' : <div className='saved-games-game-details-action-menu'>
-          <div
-            className='saved-games-game-details-action-menu-button'
-            onClick={onResume}
-          >
-            <Svg.Standard
-              svg={PlayCircle}
-              title='Resume'
-            />
-            Resume
-          </div>
-          <div
-            className='saved-games-game-details-action-menu-button'
-            onClick={onDelete}
-          >
-            <Svg.Standard
-              svg={Delete}
-              title='Delete'
-            />
-            Delete
-          </div>
+          <Button onClick={onResume} prompt='Resume' svg={PlayCircle} />
+          <Button onClick={onDelete} prompt='Delete' svg={Delete} />
         </div>
     }
   </>

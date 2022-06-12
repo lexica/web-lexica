@@ -1,6 +1,5 @@
 
 import { BrowserRouter, Route, Routes,  } from 'react-router-dom'
-import { CurrentGameType, useGameType } from './game'
 import { Translations, useTranslations } from './translations'
 import { logger } from './util/logger'
 
@@ -25,21 +24,18 @@ function App() {
   logger.debug('loading app...')
 
   const translations = useTranslations()
-  const { gameType, setGameType } = useGameType()
   const { renderState, context } = useBannerContext()
 
   return (
       <div className="App">
         <Translations.Provider
           value={translations}
-        ><CurrentGameType.Provider
-          value={gameType}
         ><RenderInBanner.Provider
           value={context}
         >
           <BrowserRouter basename="/web-lexica">
             <Routes>
-              <Route  path="/" element={<Home setGameType={setGameType}/>}/>
+              <Route  path="/" element={<Home />}/>
               <Route path="/*" element={<>
                 <Banner { ...renderState}/>
                 <Routes>
@@ -56,7 +52,6 @@ function App() {
             </Routes>
           </BrowserRouter>
         </RenderInBanner.Provider>
-        </CurrentGameType.Provider>
         </Translations.Provider>
       </div>
   )

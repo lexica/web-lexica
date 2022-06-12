@@ -1,11 +1,12 @@
+import { CSSProperties } from "react"
 import constants, { useConstants } from "../style/constants"
 
 export type SvgComponent = React.FunctionComponent<React.SVGProps<SVGSVGElement> & { title?: string }>
 
 export type SvgProps = {
   title: string,
-  width: number,
-  height: number,
+  width: number | string,
+  height: number | string,
   fill: string
 }
 
@@ -13,13 +14,14 @@ export type CustomizableProps = {
   svg: SvgComponent,
   props: {
     title: string,
-    width?: number,
-    height?: number,
+    width?: number | string,
+    height?: number | string,
     fill?: string
-  }
+  },
+  style?: CSSProperties
 }
 
-const Customizable = ({ svg, props }: CustomizableProps): JSX.Element => {
+const Customizable = ({ svg, props, style }: CustomizableProps): JSX.Element => {
   // The typescript types are wrong for this component.
   // the svgs imported by webpack are not (at least in development) functional components
   // but rather of type react.forward_ref
@@ -31,7 +33,7 @@ const Customizable = ({ svg, props }: CustomizableProps): JSX.Element => {
     fill: constants.colorContentDark
   }
 
-  const withOverrides = { ...defaults, ...props}
+  const withOverrides = { ...defaults, ...props, style }
   return <>{render(withOverrides)}</>
 }
 

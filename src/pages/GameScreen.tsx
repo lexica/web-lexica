@@ -1,5 +1,5 @@
 import { useCallback, useContext, useEffect, useMemo, useState } from 'react'
-import { useNavigate, useLocation } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import ResultsScreen from '../components/ResultsScreen'
 import InGameScreen from '../components/InGameScreen'
 import { Board, BoardRefresh } from '../game/board/hooks'
@@ -62,7 +62,6 @@ const getNextScreenLogic = ({
 type GameProps = {
   autoStart?: boolean,
   showQrCode: boolean,
-  handleBoardRefresh?: () => void,
   isMultiplayer: boolean,
 }
 
@@ -85,7 +84,6 @@ const useAutoStart = (shouldAutoStart: boolean, condition: boolean, handleStart:
 
 const Game = ({
   autoStart: shouldAutoStart,
-  handleBoardRefresh,
   showQrCode,
   isMultiplayer
 }: GameProps): JSX.Element => {
@@ -94,6 +92,7 @@ const Game = ({
   const language = useContext(Language)
   const dictionary = useContext(Dictionary)
   const rules= useContext(Rules)
+  const handleBoardRefresh = useContext(BoardRefresh)
 
   const [started, updateStarted] = useState(false)
   const [finished, setFinished] = useState(false)
@@ -146,28 +145,23 @@ const Game = ({
 }
 
 const useUpdatingSearchString = (shouldUpdateSearch: boolean) => {
-  const { pathname } = useLocation()
   const board = useContext(Board)
   const language = useContext(Language)
   const rules = useContext(Rules)
-  const navigate = useNavigate()
+  const setSearchParameters = useSearchParams()[1]
   useEffect(() => {
     if (shouldUpdateSearch === true) {
+      logger.debug('running useUpdatingSearchString use effect...')
       const searchString = getSearchString({ board, language: language.metadata.name, ...rules })
 
-      const url = `${pathname}${searchString}`
-      navigate(url, { replace: true })
+      setSearchParameters(searchString , { replace: true })
     }
-  }, [board, language, shouldUpdateSearch, rules, pathname, navigate])
+  }, [board, language, shouldUpdateSearch, rules, setSearchParameters])
 }
 
 const NewGame = ({ isMultiplayer }: { isMultiplayer: boolean }): JSX.Element => {
-
-  const handleBoardRefresh = useContext(BoardRefresh)
-
   return <NewGameProviders>
     <Game
-      handleBoardRefresh={handleBoardRefresh}
       showQrCode={isMultiplayer}
       isMultiplayer={isMultiplayer}
       autoStart={!isMultiplayer}
@@ -238,11 +232,9 @@ const GameScreen = ({ isMultiplayer: m, isNewGame: n }: GameScreenProps): JSX.El
     setPath(gamePath)
   }, [setShouldUseSavedGame])
   
-  const MemoizedResumeGame = useMemo(() => () => <ResumedGame gameUrl={path} />, [path])
-  const MemoizedNewGame = useMemo(() => () => <NewGame isMultiplayer={isMultiplayer}/>, [isMultiplayer])
-  if (shouldUseSavedGame) return <MemoizedResumeGame/>
+  if (shouldUseSavedGame) return <ResumedGame gameUrl={path} />
 
-  if (isNewGame) return <MemoizedNewGame />
+  if (isNewGame) return <NewGame isMultiplayer={isMultiplayer}/>
   return <Multiplayer/>
 }
 

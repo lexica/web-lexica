@@ -9,6 +9,11 @@
   box-sizing: border-box;
 }
 
+/* Start game button */
+.start-screen>div:last-child {
+  padding-block: 1vh;
+}
+
 .start-screen-title {
   font-size: var(--font-size-title);
   margin: 1vh;
@@ -24,8 +29,13 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
   margin-bottom: .5vh;
+  white-space: nowrap;
+}
+
+.start-screen-action-bar>div:first-child:nth-last-child(2) {
+  margin-inline-end: 1rem;
 }
 
 .start-screen-refresh-board-button {
@@ -40,39 +50,4 @@
 .start-screen-start-prompt {
   font-weight: var(--font-weight-light);
   margin-top: auto;
-}
-
-.start-screen-start-button-universal {
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: row;
-  align-content: center;
-  justify-content: center;
-  align-self: stretch;
-  padding: 1vh;
-  margin: 0;
-  margin-top: 1vh;
-}
-
-.start-screen-start-button-universal div {
-  margin-left: 0.5vh;
-  font-size: var(--font-size-title);
-}
-
-.start-screen-start-button-universal svg {
-  margin-top: auto;
-  margin-bottom: auto;
-}
-
-.start-screen-start-button-disabled {
-  background-color: var(--color-content-dark);
-  color: var(--color-background-dark);
-  user-select: none;
-  cursor: default;
-}
-
-.start-screen-start-button {
-  background-color: var(--color-accent);
-  color: var(--color-background-light);
-  cursor: pointer;
 }

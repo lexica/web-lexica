@@ -8,11 +8,11 @@ const {
 enum Names {
   vh = 'viewport-height-cheat',
   vw = 'viewport-width-cheat',
-  em = 'em-cheat'
+  rem = 'rem-cheat'
 }
 
 const sizes = {
-  [Names.em]: 7,
+  [Names.rem]: 7,
   [Names.vh]: 5,
   [Names.vw]: 3
 }
@@ -21,7 +21,7 @@ describe('cssExp', () => {
   document.body.innerHTML = `
     <div id="viewport-height-cheat" style="height: 5px;"></div>
     <div id="viewport-width-cheat" style="height: 3px;"></div>
-    <div id="em-cheat" style="height: 7px;"></div>
+    <div id="rem-cheat" style="height: 7px;"></div>
   `
 
   describe('evaluateStatement', () => {
@@ -31,20 +31,20 @@ describe('cssExp', () => {
       expect(result).toEqual(sizes[Names.vh])
     })
     it('can handle floating point numbers', () => {
-      const result = evaluateStatement('1.5vh + 1em')
+      const result = evaluateStatement('1.5vh + 1rem')
 
-      expect(result).toEqual(sizes[Names.em]+ (1.5*sizes[Names.vh]))
+      expect(result).toEqual(sizes[Names.rem]+ (1.5*sizes[Names.vh]))
     })
-    it('can handle a mathmatical expression', () => {
+    it('can handle a mathematical expression', () => {
       const result = evaluateStatement('1vh + 1vw')
 
       expect(result).toEqual(sizes[Names.vh] + sizes[Names.vw])
     })
     it('can handle sub-function calls', () => {
-      const result = evaluateStatement('max(1em, min(2vw, 4vh))')
-      expect(result).toBe(sizes[Names.em])
+      const result = evaluateStatement('max(1rem, min(2vw, 4vh))')
+      expect(result).toBe(sizes[Names.rem])
     })
-    it('can handle expressions that dont have spaces', () => {
+    it("can handle expressions that don't have spaces", () => {
       const result = evaluateStatement('1px+1px')
       expect(result).toBe(2)
     })
@@ -56,9 +56,9 @@ describe('cssExp', () => {
   })
 
   it('can handle complex calls', () => {
-    const result = cssExp`clamp(0.5em, min(2vh, 2.75vw), 1em)`
+    const result = cssExp`clamp(0.5rem, min(2vh, 2.75vw), 1rem)`
 
-    expect(result).toBe(sizes[Names.em])
+    expect(result).toBe(sizes[Names.rem])
   })
 
   describe('makeExpression', () => {

@@ -1,0 +1,102 @@
+@import "../style/constants.css";
+
+/* Universal styling */
+.button-component, .button-component>a {
+  box-sizing: border-box;
+  cursor: pointer;
+  width: 100%;
+  line-height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+}
+
+.button-component>a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Universal disabled */
+.button-component.button-component-disabled, .button-component.button-component-disabled>a {
+  cursor: not-allowed;
+}
+
+/* Coloring */
+.button-component-emphasis {
+  color: var(--color-background-light);
+  background-color: var(--color-accent);
+}
+.button-component-standard {
+  color: var(--color-content-dark);
+  background-color: var(--color-background-dark-alt);
+}
+.button-component-alternative-standard {
+  color: var(--color-content-dark);
+  background-color: var(--color-background-dark);
+}
+
+/* Disabled Coloring */
+.button-component-emphasis.button-component-disabled {
+  color: var(--color-content-low-contrast-dark);
+  background-color: var(--color-content-dark);
+}
+.button-component-standard.button-component-disabled {
+  color: var(--color-content-low-contrast-dark);
+  background-color: var(--color-background-dark-alt);
+}
+.button-component-alternative-standard.button-component-disabled {
+  color: var(--color-content-low-contrast-dark);
+  background-color: var(--color-background-dark);
+}
+
+/* variables */
+:root {
+  --padding-ratio: calc(1/9);
+  --padding-normal: calc(var(--font-size) * var(--padding-ratio));
+  --padding-title: calc(var(--font-size-title) * var(--padding-ratio));
+  --padding-subscript: calc(var(--font-size-subscript) * var(--padding-ratio));
+}
+
+/* Padding */
+.button-component-font-size-normal {
+  padding: var(--padding-normal)
+}
+.button-component-font-size-normal>svg, .button-component-font-size-normal>a>svg {
+  margin-inline-end: calc(2 * var(--padding-normal));
+}
+.button-component-font-size-title {
+  padding: var(--padding-title)
+}
+.button-component-font-size-title>svg, .button-component-font-size-title>a>svg {
+  margin-inline-end: calc(2 * var(--padding-title));
+}
+.button-component-font-size-subscript {
+  padding: var(--padding-subscript)
+}
+.button-component-font-size-subscript>svg, .button-component-font-size-subscript>a>svg {
+  margin-inline-end: calc(2 * var(--padding-subscript));
+}
+
+/* Border Styling */
+.button-component-rounded-edges {
+  border-radius: calc(var(--font-size) * 1/3);
+}
+
+/* Font Sizing */
+.button-component-font-size-normal {
+  font-size: var(--font-size);
+}
+.button-component-font-size-title {
+  font-size: var(--font-size-title);
+}
+.button-component-font-size-subscript {
+  font-size: var(--font-size-subscript);
+}
+
+.button-component-nowrap {
+  white-space: nowrap;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+}
