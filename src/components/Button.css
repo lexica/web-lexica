@@ -88,12 +88,6 @@
 .button-component-rounded-edges {
   border-radius: var(--border-radius);
 }
-/* .button-component-rounded-edges.button-component-font-size-title {
-  border-radius: calc(var(--font-size-title) * var(--radius-ratio));
-}
-.button-component-rounded-edges.button-component-font-size-subscript {
-  border-radius: calc(var(--font-size-subscript) * var(--radius-ratio));
-} */
 
 /* Font Sizing */
 .button-component-font-size-normal {
@@ -110,14 +104,4 @@
   white-space: nowrap;
   overflow-x: hidden;
   text-overflow: ellipsis;
-}
-
-.button-component-font-weight-normal {
-  font-weight: normal;
-}
-.button-component-font-weight-bolder {
-  font-weight: var(--font-weight-bold);
-}
-.button-component-font-weight-lighter {
-  font-weight: var(--font-weight-light);
 }

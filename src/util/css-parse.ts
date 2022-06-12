@@ -21,12 +21,6 @@ const getHeight = (id: string) => {
 }
 
 // eslint-disable-next-line
-const pt = (value: number) => {
-  const ptPerPixel = getHeight('pt-cheat')
-  return value * ptPerPixel
-}
-
-// eslint-disable-next-line
 const rem = (value: number) => {
   const emPerPixel = getHeight('rem-cheat')
   return value * emPerPixel
@@ -45,7 +39,7 @@ const vw = (value: number) => {
 
 const px = (value: number) => value
 
-const unitMap = { pt, rem, vh, vw, px, '': (num: number) => num } as const
+const unitMap = { rem, vh, vw, px, '': (num: number) => num } as const
 
 type Unit = keyof typeof unitMap
 

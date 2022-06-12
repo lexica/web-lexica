@@ -18,7 +18,6 @@ import {
 import { utf8ToB64 } from '../util/base-64'
 
 import './SavedGames.css'
-import Svg from '../components/Svg'
 import { useSafeNavigateBack } from '../util/url'
 import { useBannerBadge } from '../components/Banner'
 import { logger } from '../util/logger'
