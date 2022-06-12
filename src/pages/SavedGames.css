@@ -23,34 +23,9 @@
   justify-content: space-evenly;
 }
 
-.saved-games-game-details-action-menu-button {
-  cursor: pointer;
-  user-select: none;
-  background-color: var(--color-background-dark-alt);
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  border-radius: 1vh;
-  padding-inline-end: .5vh;
-  padding-inline-start: .5vh;
-  padding-block: .5vh;
-  width: 35%;
-  max-width: 35%;
-  line-height: var(--font-size);
-  margin: .5vh;
+.saved-games-game-details-action-menu>div {
+  margin-inline: 2rem;
 }
-
-.saved-games-game-details-action-menu-button>svg {
-  margin-right: .5vh;
-}
-
-/* .saved-games-game-details-action-menu-button {
-  width: 100%;
-  max-width: none;
-  line-height: var(--font-size);
-  margin: .5vh;
-} */
 
 .saved-games-game-details {
   display: flex;

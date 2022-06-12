@@ -22,89 +22,25 @@
   margin-block-start: 1vh;
 }
 
-.home-title {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-top: auto;
-}
-
-.home-title {
-  margin-bottom: 5vh;
-}
-
-.home-title-letters {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-}
-
-.home-title-letter {
-  margin: .5vh;
-  padding: 1vh;
-  background-color: var(--color-accent);
-  color: var(--color-background-dark);
-  width: 4vh;
-  height: 4vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-weight: var(--font-weight-bold);
-  vertical-align: middle;
-  font-size: var(--font-size-title);
-}
-
-.home-game-option>div {
-  font-size: var(--font-size);
-  margin-top: .2em;
-  margin-bottom: .2em;
-  margin-left: .5vh;
-  margin-right: .5vh;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
-}
-
-.home-button-defaults {
-  text-decoration: none;
-
-  color: var(--color-content-dark);
-}
-
-.home-play-game-button>svg {
-  margin-right: .5vh;
-}
-
 .home-game-buttons {
   display: flex;
   flex-direction: column;
-  margin-bottom: 2vh;
+  margin-bottom: 1rem;
   align-items: center;
   width: 100%;
 }
-
-.home-game-buttons>a {
-  width: 100%;
-  max-width: none;
-  font-size: var(--font-size-title);
-  line-height: var(--font-size-title);
+.home-game-buttons>div {
+  margin-top: 1rem;
 }
 
-.home-game-buttons>a {
-  margin-top: 2vh;
-}
-
-.home-game-buttons>a:first-child {
-  margin-top: 0;
-}
-
-.home-game-options  {
+.home-game-options {
   display: flex;
   flex-direction: row;
-  margin-bottom: 2vh;
   justify-content: space-between;
+}
+
+.home-game-options>div:first-child {
+  margin-inline-end: 0.5rem;
 }
 
 .home-buttons-container {
@@ -113,18 +49,5 @@
   margin-bottom: auto;
   margin-inline-end: auto;
   margin-inline-start: auto;
-  width: 40vh;
-}
-
-.home-button-defaults {
-  background-color: var(--color-background-dark-alt);
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  border-radius: 1vh;
-  padding-inline-end: .5vh;
-  padding-inline-start: .5vh;
-  width: 45%;
-  max-width: 45%;
+  width: min(40vh, 75vw);
 }

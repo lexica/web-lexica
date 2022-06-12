@@ -1,9 +1,9 @@
 import { useContext } from 'react'
 import { ReactComponent as PlayCircle } from '@material-design-icons/svg/round/play_circle.svg'
+import { ReactComponent as Refresh } from '@material-design-icons/svg/round/refresh.svg'
 
 import GameModeDetails from './GameModeDetails'
 
-import constants, { useConstants } from '../style/constants'
 import { Dictionary } from '../game/dictionary'
 import { Translations } from '../translations'
 import { Translation } from '../translations/implemented-languages'
@@ -13,6 +13,7 @@ import './StartScreen.css'
 import ShareGameQrCode, { Platform } from './game/ShareGameQrCode'
 import { Rules } from '../game/rules'
 import { Board } from '../game/board/hooks'
+import Button, { ButtonFontSizing, ButtonThemeType } from './Button'
 
 export type StartScreenProps = {
   handleStart: () => any
@@ -32,26 +33,14 @@ const StartScreen: React.FC<StartScreenProps> = ({
   handleBoardRefresh
 }) => {
   const languageContext = useContext(Language)
-
   const language = languageContext.metadata.name
-
-  const { fontSizeTitle } = useConstants()
-
   const dictionary = useContext(Dictionary)
-
   const translations = useContext(Translations)
-
   const rules = useContext(Rules)
-
   const board = useContext(Board)
 
-  const showRefreshButton = loading === false && error === false && typeof handleBoardRefresh === 'function'
-
-  const startButtonClass = loading || error
-    ? 'start-screen-start-button-disabled'
-    : 'start-screen-start-button'
+  const showRefreshButton = loading === false && error === false && showQrCode
   const disabled = loading || error
-
   const wordCount = loading
     ? 'Loading...'
     : error
@@ -70,27 +59,19 @@ const StartScreen: React.FC<StartScreenProps> = ({
     <GameModeDetails/>
     <div className="start-screen-action-bar">
       <div className="start-screen-word-count">{wordCount}</div>
-      {showRefreshButton && <div
-        className="start-screen-refresh-board-button"
-        onClick={handleBoardRefresh}
-      >
-        Refresh Board
-      </div>}
+      {showRefreshButton && <Button onClick={handleBoardRefresh} prompt='Refresh Board' svg={Refresh} />}
     </div>
     <div className="start-screen-share-game-qr-code">{!loading && qrCode}</div>
     <div className="start-screen-start-prompt">When all players are ready, you should all start the game at the same time.</div>
-    <div
-      className={`start-screen-start-button-universal ${startButtonClass}`}
-      onClick={disabled ? undefined : handleStart}
-    >
-      <PlayCircle
-        title="Start"
-        fill={disabled ? constants.colorBackgroundDark : constants.colorBackgroundLight}
-        width={fontSizeTitle}
-        height={fontSizeTitle}
-      />
-      <div>Start game</div>
-    </div>
+    <Button
+      fontSizing={ButtonFontSizing.Title}
+      svg={PlayCircle}
+      prompt='Start game'
+      onClick={handleStart}
+      roundedEdges={false}
+      themeType={ButtonThemeType.Emphasis}
+      disabled={disabled}
+    />
   </div>
 }
 

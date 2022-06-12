@@ -3,9 +3,9 @@ import { useEffect, useCallback, useState } from 'react'
 import { cssExp } from '../util/css-parse'
 
 const getConstants = () => ({
-  fontSize: cssExp`clamp(1em, min(2.5vh, 4vw), 2em)`,
-  fontSizeTitle: cssExp`clamp(1.5em, min(3vh, 5.25vw), 3em)`,
-  fontSizeSubscript: cssExp`clamp(0.5em, min(2vh, 2.75vw), 1em)`,
+  fontSize: cssExp`clamp(1rem, min(2.5vh, 4vw), 2rem)`,
+  fontSizeTitle: cssExp`clamp(1.5rem, min(3vh, 5.25vw), 3rem)`,
+  fontSizeSubscript: cssExp`clamp(0.5rem, min(2vh, 2.75vw), 1rem)`,
   fontWeightBold: 700,
   fontWeightLight: 100,
 
@@ -60,9 +60,9 @@ export const useConstants = () => {
 
 
 const constants = {
-  fontSize: 'clamp(1em, min(2.5vh, 4vw), 2em)',
-  fontSizeTitle: 'clamp(1.5em, min(3vh, 5.25vw), 3em)',
-  fontSizeSubscript: 'clamp(0.5em, min(2vh, 2.75vw), 1em)',
+  fontSize: 'clamp(1rem, min(2.5vh, 4vw), 2rem)',
+  fontSizeTitle: 'clamp(1.5rem, min(3vh, 5.25vw), 3rem)',
+  fontSizeSubscript: 'clamp(0.5rem, min(2vh, 2.75vw), 1rem)',
   fontWeightBold: 'bolder',
   fontWeightLight: 'lighter',
 
