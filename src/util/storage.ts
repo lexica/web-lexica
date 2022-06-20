@@ -52,7 +52,11 @@ const getSamePageEvent = (key: string, value: string | Removed) => new CustomEve
 })
 
 export const useStorage = <I>(key: string, initialValue: I, parser: (value: string) => I = JSON.parse) => {
-  const [item, setItem] = useState<I>(initialValue)
+  const [item, setItem] = useState<I>(storage.getWithDefault({
+    key,
+    parser,
+    defaultValue: initialValue
+  }))
 
   useEffect(() => {
     const eventHandler = (e: SamePageEvent) => {

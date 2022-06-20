@@ -1,69 +1,60 @@
 import {ReactComponent as Calendar } from '@material-design-icons/svg/round/calendar_today.svg'
 import {ReactComponent as Shuffle } from '@material-design-icons/svg/round/shuffle.svg'
-import { useState, useMemo } from 'react'
-import { Link, Route, Routes } from 'react-router-dom'
+import { useCallback, useMemo } from 'react'
+import { Route, Routes } from 'react-router-dom'
 import { ReactComponent as Unchecked } from '@material-design-icons/svg/round/check_box_outline_blank.svg'
 import { ReactComponent as Checked } from '@material-design-icons/svg/round/check_box.svg'
+import Button, { ButtonFontSizing } from '../components/Button'
 import MainTitle from '../components/MainTitle'
-import Svg from '../components/Svg'
-import { useConstants } from '../style/constants'
-import { makeClasses } from '../util/classes'
-
-import './Lexicle.css'
 import Random from './lexicle/Random'
 import WordOfTheDay from './lexicle/WordOfTheDay'
 import { logger } from '../util/logger'
 import Shared from './lexicle/Shared'
+import { storage, useStorage } from '../util/storage'
+
+import './Lexicle.css'
+
+enum LocalStorage { UseWordleWords = 'use-wordle-words' }
+
+const toggleUseWordleWords = (initialValue: boolean) => {
+    const storedValue = storage.get<boolean>({ key: LocalStorage.UseWordleWords })
+    const previousValue = storedValue === null ? initialValue : storedValue
+    storage.set(LocalStorage.UseWordleWords, !previousValue)
+}
 
 const ChooseGameMode = (): JSX.Element => {
-  const { fontSizeTitle } = useConstants()
-  const classes = makeClasses('lexicle-button-defaults', 'lexicle-play-game-button')
-
-  const [useWordleWords, setUseWordleWords] = useState(/^en\b/.test(navigator.language))
+  const defaultUseWordleWords = /^en\b/.test(navigator.language)
+  const useWordleWords = useStorage(LocalStorage.UseWordleWords, defaultUseWordleWords)
 
   const basePath = useMemo(
     () => `/lexicle/${useWordleWords ? '/with-wordle-words' : ''}`,
     [useWordleWords]
   )
 
+  const handleUseWordleWordList = useCallback(() => toggleUseWordleWords(defaultUseWordleWords), [defaultUseWordleWords])
+
   return <div className='lexicle-choose-game-mode'>
     <div className='lexicle-title'>
       <MainTitle title='lexicle'/>
     </div>
     <div className="lexicle-game-buttons">
-        <Link
+        <Button
           to={`${basePath}/word-of-the-day`}
-          className={classes}
-        >
-          <Svg.Customizable svg={Calendar} props={{
-            title: 'Word of the Day',
-            height: fontSizeTitle,
-            width: fontSizeTitle
-          }}/>
-          Word of the Day
-        </Link>
-        <Link
+          svg={Calendar}
+          prompt='Word of the Day'
+          fontSizing={ButtonFontSizing.Title}
+        />
+        <Button
           to={`${basePath}/random`}
-          className={classes}
-        >
-          <Svg.Customizable svg={Shuffle} props={{
-            title: 'Random',
-            height: fontSizeTitle,
-            width: fontSizeTitle,
-          }}/>
-          Random
-        </Link>
-        <div
-          className={classes}
-          onClick={() => setUseWordleWords(p => !p)}
-        >
-          Use Wordle Word List: 
-          <Svg.Customizable svg={useWordleWords ? Checked : Unchecked} props={{
-            title: 'Use Wordle Word List',
-            height: fontSizeTitle,
-            width: fontSizeTitle,
-          }}/>
-        </div>
+          svg={Shuffle}
+          fontSizing={ButtonFontSizing.Title}
+          prompt='Random'
+        />
+        <Button
+          onClick={handleUseWordleWordList}
+          prompt='Use Wordle Word List'
+          svg={useWordleWords ? Checked : Unchecked}
+        />
       </div>
     </div>
 }
