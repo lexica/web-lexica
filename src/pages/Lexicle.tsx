@@ -25,35 +25,23 @@ const toggleUseWordleWords = (initialValue: boolean) => {
 const ChooseGameMode = (): JSX.Element => {
   const defaultUseWordleWords = /^en\b/.test(navigator.language)
   const useWordleWords = useStorage(LocalStorage.UseWordleWords, defaultUseWordleWords)
-
-  const basePath = useMemo(
-    () => `/lexicle/${useWordleWords ? '/with-wordle-words' : ''}`,
-    [useWordleWords]
-  )
-
   const handleUseWordleWordList = useCallback(() => toggleUseWordleWords(defaultUseWordleWords), [defaultUseWordleWords])
+
+  const basePath = useMemo(() => `/lexicle/${useWordleWords ? '/with-wordle-words' : ''}`, [useWordleWords])
+  const buttonSize = ButtonFontSizing.Title
 
   return <div className='lexicle-choose-game-mode'>
     <div className='lexicle-title'>
       <MainTitle title='lexicle'/>
     </div>
     <div className="lexicle-game-buttons">
-        <Button
-          to={`${basePath}/word-of-the-day`}
-          svg={Calendar}
-          prompt='Word of the Day'
-          fontSizing={ButtonFontSizing.Title}
-        />
-        <Button
-          to={`${basePath}/random`}
-          svg={Shuffle}
-          fontSizing={ButtonFontSizing.Title}
-          prompt='Random'
-        />
+        <Button to={`${basePath}/word-of-the-day`} prompt='Word of the Day' svg={Calendar} fontSizing={buttonSize} />
+        <Button to={`${basePath}/random`} prompt='Random' svg={Shuffle} fontSizing={buttonSize} />
         <Button
           onClick={handleUseWordleWordList}
           prompt='Use Wordle Word List'
           svg={useWordleWords ? Checked : Unchecked}
+          fontSizing={buttonSize}
         />
       </div>
     </div>
