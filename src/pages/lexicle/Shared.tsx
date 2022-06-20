@@ -12,7 +12,7 @@ import { Score } from '../../game/lexicle/score'
 import { GameBoard } from './Game'
 import { sort } from '../../util'
 
-import WithWordleWords from './WithWordleWords'
+import { WithWordleWords } from './GameProviders'
 import Results from '../../components/game/lexicle/Results'
 import { useOnGameFinishedCallback } from './GameSetup'
 

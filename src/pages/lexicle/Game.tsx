@@ -3,7 +3,7 @@ import Board from '../../components/game/Board'
 import Results from '../../components/game/lexicle/Results'
 import Score from '../../components/game/lexicle/Score'
 import GameSetup from './GameSetup'
-import WithWordleWords from './WithWordleWords'
+import { WithWordleWords, WithLexicaWords } from './GameProviders'
 
 import './Game.css'
 
@@ -20,16 +20,16 @@ type SetupProps = {
   onGameFinish: () => void 
 }
 
-const NormalSetup = ({ children, wordOfTheDay, onGameFinish }: SetupProps) => <>
+const NormalSetup = ({ children, wordOfTheDay, onGameFinish }: SetupProps) => <WithLexicaWords>
   <GameSetup {...{ wordOfTheDay, onGameFinish }}>
     {children}
   </GameSetup>
-</>
+</WithLexicaWords>
 
 const WordleSetup = ({ children, wordOfTheDay, onGameFinish }: SetupProps) => <WithWordleWords>
-  <NormalSetup wordOfTheDay={wordOfTheDay} onGameFinish={onGameFinish}>
+  <GameSetup {...{ wordOfTheDay, onGameFinish }}>
     {children}
-  </NormalSetup>
+  </GameSetup>
 </WithWordleWords>
 
 const Game = (props: { wordOfTheDay?: boolean, useWordleWords?: boolean }): JSX.Element => {

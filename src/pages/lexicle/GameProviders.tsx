@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { ReactNode, useContext, useMemo } from 'react'
-import { Language, MetadataV1 } from '../../game/language'
+import { WithChildren } from '../../components/GameProviders'
+import { Language, MetadataV1, useLanguageFromLocalStorage } from '../../game/language'
 import { ValidAnswers } from '../../game/lexicle/score'
 import { usePromiseWithMetadata } from '../../util/hooks'
 
@@ -10,7 +11,7 @@ const getAnswers = () => axios.get<string[]>('/web-lexica/api/wordle-en-US/dicti
 
 const Loading = () => <div>Loading...</div>
 
-const WithWordleWords = ({ children }: { children: ReactNode }): JSX.Element => {
+export const WithWordleWords = ({ children }: { children: ReactNode }): JSX.Element => {
   const metadataPromise = useMemo(getMetadata, [])
   const validWordsPromise = useMemo(getValidWords, [])
   const answersPromise = useMemo(getAnswers, [])
@@ -44,4 +45,14 @@ const WithWordleWords = ({ children }: { children: ReactNode }): JSX.Element => 
   </>
 }
 
-export default WithWordleWords
+export const WithLexicaWords = ({ children }: WithChildren) => {
+  const language = useLanguageFromLocalStorage()
+  const validAnswers = useMemo(() => language.dictionary, [language])
+  return language.loading ? <Loading/> : <>
+    <Language.Provider value={language}>
+      <ValidAnswers.Provider value={validAnswers}>
+        {children}
+      </ValidAnswers.Provider>
+    </Language.Provider>
+  </>
+}
