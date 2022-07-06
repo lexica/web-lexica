@@ -1,6 +1,5 @@
 
 import { BrowserRouter, Route, Routes,  } from 'react-router-dom'
-import { Translations, useTranslations } from './translations'
 import { logger } from './util/logger'
 
 import GameModes from './pages/GameModes'
@@ -19,11 +18,19 @@ import Banner, {
 import Lexicons from './pages/Lexicons'
 import NewGameMode from './pages/NewGameMode'
 import SavedGames from './pages/SavedGames'
+import { useTranslation } from 'react-i18next'
+import { useCallback } from 'react'
 
 function App() {
   logger.debug('loading app...')
 
-  const translations = useTranslations()
+  const { t: translateFn, i18n: translationsI18n } = useTranslation('translations')
+  const { t: languageTitleFn, i18n: languageTitlesI18n } = useTranslation('language-titles')
+  const changeLanguage = useCallback((languageCode) => {
+    translationsI18n.changeLanguage(languageCode)
+    languageTitlesI18n.changeLanguage(languageCode)
+  }, [translationsI18n, languageTitlesI18n])
+
   const { renderState, context } = useBannerContext()
 
   return (

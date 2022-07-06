@@ -27,7 +27,7 @@ const main = () => {
   // program.command('merge-translation')
     .argument('<string...>', 'one or more country code to merge, or "all" to merge all codes')
     .option('-a, --android-translations-dir <string>', 'path to the Lexica translations directory',  './temp-translations/lexica/strings/app/src/main/res')
-    .option('-w, --web-translations-dir <string>', 'path to the Web Lexica translations directory', './src/translations')
+    .option('-w, --web-translations-dir <string>', 'path to the Web Lexica translations directory', './public/locales')
     .addOption(new Option('-c, --clobber', 'Replace existing Web Lexica translations with Lexica translations, does not merge translations at all').default(false).conflicts('update'))
     .option('-u, --update', 'Replace existing Web Lexica translations with Lexica translations where available, merges existing translations', false)
     .option('-p, --print', 'Print the results to stdout, no files will be written', false)
