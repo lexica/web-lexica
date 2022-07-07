@@ -1,1 +1,57 @@
-{"pages":{"home":{"headlineTitle":"Lexica","newGame":"Uusi peli","multiplayer":"Moninpeli"},"newGameMode":{"gameModeName":{"hint":"Nimi","description":"Pelitilan valintaa ja ennätysten talletusta varten"},"timeLimit":{"title":"Aikaraja","description":"Aikaraja minuutteina"},"boardSize":"Laudan koko","scoreType":{"title":"Pisteytystapa","wordLength":"Sanojen pituus","letterPoints":"Kirjainpisteet"}},"multiplayer":{"startGameHint":"Kun kaikki pelaajat ovat valmiina, aloittakaa peli samaan aikaan.","startGame":"Aloita peli","joinGameHint":"Kun kaikki pelaajat ovat valmiina, liity peliin.","joinGame":"Liity peliin"},"lexicons":{"title":"Leksikko","isBeta":"Beta"}},"gameModeDetails":{"time_one":"{{count}} min","time_other":"{{count}} min"},"lexicaGameScreens":{"inGame":{"foundWords":"Löydetyt sanat"},"results":{"missedWords":"Löytämättömät sanat"}},"scoreDetails":{"time":"Aika","words":"Sanat","score":"Pisteet","displayPercentage":"{{found}}/{{total}} ({{percentage}} %)"}}
+{
+  "pages": {
+    "home": {
+      "headlineTitle": "Lexica",
+      "newGame": "Uusi peli",
+      "multiplayer": "Moninpeli"
+    },
+    "newGameMode": {
+      "gameModeName": {
+        "hint": "Nimi",
+        "description": "Pelitilan valintaa ja ennätysten talletusta varten"
+      },
+      "timeLimit": {
+        "title": "Aikaraja",
+        "description": "Aikaraja minuutteina"
+      },
+      "boardSize": "Laudan koko",
+      "scoreType": {
+        "title": "Pisteytystapa",
+        "wordLength": "Sanojen pituus",
+        "letterPoints": "Kirjainpisteet"
+      }
+    },
+    "multiplayer": {
+      "startGameHint": "Kun kaikki pelaajat ovat valmiina, aloittakaa peli samaan aikaan.",
+      "startGame": "Aloita peli",
+      "joinGameHint": "Kun kaikki pelaajat ovat valmiina, liity peliin.",
+      "joinGame": "Liity peliin",
+      "wordCount_one": "{{count}} sana",
+      "wordCount_other": "{{count}} sanaa"
+    },
+    "lexicons": {
+      "title": "Leksikko",
+      "isBeta": "Beta"
+    }
+  },
+  "gameModeDetails": {
+    "time_one": "{{count}} min",
+    "time_other": "{{count}} min"
+  },
+  "lexicaGameScreens": {
+    "inGame": {
+      "foundWords": "Löydetyt sanat"
+    },
+    "results": {
+      "missedWords": "Löytämättömät sanat"
+    }
+  },
+  "scoreDetails": {
+    "time": "Aika",
+    "words": "Sanat",
+    "score": "Pisteet",
+    "displayPercentage": "{{found}}/{{total}} ({{percentage}} %)",
+    "wordLength": "Sanojen pituus",
+    "letterPoints": "Kirjainpisteet"
+  }
+}

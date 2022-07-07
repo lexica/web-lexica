@@ -1,1 +1,48 @@
-{"pages":{"home":{"headlineTitle":"लेक्सिका","newGame":"नया खेल"},"newGameMode":{"gameModeName":{"hint":"नाम","description":"खेल मोड चुनने के लिए/ ऊँचे स्कोर रिकार्ड करने के लिए"},"timeLimit":{"title":"समय सीमा","description":"मिनटों में समय सीमा"},"boardSize":"बोर्ड माप","scoreType":{"title":"स्कोरिंग प्रणाली","wordLength":"शब्द की लंबाई","letterPoints":"अक्षर अंक"}},"lexicons":{"title":"शब्दकोश","isBeta":"बीटा"}},"gameModeDetails":{"time_one":"{{count}} मिनट","time_other":"{{count}} मिनटें"},"lexicaGameScreens":{"inGame":{"foundWords":"खोजे शब्द"},"results":{"missedWords":"छूटे हुए शब्द"}},"scoreDetails":{"time":"अवधि","words":"शब्द","score":"स्कोर","displayPercentage":"{{found}}/{{total}} ({{percentage}}%)"}}
+{
+  "pages": {
+    "home": {
+      "headlineTitle": "लेक्सिका",
+      "newGame": "नया खेल"
+    },
+    "newGameMode": {
+      "gameModeName": {
+        "hint": "नाम",
+        "description": "खेल मोड चुनने के लिए/ ऊँचे स्कोर रिकार्ड करने के लिए"
+      },
+      "timeLimit": {
+        "title": "समय सीमा",
+        "description": "मिनटों में समय सीमा"
+      },
+      "boardSize": "बोर्ड माप",
+      "scoreType": {
+        "title": "स्कोरिंग प्रणाली",
+        "wordLength": "शब्द की लंबाई",
+        "letterPoints": "अक्षर अंक"
+      }
+    },
+    "lexicons": {
+      "title": "शब्दकोश",
+      "isBeta": "बीटा"
+    }
+  },
+  "gameModeDetails": {
+    "time_one": "{{count}} मिनट",
+    "time_other": "{{count}} मिनटें"
+  },
+  "lexicaGameScreens": {
+    "inGame": {
+      "foundWords": "खोजे शब्द"
+    },
+    "results": {
+      "missedWords": "छूटे हुए शब्द"
+    }
+  },
+  "scoreDetails": {
+    "time": "अवधि",
+    "words": "शब्द",
+    "score": "स्कोर",
+    "displayPercentage": "{{found}}/{{total}} ({{percentage}}%)",
+    "wordLength": "शब्द की लंबाई",
+    "letterPoints": "अक्षर अंक"
+  }
+}

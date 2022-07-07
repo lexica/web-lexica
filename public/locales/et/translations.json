@@ -1,1 +1,57 @@
-{"pages":{"home":{"headlineTitle":"Lexica","newGame":"Uus mäng","multiplayer":"Mitmikmäng"},"newGameMode":{"gameModeName":{"hint":"Nimi","description":"Mänguviisi valimiseks ja tulemuste salvestamiseks"},"timeLimit":{"title":"Ajapiirang","description":"Ajapiirang minutites"},"boardSize":"Mängulaua suurus","scoreType":{"title":"Punktiarvestuse tüüp","wordLength":"Sõnade pikkus","letterPoints":"Tähepunktid"}},"multiplayer":{"startGameHint":"Kui kõik mängijad on valmis, siis palun alustage mängimist ühe korraga.","startGame":"Alusta mängu","joinGameHint":"Liitu mänguga, kui kõik mängijad on valmis.","joinGame":"Liitu mänguga"},"lexicons":{"title":"Leksikon","isBeta":"beetaversioon"}},"gameModeDetails":{"time_one":"{{count}} minut","time_other":"{{count}} minutit"},"lexicaGameScreens":{"inGame":{"foundWords":"Leitud sõnad"},"results":{"missedWords":"Leidmata sõnad"}},"scoreDetails":{"time":"Aeg","words":"Sõnu","score":"Tulemus","displayPercentage":"{{found}}/{{total}} ({{percentage}}%)"}}
+{
+  "pages": {
+    "home": {
+      "headlineTitle": "Lexica",
+      "newGame": "Uus mäng",
+      "multiplayer": "Mitmikmäng"
+    },
+    "newGameMode": {
+      "gameModeName": {
+        "hint": "Nimi",
+        "description": "Mänguviisi valimiseks ja tulemuste salvestamiseks"
+      },
+      "timeLimit": {
+        "title": "Ajapiirang",
+        "description": "Ajapiirang minutites"
+      },
+      "boardSize": "Mängulaua suurus",
+      "scoreType": {
+        "title": "Punktiarvestuse tüüp",
+        "wordLength": "Sõnade pikkus",
+        "letterPoints": "Tähepunktid"
+      }
+    },
+    "multiplayer": {
+      "startGameHint": "Kui kõik mängijad on valmis, siis palun alustage mängimist ühe korraga.",
+      "startGame": "Alusta mängu",
+      "joinGameHint": "Liitu mänguga, kui kõik mängijad on valmis.",
+      "joinGame": "Liitu mänguga",
+      "wordCount_one": "{{count}} sõna",
+      "wordCount_other": "{{count}} sõna"
+    },
+    "lexicons": {
+      "title": "Leksikon",
+      "isBeta": "beetaversioon"
+    }
+  },
+  "gameModeDetails": {
+    "time_one": "{{count}} minut",
+    "time_other": "{{count}} minutit"
+  },
+  "lexicaGameScreens": {
+    "inGame": {
+      "foundWords": "Leitud sõnad"
+    },
+    "results": {
+      "missedWords": "Leidmata sõnad"
+    }
+  },
+  "scoreDetails": {
+    "time": "Aeg",
+    "words": "Sõnu",
+    "score": "Tulemus",
+    "displayPercentage": "{{found}}/{{total}} ({{percentage}}%)",
+    "wordLength": "Sõnade pikkus",
+    "letterPoints": "Tähepunktid"
+  }
+}

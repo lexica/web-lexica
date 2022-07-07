@@ -1,1 +1,19 @@
-{"ca":"Catalán","de_DE":"Alemán","es":"Español","es_solo_enne":"Español sin acentos","fa":"Persa","fr_FR":"Francés","fr_FR_no_diacritics":"Francés","hu":"Húngaro","it":"Italiano","ja":"Japonés","nl":"Holandés","pl":"Polaco","pt_BR_no_diacritics":"Portugués (BR)","ru":"Ruso","en_GB":"Inglés (GB)","uk":"Ucraniano","en_US":"Inglés (US)"}
+{
+  "ca": "Catalán",
+  "de_DE": "Alemán",
+  "es": "Español",
+  "es_solo_enne": "Español sin acentos",
+  "fa": "Persa",
+  "fr_FR": "Francés",
+  "fr_FR_no_diacritics": "Francés",
+  "hu": "Húngaro",
+  "it": "Italiano",
+  "ja": "Japonés",
+  "nl": "Holandés",
+  "pl": "Polaco",
+  "pt_BR_no_diacritics": "Portugués (BR)",
+  "ru": "Ruso",
+  "en_GB": "Inglés (GB)",
+  "uk": "Ucraniano",
+  "en_US": "Inglés (US)"
+}

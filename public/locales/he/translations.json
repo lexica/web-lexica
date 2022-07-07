@@ -1,1 +1,39 @@
-{"pages":{"home":{"headlineTitle":"Lexica","newGame":"משחק חדש"},"newGameMode":{"timeLimit":{"title":"מגבלת זמן"},"boardSize":"גודל הלוח","scoreType":{"title":"סוג ניקוד","wordLength":"אורך מילה","letterPoints":"נקודות אות"}},"lexicons":{"title":"אוצר מלים","isBeta":"בטא"}},"lexicaGameScreens":{"inGame":{"foundWords":"מילים שנמצאו"},"results":{"missedWords":"מילים חסרות"}},"scoreDetails":{"time":"זמן","words":"מילים","score":"ניקוד","displayPercentage":"{{found}}/{{total}} ({{percentage}}%)"}}
+{
+  "pages": {
+    "home": {
+      "headlineTitle": "Lexica",
+      "newGame": "משחק חדש"
+    },
+    "newGameMode": {
+      "timeLimit": {
+        "title": "מגבלת זמן"
+      },
+      "boardSize": "גודל הלוח",
+      "scoreType": {
+        "title": "סוג ניקוד",
+        "wordLength": "אורך מילה",
+        "letterPoints": "נקודות אות"
+      }
+    },
+    "lexicons": {
+      "title": "אוצר מלים",
+      "isBeta": "בטא"
+    }
+  },
+  "lexicaGameScreens": {
+    "inGame": {
+      "foundWords": "מילים שנמצאו"
+    },
+    "results": {
+      "missedWords": "מילים חסרות"
+    }
+  },
+  "scoreDetails": {
+    "time": "זמן",
+    "words": "מילים",
+    "score": "ניקוד",
+    "displayPercentage": "{{found}}/{{total}} ({{percentage}}%)",
+    "wordLength": "אורך מילה",
+    "letterPoints": "נקודות אות"
+  }
+}

@@ -1,1 +1,51 @@
-{"pages":{"home":{"headlineTitle":"Lexica","newGame":"Nytt spel"},"newGameMode":{"gameModeName":{"hint":"Namn","description":"For välj av spelläge / inspelning av poängsummar"},"timeLimit":{"title":"Tidsbegränsning","description":"Tidsgräns i minuter"},"boardSize":"Brädesstorlek","scoreType":{"title":"Poängräkning","wordLength":"Ordlängd","letterPoints":"Bokstavspoäng"}},"multiplayer":{"joinGame":"Gå med i spel"},"lexicons":{"title":"Lexikon","isBeta":"Beta"}},"gameModeDetails":{"time_one":"{{count}} min","time_other":"{{count}} min"},"lexicaGameScreens":{"inGame":{"foundWords":"Hittade ord"},"results":{"missedWords":"Misslyckade ord"}},"scoreDetails":{"time":"Tid","words":"Ord","score":"Poäng","displayPercentage":"{{found}}/{{total}} ({{percentage}}%)"}}
+{
+  "pages": {
+    "home": {
+      "headlineTitle": "Lexica",
+      "newGame": "Nytt spel"
+    },
+    "newGameMode": {
+      "gameModeName": {
+        "hint": "Namn",
+        "description": "For välj av spelläge / inspelning av poängsummar"
+      },
+      "timeLimit": {
+        "title": "Tidsbegränsning",
+        "description": "Tidsgräns i minuter"
+      },
+      "boardSize": "Brädesstorlek",
+      "scoreType": {
+        "title": "Poängräkning",
+        "wordLength": "Ordlängd",
+        "letterPoints": "Bokstavspoäng"
+      }
+    },
+    "multiplayer": {
+      "joinGame": "Gå med i spel"
+    },
+    "lexicons": {
+      "title": "Lexikon",
+      "isBeta": "Beta"
+    }
+  },
+  "gameModeDetails": {
+    "time_one": "{{count}} min",
+    "time_other": "{{count}} min"
+  },
+  "lexicaGameScreens": {
+    "inGame": {
+      "foundWords": "Hittade ord"
+    },
+    "results": {
+      "missedWords": "Misslyckade ord"
+    }
+  },
+  "scoreDetails": {
+    "time": "Tid",
+    "words": "Ord",
+    "score": "Poäng",
+    "displayPercentage": "{{found}}/{{total}} ({{percentage}}%)",
+    "wordLength": "Ordlängd",
+    "letterPoints": "Bokstavspoäng"
+  }
+}

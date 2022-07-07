@@ -1,1 +1,26 @@
-{"pages":{"home":{"headlineTitle":"ليكسيكا","newGame":"لعبة جديدة"},"newGameMode":{"timeLimit":{"title":"المهلة الزمنية"},"boardSize":"حجم اللوح","scoreType":{"wordLength":"طول الكلمة"}},"lexicons":{"title":"القاموس"}},"scoreDetails":{"words":"الكلمات","score":"النقاط","displayPercentage":"{{found}}/{{total}} ({{percentage}}%)"}}
+{
+  "pages": {
+    "home": {
+      "headlineTitle": "ليكسيكا",
+      "newGame": "لعبة جديدة"
+    },
+    "newGameMode": {
+      "timeLimit": {
+        "title": "المهلة الزمنية"
+      },
+      "boardSize": "حجم اللوح",
+      "scoreType": {
+        "wordLength": "طول الكلمة"
+      }
+    },
+    "lexicons": {
+      "title": "القاموس"
+    }
+  },
+  "scoreDetails": {
+    "words": "الكلمات",
+    "score": "النقاط",
+    "displayPercentage": "{{found}}/{{total}} ({{percentage}}%)",
+    "wordLength": "طول الكلمة"
+  }
+}

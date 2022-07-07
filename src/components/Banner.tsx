@@ -12,12 +12,15 @@ import { useCssExp } from '../util/css-parse'
 import constants, { useConstants } from '../style/constants'
 import { useSafeNavigateBack } from '../util/url'
 import { makeClasses } from '../util/classes'
+import { Translations } from '../translations'
+import { TranslationsFn } from '../translations/types'
 
-const getPageName = (path: string): string => {
+const getPageName = (path: string, translationsFn: TranslationsFn): string => {
   const segment = path.split('/').filter(s => s.length).pop()
   if (!segment) return ''
 
-  return segment.replace(/-/g, ' ')
+  const key = segment.replace(/(-[a-z])/ig, $1 => $1.replace('-', '').toUpperCase())
+  return translationsFn(`pages.${key}.title` as any)
 }
 
 export type RenderInBannerContext = {
@@ -117,7 +120,9 @@ const Banner = ({ toRender: RenderProp }: { toRender: Renderable }): JSX.Element
   const back = useSafeNavigateBack()
   const { pathname } = useLocation()
 
-  const pageName = getPageName(pathname)
+  const { translationsFn } = useContext(Translations)
+
+  const pageName = getPageName(pathname, translationsFn)
 
   const onClickHandler = useCallback(() => {
     back()

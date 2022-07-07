@@ -1,1 +1,44 @@
-{"pages":{"home":{"headlineTitle":"Lexica","newGame":"Lîstika Nû"},"newGameMode":{"gameModeName":{"hint":"Nav","description":"Bo hilbijartina moda lîstikê/tomarkirina pûanên bilind"},"timeLimit":{"title":"Lîmîta demê","description":"Bi cureya xulekê, lîmîta demê"},"boardSize":"Mezinahiya Hûnanê","scoreType":{"title":"Cureya Puandanê","wordLength":"Dirêjahiya Peyvê","letterPoints":"Pûana tîpê"}},"lexicons":{"title":"Ferheng","isBeta":"Beta"}},"lexicaGameScreens":{"inGame":{"foundWords":"Peyvên peydakirî"},"results":{"missedWords":"Peyvên Peydanekirî"}},"scoreDetails":{"time":"Mawe","words":"Peyv","score":"Pûan","displayPercentage":"{{found}}/{{total}} ({{percentage}}%)"}}
+{
+  "pages": {
+    "home": {
+      "headlineTitle": "Lexica",
+      "newGame": "Lîstika Nû"
+    },
+    "newGameMode": {
+      "gameModeName": {
+        "hint": "Nav",
+        "description": "Bo hilbijartina moda lîstikê/tomarkirina pûanên bilind"
+      },
+      "timeLimit": {
+        "title": "Lîmîta demê",
+        "description": "Bi cureya xulekê, lîmîta demê"
+      },
+      "boardSize": "Mezinahiya Hûnanê",
+      "scoreType": {
+        "title": "Cureya Puandanê",
+        "wordLength": "Dirêjahiya Peyvê",
+        "letterPoints": "Pûana tîpê"
+      }
+    },
+    "lexicons": {
+      "title": "Ferheng",
+      "isBeta": "Beta"
+    }
+  },
+  "lexicaGameScreens": {
+    "inGame": {
+      "foundWords": "Peyvên peydakirî"
+    },
+    "results": {
+      "missedWords": "Peyvên Peydanekirî"
+    }
+  },
+  "scoreDetails": {
+    "time": "Mawe",
+    "words": "Peyv",
+    "score": "Pûan",
+    "displayPercentage": "{{found}}/{{total}} ({{percentage}}%)",
+    "wordLength": "Dirêjahiya Peyvê",
+    "letterPoints": "Pûana tîpê"
+  }
+}

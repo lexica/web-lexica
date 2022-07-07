@@ -1,1 +1,57 @@
-{"pages":{"home":{"headlineTitle":"Lexica","newGame":"Нова гра","multiplayer":"Багатокористувацька гра"},"newGameMode":{"gameModeName":{"hint":"Назва","description":"Для вибору ігрового режиму / запису високих балів"},"timeLimit":{"title":"Тривалість гри","description":"Обмеження часу в хвилинах"},"boardSize":"Розмір поля","scoreType":{"title":"Метод підрахунку","wordLength":"За довжиною слів","letterPoints":"За балами букв"}},"multiplayer":{"startGameHint":"Коли всі гравці готові, вам слід розпочати гру одночасно.","startGame":"Почати гру","joinGameHint":"Коли всі гравці будуть готові, приєднуйтесь до гри.","joinGame":"Приєднатись до гри"},"lexicons":{"title":"Лексикон","isBeta":"Бета"}},"gameModeDetails":{"time_one":"{{count}} хв","time_other":"{{count}} хв"},"lexicaGameScreens":{"inGame":{"foundWords":"Знайдені слова"},"results":{"missedWords":"Пропущені слова"}},"scoreDetails":{"time":"Час","words":"Слова","score":"Бали","displayPercentage":"{{found}}/{{total}} ({{percentage}}%)"}}
+{
+  "pages": {
+    "home": {
+      "headlineTitle": "Lexica",
+      "newGame": "Нова гра",
+      "multiplayer": "Багатокористувацька гра"
+    },
+    "newGameMode": {
+      "gameModeName": {
+        "hint": "Назва",
+        "description": "Для вибору ігрового режиму / запису високих балів"
+      },
+      "timeLimit": {
+        "title": "Тривалість гри",
+        "description": "Обмеження часу в хвилинах"
+      },
+      "boardSize": "Розмір поля",
+      "scoreType": {
+        "title": "Метод підрахунку",
+        "wordLength": "За довжиною слів",
+        "letterPoints": "За балами букв"
+      }
+    },
+    "multiplayer": {
+      "startGameHint": "Коли всі гравці готові, вам слід розпочати гру одночасно.",
+      "startGame": "Почати гру",
+      "joinGameHint": "Коли всі гравці будуть готові, приєднуйтесь до гри.",
+      "joinGame": "Приєднатись до гри",
+      "wordCount_one": "{{count}} слово",
+      "wordCount_other": "{{count}} слів"
+    },
+    "lexicons": {
+      "title": "Лексикон",
+      "isBeta": "Бета"
+    }
+  },
+  "gameModeDetails": {
+    "time_one": "{{count}} хв",
+    "time_other": "{{count}} хв"
+  },
+  "lexicaGameScreens": {
+    "inGame": {
+      "foundWords": "Знайдені слова"
+    },
+    "results": {
+      "missedWords": "Пропущені слова"
+    }
+  },
+  "scoreDetails": {
+    "time": "Час",
+    "words": "Слова",
+    "score": "Бали",
+    "displayPercentage": "{{found}}/{{total}} ({{percentage}}%)",
+    "wordLength": "За довжиною слів",
+    "letterPoints": "За балами букв"
+  }
+}

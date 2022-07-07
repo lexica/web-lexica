@@ -1,1 +1,38 @@
-{"pages":{"home":{"headlineTitle":"Lexica","newGame":"新遊戲"},"newGameMode":{"timeLimit":{"title":"時限"},"boardSize":"圖版大小","scoreType":{"title":"計分方式","wordLength":"單詞長度","letterPoints":"字母分數"}},"lexicons":{"title":"字典","isBeta":"測試中"}},"lexicaGameScreens":{"inGame":{"foundWords":"找到的單詞"},"results":{"missedWords":"遺漏的單詞"}},"scoreDetails":{"words":"單詞","score":"分數","displayPercentage":"{{found}}/{{total}}（{{percentage}}%）"}}
+{
+  "pages": {
+    "home": {
+      "headlineTitle": "Lexica",
+      "newGame": "新遊戲"
+    },
+    "newGameMode": {
+      "timeLimit": {
+        "title": "時限"
+      },
+      "boardSize": "圖版大小",
+      "scoreType": {
+        "title": "計分方式",
+        "wordLength": "單詞長度",
+        "letterPoints": "字母分數"
+      }
+    },
+    "lexicons": {
+      "title": "字典",
+      "isBeta": "測試中"
+    }
+  },
+  "lexicaGameScreens": {
+    "inGame": {
+      "foundWords": "找到的單詞"
+    },
+    "results": {
+      "missedWords": "遺漏的單詞"
+    }
+  },
+  "scoreDetails": {
+    "words": "單詞",
+    "score": "分數",
+    "displayPercentage": "{{found}}/{{total}}（{{percentage}}%）",
+    "wordLength": "單詞長度",
+    "letterPoints": "字母分數"
+  }
+}

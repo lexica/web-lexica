@@ -1,1 +1,57 @@
-{"pages":{"home":{"headlineTitle":"Lexica","newGame":"Nova igra","multiplayer":"Više igrača"},"newGameMode":{"gameModeName":{"hint":"Ime","description":"Za biranje načina igre / zapisivanje najviših rezultata"},"timeLimit":{"title":"Vremensko ograničenje","description":"Vremensko ograničenje u minutama"},"boardSize":"Veličina ploče","scoreType":{"title":"Vrsta bodovanja","wordLength":"Duljina riječi","letterPoints":"Bodovi za riječi"}},"multiplayer":{"startGameHint":"Kad su svi igrači spremni, svi biste trebali započeti igru u isto vrijeme.","startGame":"Počni igru","joinGameHint":"Kad su svi igrači spremni, pridruži se igri.","joinGame":"Pridruži se igri"},"lexicons":{"title":"Leksikon","isBeta":"beta"}},"gameModeDetails":{"time_one":"{{count}} min","time_other":"{{count}} min"},"lexicaGameScreens":{"inGame":{"foundWords":"Pronađene riječi"},"results":{"missedWords":"Propuštene riječi"}},"scoreDetails":{"time":"Vrijeme","words":"Riječi","score":"Rezultat","displayPercentage":"{{found}}/{{total}} ({{percentage}} %)"}}
+{
+  "pages": {
+    "home": {
+      "headlineTitle": "Lexica",
+      "newGame": "Nova igra",
+      "multiplayer": "Više igrača"
+    },
+    "newGameMode": {
+      "gameModeName": {
+        "hint": "Ime",
+        "description": "Za biranje načina igre / zapisivanje najviših rezultata"
+      },
+      "timeLimit": {
+        "title": "Vremensko ograničenje",
+        "description": "Vremensko ograničenje u minutama"
+      },
+      "boardSize": "Veličina ploče",
+      "scoreType": {
+        "title": "Vrsta bodovanja",
+        "wordLength": "Duljina riječi",
+        "letterPoints": "Bodovi za riječi"
+      }
+    },
+    "multiplayer": {
+      "startGameHint": "Kad su svi igrači spremni, svi biste trebali započeti igru u isto vrijeme.",
+      "startGame": "Počni igru",
+      "joinGameHint": "Kad su svi igrači spremni, pridruži se igri.",
+      "joinGame": "Pridruži se igri",
+      "wordCount_one": "{{count}} riječ",
+      "wordCount_other": "{{count}} riječi"
+    },
+    "lexicons": {
+      "title": "Leksikon",
+      "isBeta": "beta"
+    }
+  },
+  "gameModeDetails": {
+    "time_one": "{{count}} min",
+    "time_other": "{{count}} min"
+  },
+  "lexicaGameScreens": {
+    "inGame": {
+      "foundWords": "Pronađene riječi"
+    },
+    "results": {
+      "missedWords": "Propuštene riječi"
+    }
+  },
+  "scoreDetails": {
+    "time": "Vrijeme",
+    "words": "Riječi",
+    "score": "Rezultat",
+    "displayPercentage": "{{found}}/{{total}} ({{percentage}} %)",
+    "wordLength": "Duljina riječi",
+    "letterPoints": "Bodovi za riječi"
+  }
+}

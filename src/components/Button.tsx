@@ -52,7 +52,7 @@ const Button = (props: ButtonProps): JSX.Element => {
     themeType = ButtonThemeType.Standard,
     disabled = false,
     roundedEdges = true,
-    nowrap = true
+    nowrap = false
   } = props
   const constants = useConstants()
   const usingLink = to !== '' && !props.disabled

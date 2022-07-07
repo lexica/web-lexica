@@ -39,6 +39,9 @@ export type TranslationsKeys = {
   'pages.multiplayer.startGame': string,
   'pages.multiplayer.joinGameHint': string,
   'pages.multiplayer.joinGame': string,
+  'pages.multiplayer.wordCount': {
+    'count': string | number,
+  },
   'pages.savedGames.title': string,
   'pages.savedGames.gameModeName': string,
   'pages.savedGames.gameModeDetails': string,
@@ -55,6 +58,7 @@ export type TranslationsKeys = {
   'pages.random.title': string,
   'pages.lexicons.title': string,
   'pages.lexicons.isBeta': string,
+  'pages.singleplayer.title': string,
   'gameModeDetails.time': {
     'count': string | number,
   },
@@ -94,6 +98,8 @@ export type TranslationsKeys = {
     'total': string | number,
     'percentage': string | number,
   },
+  'scoreDetails.wordLength': string,
+  'scoreDetails.letterPoints': string,
 }
 
 type TranslationsFnSecondArg<K extends keyof TranslationsKeys> = {

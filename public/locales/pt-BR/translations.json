@@ -1,1 +1,57 @@
-{"pages":{"home":{"headlineTitle":"Lexica","newGame":"Novo jogo","multiplayer":"Multijogador"},"newGameMode":{"gameModeName":{"hint":"Nome","description":"Para escolher o modo de jogo / registrar recordes"},"timeLimit":{"title":"Tempo Limite","description":"Limite de tempo em minutos"},"boardSize":"Tamanho do Tabuleiro","scoreType":{"title":"Tipo de Pontuação","wordLength":"Tamanho da Palavra","letterPoints":"Pontos de Letras"}},"multiplayer":{"startGameHint":"Quando todos os jogadores estiverem prontos, todos vocês devem iniciar o jogo ao mesmo tempo.","startGame":"Iniciar jogo","joinGameHint":"Quando todos os jogadores estiverem prontos, entre no jogo.","joinGame":"Entrar no jogo"},"lexicons":{"title":"Léxico","isBeta":"Beta"}},"gameModeDetails":{"time_one":"{{count}} min","time_other":"{{count}} mins"},"lexicaGameScreens":{"inGame":{"foundWords":"Palavras Encontradas"},"results":{"missedWords":"Palavras Não Encontradas"}},"scoreDetails":{"time":"Tempo","words":"Palavras","score":"Pontuação","displayPercentage":"{{found}}/{{total}} ({{percentage}}%)"}}
+{
+  "pages": {
+    "home": {
+      "headlineTitle": "Lexica",
+      "newGame": "Novo jogo",
+      "multiplayer": "Multijogador"
+    },
+    "newGameMode": {
+      "gameModeName": {
+        "hint": "Nome",
+        "description": "Para escolher o modo de jogo / registrar recordes"
+      },
+      "timeLimit": {
+        "title": "Tempo Limite",
+        "description": "Limite de tempo em minutos"
+      },
+      "boardSize": "Tamanho do Tabuleiro",
+      "scoreType": {
+        "title": "Tipo de Pontuação",
+        "wordLength": "Tamanho da Palavra",
+        "letterPoints": "Pontos de Letras"
+      }
+    },
+    "multiplayer": {
+      "startGameHint": "Quando todos os jogadores estiverem prontos, todos vocês devem iniciar o jogo ao mesmo tempo.",
+      "startGame": "Iniciar jogo",
+      "joinGameHint": "Quando todos os jogadores estiverem prontos, entre no jogo.",
+      "joinGame": "Entrar no jogo",
+      "wordCount_one": "{{count}} palavra",
+      "wordCount_other": "{{count}} palavras"
+    },
+    "lexicons": {
+      "title": "Léxico",
+      "isBeta": "Beta"
+    }
+  },
+  "gameModeDetails": {
+    "time_one": "{{count}} min",
+    "time_other": "{{count}} mins"
+  },
+  "lexicaGameScreens": {
+    "inGame": {
+      "foundWords": "Palavras Encontradas"
+    },
+    "results": {
+      "missedWords": "Palavras Não Encontradas"
+    }
+  },
+  "scoreDetails": {
+    "time": "Tempo",
+    "words": "Palavras",
+    "score": "Pontuação",
+    "displayPercentage": "{{found}}/{{total}} ({{percentage}}%)",
+    "wordLength": "Tamanho da Palavra",
+    "letterPoints": "Pontos de Letras"
+  }
+}

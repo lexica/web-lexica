@@ -1,1 +1,57 @@
-{"pages":{"home":{"headlineTitle":"Lexica","newGame":"Naujas žaidimas","multiplayer":"Daugelio žaidėjų rėžimas"},"newGameMode":{"gameModeName":{"hint":"Pavadinimas","description":"Žaidimo rėžimo pasirinkimui / rekordų fiksavimui"},"timeLimit":{"title":"Laiko limitas","description":"Laiko limitas minutėmis"},"boardSize":"Lentos dydis","scoreType":{"title":"Vertinimo tipas","wordLength":"Žodžio ilgis","letterPoints":"Taškai už raides"}},"multiplayer":{"startGameHint":"Kai visi žaidėjai bus pasiruošę, žaidimą turėtumėte pradėti vienu metu.","startGame":"Pradėti žaidimą","joinGameHint":"Kai visi žaidėjai bus pasiruošę, prisijunkite prie žaidimo.","joinGame":"Prisijungti prie žaidimo"},"lexicons":{"title":"Žodynas","isBeta":"Beta"}},"gameModeDetails":{"time_one":"{{count}} min.","time_other":"{{count}} min."},"lexicaGameScreens":{"inGame":{"foundWords":"Rasti žodžiai"},"results":{"missedWords":"Praleisti žodžiai"}},"scoreDetails":{"time":"Laikas","words":"Žodžiai","score":"Taškai","displayPercentage":"{{found}}/{{total}} ({{percentage}}%)"}}
+{
+  "pages": {
+    "home": {
+      "headlineTitle": "Lexica",
+      "newGame": "Naujas žaidimas",
+      "multiplayer": "Daugelio žaidėjų rėžimas"
+    },
+    "newGameMode": {
+      "gameModeName": {
+        "hint": "Pavadinimas",
+        "description": "Žaidimo rėžimo pasirinkimui / rekordų fiksavimui"
+      },
+      "timeLimit": {
+        "title": "Laiko limitas",
+        "description": "Laiko limitas minutėmis"
+      },
+      "boardSize": "Lentos dydis",
+      "scoreType": {
+        "title": "Vertinimo tipas",
+        "wordLength": "Žodžio ilgis",
+        "letterPoints": "Taškai už raides"
+      }
+    },
+    "multiplayer": {
+      "startGameHint": "Kai visi žaidėjai bus pasiruošę, žaidimą turėtumėte pradėti vienu metu.",
+      "startGame": "Pradėti žaidimą",
+      "joinGameHint": "Kai visi žaidėjai bus pasiruošę, prisijunkite prie žaidimo.",
+      "joinGame": "Prisijungti prie žaidimo",
+      "wordCount_one": "{{count}} žodis",
+      "wordCount_other": "{{count}} žodžių"
+    },
+    "lexicons": {
+      "title": "Žodynas",
+      "isBeta": "Beta"
+    }
+  },
+  "gameModeDetails": {
+    "time_one": "{{count}} min.",
+    "time_other": "{{count}} min."
+  },
+  "lexicaGameScreens": {
+    "inGame": {
+      "foundWords": "Rasti žodžiai"
+    },
+    "results": {
+      "missedWords": "Praleisti žodžiai"
+    }
+  },
+  "scoreDetails": {
+    "time": "Laikas",
+    "words": "Žodžiai",
+    "score": "Taškai",
+    "displayPercentage": "{{found}}/{{total}} ({{percentage}}%)",
+    "wordLength": "Žodžio ilgis",
+    "letterPoints": "Taškai už raides"
+  }
+}

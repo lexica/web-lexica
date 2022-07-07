@@ -1,1 +1,48 @@
-{"pages":{"home":{"headlineTitle":"Lexica","newGame":"Νέο παιχνίδι"},"newGameMode":{"gameModeName":{"hint":"Όνομα","description":"Για επιλογή τρόπου παιχνιδιού / καταγραφή υψηλών βαθμολογιών"},"timeLimit":{"title":"Χρονικό όριο","description":"Χρονικό όριο σε λεπτά"},"boardSize":"Μέγεθος πίνακα","scoreType":{"title":"Τύπος βαθμολόγησης","wordLength":"Μήκος λέξης","letterPoints":"Σημεία γραμμάτων"}},"lexicons":{"title":"Λεξικό","isBeta":"Beta"}},"gameModeDetails":{"time_one":"{{count}} λεπ","time_other":"{{count}} λεπ"},"lexicaGameScreens":{"inGame":{"foundWords":"Λέξεις Που Βρέθηκαν"},"results":{"missedWords":"Χαμένες λέξεις"}},"scoreDetails":{"time":"Χρόνος","words":"Λέξεις","score":"Βαθμολογία","displayPercentage":"{{found}}/{{total}} ({{percentage}}%)"}}
+{
+  "pages": {
+    "home": {
+      "headlineTitle": "Lexica",
+      "newGame": "Νέο παιχνίδι"
+    },
+    "newGameMode": {
+      "gameModeName": {
+        "hint": "Όνομα",
+        "description": "Για επιλογή τρόπου παιχνιδιού / καταγραφή υψηλών βαθμολογιών"
+      },
+      "timeLimit": {
+        "title": "Χρονικό όριο",
+        "description": "Χρονικό όριο σε λεπτά"
+      },
+      "boardSize": "Μέγεθος πίνακα",
+      "scoreType": {
+        "title": "Τύπος βαθμολόγησης",
+        "wordLength": "Μήκος λέξης",
+        "letterPoints": "Σημεία γραμμάτων"
+      }
+    },
+    "lexicons": {
+      "title": "Λεξικό",
+      "isBeta": "Beta"
+    }
+  },
+  "gameModeDetails": {
+    "time_one": "{{count}} λεπ",
+    "time_other": "{{count}} λεπ"
+  },
+  "lexicaGameScreens": {
+    "inGame": {
+      "foundWords": "Λέξεις Που Βρέθηκαν"
+    },
+    "results": {
+      "missedWords": "Χαμένες λέξεις"
+    }
+  },
+  "scoreDetails": {
+    "time": "Χρόνος",
+    "words": "Λέξεις",
+    "score": "Βαθμολογία",
+    "displayPercentage": "{{found}}/{{total}} ({{percentage}}%)",
+    "wordLength": "Μήκος λέξης",
+    "letterPoints": "Σημεία γραμμάτων"
+  }
+}

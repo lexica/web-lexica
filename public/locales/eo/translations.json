@@ -1,1 +1,57 @@
-{"pages":{"home":{"headlineTitle":"Lexica","newGame":"Nova ludo","multiplayer":"Pluraj ludantoj"},"newGameMode":{"gameModeName":{"hint":"Nomo","description":"Por elekti ludreĝimon / registri plej bonajn poentarojn"},"timeLimit":{"title":"Tempolimo","description":"Tempolimo en minutoj"},"boardSize":"Grando de Tabulo","scoreType":{"title":"Tipo de Poentaro","wordLength":"Vortolongo","letterPoints":"Literaj Poentoj"}},"multiplayer":{"startGameHint":"Kiam ĉiuj ludantoj pretas, ĉiuj ekludu samtempe.","startGame":"Ekludi","joinGameHint":"Kiam ĉiuj ludantoj pretas, aliĝu al la ludo.","joinGame":"Aliĝi al ludo"},"lexicons":{"title":"Vortaro","isBeta":"Beta-Versio"}},"gameModeDetails":{"time_one":"{{count}} minuto","time_other":"{{count}} minutoj"},"lexicaGameScreens":{"inGame":{"foundWords":"Trovitaj Vortoj"},"results":{"missedWords":"Ne Trovitaj Vortoj"}},"scoreDetails":{"time":"Tempo","words":"Vortoj","score":"Poentoj","displayPercentage":"{{found}}/{{total}} ({{percentage}}%)"}}
+{
+  "pages": {
+    "home": {
+      "headlineTitle": "Lexica",
+      "newGame": "Nova ludo",
+      "multiplayer": "Pluraj ludantoj"
+    },
+    "newGameMode": {
+      "gameModeName": {
+        "hint": "Nomo",
+        "description": "Por elekti ludreĝimon / registri plej bonajn poentarojn"
+      },
+      "timeLimit": {
+        "title": "Tempolimo",
+        "description": "Tempolimo en minutoj"
+      },
+      "boardSize": "Grando de Tabulo",
+      "scoreType": {
+        "title": "Tipo de Poentaro",
+        "wordLength": "Vortolongo",
+        "letterPoints": "Literaj Poentoj"
+      }
+    },
+    "multiplayer": {
+      "startGameHint": "Kiam ĉiuj ludantoj pretas, ĉiuj ekludu samtempe.",
+      "startGame": "Ekludi",
+      "joinGameHint": "Kiam ĉiuj ludantoj pretas, aliĝu al la ludo.",
+      "joinGame": "Aliĝi al ludo",
+      "wordCount_one": "{{count}} vorto",
+      "wordCount_other": "{{count}} vortoj"
+    },
+    "lexicons": {
+      "title": "Vortaro",
+      "isBeta": "Beta-Versio"
+    }
+  },
+  "gameModeDetails": {
+    "time_one": "{{count}} minuto",
+    "time_other": "{{count}} minutoj"
+  },
+  "lexicaGameScreens": {
+    "inGame": {
+      "foundWords": "Trovitaj Vortoj"
+    },
+    "results": {
+      "missedWords": "Ne Trovitaj Vortoj"
+    }
+  },
+  "scoreDetails": {
+    "time": "Tempo",
+    "words": "Vortoj",
+    "score": "Poentoj",
+    "displayPercentage": "{{found}}/{{total}} ({{percentage}}%)",
+    "wordLength": "Vortolongo",
+    "letterPoints": "Literaj Poentoj"
+  }
+}

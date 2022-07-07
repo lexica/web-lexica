@@ -1,3 +1,4 @@
+const R = require('ramda')
 const { program, Option } = require('commander')
 const { readdirSync, existsSync, mkdirSync, writeFileSync } = require('fs')
 const translationMaps = require('./android-and-web-translation-mappings')
@@ -19,6 +20,10 @@ const getInputFolderNameToTranslationCodeMap = inputFolders => R.reduce((acc, fo
   return { ...acc, [folder]: folder.replace(/^values-/, '').replace('-r', '-') }
 }, {}, inputFolders)
 
+/** @type {(path: string, content: any) => void} */
+const writeToFile = (path, content) => {
+  writeFileSync(path, JSON.stringify(content, null, 2), { encoding: 'utf-8' })
+}
 
 const handleMergeTranslations = (args, options) => {
   /** @type {{ androidTranslationsDir: string, webTranslationsDir: string, clobber: boolean, print: boolean, tee: boolean }} */
@@ -30,7 +35,7 @@ const handleMergeTranslations = (args, options) => {
     print,
     tee
   } = options
-  const getInputFolderPath = folder => { const path = `${androidTranslationsDir}/${folder}`; console.log(path); return path }
+  const getInputFolderPath = folder => `${androidTranslationsDir}/${folder}`
 
   const makeTranslationDir = (languageCode) => {
     const path = `${webTranslationsDir}/${languageCode}`
@@ -53,12 +58,12 @@ const handleMergeTranslations = (args, options) => {
 
   const codes = args.includes('all') ? allCodes : args
 
-
   const enableWrite = tee || !print
   const enableLog = tee || print
 
   const mappedTranslations = codes.reduce((acc, languageCode) => {
     const androidTranslations = getAndroidTranslationsFromFolder(languageCodeToFolderPathMap[languageCode])
+    if (languageCode === 'en') console.log(JSON.stringify(androidTranslations, null, 2))
     const translations = mapTranslationsFromAndroidToWeb(translationsFromAndroidToWeb, androidTranslations)
     const languageTitles = mapTranslationsFromAndroidToWeb(languageTitlesFromAndroidToWeb, androidTranslations)
     return {
@@ -76,10 +81,10 @@ const handleMergeTranslations = (args, options) => {
       if (!translations && !languageTitles) continue
       const translationsDir = makeTranslationDir(languageCode)
       if (translations) {
-        writeFileSync(`${translationsDir}/translations.json`, JSON.stringify(translations), { encoding: 'utf-8' })
+        writeToFile(`${translationsDir}/translations.json`, translations)
       }
       if (languageTitles) {
-        writeFileSync(`${translationsDir}/language-titles.json`, JSON.stringify(languageTitles), { encoding: 'utf-8' })
+        writeToFile(`${translationsDir}/language-titles.json`, languageTitles)
       }
     }
   }
@@ -99,13 +104,13 @@ const handleMergeTranslations = (args, options) => {
         const path = `${translationsDir}/translations.json`
         const existingTranslations = getExistingTranslationFile(path)
         const merged = mergeAndUpdate(existingTranslations, translations)
-        writeFileSync(path, JSON.stringify(merged), { encoding: 'utf-8' })
+        writeToFile(path, merged)
       }
       if (languageTitles) {
         const path = `${translationsDir}/language-titles.json`
         const existingLanguageTitles = getExistingTranslationFile(path)
         const merged = mergeAndUpdate(existingLanguageTitles, languageTitles)
-        writeFileSync(path, JSON.stringify(merged), { encoding: 'utf-8' })
+        writeToFile(path, merged)
       }
     }
   }
@@ -121,13 +126,13 @@ const handleMergeTranslations = (args, options) => {
         const path = `${translationsDir}/translations.json`
         const existingTranslations = getExistingTranslationFile(path)
         const merged = mergeAdditive(existingTranslations, translations)
-        writeFileSync(path, JSON.stringify(merged), { encoding: 'utf-8' })
+        writeToFile(path, merged)
       }
       if (languageTitles) {
         const path = `${translationsDir}/language-titles.json`
         const existingLanguageTitles = getExistingTranslationFile(path)
         const merged = mergeAdditive(existingLanguageTitles, languageTitles)
-        writeFileSync(path, JSON.stringify(merged), { encoding: 'utf-8' })
+        writeToFile(path, merged)
       }
     }
   }
@@ -169,7 +174,7 @@ const main = () => {
     .version('0.0.1')
   program.command('merge-translations')
     .argument('<string...>', 'one or more country code to merge, or "all" to merge all codes')
-    .option('-a, --android-translations-dir <string>', 'path to the Lexica translations directory',  './temp-translations/lexica/strings/app/src/main/res')
+    .option('-a, --android-translations-dir <string>', 'path to the Lexica translations directory',  './tmp-translations/lexica/strings/app/src/main/res')
     .option('-w, --web-translations-dir <string>', 'path to the Web Lexica translations directory', './public/locales')
     .addOption(new Option('-c, --clobber', 'Replace existing Web Lexica translations with Lexica translations, does not merge translations at all').default(false).conflicts('update'))
     .option('-u, --update', 'Replace existing Web Lexica translations with Lexica translations where available, merges existing translations', false)

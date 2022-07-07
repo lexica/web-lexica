@@ -1,20 +1,15 @@
 const { mergeObjects } = require('./util')
 /** @typedef {(val: string) => string} TransformerFn */
 
+/** @type {TransformerFn} */
+const countTransformer = str => str.replace(/%(\d\$)?d/, '{{count}}')
+
 const translationsFromWebToAndroid = {
   pages: {
     home: {
-      headlineTitle: {
-        tag: 'string',
-        name: 'app_name'
-      },
       newGame: {
         tag: 'string',
         name: 'new_game'
-      },
-      multiplayer: {
-        tag: 'string',
-        name: 'multiplayer'
       },
     },
     newGameMode: {
@@ -47,14 +42,6 @@ const translationsFromWebToAndroid = {
           tag: 'string',
           name: 'pref_scoreType'
         },
-        wordLength: {
-          tag: 'string',
-          name: 'word_length'
-        },
-        letterPoints: {
-          tag: 'string',
-          name: 'letter_points'
-        }
       }
     },
     multiplayer: {
@@ -77,6 +64,24 @@ const translationsFromWebToAndroid = {
       joinGame: {
         tag: 'string',
         name: 'multiplayer_lobby__join_game'
+      },
+      wordCount_one: {
+        tag: 'plurals',
+        name: 'num_available_words_in_game',
+        value: {
+          tag: 'item',
+          quantity: 'one',
+          transformerFn: countTransformer
+        }
+      },
+      wordCount_other: {
+        tag: 'plurals',
+        name: 'num_available_words_in_game',
+        value: {
+          tag: 'item',
+          quantity: 'other',
+          transformerFn: countTransformer
+        }
       }
     },
     lexicons: {
@@ -107,8 +112,7 @@ const translationsFromWebToAndroid = {
       value: {
         tag: 'item',
         quantity: 'other',
-        /** @type {TransformerFn} */
-        transformerFn: str => str.replace('%d', '{{count}}')
+        transformerFn: countTransformer
       }
     }
   },
@@ -153,7 +157,25 @@ const translationsFromWebToAndroid = {
         .replace('%3$d', '{{percentage}}')
         .replace('%%', '%')
       }
+    },
+    wordLength: {
+      tag: 'string',
+      name: 'word_length'
+    },
+    letterPoints: {
+      tag: 'string',
+      name: 'letter_points'
     }
+  },
+  general: {
+      multiplayer: {
+        tag: 'string',
+        name: 'multiplayer'
+      },
+      lexica: {
+        tag: 'string',
+        name: 'app_name'
+      },
   }
 }
 const languageTitlesFromWebToAndroid = {

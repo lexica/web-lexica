@@ -1,6 +1,8 @@
 const { readFileSync, existsSync } = require('fs')
-const { parse } = require('fast-xml-parser')
+const { XMLParser } = require('fast-xml-parser')
 const R = require('ramda')
+
+const xmlParser = new XMLParser({ ignoreAttributes: false, attributeNamePrefix: '' })
 
 /** @typedef {{ name: string, '#text'}} StringTagItem */
 /** @typedef {{ '#text': string, quantity: string }} PluralsTagItemItem */
@@ -25,7 +27,7 @@ const readTranslationXML = folderPath => {
 }
 
 /** @type {(file: string) => ParsedXML} */
-const parseXml = file => parse(file, {
+const parseXml = file => xmlParser.parse(file, {
   ignoreAttributes: false,
   parseAttributeValue: true,
   arrayMode: false,

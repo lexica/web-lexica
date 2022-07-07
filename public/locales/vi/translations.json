@@ -1,1 +1,55 @@
-{"pages":{"home":{"headlineTitle":"Lexica","newGame":"Trò chơi mới","multiplayer":"Nhiều người chơi"},"newGameMode":{"gameModeName":{"hint":"Tên","description":"Để chọn chế độ chơi / ghi lại điểm cao"},"timeLimit":{"title":"Giới hạn thời gian","description":"Giới hạn thời gian tính bằng phút"},"boardSize":"Kích thước bảng","scoreType":{"title":"Kiểu tính điểm","wordLength":"Độ dài của từ","letterPoints":"Điểm cho từng chữ cái"}},"multiplayer":{"startGameHint":"Khi tất cả người chơi đã sẵn sàng, tất cả các bạn nên bắt đầu trò chơi cùng một lúc.","startGame":"Bắt đầu chơi","joinGameHint":"Khi tất cả người chơi đã sẵn sàng, hãy tham gia trò chơi.","joinGame":"Tham gia trò chơi"},"lexicons":{"title":"Lexicon","isBeta":"Beta"}},"gameModeDetails":{"time_other":"{{count}} phút"},"lexicaGameScreens":{"inGame":{"foundWords":"Từ đã tìm thấy"},"results":{"missedWords":"Từ bị bỏ lỡ"}},"scoreDetails":{"time":"Thời gian","words":"Từ","score":"Điểm","displayPercentage":"{{found}}/{{total}} ({{percentage}}%)"}}
+{
+  "pages": {
+    "home": {
+      "headlineTitle": "Lexica",
+      "newGame": "Trò chơi mới",
+      "multiplayer": "Nhiều người chơi"
+    },
+    "newGameMode": {
+      "gameModeName": {
+        "hint": "Tên",
+        "description": "Để chọn chế độ chơi / ghi lại điểm cao"
+      },
+      "timeLimit": {
+        "title": "Giới hạn thời gian",
+        "description": "Giới hạn thời gian tính bằng phút"
+      },
+      "boardSize": "Kích thước bảng",
+      "scoreType": {
+        "title": "Kiểu tính điểm",
+        "wordLength": "Độ dài của từ",
+        "letterPoints": "Điểm cho từng chữ cái"
+      }
+    },
+    "multiplayer": {
+      "startGameHint": "Khi tất cả người chơi đã sẵn sàng, tất cả các bạn nên bắt đầu trò chơi cùng một lúc.",
+      "startGame": "Bắt đầu chơi",
+      "joinGameHint": "Khi tất cả người chơi đã sẵn sàng, hãy tham gia trò chơi.",
+      "joinGame": "Tham gia trò chơi",
+      "wordCount_other": "{{count}} từ"
+    },
+    "lexicons": {
+      "title": "Lexicon",
+      "isBeta": "Beta"
+    }
+  },
+  "gameModeDetails": {
+    "time_other": "{{count}} phút"
+  },
+  "lexicaGameScreens": {
+    "inGame": {
+      "foundWords": "Từ đã tìm thấy"
+    },
+    "results": {
+      "missedWords": "Từ bị bỏ lỡ"
+    }
+  },
+  "scoreDetails": {
+    "time": "Thời gian",
+    "words": "Từ",
+    "score": "Điểm",
+    "displayPercentage": "{{found}}/{{total}} ({{percentage}}%)",
+    "wordLength": "Độ dài của từ",
+    "letterPoints": "Điểm cho từng chữ cái"
+  }
+}
