@@ -8,21 +8,21 @@ import { ReactComponent as Redo } from '@material-design-icons/svg/round/redo.sv
 import { useRulesFromStorage } from '../game/rules'
 import './Home.css'
 import { useLanguageCodeFromLocalStorage } from '../game/language'
-import { Translation } from '../translations/implemented-languages'
-import { useTranslations } from '../translations'
+import { Translations } from '../translations'
 import { useHighScore } from '../game/high-scores'
 import { useSavedGameList } from '../game/save-game'
 import MainTitle from '../components/MainTitle'
 import Button, { ButtonFontSizing } from '../components/Button'
+import { useContext } from 'react'
 
 const GameSettings = (): JSX.Element => {
   const [ruleset] = useRulesFromStorage()
 
-  const languageCode = useLanguageCodeFromLocalStorage() as any as keyof Translation['languageTitles']
+  const languageCode = useLanguageCodeFromLocalStorage()
 
-  const { languageTitles } = useTranslations()
+  const translations = useContext(Translations)
 
-  const languageTitle = languageTitles[languageCode] || languageCode
+  const languageTitle = translations.ready ? translations.languageTitlesFn(languageCode as any) : languageCode
 
   return <div className="home-game-options">
     <Button to='/lexicons' svg={Language} svgTitle={'Lexicon'} prompt={languageTitle} />
@@ -35,17 +35,23 @@ const PlayGameButtons = (): JSX.Element => {
   const savedGames = useSavedGameList()
   const fontSizing = ButtonFontSizing.Title
 
-  const resumeGame = <Button to="/saved-games" fontSizing={fontSizing} svg={Redo} prompt='Resume Game'/>
+  const { translationsFn } = useContext(Translations)
+
+  const resumeGame = <Button
+    to="/saved-games"
+    fontSizing={fontSizing}
+    svg={Redo}
+    prompt={translationsFn('pages.home.resumeGame')}
+  />
 
   return <div className="home-game-buttons">
-    <Button to='/singleplayer' svg={PlayCircle} fontSizing={fontSizing} prompt='New Game' />
-    <Button to='/multiplayer' svg={GroupAdd} fontSizing={fontSizing} prompt='Multiplayer' />
+    <Button to='/singleplayer' svg={PlayCircle} fontSizing={fontSizing} prompt={translationsFn('pages.home.newGame')} />
+    <Button to='/multiplayer' svg={GroupAdd} fontSizing={fontSizing} prompt={translationsFn('pages.home.multiplayer')} />
     <Button
       to='/lexicle'
       svg={Grid}
-      svgTitle='Lexicle'
       fontSizing={fontSizing}
-      prompt='Try Lexicle'
+      prompt={translationsFn('pages.home.tryLexicle')}
     />
     { savedGames?.length > 0 ? resumeGame : ''}
   </div>
@@ -53,17 +59,20 @@ const PlayGameButtons = (): JSX.Element => {
 
 const HighScore = (): JSX.Element => {
   const [{ name }, currentId] = useRulesFromStorage()
-  const highScore = useHighScore(currentId)
+  const { translationsFn } = useContext(Translations)
+
+  const score = useHighScore(currentId)
   return <div className="home-high-score">
-    <div>Mode: {name}</div>
-    <div>High Score: {highScore}</div>
+    <div>{translationsFn('pages.home.gameMode', { gameMode: name })}</div>
+    <div>{translationsFn('pages.home.highScore', { score })}</div>
   </div>
 }
 
 const Home = () => {
+  const { translationsFn } = useContext(Translations)
   return <div className="Page home">
     <HighScore />
-    <MainTitle title='lexica' subtitle='online' />
+    <MainTitle title={translationsFn('pages.home.headlineTitle')} subtitle={translationsFn('pages.home.subtitle')} />
     <div className="home-buttons-container">
       <PlayGameButtons />
       <GameSettings />

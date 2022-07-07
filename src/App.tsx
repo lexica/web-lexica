@@ -20,13 +20,26 @@ import NewGameMode from './pages/NewGameMode'
 import SavedGames from './pages/SavedGames'
 import { useTranslation } from 'react-i18next'
 import { useCallback } from 'react'
+import { Translations } from './translations'
+import { LanguageTitlesFn, TranslationsFn } from './translations/types'
 
 function App() {
   logger.debug('loading app...')
 
-  const { t: translateFn, i18n: translationsI18n } = useTranslation('translations')
-  const { t: languageTitleFn, i18n: languageTitlesI18n } = useTranslation('language-titles')
-  const changeLanguage = useCallback((languageCode) => {
+  const { t: translationsFnUnwrapped, i18n: translationsI18n, ready: translationsReady } = useTranslation('translations', { useSuspense: false })
+  const { t: languageTitlesFnUnwrapped, i18n: languageTitlesI18n, ready: languageTitlesReady } = useTranslation('language-titles', { useSuspense: false })
+  const ready = translationsReady && languageTitlesReady
+
+  const translationsFn = useCallback<TranslationsFn>((key, options) => {
+    if (!ready) return key
+    return translationsFnUnwrapped(key, options as any)
+  }, [ready, translationsFnUnwrapped])
+  const languageTitlesFn = useCallback<LanguageTitlesFn>((key, options) => {
+    if (!ready) return key
+    return languageTitlesFnUnwrapped(key, options as any)
+  }, [ready, languageTitlesFnUnwrapped])
+
+  const changeLanguage = useCallback((languageCode: string) => {
     translationsI18n.changeLanguage(languageCode)
     languageTitlesI18n.changeLanguage(languageCode)
   }, [translationsI18n, languageTitlesI18n])
@@ -36,7 +49,7 @@ function App() {
   return (
       <div className="App">
         <Translations.Provider
-          value={translations}
+          value={{ translationsFn, languageTitlesFn, changeLanguage, ready }}
         ><RenderInBanner.Provider
           value={context}
         >

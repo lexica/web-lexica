@@ -6,7 +6,6 @@ import GameModeDetails from './GameModeDetails'
 
 import { Dictionary } from '../game/dictionary'
 import { Translations } from '../translations'
-import { Translation } from '../translations/implemented-languages'
 import { Language } from '../game/language'
 
 import './StartScreen.css'
@@ -47,9 +46,7 @@ const StartScreen: React.FC<StartScreenProps> = ({
     ? 'Error loading board'
     : `${dictionary.boardDictionary.length} words`
 
-  const languageTitle = translations.languageTitles[
-    language as any as keyof Translation['languageTitles']
-  ]
+  const languageTitle = translations.ready ? translations.languageTitlesFn(language as any) : language
 
   const qrCode = showQrCode === true && <ShareGameQrCode {...{ rules, language, board, platform: Platform.Android,  }}/>
 

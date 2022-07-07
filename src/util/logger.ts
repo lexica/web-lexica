@@ -27,6 +27,7 @@ const getCallingFunction = () => {
 export const logger = {
   error: console.error,
   info: console.info,
+  warn: console.warn,
   debug: process.env.NODE_ENV === 'production' ? (..._: any[]) => {} : (...logs: any[]) => {
     const logString = logs.map(log => {
       if (isPrimitive(log)) return log.toString()

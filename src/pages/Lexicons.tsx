@@ -1,4 +1,4 @@
-import { useCallback } from 'react'
+import { useCallback, useContext } from 'react'
 import { useNavigate } from 'react-router'
 
 import {
@@ -7,7 +7,7 @@ import {
   useLanguageCodeFromLocalStorage,
   useMultipleLanguageMetadata
 } from '../game/language'
-import { useTranslations } from '../translations'
+import { Translations } from '../translations'
 import { makeClasses } from '../util/classes'
 import { logger } from '../util/logger'
 
@@ -28,9 +28,8 @@ const Lexicon = ({
   languageCode,
   metadata
 }: LexiconProps): JSX.Element => {
-  const { languageTitles } = useTranslations()
-  const languageTitleKey = languageCode as any as keyof typeof languageTitles
-  const title = languageTitles[languageTitleKey] || languageCode
+  const translations = useContext(Translations)
+  const title = (translations.ready && translations.languageTitlesFn(languageCode as any)) || languageCode
   const beta = getBetaLabel(metadata)
   const currentCode = useLanguageCodeFromLocalStorage()
 
