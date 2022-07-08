@@ -41,7 +41,8 @@
     },
     "multiplayer": {
       "title": "Multiplayer",
-      "gameTitle": "Web Lexica New Multiplayer Game",
+      "gameTitle": "Web Lexica Multiplayer Game",
+      "newGameTitle": "Web Lexica New Multiplayer Game",
       "refreshBoard": "Refresh Board",
       "startGameHint": "When all players are ready, you should all start the game at the same time.",
       "startGame": "Start game",
@@ -120,6 +121,7 @@
     "loading": "Loading",
     "error": "Error",
     "back": "Back",
-    "foundWords": "Found Words"
+    "foundWords": "Found Words",
+    "paused": "Paused"
   }
 }

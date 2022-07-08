@@ -1,8 +1,9 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useContext, useState } from 'react'
 import { ReactComponent as DirectionsRun } from '@material-design-icons/svg/round/directions_run.svg'
 
 import Description from './Description'
 import Radio from '../Radio'
+import { Translations } from '../../translations'
 
 export type TimeAttackProps = {
   handleTimeAttackUpdate: (multiplier: number) => void
@@ -22,6 +23,7 @@ const TimeAttack = ({
   selectedMultiplier
 }: TimeAttackProps): JSX.Element => {
   const [multiplier, setMultiplier] = useState(0)
+  const { translationsFn } = useContext(Translations)
 
   const handleMultiplierUpdate = useCallback((multiplier: number) => {
     setMultiplier(multiplier)
@@ -30,7 +32,7 @@ const TimeAttack = ({
 
   return <Description
     svg={DirectionsRun}
-    title="Time Attack"
+    title={translationsFn('pages.newGameMode.timeAttack.title')}
   >
     <div className="new-game-mode-time-attack-input-holder">
       <div className="new-game-mode-time-attack-options">
@@ -45,7 +47,7 @@ const TimeAttack = ({
         />)}
       </div>
       <div className="new-game-mode-time-attack-example">
-        Adds (Word Length score x {multiplier}) second(s) per word found
+        {translationsFn('pages.newGameMode.timeAttack.hint', { multiplier })}
       </div>
     </div>
     {/* <input type="checkbox" name="time-attack" checked={timeAttack} onChange={handleOnClick}/> */}

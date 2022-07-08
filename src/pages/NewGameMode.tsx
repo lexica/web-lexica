@@ -1,4 +1,4 @@
-import { useCallback, useState, useMemo } from 'react'
+import { useCallback, useState, useMemo, useContext } from 'react'
 import { ReactComponent as Save } from '@material-design-icons/svg/round/save.svg'
 
 import Name from '../components/new-game-mode/Name'
@@ -16,6 +16,7 @@ import MinimumWordLength from '../components/new-game-mode/MinimumWordLength'
 
 import './NewGameMode.css'
 import TimeAttack from '../components/new-game-mode/TimeAttack'
+import { Translations } from '../translations'
 
 const validTimeLimit = (time: number) => time > 0
 const validName = (name: string) => /([\w\s\d_-]+)/.test(name)
@@ -34,6 +35,8 @@ const NewGameMode = (): JSX.Element => {
   const [boardSize, setBoardSize] = useState(0)
   const [scoreType, setScoreType] = useState<ScoreType>('invalid' as any)
   const [minimumWordLength, setMinimumWordLength] = useState(0)
+
+  const { translationsFn } = useContext(Translations)
 
 
   const navigate = useNavigate()
@@ -70,9 +73,9 @@ const NewGameMode = (): JSX.Element => {
   useBannerBadge({
     disabled: !isValid,
     svg: Save,
-    svgTitle: 'Save Game Mode',
+    svgTitle: translationsFn('pages.newGameMode.saveGameMode'),
     onClick: handleSave,
-    prompt: 'Save Game Mode'
+    prompt: translationsFn('pages.newGameMode.saveGameMode')
   })
 
   return <div className="Page new-game-mode">

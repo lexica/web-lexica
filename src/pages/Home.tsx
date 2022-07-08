@@ -22,7 +22,7 @@ const GameSettings = (): JSX.Element => {
 
   const translations = useContext(Translations)
 
-  const languageTitle = translations.ready ? translations.languageTitlesFn(languageCode as any) : languageCode
+  const languageTitle = translations.languageTitlesFn(languageCode as any)
 
   return <div className="home-game-options">
     <Button to='/lexicons' svg={Language} svgTitle={'Lexicon'} prompt={languageTitle} />

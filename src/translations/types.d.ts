@@ -34,6 +34,7 @@ export type TranslationsKeys = {
   'pages.newGameMode.saveGameMode': string,
   'pages.multiplayer.title': string,
   'pages.multiplayer.gameTitle': string,
+  'pages.multiplayer.newGameTitle': string,
   'pages.multiplayer.refreshBoard': string,
   'pages.multiplayer.startGameHint': string,
   'pages.multiplayer.startGame': string,
@@ -100,6 +101,13 @@ export type TranslationsKeys = {
   },
   'scoreDetails.wordLength': string,
   'scoreDetails.letterPoints': string,
+  'general.multiplayer': string,
+  'general.lexica': string,
+  'general.loading': string,
+  'general.error': string,
+  'general.back': string,
+  'general.foundWords': string,
+  'general.paused': string,
 }
 
 type TranslationsFnSecondArg<K extends keyof TranslationsKeys> = {

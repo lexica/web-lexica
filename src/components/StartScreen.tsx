@@ -53,9 +53,9 @@ const StartScreen: React.FC<StartScreenProps> = ({
   const showRefreshButton = loading === false && error === false && showQrCode
   const disabled = loading || error
   const wordCount = loading
-    ? 'Loading...'
+    ? translationsFn('general.loading')
     : error
-    ? 'Error loading board'
+    ? translationsFn('general.error')
     : translationsFn('pages.multiplayer.wordCount', { count: dictionary.boardDictionary.length })
 
   const languageTitle = languageTitlesFn(language as any)

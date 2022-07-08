@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useContext, useState } from 'react'
 import { ReactComponent as EmojiEvents } from '@material-design-icons/svg/round/emoji_events.svg'
 
 import { getClass } from './util'
@@ -6,6 +6,7 @@ import { ScoreType } from '../../game/score'
 
 import Description from './Description'
 import Radio from '../Radio'
+import { Translations } from '../../translations'
 
 const {
   optionClass
@@ -15,7 +16,8 @@ const isScoreType = (type: any): type is ScoreType => [ScoreType.Letters, ScoreT
 
 const ScoringType = ({ handleScoreUpdate, scoreTypes }: { handleScoreUpdate: (type: ScoreType) => void, scoreTypes: ScoreType[] }): JSX.Element => {
   const [scoreType, setScoreType] = useState<ScoreType>('' as any)
-  const title = 'Score Type'
+  const { translationsFn } = useContext(Translations)
+  const title = translationsFn('pages.newGameMode.scoreType.title')
 
   const handleChange = useCallback((value: string) => {
     if (!isScoreType(value)) return
@@ -27,8 +29,8 @@ const ScoringType = ({ handleScoreUpdate, scoreTypes }: { handleScoreUpdate: (ty
     <div>
       {scoreTypes.map((type, index) => {
         const title = {
-          [ScoreType.Letters]: 'Letter Points',
-          [ScoreType.Length]: 'Word Length'
+          [ScoreType.Letters]: translationsFn('pages.newGameMode.scoreType.letterPoints'),
+          [ScoreType.Length]: translationsFn('pages.newGameMode.scoreType.wordLength')
         }[type]
 
         return <div

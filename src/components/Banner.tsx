@@ -146,7 +146,7 @@ const Banner = ({ toRender: RenderProp }: { toRender: Renderable }): JSX.Element
       className="banner-button-area"
       onClick={onClickHandler}
     >
-      <Svg.Standard svg={ArrowBack} title="Return home"/>
+      <Svg.Standard svg={ArrowBack} title={translationsFn('general.back')}/>
     </div>
     <div className="banner-page-title">
       {pageName}

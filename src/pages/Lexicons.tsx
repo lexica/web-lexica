@@ -13,10 +13,10 @@ import { logger } from '../util/logger'
 
 import './Lexicons.css'
 
-const getBetaLabel = (metadata?: MetadataV1) => {
+const getBetaLabel = (metadata?: MetadataV1, betaLabel: string = '') => {
   const getLabel = (text: string) => <div className="lexicons-lexicon-beta-label">{text}</div>
   if (metadata?.isBeta === undefined) return getLabel('Loading...')
-  return metadata.isBeta ? getLabel('Beta') : <></>
+  return metadata.isBeta ? getLabel(betaLabel) : <></>
 }
 
 type LexiconProps = {
@@ -29,8 +29,8 @@ const Lexicon = ({
   metadata
 }: LexiconProps): JSX.Element => {
   const translations = useContext(Translations)
-  const title = (translations.ready && translations.languageTitlesFn(languageCode as any)) || languageCode
-  const beta = getBetaLabel(metadata)
+  const title = translations.languageTitlesFn(languageCode as any)
+  const beta = getBetaLabel(metadata, translations.translationsFn('pages.lexicons.isBeta'))
   const currentCode = useLanguageCodeFromLocalStorage()
 
   const navigate = useNavigate()
@@ -56,6 +56,7 @@ const Lexicon = ({
 }
 
 const Lexicons = (): JSX.Element => {
+  const { translationsFn } = useContext(Translations)
   const { loading, metadata } = useMultipleLanguageMetadata()
   const languages = Object.keys(metadata)
 
@@ -65,7 +66,7 @@ const Lexicons = (): JSX.Element => {
       metadata={metadata[languageCode]}
     />
 
-  if (loading) return <div className="Page lexicons-loading">Loading...</div>
+  if (loading) return <div className="Page lexicons-loading">{translationsFn('general.loading')}</div>
 
   return <div className="Page lexicons scrollbar">
     {languages.map(l => getLexicon(l))}

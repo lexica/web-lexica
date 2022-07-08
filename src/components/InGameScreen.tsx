@@ -15,6 +15,7 @@ import { usePauseGameOnHidden } from '../game/pause-game'
 import { useSaveGame } from '../game/save-game'
 import { Timer } from '../game/timer'
 import { ConfirmationEffect, useConfirmationEffect } from './game/Board/hooks'
+import { Translations } from '../translations'
 
 import './InGameScreen.css'
 
@@ -25,6 +26,7 @@ const Game: React.FC = () => {
 
   const useSaveGameState = useSaveGame()
   const setUseSaveGameStateWrapper = useState(useSaveGameState)[1]
+  const { translationsFn } = useContext(Translations)
 
   // Weird way of removing callbacks...
   useEffect(() => {
@@ -54,6 +56,7 @@ const Game: React.FC = () => {
   const foundWordsComponent = <ScoredWordList {...{ scoredWords: foundWords }} />
 
 
+
   const verticalLayout = <VerticalContainer
     Board={board}
     MostRecentGuess={mostRecentGuesses}
@@ -70,7 +73,7 @@ const Game: React.FC = () => {
   />
 
   const layout = useVerticalLayout ? verticalLayout : horizontalLayout;
-  return isPaused ? <div>Game Paused</div> : <div className="game-container" style={{ height: '100%' }}>
+  return isPaused ? <div>{translationsFn('general.paused')}</div> : <div className="game-container" style={{ height: '100%' }}>
     <ConfirmationEffect.Provider value={useConfirmationEffect}>
       {layout}
     </ConfirmationEffect.Provider>

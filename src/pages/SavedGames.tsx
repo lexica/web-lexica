@@ -22,6 +22,7 @@ import { useSafeNavigateBack } from '../util/url'
 import { useBannerBadge } from '../components/Banner'
 import { logger } from '../util/logger'
 import Button from '../components/Button'
+import { Translations } from '../translations'
 
 const getTime = ({ timer }: SavedGameType) => {
   const { minutes, seconds } = normalize({ seconds: timer })
@@ -46,6 +47,7 @@ const SavedGame = ({
 }: SavedGameProps): JSX.Element => {
   const savedGame = useResumedGame(url)
   const { fontSizeSubscript } = useConstants()
+  const { translationsFn } = useContext(Translations)
 
   const savedRulesets = useContext(SavedRulesets)
 
@@ -56,6 +58,9 @@ const SavedGame = ({
   const onSelect = useCallback(() => handleSelect(url), [url, handleSelect])
   const onDelete = useCallback(() => handleDelete(url), [url, handleDelete])
   const onResume = useCallback(() => handleResume(url), [url, handleResume])
+
+  const resume = translationsFn('pages.savedGames.resume')
+  const deletePrompt = translationsFn('pages.savedGames.delete')
 
   return <>
     <div
@@ -70,8 +75,8 @@ const SavedGame = ({
     </div>
     {
       !isSelected ? '' : <div className='saved-games-game-details-action-menu'>
-          <Button onClick={onResume} prompt='Resume' svg={PlayCircle} />
-          <Button onClick={onDelete} prompt='Delete' svg={Delete} />
+          <Button onClick={onResume} prompt={resume} svg={PlayCircle} />
+          <Button onClick={onDelete} prompt={deletePrompt} svg={Delete} />
         </div>
     }
   </>
@@ -83,6 +88,8 @@ const SavedGames = (): JSX.Element => {
   const [selectedGame, setSelectedGame] = useState('')
   const navigate = useNavigate()
   const goBack = useSafeNavigateBack()
+
+  const { translationsFn } = useContext(Translations)
 
   useEffect(() => {
     const gameList = getSavedGameList()
@@ -120,22 +127,22 @@ const SavedGames = (): JSX.Element => {
   }, [goBack])
 
   useBannerBadge({
-    svgTitle: 'Clear All Saved Games',
+    svgTitle: translationsFn('pages.savedGames.clearAll'),
     svg: Delete,
     onClick: handleClearAllSavedGames,
-    prompt: 'Clear All'
+    prompt: translationsFn('pages.savedGames.clearAll')
   })
 
   return <div className='SavedGames Page'>
     <div className='saved-games-game-details-headers'>
       <div className='saved-games-game-details-header-1'>
-        Rule Name
+        {translationsFn('pages.savedGames.gameModeName')}
       </div>
       <div className='saved-games-game-details-header-3'>
-        Rule Details
+        {translationsFn('pages.savedGames.gameModeDetails')}
       </div>
       <div className='saved-games-game-details-header-1'>
-        Remaining Time
+        {translationsFn('pages.savedGames.remainingTime')}
       </div>
     </div>
     <SavedRulesets.Provider value={savedRulesets}>

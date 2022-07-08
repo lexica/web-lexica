@@ -1,4 +1,4 @@
-import { useCallback } from 'react'
+import { useCallback, useContext } from 'react'
 import { ReactComponent as Add } from '@material-design-icons/svg/round/add.svg'
 
 import { Ruleset, Rulesets, setCurrentRuleset, useRulesets, useRulesFromStorage } from '../game/rules'
@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom'
 import { logger } from '../util/logger'
 
 import './GameModes.css'
+import { Translations } from '../translations'
 
 type ModeProps = {
   rulesetTuple: [string, Ruleset]
@@ -75,6 +76,7 @@ const ModesList = ({
 }
 
 const GameModes = (): JSX.Element => {
+  const { translationsFn } = useContext(Translations)
 
   const rulesets = useRulesets()
   const selectedRulesetId = useRulesFromStorage()[1]
@@ -83,10 +85,10 @@ const GameModes = (): JSX.Element => {
   const handleAddGameModeOnClick = useCallback(() => navigate('/new-game-mode'), [navigate])
 
   useBannerBadge({
-    svgTitle: 'Add new game mode',
+    svgTitle: translationsFn('pages.gameModes.addGameMode'),
     svg: Add,
     onClick: handleAddGameModeOnClick,
-    prompt: 'Add Game Mode'
+    prompt: translationsFn('pages.gameModes.addGameMode')
   })
 
 
