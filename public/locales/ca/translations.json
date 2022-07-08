@@ -27,10 +27,11 @@
   },
   "lexicaGameScreens": {
     "inGame": {
-      "foundWords": "Mots trobats"
+      "foundWords": "$t(general.foundWords)"
     },
     "results": {
-      "missedWords": "Mots romanents"
+      "missedWords": "Mots romanents",
+      "foundWords": "$t(general.foundWords)"
     }
   },
   "scoreDetails": {
@@ -42,6 +43,7 @@
     "letterPoints": "Valor de les lletres"
   },
   "general": {
-    "lexica": "Lèxica"
+    "lexica": "Lèxica",
+    "foundWords": "Mots trobats"
   }
 }

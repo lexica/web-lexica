@@ -32,10 +32,11 @@
   },
   "lexicaGameScreens": {
     "inGame": {
-      "foundWords": "Palabras completadas"
+      "foundWords": "$t(general.foundWords)"
     },
     "results": {
-      "missedWords": "Palabras incompletas"
+      "missedWords": "Palabras incompletas",
+      "foundWords": "$t(general.foundWords)"
     }
   },
   "scoreDetails": {
@@ -47,6 +48,7 @@
     "letterPoints": "Letras con puntaje"
   },
   "general": {
-    "lexica": "Léxica"
+    "lexica": "Léxica",
+    "foundWords": "Palabras completadas"
   }
 }

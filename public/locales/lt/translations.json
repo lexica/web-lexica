@@ -40,10 +40,11 @@
   },
   "lexicaGameScreens": {
     "inGame": {
-      "foundWords": "Rasti žodžiai"
+      "foundWords": "$t(general.foundWords)"
     },
     "results": {
-      "missedWords": "Praleisti žodžiai"
+      "missedWords": "Praleisti žodžiai",
+      "foundWords": "$t(general.foundWords)"
     }
   },
   "scoreDetails": {
@@ -57,6 +58,7 @@
   "general": {
     "multiplayer": "Daugelio žaidėjų rėžimas",
     "lexica": "Lexica",
-    "back": "Atgal"
+    "back": "Atgal",
+    "foundWords": "Rasti žodžiai"
   }
 }

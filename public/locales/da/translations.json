@@ -32,10 +32,11 @@
   },
   "lexicaGameScreens": {
     "inGame": {
-      "foundWords": "Fundne ord"
+      "foundWords": "$t(general.foundWords)"
     },
     "results": {
-      "missedWords": "Oversætte ord"
+      "missedWords": "Oversætte ord",
+      "foundWords": "$t(general.foundWords)"
     }
   },
   "scoreDetails": {
@@ -47,6 +48,7 @@
     "letterPoints": "Bogstavpoints"
   },
   "general": {
-    "lexica": "Lexica"
+    "lexica": "Lexica",
+    "foundWords": "Fundne ord"
   }
 }

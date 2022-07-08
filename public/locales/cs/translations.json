@@ -26,5 +26,13 @@
   },
   "general": {
     "lexica": "Lexica"
+  },
+  "lexicaGameScreens": {
+    "inGame": {
+      "foundWords": "$t(general.foundWords)"
+    },
+    "results": {
+      "foundWords": "$t(general.foundWords)"
+    }
   }
 }

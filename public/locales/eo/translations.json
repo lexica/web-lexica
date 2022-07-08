@@ -40,10 +40,11 @@
   },
   "lexicaGameScreens": {
     "inGame": {
-      "foundWords": "Trovitaj Vortoj"
+      "foundWords": "$t(general.foundWords)"
     },
     "results": {
-      "missedWords": "Ne Trovitaj Vortoj"
+      "missedWords": "Ne Trovitaj Vortoj",
+      "foundWords": "$t(general.foundWords)"
     }
   },
   "scoreDetails": {
@@ -57,6 +58,7 @@
   "general": {
     "multiplayer": "Pluraj ludantoj",
     "lexica": "Lexica",
-    "back": "Reen"
+    "back": "Reen",
+    "foundWords": "Trovitaj Vortoj"
   }
 }

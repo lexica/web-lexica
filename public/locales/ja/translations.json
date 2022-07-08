@@ -23,10 +23,11 @@
   },
   "lexicaGameScreens": {
     "inGame": {
-      "foundWords": "見つけた単語"
+      "foundWords": "$t(general.foundWords)"
     },
     "results": {
-      "missedWords": "ミスした単語"
+      "missedWords": "ミスした単語",
+      "foundWords": "$t(general.foundWords)"
     }
   },
   "scoreDetails": {
@@ -38,6 +39,7 @@
     "letterPoints": "文字のポイント"
   },
   "general": {
-    "lexica": "Lexica"
+    "lexica": "Lexica",
+    "foundWords": "見つけた単語"
   }
 }

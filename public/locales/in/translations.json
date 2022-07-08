@@ -37,10 +37,11 @@
   },
   "lexicaGameScreens": {
     "inGame": {
-      "foundWords": "Kata Yang Ditemukan"
+      "foundWords": "$t(general.foundWords)"
     },
     "results": {
-      "missedWords": "Kata Yang Terlewat"
+      "missedWords": "Kata Yang Terlewat",
+      "foundWords": "$t(general.foundWords)"
     }
   },
   "scoreDetails": {
@@ -53,6 +54,7 @@
   "general": {
     "multiplayer": "Multi-pemain",
     "lexica": "Lexica",
-    "back": "Kembali"
+    "back": "Kembali",
+    "foundWords": "Kata Yang Ditemukan"
   }
 }

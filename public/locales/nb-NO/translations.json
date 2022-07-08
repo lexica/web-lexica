@@ -40,10 +40,11 @@
   },
   "lexicaGameScreens": {
     "inGame": {
-      "foundWords": "Oppdagede ord"
+      "foundWords": "$t(general.foundWords)"
     },
     "results": {
-      "missedWords": "Uoppdagede ord"
+      "missedWords": "Uoppdagede ord",
+      "foundWords": "$t(general.foundWords)"
     }
   },
   "scoreDetails": {
@@ -57,6 +58,7 @@
   "general": {
     "multiplayer": "Flerspiller",
     "lexica": "Lexica",
-    "back": "Tilbake"
+    "back": "Tilbake",
+    "foundWords": "Oppdagede ord"
   }
 }

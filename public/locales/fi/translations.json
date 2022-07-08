@@ -40,10 +40,11 @@
   },
   "lexicaGameScreens": {
     "inGame": {
-      "foundWords": "Löydetyt sanat"
+      "foundWords": "$t(general.foundWords)"
     },
     "results": {
-      "missedWords": "Löytämättömät sanat"
+      "missedWords": "Löytämättömät sanat",
+      "foundWords": "$t(general.foundWords)"
     }
   },
   "scoreDetails": {
@@ -57,6 +58,7 @@
   "general": {
     "multiplayer": "Moninpeli",
     "lexica": "Lexica",
-    "back": "Takaisin"
+    "back": "Takaisin",
+    "foundWords": "Löydetyt sanat"
   }
 }

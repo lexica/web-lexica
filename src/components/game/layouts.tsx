@@ -1,3 +1,5 @@
+import { useContext } from 'react'
+import { Translations } from '../../translations'
 import GameModeDetails from '../GameModeDetails'
 import './layout.css'
 
@@ -19,6 +21,7 @@ export const HorizontalContainer: React.FC<HorizontalContainerProps> = ({
   Score,
   FoundWords
 }) => {
+  const { translationsFn } = useContext(Translations)
   return <div className="game-horizontal-container">
     <div className="left-pane">
       <div className="board-holder">{Board}</div>
@@ -28,8 +31,8 @@ export const HorizontalContainer: React.FC<HorizontalContainerProps> = ({
     <div className="right-pane">
       <div className="score-holder">{Score}</div>
       <div className="list-titles-holder">
-        <div>Guesses</div>
-        <div>Found Words</div>
+        <div>{translationsFn('lexicaGameScreens.inGame.guesses')}</div>
+        <div>{translationsFn('lexicaGameScreens.inGame.foundWords')}</div>
       </div>
       <div className="lists-holder">
         <div className="guesses-holder">{Guesses}</div>

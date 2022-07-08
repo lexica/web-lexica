@@ -1,10 +1,11 @@
-import { useContext, useEffect, useMemo, useRef, useState } from 'react'
+import { useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react'
 
 import { LetterScores, scoreWord } from '../../game'
 import { Score as ScoreContext} from '../../game/score'
 import { Rules } from '../../game/rules'
 import './Score.css'
 import { secondsBetweenDates, Timer, TimerContext } from '../../game/timer'
+import { Translations } from '../../translations'
 
 const getTime = (timeInSeconds: number) => {
   const seconds = timeInSeconds % 60
@@ -31,6 +32,7 @@ const Score: React.FC<{
   const rules = useContext(Rules)
 
   const remainingTimeRef = useRef(state.remainingTime)
+  const { translationsFn } = useContext(Translations)
 
   const [remainingTime, setRemainingTime] = useState(getRemainingTime(state.remainingTime, state))
   const [showTimeAddition, setShowTimeAddition] = useState(false)
@@ -68,26 +70,31 @@ const Score: React.FC<{
   ), [scoreType, letterScores, remainingWords]) + currentScore
   const foundCount = foundWords.length
   const totalCount = remainingWords.length + foundCount
+
+  const getBreakdownString = useCallback((found: number, total: number) => {
+    if (!showPercent) return `${found}/${total}`
+
+    const percentage = Math.floor((found/total) * 100)
+    return translationsFn('scoreDetails.displayPercentage', { found, total, percentage })
+  }, [showPercent, translationsFn])
+
   return (
     <div className="container">
-      <div
-        className="section"
-        style={hideTime ? { display: 'none'} : {}}
-      >
-        <div className="title">Time</div>
+      <div className="section" style={hideTime ? { display: 'none'} : {}} >
+        <div className="title">{translationsFn('scoreDetails.time')}</div>
         <div className="info">{getTime(remainingTime || 0)}</div>
         {showTimeAddition ? <div className="score-time-addition">+{timeAddition}</div> : ''}
       </div>
       <div className="section">
-        <div className="title">Words</div>
+        <div className="title">{translationsFn('scoreDetails.words')}</div>
         <div className="info">
-          {foundCount}/{totalCount}{showPercent ? ` (${Math.floor((foundCount/totalCount) * 100)}%)` : '' }
+          {getBreakdownString(foundCount, totalCount)}
         </div>
       </div>
       <div className="section">
-        <div className="title">Score</div>
+        <div className="title">{translationsFn('scoreDetails.score')}</div>
         <div className="info">
-          {currentScore}/{totalScore}{showPercent ? ` (${Math.floor((currentScore/totalScore) * 100)}%)` : ''}
+          {getBreakdownString(currentScore, totalScore)}
         </div>
       </div>
     </div>

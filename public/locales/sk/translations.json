@@ -40,10 +40,11 @@
   },
   "lexicaGameScreens": {
     "inGame": {
-      "foundWords": "Nájdené Slová"
+      "foundWords": "$t(general.foundWords)"
     },
     "results": {
-      "missedWords": "Nenájdené Slová"
+      "missedWords": "Nenájdené Slová",
+      "foundWords": "$t(general.foundWords)"
     }
   },
   "scoreDetails": {
@@ -57,6 +58,7 @@
   "general": {
     "multiplayer": "Multiplayer",
     "lexica": "Lexica",
-    "back": "Späť"
+    "back": "Späť",
+    "foundWords": "Nájdené Slová"
   }
 }

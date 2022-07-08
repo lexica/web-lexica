@@ -32,10 +32,11 @@
   },
   "lexicaGameScreens": {
     "inGame": {
-      "foundWords": "Λέξεις Που Βρέθηκαν"
+      "foundWords": "$t(general.foundWords)"
     },
     "results": {
-      "missedWords": "Χαμένες λέξεις"
+      "missedWords": "Χαμένες λέξεις",
+      "foundWords": "$t(general.foundWords)"
     }
   },
   "scoreDetails": {
@@ -47,6 +48,7 @@
     "letterPoints": "Σημεία γραμμάτων"
   },
   "general": {
-    "lexica": "Lexica"
+    "lexica": "Lexica",
+    "foundWords": "Λέξεις Που Βρέθηκαν"
   }
 }

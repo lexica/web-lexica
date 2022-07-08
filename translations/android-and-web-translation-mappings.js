@@ -120,16 +120,10 @@ const translationsFromWebToAndroid = {
   },
   lexicaGameScreens: {
     inGame: {
-      foundWords: {
-        tag: 'string',
-        name: 'found_words'
-      }
+      foundWords: new Reference('general.foundWords')
     },
     results: {
-      foundWords: {
-        tag: 'string',
-        name: 'found_words'
-      },
+      foundWords: new Reference('general.foundWords'),
       missedWords: {
         tag: 'string',
         name: 'missed_words'
@@ -181,7 +175,11 @@ const translationsFromWebToAndroid = {
       back: {
         tag: 'string',
         name: 'back'
-      }
+      },
+      foundWords: {
+        tag: 'string',
+        name: 'found_words'
+      },
   }
 }
 const languageTitlesFromWebToAndroid = {

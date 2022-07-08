@@ -35,5 +35,13 @@
     "multiplayer": "একাধিক খেলোয়াড়",
     "lexica": "লেক্সিকা",
     "back": "পিছনে"
+  },
+  "lexicaGameScreens": {
+    "inGame": {
+      "foundWords": "$t(general.foundWords)"
+    },
+    "results": {
+      "foundWords": "$t(general.foundWords)"
+    }
   }
 }

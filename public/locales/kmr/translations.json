@@ -28,10 +28,11 @@
   },
   "lexicaGameScreens": {
     "inGame": {
-      "foundWords": "Peyvên peydakirî"
+      "foundWords": "$t(general.foundWords)"
     },
     "results": {
-      "missedWords": "Peyvên Peydanekirî"
+      "missedWords": "Peyvên Peydanekirî",
+      "foundWords": "$t(general.foundWords)"
     }
   },
   "scoreDetails": {
@@ -43,6 +44,7 @@
     "letterPoints": "Pûana tîpê"
   },
   "general": {
-    "lexica": "Lexica"
+    "lexica": "Lexica",
+    "foundWords": "Peyvên peydakirî"
   }
 }

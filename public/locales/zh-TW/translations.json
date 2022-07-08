@@ -23,10 +23,11 @@
   },
   "lexicaGameScreens": {
     "inGame": {
-      "foundWords": "找到的單詞"
+      "foundWords": "$t(general.foundWords)"
     },
     "results": {
-      "missedWords": "遺漏的單詞"
+      "missedWords": "遺漏的單詞",
+      "foundWords": "$t(general.foundWords)"
     }
   },
   "scoreDetails": {
@@ -37,6 +38,7 @@
     "letterPoints": "字母分數"
   },
   "general": {
-    "lexica": "Lexica"
+    "lexica": "Lexica",
+    "foundWords": "找到的單詞"
   }
 }

@@ -27,10 +27,11 @@
   },
   "lexicaGameScreens": {
     "inGame": {
-      "foundWords": "Znalezione słowa"
+      "foundWords": "$t(general.foundWords)"
     },
     "results": {
-      "missedWords": "Brakujące słowa"
+      "missedWords": "Brakujące słowa",
+      "foundWords": "$t(general.foundWords)"
     }
   },
   "scoreDetails": {
@@ -42,6 +43,7 @@
     "letterPoints": "Punty Liter"
   },
   "general": {
-    "lexica": "Lexica"
+    "lexica": "Lexica",
+    "foundWords": "Znalezione słowa"
   }
 }

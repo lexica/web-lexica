@@ -38,10 +38,11 @@
   },
   "lexicaGameScreens": {
     "inGame": {
-      "foundWords": "找到的单词"
+      "foundWords": "$t(general.foundWords)"
     },
     "results": {
-      "missedWords": "遗漏的单词"
+      "missedWords": "遗漏的单词",
+      "foundWords": "$t(general.foundWords)"
     }
   },
   "scoreDetails": {
@@ -55,6 +56,7 @@
   "general": {
     "multiplayer": "多人游戏",
     "lexica": "Lexica",
-    "back": "返回"
+    "back": "返回",
+    "foundWords": "找到的单词"
   }
 }

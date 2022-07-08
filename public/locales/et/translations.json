@@ -40,10 +40,11 @@
   },
   "lexicaGameScreens": {
     "inGame": {
-      "foundWords": "Leitud sõnad"
+      "foundWords": "$t(general.foundWords)"
     },
     "results": {
-      "missedWords": "Leidmata sõnad"
+      "missedWords": "Leidmata sõnad",
+      "foundWords": "$t(general.foundWords)"
     }
   },
   "scoreDetails": {
@@ -57,6 +58,7 @@
   "general": {
     "multiplayer": "Mitmikmäng",
     "lexica": "Lexica",
-    "back": "Tagasi"
+    "back": "Tagasi",
+    "foundWords": "Leitud sõnad"
   }
 }

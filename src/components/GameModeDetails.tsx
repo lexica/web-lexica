@@ -3,7 +3,7 @@ import { ReactComponent as GridView } from '@material-design-icons/svg/round/gri
 import { ReactComponent as DirectionsRun } from '@material-design-icons/svg/round/directions_run.svg'
 import { ReactComponent as EmojiEvents } from '@material-design-icons/svg/round/emoji_events.svg'
 import { ReactComponent as Sort } from '@material-design-icons/svg/round/sort.svg'
-import { Duration, normalize, toMinutes } from 'duration-fns'
+import { toMinutes } from 'duration-fns'
 import { TranslationsFn } from '../translations/types'
 import { Translations } from '../translations'
 
@@ -17,12 +17,6 @@ const getScoringType = (scoringType: string, translationsFn: TranslationsFn): st
   'l': translationsFn('scoreDetails.letterPoints'),
   'w': translationsFn('scoreDetails.wordLength')
 }[scoringType] as any)
-
-const getReadableTime = (time: Duration) => {
-  const { minutes = 0 } = normalize(time)
-  if (minutes === 1) return '1 min'
-  return `${minutes} mins`
-}
 
 export type GameModeDetailsProps = {
   size?: number

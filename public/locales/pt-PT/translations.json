@@ -32,10 +32,11 @@
   },
   "lexicaGameScreens": {
     "inGame": {
-      "foundWords": "Palavras encontradas"
+      "foundWords": "$t(general.foundWords)"
     },
     "results": {
-      "missedWords": "Palavras a encontrar"
+      "missedWords": "Palavras a encontrar",
+      "foundWords": "$t(general.foundWords)"
     }
   },
   "scoreDetails": {
@@ -47,6 +48,7 @@
     "letterPoints": "Pontos de letras"
   },
   "general": {
-    "lexica": "Lexica"
+    "lexica": "Lexica",
+    "foundWords": "Palavras encontradas"
   }
 }

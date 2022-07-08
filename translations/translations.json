@@ -87,10 +87,10 @@
   "lexicaGameScreens": {
     "inGame": {
       "guesses": "Guesses",
-      "foundWords": "Found Words"
+      "foundWords": "$t(general.foundWords)"
     },
     "results": {
-      "foundWords": "Found Words",
+      "foundWords": "$t(general.foundWords)",
       "missedWords": "Missed Words"
     }
   },
@@ -119,6 +119,7 @@
     "lexica": "Lexica",
     "loading": "Loading",
     "error": "Error",
-    "back": "Back"
+    "back": "Back",
+    "foundWords": "Found Words"
   }
 }

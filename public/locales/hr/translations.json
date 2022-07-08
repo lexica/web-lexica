@@ -40,10 +40,11 @@
   },
   "lexicaGameScreens": {
     "inGame": {
-      "foundWords": "Pronađene riječi"
+      "foundWords": "$t(general.foundWords)"
     },
     "results": {
-      "missedWords": "Propuštene riječi"
+      "missedWords": "Propuštene riječi",
+      "foundWords": "$t(general.foundWords)"
     }
   },
   "scoreDetails": {
@@ -57,6 +58,7 @@
   "general": {
     "multiplayer": "Više igrača",
     "lexica": "Lexica",
-    "back": "Natrag"
+    "back": "Natrag",
+    "foundWords": "Pronađene riječi"
   }
 }

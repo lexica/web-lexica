@@ -22,10 +22,11 @@
   },
   "lexicaGameScreens": {
     "inGame": {
-      "foundWords": "Намерени Думи"
+      "foundWords": "$t(general.foundWords)"
     },
     "results": {
-      "missedWords": "Пропуснати Думи"
+      "missedWords": "Пропуснати Думи",
+      "foundWords": "$t(general.foundWords)"
     }
   },
   "scoreDetails": {
@@ -33,6 +34,7 @@
     "letterPoints": "Точи за Букви"
   },
   "general": {
-    "lexica": "Лексика"
+    "lexica": "Лексика",
+    "foundWords": "Намерени Думи"
   }
 }

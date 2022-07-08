@@ -35,10 +35,11 @@
   },
   "lexicaGameScreens": {
     "inGame": {
-      "foundWords": "Hittade ord"
+      "foundWords": "$t(general.foundWords)"
     },
     "results": {
-      "missedWords": "Misslyckade ord"
+      "missedWords": "Misslyckade ord",
+      "foundWords": "$t(general.foundWords)"
     }
   },
   "scoreDetails": {
@@ -50,6 +51,7 @@
     "letterPoints": "Bokstavspoäng"
   },
   "general": {
-    "lexica": "Lexica"
+    "lexica": "Lexica",
+    "foundWords": "Hittade ord"
   }
 }

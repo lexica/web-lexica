@@ -23,10 +23,11 @@
   },
   "lexicaGameScreens": {
     "inGame": {
-      "foundWords": "Megtalált szavak"
+      "foundWords": "$t(general.foundWords)"
     },
     "results": {
-      "missedWords": "Hiányzó szavak"
+      "missedWords": "Hiányzó szavak",
+      "foundWords": "$t(general.foundWords)"
     }
   },
   "scoreDetails": {
@@ -38,6 +39,7 @@
     "letterPoints": "Betűpontok"
   },
   "general": {
-    "lexica": "Lexica"
+    "lexica": "Lexica",
+    "foundWords": "Megtalált szavak"
   }
 }

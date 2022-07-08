@@ -40,10 +40,11 @@
   },
   "lexicaGameScreens": {
     "inGame": {
-      "foundWords": "Bulunan Sözcükler"
+      "foundWords": "$t(general.foundWords)"
     },
     "results": {
-      "missedWords": "Bulunamayan Sözcükler"
+      "missedWords": "Bulunamayan Sözcükler",
+      "foundWords": "$t(general.foundWords)"
     }
   },
   "scoreDetails": {
@@ -57,6 +58,7 @@
   "general": {
     "multiplayer": "Çok oyunculu",
     "lexica": "Lexica - Sözcük Oyunu",
-    "back": "Geri"
+    "back": "Geri",
+    "foundWords": "Bulunan Sözcükler"
   }
 }

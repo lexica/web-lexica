@@ -32,10 +32,11 @@
   },
   "lexicaGameScreens": {
     "inGame": {
-      "foundWords": "खोजे शब्द"
+      "foundWords": "$t(general.foundWords)"
     },
     "results": {
-      "missedWords": "छूटे हुए शब्द"
+      "missedWords": "छूटे हुए शब्द",
+      "foundWords": "$t(general.foundWords)"
     }
   },
   "scoreDetails": {
@@ -47,6 +48,7 @@
     "letterPoints": "अक्षर अंक"
   },
   "general": {
-    "lexica": "लेक्सिका"
+    "lexica": "लेक्सिका",
+    "foundWords": "खोजे शब्द"
   }
 }

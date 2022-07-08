@@ -40,10 +40,11 @@
   },
   "lexicaGameScreens": {
     "inGame": {
-      "foundWords": "Знайдені слова"
+      "foundWords": "$t(general.foundWords)"
     },
     "results": {
-      "missedWords": "Пропущені слова"
+      "missedWords": "Пропущені слова",
+      "foundWords": "$t(general.foundWords)"
     }
   },
   "scoreDetails": {
@@ -57,6 +58,7 @@
   "general": {
     "multiplayer": "Багатокористувацька гра",
     "lexica": "Lexica",
-    "back": "Назад"
+    "back": "Назад",
+    "foundWords": "Знайдені слова"
   }
 }

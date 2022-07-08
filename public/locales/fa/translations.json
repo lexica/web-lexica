@@ -23,10 +23,11 @@
   },
   "lexicaGameScreens": {
     "inGame": {
-      "foundWords": "واژه‌های پیدا شده"
+      "foundWords": "$t(general.foundWords)"
     },
     "results": {
-      "missedWords": "واژه‌های پیدا نشده"
+      "missedWords": "واژه‌های پیدا نشده",
+      "foundWords": "$t(general.foundWords)"
     }
   },
   "scoreDetails": {
@@ -38,6 +39,7 @@
     "letterPoints": "امتیاز هر حرف"
   },
   "general": {
-    "lexica": "لکسیکا"
+    "lexica": "لکسیکا",
+    "foundWords": "واژه‌های پیدا شده"
   }
 }

@@ -15,5 +15,13 @@
     "lexicons": {
       "title": "พจนาณุกรม"
     }
+  },
+  "lexicaGameScreens": {
+    "inGame": {
+      "foundWords": "$t(general.foundWords)"
+    },
+    "results": {
+      "foundWords": "$t(general.foundWords)"
+    }
   }
 }
