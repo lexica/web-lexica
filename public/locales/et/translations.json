@@ -1,9 +1,9 @@
 {
   "pages": {
     "home": {
-      "headlineTitle": "Lexica",
       "newGame": "Uus mäng",
-      "multiplayer": "Mitmikmäng"
+      "headlineTitle": "$t(general.lexica)",
+      "multiplayer": "$t(general.multiplayer)"
     },
     "newGameMode": {
       "gameModeName": {
@@ -17,8 +17,8 @@
       "boardSize": "Mängulaua suurus",
       "scoreType": {
         "title": "Punktiarvestuse tüüp",
-        "wordLength": "Sõnade pikkus",
-        "letterPoints": "Tähepunktid"
+        "wordLength": "$t(scoreDetails.wordLength)",
+        "letterPoints": "$t(scoreDetails.letterPoints)"
       }
     },
     "multiplayer": {
@@ -53,5 +53,10 @@
     "displayPercentage": "{{found}}/{{total}} ({{percentage}}%)",
     "wordLength": "Sõnade pikkus",
     "letterPoints": "Tähepunktid"
+  },
+  "general": {
+    "multiplayer": "Mitmikmäng",
+    "lexica": "Lexica",
+    "back": "Tagasi"
   }
 }

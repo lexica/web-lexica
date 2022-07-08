@@ -1,9 +1,9 @@
 {
   "pages": {
     "home": {
-      "headlineTitle": "Lexica - Sözcük Oyunu",
       "newGame": "Yeni Oyun",
-      "multiplayer": "Çok oyunculu"
+      "headlineTitle": "$t(general.lexica)",
+      "multiplayer": "$t(general.multiplayer)"
     },
     "newGameMode": {
       "gameModeName": {
@@ -17,8 +17,8 @@
       "boardSize": "Tahta Boyutu",
       "scoreType": {
         "title": "Puanlama Türü",
-        "wordLength": "Sözcük Uzunluğu",
-        "letterPoints": "Harf Puanı"
+        "wordLength": "$t(scoreDetails.wordLength)",
+        "letterPoints": "$t(scoreDetails.letterPoints)"
       }
     },
     "multiplayer": {
@@ -53,5 +53,10 @@
     "displayPercentage": "{{found}}/{{total}} ({{percentage}}%)",
     "wordLength": "Sözcük Uzunluğu",
     "letterPoints": "Harf Puanı"
+  },
+  "general": {
+    "multiplayer": "Çok oyunculu",
+    "lexica": "Lexica - Sözcük Oyunu",
+    "back": "Geri"
   }
 }

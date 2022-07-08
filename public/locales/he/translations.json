@@ -1,8 +1,9 @@
 {
   "pages": {
     "home": {
-      "headlineTitle": "Lexica",
-      "newGame": "משחק חדש"
+      "newGame": "משחק חדש",
+      "headlineTitle": "$t(general.lexica)",
+      "multiplayer": "$t(general.multiplayer)"
     },
     "newGameMode": {
       "timeLimit": {
@@ -11,8 +12,8 @@
       "boardSize": "גודל הלוח",
       "scoreType": {
         "title": "סוג ניקוד",
-        "wordLength": "אורך מילה",
-        "letterPoints": "נקודות אות"
+        "wordLength": "$t(scoreDetails.wordLength)",
+        "letterPoints": "$t(scoreDetails.letterPoints)"
       }
     },
     "lexicons": {
@@ -35,5 +36,8 @@
     "displayPercentage": "{{found}}/{{total}} ({{percentage}}%)",
     "wordLength": "אורך מילה",
     "letterPoints": "נקודות אות"
+  },
+  "general": {
+    "lexica": "Lexica"
   }
 }

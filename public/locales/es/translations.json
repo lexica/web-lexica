@@ -1,8 +1,9 @@
 {
   "pages": {
     "home": {
-      "headlineTitle": "Léxica",
-      "newGame": "Nueva partida"
+      "newGame": "Nueva partida",
+      "headlineTitle": "$t(general.lexica)",
+      "multiplayer": "$t(general.multiplayer)"
     },
     "newGameMode": {
       "gameModeName": {
@@ -16,8 +17,8 @@
       "boardSize": "Tamaño del tablero",
       "scoreType": {
         "title": "Tipo de puntaje",
-        "wordLength": "Longitud de palabra",
-        "letterPoints": "Letras con puntaje"
+        "wordLength": "$t(scoreDetails.wordLength)",
+        "letterPoints": "$t(scoreDetails.letterPoints)"
       }
     },
     "lexicons": {
@@ -44,5 +45,8 @@
     "displayPercentage": "{{found}}/{{total}} ({{percentage}}%)",
     "wordLength": "Longitud de palabra",
     "letterPoints": "Letras con puntaje"
+  },
+  "general": {
+    "lexica": "Léxica"
   }
 }

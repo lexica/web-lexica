@@ -1,8 +1,9 @@
 {
   "pages": {
     "home": {
-      "headlineTitle": "Lexica",
-      "newGame": "新しいゲーム"
+      "newGame": "新しいゲーム",
+      "headlineTitle": "$t(general.lexica)",
+      "multiplayer": "$t(general.multiplayer)"
     },
     "newGameMode": {
       "timeLimit": {
@@ -11,8 +12,8 @@
       "boardSize": "ボード サイズ",
       "scoreType": {
         "title": "得点の種類",
-        "wordLength": "単語の長さ",
-        "letterPoints": "文字のポイント"
+        "wordLength": "$t(scoreDetails.wordLength)",
+        "letterPoints": "$t(scoreDetails.letterPoints)"
       }
     },
     "lexicons": {
@@ -35,5 +36,8 @@
     "displayPercentage": "{{found}}/{{total}} ({{percentage}}%)",
     "wordLength": "単語の長さ",
     "letterPoints": "文字のポイント"
+  },
+  "general": {
+    "lexica": "Lexica"
   }
 }

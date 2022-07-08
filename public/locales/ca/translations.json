@@ -1,8 +1,9 @@
 {
   "pages": {
     "home": {
-      "headlineTitle": "Lèxica",
-      "newGame": "Partida nova"
+      "newGame": "Partida nova",
+      "headlineTitle": "$t(general.lexica)",
+      "multiplayer": "$t(general.multiplayer)"
     },
     "newGameMode": {
       "gameModeName": {
@@ -15,8 +16,8 @@
       "boardSize": "Mida del tauler",
       "scoreType": {
         "title": "Tipus de puntuació",
-        "wordLength": "Longitud dels mots",
-        "letterPoints": "Valor de les lletres"
+        "wordLength": "$t(scoreDetails.wordLength)",
+        "letterPoints": "$t(scoreDetails.letterPoints)"
       }
     },
     "lexicons": {
@@ -39,5 +40,8 @@
     "displayPercentage": "{{found}}/{{total}} ({{percentage}}%)",
     "wordLength": "Longitud dels mots",
     "letterPoints": "Valor de les lletres"
+  },
+  "general": {
+    "lexica": "Lèxica"
   }
 }

@@ -1,8 +1,9 @@
 {
   "pages": {
     "home": {
-      "headlineTitle": "Lexica",
-      "newGame": "Új játék"
+      "newGame": "Új játék",
+      "headlineTitle": "$t(general.lexica)",
+      "multiplayer": "$t(general.multiplayer)"
     },
     "newGameMode": {
       "timeLimit": {
@@ -11,8 +12,8 @@
       "boardSize": "Táblaméret",
       "scoreType": {
         "title": "Pontozás típusa",
-        "wordLength": "Szóhossz",
-        "letterPoints": "Betűpontok"
+        "wordLength": "$t(scoreDetails.wordLength)",
+        "letterPoints": "$t(scoreDetails.letterPoints)"
       }
     },
     "lexicons": {
@@ -35,5 +36,8 @@
     "displayPercentage": "{{found}}/{{total}} ({{percentage}}%)",
     "wordLength": "Szóhossz",
     "letterPoints": "Betűpontok"
+  },
+  "general": {
+    "lexica": "Lexica"
   }
 }

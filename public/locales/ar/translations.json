@@ -1,8 +1,9 @@
 {
   "pages": {
     "home": {
-      "headlineTitle": "ليكسيكا",
-      "newGame": "لعبة جديدة"
+      "newGame": "لعبة جديدة",
+      "headlineTitle": "$t(general.lexica)",
+      "multiplayer": "$t(general.multiplayer)"
     },
     "newGameMode": {
       "timeLimit": {
@@ -10,7 +11,8 @@
       },
       "boardSize": "حجم اللوح",
       "scoreType": {
-        "wordLength": "طول الكلمة"
+        "wordLength": "$t(scoreDetails.wordLength)",
+        "letterPoints": "$t(scoreDetails.letterPoints)"
       }
     },
     "lexicons": {
@@ -22,5 +24,8 @@
     "score": "النقاط",
     "displayPercentage": "{{found}}/{{total}} ({{percentage}}%)",
     "wordLength": "طول الكلمة"
+  },
+  "general": {
+    "lexica": "ليكسيكا"
   }
 }

@@ -1,9 +1,9 @@
 {
   "pages": {
     "home": {
-      "headlineTitle": "লেক্সিকা",
       "newGame": "নতুল খেলা",
-      "multiplayer": "একাধিক খেলোয়াড়"
+      "headlineTitle": "$t(general.lexica)",
+      "multiplayer": "$t(general.multiplayer)"
     },
     "newGameMode": {
       "gameModeName": {
@@ -15,8 +15,8 @@
       "boardSize": "বোর্ডের আকার",
       "scoreType": {
         "title": "স্কোরিং প্রকার",
-        "wordLength": "শব্দ দৈর্ঘ্য",
-        "letterPoints": "অক্ষর সংখ্যা"
+        "wordLength": "$t(scoreDetails.wordLength)",
+        "letterPoints": "$t(scoreDetails.letterPoints)"
       }
     },
     "lexicons": {
@@ -30,5 +30,10 @@
     "score": "সংখ্যা",
     "wordLength": "শব্দ দৈর্ঘ্য",
     "letterPoints": "অক্ষর সংখ্যা"
+  },
+  "general": {
+    "multiplayer": "একাধিক খেলোয়াড়",
+    "lexica": "লেক্সিকা",
+    "back": "পিছনে"
   }
 }

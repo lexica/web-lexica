@@ -1,9 +1,9 @@
 {
   "pages": {
     "home": {
-      "headlineTitle": "Lexica",
       "newGame": "Нова гра",
-      "multiplayer": "Багатокористувацька гра"
+      "headlineTitle": "$t(general.lexica)",
+      "multiplayer": "$t(general.multiplayer)"
     },
     "newGameMode": {
       "gameModeName": {
@@ -17,8 +17,8 @@
       "boardSize": "Розмір поля",
       "scoreType": {
         "title": "Метод підрахунку",
-        "wordLength": "За довжиною слів",
-        "letterPoints": "За балами букв"
+        "wordLength": "$t(scoreDetails.wordLength)",
+        "letterPoints": "$t(scoreDetails.letterPoints)"
       }
     },
     "multiplayer": {
@@ -53,5 +53,10 @@
     "displayPercentage": "{{found}}/{{total}} ({{percentage}}%)",
     "wordLength": "За довжиною слів",
     "letterPoints": "За балами букв"
+  },
+  "general": {
+    "multiplayer": "Багатокористувацька гра",
+    "lexica": "Lexica",
+    "back": "Назад"
   }
 }

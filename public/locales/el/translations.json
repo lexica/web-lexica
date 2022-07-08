@@ -1,8 +1,9 @@
 {
   "pages": {
     "home": {
-      "headlineTitle": "Lexica",
-      "newGame": "Νέο παιχνίδι"
+      "newGame": "Νέο παιχνίδι",
+      "headlineTitle": "$t(general.lexica)",
+      "multiplayer": "$t(general.multiplayer)"
     },
     "newGameMode": {
       "gameModeName": {
@@ -16,8 +17,8 @@
       "boardSize": "Μέγεθος πίνακα",
       "scoreType": {
         "title": "Τύπος βαθμολόγησης",
-        "wordLength": "Μήκος λέξης",
-        "letterPoints": "Σημεία γραμμάτων"
+        "wordLength": "$t(scoreDetails.wordLength)",
+        "letterPoints": "$t(scoreDetails.letterPoints)"
       }
     },
     "lexicons": {
@@ -44,5 +45,8 @@
     "displayPercentage": "{{found}}/{{total}} ({{percentage}}%)",
     "wordLength": "Μήκος λέξης",
     "letterPoints": "Σημεία γραμμάτων"
+  },
+  "general": {
+    "lexica": "Lexica"
   }
 }

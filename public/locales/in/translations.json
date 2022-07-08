@@ -1,9 +1,9 @@
 {
   "pages": {
     "home": {
-      "headlineTitle": "Lexica",
       "newGame": "Permainan Baru",
-      "multiplayer": "Multi-pemain"
+      "headlineTitle": "$t(general.lexica)",
+      "multiplayer": "$t(general.multiplayer)"
     },
     "newGameMode": {
       "gameModeName": {
@@ -16,7 +16,8 @@
       "boardSize": "Ukuran Papan",
       "scoreType": {
         "title": "Jenis Penilaian",
-        "wordLength": "Panjang Kata"
+        "wordLength": "$t(scoreDetails.wordLength)",
+        "letterPoints": "$t(scoreDetails.letterPoints)"
       }
     },
     "multiplayer": {
@@ -48,5 +49,10 @@
     "score": "Nilai",
     "displayPercentage": "{{found}}/{{total}} ({{percentage}}%)",
     "wordLength": "Panjang Kata"
+  },
+  "general": {
+    "multiplayer": "Multi-pemain",
+    "lexica": "Lexica",
+    "back": "Kembali"
   }
 }

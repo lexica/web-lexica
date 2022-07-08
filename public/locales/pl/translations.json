@@ -1,8 +1,9 @@
 {
   "pages": {
     "home": {
-      "headlineTitle": "Lexica",
-      "newGame": "Nowa gra"
+      "newGame": "Nowa gra",
+      "headlineTitle": "$t(general.lexica)",
+      "multiplayer": "$t(general.multiplayer)"
     },
     "newGameMode": {
       "gameModeName": {
@@ -15,8 +16,8 @@
       "boardSize": "Rozmiar planszy",
       "scoreType": {
         "title": "Typ punktacji",
-        "wordLength": "Długość słowa",
-        "letterPoints": "Punty Liter"
+        "wordLength": "$t(scoreDetails.wordLength)",
+        "letterPoints": "$t(scoreDetails.letterPoints)"
       }
     },
     "lexicons": {
@@ -39,5 +40,8 @@
     "displayPercentage": "{{found}}/{{total}} ({{percentage}}%)",
     "wordLength": "Długość słowa",
     "letterPoints": "Punty Liter"
+  },
+  "general": {
+    "lexica": "Lexica"
   }
 }

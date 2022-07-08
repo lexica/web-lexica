@@ -1,8 +1,9 @@
 {
   "pages": {
     "home": {
-      "headlineTitle": "لکسیکا",
-      "newGame": "بازی جدید"
+      "newGame": "بازی جدید",
+      "headlineTitle": "$t(general.lexica)",
+      "multiplayer": "$t(general.multiplayer)"
     },
     "newGameMode": {
       "timeLimit": {
@@ -11,8 +12,8 @@
       "boardSize": "اندازهٔ صفحه",
       "scoreType": {
         "title": "نوع امتیازگیری",
-        "wordLength": "طول واژه",
-        "letterPoints": "امتیاز هر حرف"
+        "wordLength": "$t(scoreDetails.wordLength)",
+        "letterPoints": "$t(scoreDetails.letterPoints)"
       }
     },
     "lexicons": {
@@ -35,5 +36,8 @@
     "displayPercentage": "{{found}}/{{total}} ({{percentage}}%)",
     "wordLength": "طول واژه",
     "letterPoints": "امتیاز هر حرف"
+  },
+  "general": {
+    "lexica": "لکسیکا"
   }
 }

@@ -1,8 +1,9 @@
 {
   "pages": {
     "home": {
-      "headlineTitle": "Lexica",
-      "newGame": "Nydt spil"
+      "newGame": "Nydt spil",
+      "headlineTitle": "$t(general.lexica)",
+      "multiplayer": "$t(general.multiplayer)"
     },
     "newGameMode": {
       "gameModeName": {
@@ -16,8 +17,8 @@
       "boardSize": "Brettstørrelse",
       "scoreType": {
         "title": "Scoringstype",
-        "wordLength": "Ordlængde",
-        "letterPoints": "Bogstavpoints"
+        "wordLength": "$t(scoreDetails.wordLength)",
+        "letterPoints": "$t(scoreDetails.letterPoints)"
       }
     },
     "lexicons": {
@@ -44,5 +45,8 @@
     "displayPercentage": "{{found}}/{{total}} ({{percentage}}%)",
     "wordLength": "Ordlængde",
     "letterPoints": "Bogstavpoints"
+  },
+  "general": {
+    "lexica": "Lexica"
   }
 }

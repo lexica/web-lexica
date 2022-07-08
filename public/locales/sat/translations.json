@@ -1,8 +1,9 @@
 {
   "pages": {
     "home": {
-      "headlineTitle": "ᱞᱮᱠᱥᱠᱟ",
-      "newGame": "ᱱᱟᱶᱟ ᱠᱷᱮᱞ"
+      "newGame": "ᱱᱟᱶᱟ ᱠᱷᱮᱞ",
+      "headlineTitle": "$t(general.lexica)",
+      "multiplayer": "$t(general.multiplayer)"
     },
     "newGameMode": {
       "timeLimit": {
@@ -11,8 +12,8 @@
       "boardSize": "ᱵᱚᱰ ᱢᱟᱯ",
       "scoreType": {
         "title": "ᱥᱠᱚᱨᱤᱝ ᱯᱨᱚᱠᱟᱨ",
-        "wordLength": "ᱟᱲᱟ ᱞᱚᱸᱵᱟ",
-        "letterPoints": "ᱪᱤᱴᱷᱤ ᱯᱚᱮᱸᱴ ᱠᱚ"
+        "wordLength": "$t(scoreDetails.wordLength)",
+        "letterPoints": "$t(scoreDetails.letterPoints)"
       }
     },
     "lexicons": {
@@ -35,5 +36,8 @@
     "displayPercentage": "{{found}}/{{total}} ({{percentage}}%)",
     "wordLength": "ᱟᱲᱟ ᱞᱚᱸᱵᱟ",
     "letterPoints": "ᱪᱤᱴᱷᱤ ᱯᱚᱮᱸᱴ ᱠᱚ"
+  },
+  "general": {
+    "lexica": "ᱞᱮᱠᱥᱠᱟ"
   }
 }

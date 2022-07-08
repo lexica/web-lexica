@@ -1,9 +1,9 @@
 {
   "pages": {
     "home": {
-      "headlineTitle": "Lexica",
       "newGame": "Nouvelle partie",
-      "multiplayer": "Multijoueur"
+      "headlineTitle": "$t(general.lexica)",
+      "multiplayer": "$t(general.multiplayer)"
     },
     "newGameMode": {
       "gameModeName": {
@@ -17,8 +17,8 @@
       "boardSize": "Taille de la grille",
       "scoreType": {
         "title": "Mode de décompte des points",
-        "wordLength": "Longueur des mots",
-        "letterPoints": "Valeur des lettres"
+        "wordLength": "$t(scoreDetails.wordLength)",
+        "letterPoints": "$t(scoreDetails.letterPoints)"
       }
     },
     "multiplayer": {
@@ -53,5 +53,10 @@
     "displayPercentage": "{{found}}/{{total}} ({{percentage}}%)",
     "wordLength": "Longueur des mots",
     "letterPoints": "Valeur des lettres"
+  },
+  "general": {
+    "multiplayer": "Multijoueur",
+    "lexica": "Lexica",
+    "back": "Retour"
   }
 }

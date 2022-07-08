@@ -1,9 +1,9 @@
 {
   "pages": {
     "home": {
-      "headlineTitle": "Lexica",
       "newGame": "Trò chơi mới",
-      "multiplayer": "Nhiều người chơi"
+      "headlineTitle": "$t(general.lexica)",
+      "multiplayer": "$t(general.multiplayer)"
     },
     "newGameMode": {
       "gameModeName": {
@@ -17,8 +17,8 @@
       "boardSize": "Kích thước bảng",
       "scoreType": {
         "title": "Kiểu tính điểm",
-        "wordLength": "Độ dài của từ",
-        "letterPoints": "Điểm cho từng chữ cái"
+        "wordLength": "$t(scoreDetails.wordLength)",
+        "letterPoints": "$t(scoreDetails.letterPoints)"
       }
     },
     "multiplayer": {
@@ -51,5 +51,10 @@
     "displayPercentage": "{{found}}/{{total}} ({{percentage}}%)",
     "wordLength": "Độ dài của từ",
     "letterPoints": "Điểm cho từng chữ cái"
+  },
+  "general": {
+    "multiplayer": "Nhiều người chơi",
+    "lexica": "Lexica",
+    "back": "Quay lại"
   }
 }

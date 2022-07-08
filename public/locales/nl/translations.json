@@ -1,9 +1,9 @@
 {
   "pages": {
     "home": {
-      "headlineTitle": "Lexica",
       "newGame": "Nieuw spel",
-      "multiplayer": "Meerdere spelers"
+      "headlineTitle": "$t(general.lexica)",
+      "multiplayer": "$t(general.multiplayer)"
     },
     "newGameMode": {
       "gameModeName": {
@@ -17,8 +17,8 @@
       "boardSize": "Bordgrootte",
       "scoreType": {
         "title": "Scorenotatie",
-        "wordLength": "Woordlengte",
-        "letterPoints": "Letterpunten"
+        "wordLength": "$t(scoreDetails.wordLength)",
+        "letterPoints": "$t(scoreDetails.letterPoints)"
       }
     },
     "multiplayer": {
@@ -53,5 +53,10 @@
     "displayPercentage": "{{found}}/{{total}} ({{percentage}}%)",
     "wordLength": "Woordlengte",
     "letterPoints": "Letterpunten"
+  },
+  "general": {
+    "multiplayer": "Meerdere spelers",
+    "lexica": "Lexica",
+    "back": "Terug"
   }
 }

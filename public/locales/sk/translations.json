@@ -1,9 +1,9 @@
 {
   "pages": {
     "home": {
-      "headlineTitle": "Lexica",
       "newGame": "Nová hra",
-      "multiplayer": "Multiplayer"
+      "headlineTitle": "$t(general.lexica)",
+      "multiplayer": "$t(general.multiplayer)"
     },
     "newGameMode": {
       "gameModeName": {
@@ -17,8 +17,8 @@
       "boardSize": "Veľkosť hracej plochy",
       "scoreType": {
         "title": "Typ bodovania",
-        "wordLength": "Dĺžka Slov",
-        "letterPoints": "Body za písmená"
+        "wordLength": "$t(scoreDetails.wordLength)",
+        "letterPoints": "$t(scoreDetails.letterPoints)"
       }
     },
     "multiplayer": {
@@ -53,5 +53,10 @@
     "displayPercentage": "{{found}}/{{total}} ({{percentage}}%)",
     "wordLength": "Dĺžka Slov",
     "letterPoints": "Body za písmená"
+  },
+  "general": {
+    "multiplayer": "Multiplayer",
+    "lexica": "Lexica",
+    "back": "Späť"
   }
 }

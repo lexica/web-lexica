@@ -1,9 +1,9 @@
 {
   "pages": {
     "home": {
-      "headlineTitle": "Lexica",
       "newGame": "Nova igra",
-      "multiplayer": "Više igrača"
+      "headlineTitle": "$t(general.lexica)",
+      "multiplayer": "$t(general.multiplayer)"
     },
     "newGameMode": {
       "gameModeName": {
@@ -17,8 +17,8 @@
       "boardSize": "Veličina ploče",
       "scoreType": {
         "title": "Vrsta bodovanja",
-        "wordLength": "Duljina riječi",
-        "letterPoints": "Bodovi za riječi"
+        "wordLength": "$t(scoreDetails.wordLength)",
+        "letterPoints": "$t(scoreDetails.letterPoints)"
       }
     },
     "multiplayer": {
@@ -53,5 +53,10 @@
     "displayPercentage": "{{found}}/{{total}} ({{percentage}} %)",
     "wordLength": "Duljina riječi",
     "letterPoints": "Bodovi za riječi"
+  },
+  "general": {
+    "multiplayer": "Više igrača",
+    "lexica": "Lexica",
+    "back": "Natrag"
   }
 }

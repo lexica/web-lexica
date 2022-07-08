@@ -1,8 +1,9 @@
 {
   "pages": {
     "home": {
-      "headlineTitle": "Lexica",
-      "newGame": "新遊戲"
+      "newGame": "新遊戲",
+      "headlineTitle": "$t(general.lexica)",
+      "multiplayer": "$t(general.multiplayer)"
     },
     "newGameMode": {
       "timeLimit": {
@@ -11,8 +12,8 @@
       "boardSize": "圖版大小",
       "scoreType": {
         "title": "計分方式",
-        "wordLength": "單詞長度",
-        "letterPoints": "字母分數"
+        "wordLength": "$t(scoreDetails.wordLength)",
+        "letterPoints": "$t(scoreDetails.letterPoints)"
       }
     },
     "lexicons": {
@@ -34,5 +35,8 @@
     "displayPercentage": "{{found}}/{{total}}（{{percentage}}%）",
     "wordLength": "單詞長度",
     "letterPoints": "字母分數"
+  },
+  "general": {
+    "lexica": "Lexica"
   }
 }

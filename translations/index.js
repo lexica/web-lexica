@@ -63,7 +63,6 @@ const handleMergeTranslations = (args, options) => {
 
   const mappedTranslations = codes.reduce((acc, languageCode) => {
     const androidTranslations = getAndroidTranslationsFromFolder(languageCodeToFolderPathMap[languageCode])
-    if (languageCode === 'en') console.log(JSON.stringify(androidTranslations, null, 2))
     const translations = mapTranslationsFromAndroidToWeb(translationsFromAndroidToWeb, androidTranslations)
     const languageTitles = mapTranslationsFromAndroidToWeb(languageTitlesFromAndroidToWeb, androidTranslations)
     return {

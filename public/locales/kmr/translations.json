@@ -1,8 +1,9 @@
 {
   "pages": {
     "home": {
-      "headlineTitle": "Lexica",
-      "newGame": "Lîstika Nû"
+      "newGame": "Lîstika Nû",
+      "headlineTitle": "$t(general.lexica)",
+      "multiplayer": "$t(general.multiplayer)"
     },
     "newGameMode": {
       "gameModeName": {
@@ -16,8 +17,8 @@
       "boardSize": "Mezinahiya Hûnanê",
       "scoreType": {
         "title": "Cureya Puandanê",
-        "wordLength": "Dirêjahiya Peyvê",
-        "letterPoints": "Pûana tîpê"
+        "wordLength": "$t(scoreDetails.wordLength)",
+        "letterPoints": "$t(scoreDetails.letterPoints)"
       }
     },
     "lexicons": {
@@ -40,5 +41,8 @@
     "displayPercentage": "{{found}}/{{total}} ({{percentage}}%)",
     "wordLength": "Dirêjahiya Peyvê",
     "letterPoints": "Pûana tîpê"
+  },
+  "general": {
+    "lexica": "Lexica"
   }
 }

@@ -1,9 +1,9 @@
 {
   "pages": {
     "home": {
-      "headlineTitle": "Lexica",
       "newGame": "Uusi peli",
-      "multiplayer": "Moninpeli"
+      "headlineTitle": "$t(general.lexica)",
+      "multiplayer": "$t(general.multiplayer)"
     },
     "newGameMode": {
       "gameModeName": {
@@ -17,8 +17,8 @@
       "boardSize": "Laudan koko",
       "scoreType": {
         "title": "Pisteytystapa",
-        "wordLength": "Sanojen pituus",
-        "letterPoints": "Kirjainpisteet"
+        "wordLength": "$t(scoreDetails.wordLength)",
+        "letterPoints": "$t(scoreDetails.letterPoints)"
       }
     },
     "multiplayer": {
@@ -53,5 +53,10 @@
     "displayPercentage": "{{found}}/{{total}} ({{percentage}} %)",
     "wordLength": "Sanojen pituus",
     "letterPoints": "Kirjainpisteet"
+  },
+  "general": {
+    "multiplayer": "Moninpeli",
+    "lexica": "Lexica",
+    "back": "Takaisin"
   }
 }

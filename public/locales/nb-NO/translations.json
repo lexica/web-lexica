@@ -1,9 +1,9 @@
 {
   "pages": {
     "home": {
-      "headlineTitle": "Lexica",
       "newGame": "Nytt spill",
-      "multiplayer": "Flerspiller"
+      "headlineTitle": "$t(general.lexica)",
+      "multiplayer": "$t(general.multiplayer)"
     },
     "newGameMode": {
       "gameModeName": {
@@ -17,8 +17,8 @@
       "boardSize": "Brettstørrelse",
       "scoreType": {
         "title": "Poengivningstype",
-        "wordLength": "Ordlengde",
-        "letterPoints": "Bokstavpoeng"
+        "wordLength": "$t(scoreDetails.wordLength)",
+        "letterPoints": "$t(scoreDetails.letterPoints)"
       }
     },
     "multiplayer": {
@@ -53,5 +53,10 @@
     "displayPercentage": "{{found}}/{{total}} ({{percentage}}%)",
     "wordLength": "Ordlengde",
     "letterPoints": "Bokstavpoeng"
+  },
+  "general": {
+    "multiplayer": "Flerspiller",
+    "lexica": "Lexica",
+    "back": "Tilbake"
   }
 }

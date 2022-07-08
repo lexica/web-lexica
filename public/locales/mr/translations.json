@@ -1,8 +1,9 @@
 {
   "pages": {
     "home": {
-      "headlineTitle": "लेक्सिका",
-      "newGame": "नवीन खेळ"
+      "newGame": "नवीन खेळ",
+      "headlineTitle": "$t(general.lexica)",
+      "multiplayer": "$t(general.multiplayer)"
     },
     "newGameMode": {
       "timeLimit": {
@@ -11,8 +12,8 @@
       "boardSize": "बोर्डाचा आकार",
       "scoreType": {
         "title": "गुणांकन प्रकार",
-        "wordLength": "शब्दाची लांबी",
-        "letterPoints": "अक्षराचे गुण"
+        "wordLength": "$t(scoreDetails.wordLength)",
+        "letterPoints": "$t(scoreDetails.letterPoints)"
       }
     },
     "lexicons": {
@@ -35,5 +36,8 @@
     "displayPercentage": "{{found}}/{{total}} ({{percentage}}%)",
     "wordLength": "शब्दाची लांबी",
     "letterPoints": "अक्षराचे गुण"
+  },
+  "general": {
+    "lexica": "लेक्सिका"
   }
 }

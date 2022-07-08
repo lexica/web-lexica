@@ -1,8 +1,9 @@
 {
   "pages": {
     "home": {
-      "headlineTitle": "Лексика",
-      "newGame": "Нова Игра"
+      "newGame": "Нова Игра",
+      "headlineTitle": "$t(general.lexica)",
+      "multiplayer": "$t(general.multiplayer)"
     },
     "newGameMode": {
       "timeLimit": {
@@ -11,8 +12,8 @@
       "boardSize": "Размер на Таблото",
       "scoreType": {
         "title": "Вид на Точкуване",
-        "wordLength": "Дължина на Думата",
-        "letterPoints": "Точи за Букви"
+        "wordLength": "$t(scoreDetails.wordLength)",
+        "letterPoints": "$t(scoreDetails.letterPoints)"
       }
     },
     "lexicons": {
@@ -30,5 +31,8 @@
   "scoreDetails": {
     "wordLength": "Дължина на Думата",
     "letterPoints": "Точи за Букви"
+  },
+  "general": {
+    "lexica": "Лексика"
   }
 }

@@ -29,6 +29,11 @@ const makePartialTranslationFromValues = (mappingValues, translationValues) => m
   return makePartialTranslationFromPathAndValue(path, matchingTranslationValue.value, mappingValue.transformerFn)
 }).reduce(mergeObjects, {})
 
+/** @type {(references: import('./android-and-web-translation-mappings').ReferenceEntry[]) => any} */
+const makeReferences = references => references.reduce((acc, { path, referenceTo }) => mergeObjects(
+  acc,
+  makePartialTranslationFromPathAndValue(path, referenceTo)
+), {})
 
 /**
  * 
@@ -40,7 +45,9 @@ const mapTranslationsFromAndroidToWeb = (translationMap, androidTranslation) => 
   const mappingKeys = Object.keys(translationMap)
   const commonKeys = mappingKeys.filter(k => androidKeys.includes(k))
 
-  if (!commonKeys) return {}
+  const references = makeReferences(translationMap['$references'] || [])
+
+  if (!commonKeys) return references
 
   return commonKeys.reduce((acc, key) => {
     const translation = androidTranslation[key]
@@ -57,7 +64,7 @@ const mapTranslationsFromAndroidToWeb = (translationMap, androidTranslation) => 
       return mergeObjects(acc, partialTranslation)
     }
     return acc
-  }, {})
+  }, references)
 }
 
 // const genericGetTranslations = (translationMap) => {

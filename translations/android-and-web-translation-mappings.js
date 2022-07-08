@@ -1,12 +1,17 @@
-const { mergeObjects } = require('./util')
+const R = require('ramda')
+const { logger } = require('@storybook/node-logger')
 /** @typedef {(val: string) => string} TransformerFn */
 
 /** @type {TransformerFn} */
 const countTransformer = str => str.replace(/%(\d\$)?d/, '{{count}}')
 
+class Reference { constructor(ref) { this.ref = ref } toString() { return `$t(${this.ref})` } }
+
 const translationsFromWebToAndroid = {
   pages: {
     home: {
+      headlineTitle: new Reference('general.lexica'),
+      multiplayer: new Reference('general.multiplayer'),
       newGame: {
         tag: 'string',
         name: 'new_game'
@@ -42,13 +47,11 @@ const translationsFromWebToAndroid = {
           tag: 'string',
           name: 'pref_scoreType'
         },
+        wordLength: new Reference('scoreDetails.wordLength'),
+        letterPoints: new Reference('scoreDetails.letterPoints')
       }
     },
     multiplayer: {
-      title: {
-        tag: 'string',
-        name: 'multiplayer'
-      },
       startGameHint: {
         tag: 'string',
         name: 'multiplayer__start_when_ready'
@@ -102,8 +105,7 @@ const translationsFromWebToAndroid = {
       value: {
         tag: 'item',
         quantity: 'one',
-        /** @type {TransformerFn} */
-        transformerFn: str => str.replace('%d', '{{count}}')
+        transformerFn: countTransformer
       }
     },
     time_other: {
@@ -176,6 +178,10 @@ const translationsFromWebToAndroid = {
         tag: 'string',
         name: 'app_name'
       },
+      back: {
+        tag: 'string',
+        name: 'back'
+      }
   }
 }
 const languageTitlesFromWebToAndroid = {
@@ -203,13 +209,32 @@ const languageTitlesFromWebToAndroid = {
 
 const getCurrentPath = (path, key) =>  path ? `${path}.${key}` : key
 
+const mergeNestedMappings = (map1, map2) => {
+  return R.mergeDeepWithKey((key, item1, item2) => {
+    if (key === '$references') return [...item1, ...item2]
+    logger.warn(`had an unexpected key collision while merging nested translation mappings. key: ${key}`)
+  }, map1, map2)
+}
+
 const getReduceFromAndroidToWeb = (path, subObject) => (acc, key) => {
   const value = subObject[key]
   const currentPath = getCurrentPath(path, key)
+
+  if (value instanceof Reference) {
+    const reference = {
+      path: currentPath,
+      referenceTo: value.toString()
+    }
+    return {
+      ...acc,
+      '$references': [...(acc['$references'] || []), reference]
+    }
+  }
+
   if (value.tag === undefined) {
     const reducer = getReduceFromAndroidToWeb(currentPath, value)
     const nested = Object.keys(value).reduce(reducer, {})
-    return mergeObjects(acc, nested, true)
+    return mergeNestedMappings(acc, nested)
   }
   if (value.value !== undefined) {
     const existingValue = acc[value.name] || { tag: value.tag, values: [] }
@@ -246,7 +271,8 @@ const flipMap = obj => {
 /** @typedef {{ tag: 'item', quantity: string, path: string, transformerFn?: (val: string) => string }} PluralValue */
 /** @typedef {{ tag: 'string', paths: string[], transformerFn?: (val: string) => string } StringTag } */
 /** @typedef {{ tag: 'plurals', values: PluralValue[] }} PluralTag */
-/** @typedef {{ [key: string]: StringTag | PluralTag }} AndroidToWebMap */
+/** @typedef {{ referenceTo: string, path: string }} ReferenceEntry */
+/** @typedef {{ [key: string]: StringTag | PluralTag } & { '$references'?: ReferenceEntry[] }} AndroidToWebMap */
 
 module.exports = {
   translationsFromWebToAndroid,

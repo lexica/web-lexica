@@ -1,10 +1,16 @@
 {
   "pages": {
     "home": {
-      "newGame": "เริ่มเกม"
+      "newGame": "เริ่มเกม",
+      "headlineTitle": "$t(general.lexica)",
+      "multiplayer": "$t(general.multiplayer)"
     },
     "newGameMode": {
-      "boardSize": "ขนาดกระดาน"
+      "boardSize": "ขนาดกระดาน",
+      "scoreType": {
+        "wordLength": "$t(scoreDetails.wordLength)",
+        "letterPoints": "$t(scoreDetails.letterPoints)"
+      }
     },
     "lexicons": {
       "title": "พจนาณุกรม"

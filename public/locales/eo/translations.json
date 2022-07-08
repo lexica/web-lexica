@@ -1,9 +1,9 @@
 {
   "pages": {
     "home": {
-      "headlineTitle": "Lexica",
       "newGame": "Nova ludo",
-      "multiplayer": "Pluraj ludantoj"
+      "headlineTitle": "$t(general.lexica)",
+      "multiplayer": "$t(general.multiplayer)"
     },
     "newGameMode": {
       "gameModeName": {
@@ -17,8 +17,8 @@
       "boardSize": "Grando de Tabulo",
       "scoreType": {
         "title": "Tipo de Poentaro",
-        "wordLength": "Vortolongo",
-        "letterPoints": "Literaj Poentoj"
+        "wordLength": "$t(scoreDetails.wordLength)",
+        "letterPoints": "$t(scoreDetails.letterPoints)"
       }
     },
     "multiplayer": {
@@ -53,5 +53,10 @@
     "displayPercentage": "{{found}}/{{total}} ({{percentage}}%)",
     "wordLength": "Vortolongo",
     "letterPoints": "Literaj Poentoj"
+  },
+  "general": {
+    "multiplayer": "Pluraj ludantoj",
+    "lexica": "Lexica",
+    "back": "Reen"
   }
 }

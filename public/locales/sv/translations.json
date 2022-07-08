@@ -1,8 +1,9 @@
 {
   "pages": {
     "home": {
-      "headlineTitle": "Lexica",
-      "newGame": "Nytt spel"
+      "newGame": "Nytt spel",
+      "headlineTitle": "$t(general.lexica)",
+      "multiplayer": "$t(general.multiplayer)"
     },
     "newGameMode": {
       "gameModeName": {
@@ -16,8 +17,8 @@
       "boardSize": "Brädesstorlek",
       "scoreType": {
         "title": "Poängräkning",
-        "wordLength": "Ordlängd",
-        "letterPoints": "Bokstavspoäng"
+        "wordLength": "$t(scoreDetails.wordLength)",
+        "letterPoints": "$t(scoreDetails.letterPoints)"
       }
     },
     "multiplayer": {
@@ -47,5 +48,8 @@
     "displayPercentage": "{{found}}/{{total}} ({{percentage}}%)",
     "wordLength": "Ordlängd",
     "letterPoints": "Bokstavspoäng"
+  },
+  "general": {
+    "lexica": "Lexica"
   }
 }
