@@ -2,6 +2,19 @@
 
 ## A web version of Lexica
 
+
+## News
+
+### Now with translations!
+
+Web Lexica now has translations! This is a new feature and may have some bugs. If you find any, please [create an issue](https://github.com/lexica/web-lexica/issues/new).
+
+If you would like to contribute to translations, check out the [Web Lexica Weblate Project](https://hosted.weblate.org/projects/web-lexica/), and please [see these instructions for using Weblate](https://hosted.weblate.org/engage/web-lexica/) to hlep translate `web-lexica`.
+
+Many of the current translations have been re-used from [Lexica](https://github.com/lexica/lexica). A deep thank you to all who have previously given there time to help translate `lexica`.
+
+
+
 ### New game/game mode: Lexicle
 
 Love playing [Wordle](https://www.nytimes.com/games/wordle/index.html)? Try playing with a Lexica twist! [Give it a try](https://lexica.github.io/web-lexica/lexicle/).
@@ -29,7 +42,6 @@ Here are some things that `web-lexica` adds to Lexica:
 
 Here are a list of its noteworthy shortcomings:
 
-1. The game has not been translated to other languages, despite being able to play games in other languages
 1. There are no preferences (Language, theme, etc)
 
 Less important, but still missing, items are:
@@ -38,7 +50,7 @@ Less important, but still missing, items are:
 1. When creating a multiplayer game, the QR code leads to the Android App's landing page, with no option for a direct link to a `web-lexica` game (The page's URL does dynamically update though, and can be used to share games)
 1. Board rotation has not been implemented
 1. A post-game `Share` option has not been implemented
-1. The post-game `Missed Words` list does not include dictionary links or a preview board
+1. The post-game summary does not not include dictionary links or a preview board
 
 The app currently uses the excellent [`Solarized`](https://github.com/altercation/solarized) color scheme, the licence to which can be found [here](https://raw.githubusercontent.com/altercation/solarized/master/LICENSE)
 
