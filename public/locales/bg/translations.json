@@ -1,0 +1,40 @@
+{
+  "pages": {
+    "home": {
+      "newGame": "Нова Игра",
+      "headlineTitle": "$t(general.lexica)",
+      "multiplayer": "$t(general.multiplayer)"
+    },
+    "newGameMode": {
+      "timeLimit": {
+        "title": "Времеви Лимит"
+      },
+      "boardSize": "Размер на Таблото",
+      "scoreType": {
+        "title": "Вид на Точкуване",
+        "wordLength": "$t(scoreDetails.wordLength)",
+        "letterPoints": "$t(scoreDetails.letterPoints)"
+      }
+    },
+    "lexicons": {
+      "title": "Речник"
+    }
+  },
+  "lexicaGameScreens": {
+    "inGame": {
+      "foundWords": "$t(general.foundWords)"
+    },
+    "results": {
+      "missedWords": "Пропуснати Думи",
+      "foundWords": "$t(general.foundWords)"
+    }
+  },
+  "scoreDetails": {
+    "wordLength": "Дължина на Думата",
+    "letterPoints": "Точи за Букви"
+  },
+  "general": {
+    "lexica": "Лексика",
+    "foundWords": "Намерени Думи"
+  }
+}

@@ -4,7 +4,8 @@ import { getClass } from './util'
 
 import Description from './Description'
 import Radio from '../Radio'
-import { useCallback, useState } from 'react'
+import { useCallback, useContext, useState } from 'react'
+import { Translations } from '../../translations'
 
 const {
   optionClass
@@ -20,7 +21,8 @@ const BoardSize = ({
   sizes
 }: BoardSizeProps) => {
   const [boardSize, setBoardSize] = useState(0)
-  const title = 'Board Size'
+  const { translationsFn } = useContext(Translations)
+  const title = translationsFn('pages.newGameMode.boardSize')
 
   const handleChange = useCallback((size: number) => {
     if (!sizes.includes(size)) return

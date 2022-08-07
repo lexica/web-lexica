@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext, useMemo } from 'react'
 import { ReactComponent as PlayCircle } from '@material-design-icons/svg/round/play_circle.svg'
 import { ReactComponent as Refresh } from '@material-design-icons/svg/round/refresh.svg'
 
@@ -6,7 +6,6 @@ import GameModeDetails from './GameModeDetails'
 
 import { Dictionary } from '../game/dictionary'
 import { Translations } from '../translations'
-import { Translation } from '../translations/implemented-languages'
 import { Language } from '../game/language'
 
 import './StartScreen.css'
@@ -14,6 +13,7 @@ import ShareGameQrCode, { Platform } from './game/ShareGameQrCode'
 import { Rules } from '../game/rules'
 import { Board } from '../game/board/hooks'
 import Button, { ButtonFontSizing, ButtonThemeType } from './Button'
+import { TranslationsFn } from '../translations/types'
 
 export type StartScreenProps = {
   handleStart: () => any
@@ -22,6 +22,16 @@ export type StartScreenProps = {
   showQrCode?: boolean,
   handleBoardRefresh?: () => void,
   pageTitle: string
+}
+
+const getTranslatedStrings = (joiningGame: boolean, translationsFn: TranslationsFn) => {
+  return joiningGame ? {
+    startGameButtonPrompt: translationsFn('pages.multiplayer.joinGame'),
+    startGameHint: translationsFn('pages.multiplayer.joinGameHint'),
+  } : {
+    startGameButtonPrompt: translationsFn('pages.multiplayer.startGame'),
+    startGameHint: translationsFn('pages.multiplayer.startGameHint'),
+  }
 }
 
 const StartScreen: React.FC<StartScreenProps> = ({
@@ -34,24 +44,23 @@ const StartScreen: React.FC<StartScreenProps> = ({
 }) => {
   const languageContext = useContext(Language)
   const language = languageContext.metadata.name
+  const { translationsFn, languageTitlesFn } = useContext(Translations)
+  const translations = useMemo(() => getTranslatedStrings(!showQrCode, translationsFn), [showQrCode, translationsFn])
   const dictionary = useContext(Dictionary)
-  const translations = useContext(Translations)
   const rules = useContext(Rules)
   const board = useContext(Board)
 
   const showRefreshButton = loading === false && error === false && showQrCode
   const disabled = loading || error
   const wordCount = loading
-    ? 'Loading...'
+    ? translationsFn('general.loading')
     : error
-    ? 'Error loading board'
-    : `${dictionary.boardDictionary.length} words`
+    ? translationsFn('general.error')
+    : translationsFn('pages.multiplayer.wordCount', { count: dictionary.boardDictionary.length })
 
-  const languageTitle = translations.languageTitles[
-    language as any as keyof Translation['languageTitles']
-  ]
+  const languageTitle = languageTitlesFn(language as any)
 
-  const qrCode = showQrCode === true && <ShareGameQrCode {...{ rules, language, board, platform: Platform.Android,  }}/>
+  const qrCode = showQrCode === true && <ShareGameQrCode {...{ rules, language, board, platform: Platform.Android }}/>
 
   return <div className="start-screen">
     <div className="start-screen-title">{pageTitle}</div>
@@ -62,11 +71,11 @@ const StartScreen: React.FC<StartScreenProps> = ({
       {showRefreshButton && <Button onClick={handleBoardRefresh} prompt='Refresh Board' svg={Refresh} />}
     </div>
     <div className="start-screen-share-game-qr-code">{!loading && qrCode}</div>
-    <div className="start-screen-start-prompt">When all players are ready, you should all start the game at the same time.</div>
+    <div className="start-screen-start-prompt">{translations.startGameHint}</div>
     <Button
       fontSizing={ButtonFontSizing.Title}
       svg={PlayCircle}
-      prompt='Start game'
+      prompt={translations.startGameButtonPrompt}
       onClick={handleStart}
       roundedEdges={false}
       themeType={ButtonThemeType.Emphasis}

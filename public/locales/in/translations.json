@@ -1,0 +1,60 @@
+{
+  "pages": {
+    "home": {
+      "newGame": "Permainan Baru",
+      "headlineTitle": "$t(general.lexica)",
+      "multiplayer": "$t(general.multiplayer)"
+    },
+    "newGameMode": {
+      "gameModeName": {
+        "hint": "Nama"
+      },
+      "timeLimit": {
+        "title": "Batas Waktu",
+        "description": "Batas waktu dalam menit"
+      },
+      "boardSize": "Ukuran Papan",
+      "scoreType": {
+        "title": "Jenis Penilaian",
+        "wordLength": "$t(scoreDetails.wordLength)",
+        "letterPoints": "$t(scoreDetails.letterPoints)"
+      }
+    },
+    "multiplayer": {
+      "startGameHint": "Ketika semua pemain sudah siap, kalian harus memulai permainan pada waktu yang sama.",
+      "startGame": "Mulai permainan",
+      "joinGameHint": "Ketika semua pemain sudah siap, bergabung ke permainan.",
+      "joinGame": "Gabung ke permainan",
+      "wordCount_other": "{{count}} kata"
+    },
+    "lexicons": {
+      "title": "Lexicon",
+      "isBeta": "Beta"
+    }
+  },
+  "gameModeDetails": {
+    "time_other": "{{count}} menit"
+  },
+  "lexicaGameScreens": {
+    "inGame": {
+      "foundWords": "$t(general.foundWords)"
+    },
+    "results": {
+      "missedWords": "Kata Yang Terlewat",
+      "foundWords": "$t(general.foundWords)"
+    }
+  },
+  "scoreDetails": {
+    "time": "Waktu",
+    "words": "Kata",
+    "score": "Nilai",
+    "displayPercentage": "{{found}}/{{total}} ({{percentage}}%)",
+    "wordLength": "Panjang Kata"
+  },
+  "general": {
+    "multiplayer": "Multi-pemain",
+    "lexica": "Lexica",
+    "back": "Kembali",
+    "foundWords": "Kata Yang Ditemukan"
+  }
+}

@@ -11,6 +11,7 @@ import { makeClasses } from '../util/classes'
 import Button, { ButtonThemeType } from './Button'
 
 import './ResultsScreen.css'
+import { Translations } from '../translations'
 
 enum Lists {
   FoundWords = 'found',
@@ -28,8 +29,13 @@ const ListSelector = ({
   displayedList,
   updateDisplayedList,
 }: ListSelectorProps) => {
+  const { translationsFn } = useContext(Translations)
+
   const selected = displayedList === listName
-  const title = listName === Lists.FoundWords ? 'Found words' : 'Missed words'
+  const title = listName === Lists.FoundWords
+    ? translationsFn('lexicaGameScreens.results.missedWords')
+    : translationsFn('lexicaGameScreens.results.missedWords')
+
   const svg = listName === Lists.FoundWords ? CheckCircle : HighlightOff
   const theme = selected ? ButtonThemeType.Standard : ButtonThemeType.AltStandard
 
@@ -40,6 +46,7 @@ const ListSelector = ({
 
 const Results: React.FC = () => {
   const { foundWords, remainingWords } = useContext(ScoreContext)
+  const { translationsFn } = useContext(Translations)
   const letterScores = useContext(LetterScores)
 
   const [displayedList, updateDisplayedList] = useState(Lists.FoundWords)
@@ -58,12 +65,12 @@ const Results: React.FC = () => {
       <div
         className={displayedList === Lists.MissedWords ? 'disabled' : ''}
       >
-        Found Words
+        {translationsFn('lexicaGameScreens.results.foundWords')}
       </div>
       <div
         className={displayedList === Lists.FoundWords ? 'disabled' : ''}
       >
-        Missed Words
+        {translationsFn('lexicaGameScreens.results.missedWords')}
       </div>
     </div>
     <div className='results-main-container'>

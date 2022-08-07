@@ -1,0 +1,45 @@
+{
+  "pages": {
+    "home": {
+      "newGame": "Új játék",
+      "headlineTitle": "$t(general.lexica)",
+      "multiplayer": "$t(general.multiplayer)"
+    },
+    "newGameMode": {
+      "timeLimit": {
+        "title": "Időkorlát"
+      },
+      "boardSize": "Táblaméret",
+      "scoreType": {
+        "title": "Pontozás típusa",
+        "wordLength": "$t(scoreDetails.wordLength)",
+        "letterPoints": "$t(scoreDetails.letterPoints)"
+      }
+    },
+    "lexicons": {
+      "title": "Lexikon",
+      "isBeta": "béta"
+    }
+  },
+  "lexicaGameScreens": {
+    "inGame": {
+      "foundWords": "$t(general.foundWords)"
+    },
+    "results": {
+      "missedWords": "Hiányzó szavak",
+      "foundWords": "$t(general.foundWords)"
+    }
+  },
+  "scoreDetails": {
+    "time": "Idő",
+    "words": "Szavak",
+    "score": "Pontszám",
+    "displayPercentage": "{{found}}/{{total}} ({{percentage}}%)",
+    "wordLength": "Szóhossz",
+    "letterPoints": "Betűpontok"
+  },
+  "general": {
+    "lexica": "Lexica",
+    "foundWords": "Megtalált szavak"
+  }
+}

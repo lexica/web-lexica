@@ -1,0 +1,54 @@
+{
+  "pages": {
+    "home": {
+      "newGame": "Nydt spil",
+      "headlineTitle": "$t(general.lexica)",
+      "multiplayer": "$t(general.multiplayer)"
+    },
+    "newGameMode": {
+      "gameModeName": {
+        "hint": "Navn",
+        "description": "For valg af spilmodus / optagelse av højeste scorer"
+      },
+      "timeLimit": {
+        "title": "Tidsgrænse",
+        "description": "Tidsgrænse i minutter"
+      },
+      "boardSize": "Brettstørrelse",
+      "scoreType": {
+        "title": "Scoringstype",
+        "wordLength": "$t(scoreDetails.wordLength)",
+        "letterPoints": "$t(scoreDetails.letterPoints)"
+      }
+    },
+    "lexicons": {
+      "title": "Leksikon",
+      "isBeta": "Beta"
+    }
+  },
+  "gameModeDetails": {
+    "time_one": "{{count}} min",
+    "time_other": "{{count}} min"
+  },
+  "lexicaGameScreens": {
+    "inGame": {
+      "foundWords": "$t(general.foundWords)"
+    },
+    "results": {
+      "missedWords": "Oversætte ord",
+      "foundWords": "$t(general.foundWords)"
+    }
+  },
+  "scoreDetails": {
+    "time": "Tid",
+    "words": "Ord",
+    "score": "Score",
+    "displayPercentage": "{{found}}/{{total}} ({{percentage}}%)",
+    "wordLength": "Ordlængde",
+    "letterPoints": "Bogstavpoints"
+  },
+  "general": {
+    "lexica": "Lexica",
+    "foundWords": "Fundne ord"
+  }
+}

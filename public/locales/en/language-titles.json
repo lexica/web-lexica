@@ -1,0 +1,22 @@
+{
+  "ca": "Catalan",
+  "de_DE": "German (Extended)",
+  "de_DE_no_diacritics": "German",
+  "es": "Spanish",
+  "es_solo_enne": "Spanish only Ñ",
+  "fa": "Persian",
+  "fr_FR": "French (Extended)",
+  "fr_FR_no_diacritics": "French",
+  "hu": "Hungarian",
+  "it": "Italian",
+  "ja": "Japanese",
+  "nl": "Dutch",
+  "pl": "Polish",
+  "pt_BR": "Portuguese (Brazil) (Extended)",
+  "pt_BR_no_diacritics": "Portuguese (Brazil)",
+  "ru": "Russian",
+  "ru_extended": "Russian (Extended)",
+  "en_GB": "English (UK)",
+  "uk": "Ukrainian",
+  "en_US": "English (US)"
+}

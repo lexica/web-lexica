@@ -1,0 +1,45 @@
+{
+  "pages": {
+    "home": {
+      "newGame": "ᱱᱟᱶᱟ ᱠᱷᱮᱞ",
+      "headlineTitle": "$t(general.lexica)",
+      "multiplayer": "$t(general.multiplayer)"
+    },
+    "newGameMode": {
+      "timeLimit": {
+        "title": "ᱥᱚᱢᱚᱭ ᱞᱤᱢᱤᱴ"
+      },
+      "boardSize": "ᱵᱚᱰ ᱢᱟᱯ",
+      "scoreType": {
+        "title": "ᱥᱠᱚᱨᱤᱝ ᱯᱨᱚᱠᱟᱨ",
+        "wordLength": "$t(scoreDetails.wordLength)",
+        "letterPoints": "$t(scoreDetails.letterPoints)"
+      }
+    },
+    "lexicons": {
+      "title": "ᱞᱤᱠᱥᱤᱠᱚᱱ",
+      "isBeta": "ᱵᱮᱴᱟ"
+    }
+  },
+  "lexicaGameScreens": {
+    "inGame": {
+      "foundWords": "$t(general.foundWords)"
+    },
+    "results": {
+      "missedWords": "ᱟᱲᱟ ᱠᱚ ᱵᱟᱹᱱᱩᱜᱼᱟ",
+      "foundWords": "$t(general.foundWords)"
+    }
+  },
+  "scoreDetails": {
+    "time": "ᱥᱚᱢᱚᱭ",
+    "words": "ᱟᱲᱟ",
+    "score": "ᱥᱠᱚᱨ",
+    "displayPercentage": "{{found}}/{{total}} ({{percentage}}%)",
+    "wordLength": "ᱟᱲᱟ ᱞᱚᱸᱵᱟ",
+    "letterPoints": "ᱪᱤᱴᱷᱤ ᱯᱚᱮᱸᱴ ᱠᱚ"
+  },
+  "general": {
+    "lexica": "ᱞᱮᱠᱥᱠᱟ",
+    "foundWords": "ᱟᱲᱟ ᱠᱚ ᱧᱟᱢ ᱮᱱᱟ"
+  }
+}

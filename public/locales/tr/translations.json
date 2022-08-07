@@ -1,0 +1,64 @@
+{
+  "pages": {
+    "home": {
+      "newGame": "Yeni Oyun",
+      "headlineTitle": "$t(general.lexica)",
+      "multiplayer": "$t(general.multiplayer)"
+    },
+    "newGameMode": {
+      "gameModeName": {
+        "hint": "Ad",
+        "description": "Oyun modunu seçmek / yüksek puanları kaydetmek için"
+      },
+      "timeLimit": {
+        "title": "Zaman Sınırı",
+        "description": "Dakika cinsinden zaman sınırı"
+      },
+      "boardSize": "Tahta Boyutu",
+      "scoreType": {
+        "title": "Puanlama Türü",
+        "wordLength": "$t(scoreDetails.wordLength)",
+        "letterPoints": "$t(scoreDetails.letterPoints)"
+      }
+    },
+    "multiplayer": {
+      "startGameHint": "Tüm oyuncular hazır olduğunda, hepiniz oyuna aynı anda başlamalısınız.",
+      "startGame": "Oyunu başlat",
+      "joinGameHint": "Tüm oyuncular hazır olduğunda oyuna katılın.",
+      "joinGame": "Oyuna katıl",
+      "wordCount_one": "{{count}} sözcük",
+      "wordCount_other": "{{count}} sözcük"
+    },
+    "lexicons": {
+      "title": "Sözlük",
+      "isBeta": "Beta sürüm"
+    }
+  },
+  "gameModeDetails": {
+    "time_one": "{{count}} dak",
+    "time_other": "{{count}} dak"
+  },
+  "lexicaGameScreens": {
+    "inGame": {
+      "foundWords": "$t(general.foundWords)"
+    },
+    "results": {
+      "missedWords": "Bulunamayan Sözcükler",
+      "foundWords": "$t(general.foundWords)"
+    }
+  },
+  "scoreDetails": {
+    "time": "Süre",
+    "words": "Sözcükler",
+    "score": "Puan",
+    "displayPercentage": "{{found}}/{{total}} ({{percentage}}%)",
+    "wordLength": "Sözcük Uzunluğu",
+    "letterPoints": "Harf Puanı"
+  },
+  "general": {
+    "multiplayer": "Çok oyunculu",
+    "lexica": "Lexica - Sözcük Oyunu",
+    "back": "Geri",
+    "foundWords": "Bulunan Sözcükler"
+  }
+}

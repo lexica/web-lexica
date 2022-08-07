@@ -1,0 +1,64 @@
+{
+  "pages": {
+    "home": {
+      "newGame": "Nova igra",
+      "headlineTitle": "$t(general.lexica)",
+      "multiplayer": "$t(general.multiplayer)"
+    },
+    "newGameMode": {
+      "gameModeName": {
+        "hint": "Ime",
+        "description": "Za biranje načina igre / zapisivanje najviših rezultata"
+      },
+      "timeLimit": {
+        "title": "Vremensko ograničenje",
+        "description": "Vremensko ograničenje u minutama"
+      },
+      "boardSize": "Veličina ploče",
+      "scoreType": {
+        "title": "Vrsta bodovanja",
+        "wordLength": "$t(scoreDetails.wordLength)",
+        "letterPoints": "$t(scoreDetails.letterPoints)"
+      }
+    },
+    "multiplayer": {
+      "startGameHint": "Kad su svi igrači spremni, svi biste trebali započeti igru u isto vrijeme.",
+      "startGame": "Počni igru",
+      "joinGameHint": "Kad su svi igrači spremni, pridruži se igri.",
+      "joinGame": "Pridruži se igri",
+      "wordCount_one": "{{count}} riječ",
+      "wordCount_other": "{{count}} riječi"
+    },
+    "lexicons": {
+      "title": "Leksikon",
+      "isBeta": "beta"
+    }
+  },
+  "gameModeDetails": {
+    "time_one": "{{count}} min",
+    "time_other": "{{count}} min"
+  },
+  "lexicaGameScreens": {
+    "inGame": {
+      "foundWords": "$t(general.foundWords)"
+    },
+    "results": {
+      "missedWords": "Propuštene riječi",
+      "foundWords": "$t(general.foundWords)"
+    }
+  },
+  "scoreDetails": {
+    "time": "Vrijeme",
+    "words": "Riječi",
+    "score": "Rezultat",
+    "displayPercentage": "{{found}}/{{total}} ({{percentage}} %)",
+    "wordLength": "Duljina riječi",
+    "letterPoints": "Bodovi za riječi"
+  },
+  "general": {
+    "multiplayer": "Više igrača",
+    "lexica": "Lexica",
+    "back": "Natrag",
+    "foundWords": "Pronađene riječi"
+  }
+}

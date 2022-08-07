@@ -1,10 +1,11 @@
-import { useState, useCallback  } from 'react'
+import { useState, useCallback, useContext  } from 'react'
 import { ReactComponent as Sort } from '@material-design-icons/svg/round/sort.svg'
 
 import Description from './Description'
 import Radio from '../Radio'
 
 import { getClass } from './util'
+import { Translations } from '../../translations'
 
 const {
   optionClass,
@@ -21,7 +22,8 @@ const MinimumWordLength = ({
   wordLengths
 }: MinimumWordLengthProps): JSX.Element => {
   const [minimumWordLength, setMinimumWordLength] = useState(0)
-  const title = 'Minimum Word Length'
+  const { translationsFn } = useContext(Translations)
+  const title = translationsFn('pages.newGameMode.minimumWordLength')
 
   const handleChange = useCallback((length: number) => {
     if (!wordLengths.includes(length)) return

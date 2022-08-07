@@ -1,0 +1,39 @@
+{
+  "pages": {
+    "home": {
+      "newGame": "لعبة جديدة",
+      "headlineTitle": "$t(general.lexica)",
+      "multiplayer": "$t(general.multiplayer)"
+    },
+    "newGameMode": {
+      "timeLimit": {
+        "title": "المهلة الزمنية"
+      },
+      "boardSize": "حجم اللوح",
+      "scoreType": {
+        "wordLength": "$t(scoreDetails.wordLength)",
+        "letterPoints": "$t(scoreDetails.letterPoints)"
+      }
+    },
+    "lexicons": {
+      "title": "القاموس"
+    }
+  },
+  "scoreDetails": {
+    "words": "الكلمات",
+    "score": "النقاط",
+    "displayPercentage": "{{found}}/{{total}} ({{percentage}}%)",
+    "wordLength": "طول الكلمة"
+  },
+  "general": {
+    "lexica": "ليكسيكا"
+  },
+  "lexicaGameScreens": {
+    "inGame": {
+      "foundWords": "$t(general.foundWords)"
+    },
+    "results": {
+      "foundWords": "$t(general.foundWords)"
+    }
+  }
+}

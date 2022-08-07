@@ -1,0 +1,54 @@
+{
+  "pages": {
+    "home": {
+      "newGame": "Νέο παιχνίδι",
+      "headlineTitle": "$t(general.lexica)",
+      "multiplayer": "$t(general.multiplayer)"
+    },
+    "newGameMode": {
+      "gameModeName": {
+        "hint": "Όνομα",
+        "description": "Για επιλογή τρόπου παιχνιδιού / καταγραφή υψηλών βαθμολογιών"
+      },
+      "timeLimit": {
+        "title": "Χρονικό όριο",
+        "description": "Χρονικό όριο σε λεπτά"
+      },
+      "boardSize": "Μέγεθος πίνακα",
+      "scoreType": {
+        "title": "Τύπος βαθμολόγησης",
+        "wordLength": "$t(scoreDetails.wordLength)",
+        "letterPoints": "$t(scoreDetails.letterPoints)"
+      }
+    },
+    "lexicons": {
+      "title": "Λεξικό",
+      "isBeta": "Beta"
+    }
+  },
+  "gameModeDetails": {
+    "time_one": "{{count}} λεπ",
+    "time_other": "{{count}} λεπ"
+  },
+  "lexicaGameScreens": {
+    "inGame": {
+      "foundWords": "$t(general.foundWords)"
+    },
+    "results": {
+      "missedWords": "Χαμένες λέξεις",
+      "foundWords": "$t(general.foundWords)"
+    }
+  },
+  "scoreDetails": {
+    "time": "Χρόνος",
+    "words": "Λέξεις",
+    "score": "Βαθμολογία",
+    "displayPercentage": "{{found}}/{{total}} ({{percentage}}%)",
+    "wordLength": "Μήκος λέξης",
+    "letterPoints": "Σημεία γραμμάτων"
+  },
+  "general": {
+    "lexica": "Lexica",
+    "foundWords": "Λέξεις Που Βρέθηκαν"
+  }
+}

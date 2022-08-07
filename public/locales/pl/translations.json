@@ -1,0 +1,49 @@
+{
+  "pages": {
+    "home": {
+      "newGame": "Nowa gra",
+      "headlineTitle": "$t(general.lexica)",
+      "multiplayer": "$t(general.multiplayer)"
+    },
+    "newGameMode": {
+      "gameModeName": {
+        "hint": "Nazwa"
+      },
+      "timeLimit": {
+        "title": "Limit czasu",
+        "description": "Limit czasu w minutach"
+      },
+      "boardSize": "Rozmiar planszy",
+      "scoreType": {
+        "title": "Typ punktacji",
+        "wordLength": "$t(scoreDetails.wordLength)",
+        "letterPoints": "$t(scoreDetails.letterPoints)"
+      }
+    },
+    "lexicons": {
+      "title": "Leksykon",
+      "isBeta": "Beta"
+    }
+  },
+  "lexicaGameScreens": {
+    "inGame": {
+      "foundWords": "$t(general.foundWords)"
+    },
+    "results": {
+      "missedWords": "Brakujące słowa",
+      "foundWords": "$t(general.foundWords)"
+    }
+  },
+  "scoreDetails": {
+    "time": "Czas",
+    "words": "Słowa",
+    "score": "Wynik",
+    "displayPercentage": "{{found}}/{{total}} ({{percentage}}%)",
+    "wordLength": "Długość słowa",
+    "letterPoints": "Punty Liter"
+  },
+  "general": {
+    "lexica": "Lexica",
+    "foundWords": "Znalezione słowa"
+  }
+}

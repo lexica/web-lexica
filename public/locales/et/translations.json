@@ -1,0 +1,64 @@
+{
+  "pages": {
+    "home": {
+      "newGame": "Uus mäng",
+      "headlineTitle": "$t(general.lexica)",
+      "multiplayer": "$t(general.multiplayer)"
+    },
+    "newGameMode": {
+      "gameModeName": {
+        "hint": "Nimi",
+        "description": "Mänguviisi valimiseks ja tulemuste salvestamiseks"
+      },
+      "timeLimit": {
+        "title": "Ajapiirang",
+        "description": "Ajapiirang minutites"
+      },
+      "boardSize": "Mängulaua suurus",
+      "scoreType": {
+        "title": "Punktiarvestuse tüüp",
+        "wordLength": "$t(scoreDetails.wordLength)",
+        "letterPoints": "$t(scoreDetails.letterPoints)"
+      }
+    },
+    "multiplayer": {
+      "startGameHint": "Kui kõik mängijad on valmis, siis palun alustage mängimist ühe korraga.",
+      "startGame": "Alusta mängu",
+      "joinGameHint": "Liitu mänguga, kui kõik mängijad on valmis.",
+      "joinGame": "Liitu mänguga",
+      "wordCount_one": "{{count}} sõna",
+      "wordCount_other": "{{count}} sõna"
+    },
+    "lexicons": {
+      "title": "Leksikon",
+      "isBeta": "beetaversioon"
+    }
+  },
+  "gameModeDetails": {
+    "time_one": "{{count}} minut",
+    "time_other": "{{count}} minutit"
+  },
+  "lexicaGameScreens": {
+    "inGame": {
+      "foundWords": "$t(general.foundWords)"
+    },
+    "results": {
+      "missedWords": "Leidmata sõnad",
+      "foundWords": "$t(general.foundWords)"
+    }
+  },
+  "scoreDetails": {
+    "time": "Aeg",
+    "words": "Sõnu",
+    "score": "Tulemus",
+    "displayPercentage": "{{found}}/{{total}} ({{percentage}}%)",
+    "wordLength": "Sõnade pikkus",
+    "letterPoints": "Tähepunktid"
+  },
+  "general": {
+    "multiplayer": "Mitmikmäng",
+    "lexica": "Lexica",
+    "back": "Tagasi",
+    "foundWords": "Leitud sõnad"
+  }
+}

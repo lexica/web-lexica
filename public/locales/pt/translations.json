@@ -1,0 +1,54 @@
+{
+  "pages": {
+    "home": {
+      "newGame": "Novo Jogo",
+      "headlineTitle": "$t(general.lexica)",
+      "multiplayer": "$t(general.multiplayer)"
+    },
+    "newGameMode": {
+      "gameModeName": {
+        "hint": "Nome",
+        "description": "Para escolher o modo de jogo / registar recordes"
+      },
+      "timeLimit": {
+        "title": "Tempo limite",
+        "description": "Limite de tempo em minutos"
+      },
+      "boardSize": "Tamanho do tabuleiro",
+      "scoreType": {
+        "title": "Tipo de Pontuação",
+        "wordLength": "$t(scoreDetails.wordLength)",
+        "letterPoints": "$t(scoreDetails.letterPoints)"
+      }
+    },
+    "lexicons": {
+      "title": "Léxico",
+      "isBeta": "Beta"
+    }
+  },
+  "gameModeDetails": {
+    "time_one": "{{count}} min",
+    "time_other": "{{count}} mins"
+  },
+  "lexicaGameScreens": {
+    "inGame": {
+      "foundWords": "$t(general.foundWords)"
+    },
+    "results": {
+      "missedWords": "Palavras a encontrar",
+      "foundWords": "$t(general.foundWords)"
+    }
+  },
+  "scoreDetails": {
+    "time": "Tempo",
+    "words": "Palavras",
+    "score": "Pontuação",
+    "displayPercentage": "{{found}}/{{total}} ({{percentage}}%)",
+    "wordLength": "Tamanho da palavra",
+    "letterPoints": "Pontos de letras"
+  },
+  "general": {
+    "lexica": "Lexica",
+    "foundWords": "Palavras encontradas"
+  }
+}

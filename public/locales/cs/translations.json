@@ -1,0 +1,38 @@
+{
+  "pages": {
+    "home": {
+      "newGame": "Nová hra",
+      "headlineTitle": "$t(general.lexica)",
+      "multiplayer": "$t(general.multiplayer)"
+    },
+    "newGameMode": {
+      "timeLimit": {
+        "title": "Časový limit"
+      },
+      "boardSize": "Velikost herní plochy",
+      "scoreType": {
+        "title": "Způsob bodování",
+        "wordLength": "$t(scoreDetails.wordLength)",
+        "letterPoints": "$t(scoreDetails.letterPoints)"
+      }
+    },
+    "lexicons": {
+      "title": "Slovník",
+      "isBeta": "Beta"
+    }
+  },
+  "scoreDetails": {
+    "wordLength": "Délka slova"
+  },
+  "general": {
+    "lexica": "Lexica"
+  },
+  "lexicaGameScreens": {
+    "inGame": {
+      "foundWords": "$t(general.foundWords)"
+    },
+    "results": {
+      "foundWords": "$t(general.foundWords)"
+    }
+  }
+}

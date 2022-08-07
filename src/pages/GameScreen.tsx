@@ -16,6 +16,7 @@ import { useTimeAttack } from '../game/time-attack'
 import { savedGameExistsForUrl } from '../game/save-game'
 import { getGamePath, isValidGamePath } from '../util/url'
 import { NewGameProviders, ResumedGameProviders, SharedGameProviders } from '../components/GameProviders'
+import { Translations } from '../translations'
 
 export type GameScreenProps = {
   isMultiplayer?: boolean,
@@ -24,10 +25,12 @@ export type GameScreenProps = {
 }
 
 const LoadingScreen = (): JSX.Element => {
+  const { translationsFn } = useContext(Translations)
+
   return <>
     <div className="single-player-loading-screen">
       <GameModeDetails />
-      Loading board...
+      {translationsFn('general.loading')}
     </div>
   </>
 }
@@ -89,6 +92,8 @@ const Game = ({
 }: GameProps): JSX.Element => {
   const autoStart = shouldAutoStart === true
 
+  const { translationsFn } = useContext(Translations)
+
   const language = useContext(Language)
   const dictionary = useContext(Dictionary)
   const rules= useContext(Rules)
@@ -126,7 +131,9 @@ const Game = ({
 
   useTimeAttack(rules, timer, score)
 
-  const pageTitle = `Web Lexica ${showQrCode ? 'New ' : ''}${isMultiplayer ? 'Multiplayer Game' : ''}`
+  const pageTitle = showQrCode
+    ? translationsFn('pages.multiplayer.newGameTitle')
+    : translationsFn('pages.multiplayer.gameTitle')
 
   useUpdatingSearchString(!loading && !error)
 

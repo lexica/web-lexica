@@ -1,0 +1,64 @@
+{
+  "pages": {
+    "home": {
+      "newGame": "Nuova partita",
+      "headlineTitle": "$t(general.lexica)",
+      "multiplayer": "$t(general.multiplayer)"
+    },
+    "newGameMode": {
+      "gameModeName": {
+        "hint": "Nome",
+        "description": "Per scegliere la modalità di gioco / registrare i punteggi più alti"
+      },
+      "timeLimit": {
+        "title": "Limite di tempo",
+        "description": "Limite di tempo in minuti"
+      },
+      "boardSize": "Dimensioni della tavola",
+      "scoreType": {
+        "title": "Tipo di punteggio",
+        "wordLength": "$t(scoreDetails.wordLength)",
+        "letterPoints": "$t(scoreDetails.letterPoints)"
+      }
+    },
+    "multiplayer": {
+      "startGameHint": "Quando tutti i giocatori sono pronti, dovreste iniziare la partita tutti insieme.",
+      "startGame": "Inizia la partita",
+      "joinGameHint": "Quando tutti i giocatori sono pronti, unitevi alla partita.",
+      "joinGame": "Unisciti alla partita",
+      "wordCount_one": "{{count}} parola",
+      "wordCount_other": "{{count}} parole"
+    },
+    "lexicons": {
+      "title": "Lessico",
+      "isBeta": "Beta"
+    }
+  },
+  "gameModeDetails": {
+    "time_one": "{{count}} min",
+    "time_other": "{{count}} min"
+  },
+  "lexicaGameScreens": {
+    "inGame": {
+      "foundWords": "$t(general.foundWords)"
+    },
+    "results": {
+      "missedWords": "Parole non trovate",
+      "foundWords": "$t(general.foundWords)"
+    }
+  },
+  "scoreDetails": {
+    "time": "Tempo",
+    "words": "Parole",
+    "score": "Punteggio",
+    "displayPercentage": "{{found}}/{{total}} ({{percentage}}%)",
+    "wordLength": "Lunghezza delle parole",
+    "letterPoints": "Punti lettera"
+  },
+  "general": {
+    "multiplayer": "Multigiocatore",
+    "lexica": "Lexica",
+    "back": "Indietro",
+    "foundWords": "Parole trovate"
+  }
+}

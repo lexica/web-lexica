@@ -1,6 +1,6 @@
 import {ReactComponent as Calendar } from '@material-design-icons/svg/round/calendar_today.svg'
 import {ReactComponent as Shuffle } from '@material-design-icons/svg/round/shuffle.svg'
-import { useCallback, useMemo } from 'react'
+import { useCallback, useContext, useMemo } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { ReactComponent as Unchecked } from '@material-design-icons/svg/round/check_box_outline_blank.svg'
 import { ReactComponent as Checked } from '@material-design-icons/svg/round/check_box.svg'
@@ -13,6 +13,7 @@ import Shared from './lexicle/Shared'
 import { storage, useStorage } from '../util/storage'
 
 import './Lexicle.css'
+import { Translations } from '../translations'
 
 enum LocalStorage { UseWordleWords = 'use-wordle-words' }
 
@@ -23,6 +24,7 @@ const toggleUseWordleWords = (initialValue: boolean) => {
 }
 
 const ChooseGameMode = (): JSX.Element => {
+  const { translationsFn } = useContext(Translations)
   const defaultUseWordleWords = /^en\b/.test(navigator.language)
   const useWordleWords = useStorage(LocalStorage.UseWordleWords, defaultUseWordleWords)
   const handleUseWordleWordList = useCallback(() => toggleUseWordleWords(defaultUseWordleWords), [defaultUseWordleWords])
@@ -35,11 +37,21 @@ const ChooseGameMode = (): JSX.Element => {
       <MainTitle title='lexicle'/>
     </div>
     <div className="lexicle-game-buttons">
-        <Button to={`${basePath}/word-of-the-day`} prompt='Word of the Day' svg={Calendar} fontSizing={buttonSize} />
-        <Button to={`${basePath}/random`} prompt='Random' svg={Shuffle} fontSizing={buttonSize} />
+        <Button
+          to={`${basePath}/word-of-the-day`}
+          prompt={translationsFn('pages.lexicle.wordOfTheDay')}
+          svg={Calendar}
+          fontSizing={buttonSize}
+        />
+        <Button
+          to={`${basePath}/random`}
+          prompt={translationsFn('pages.lexicle.random')}
+          svg={Shuffle}
+          fontSizing={buttonSize}
+        />
         <Button
           onClick={handleUseWordleWordList}
-          prompt='Use Wordle Word List'
+          prompt={translationsFn('pages.lexicle.useWordleWordList')}
           svg={useWordleWords ? Checked : Unchecked}
           fontSizing={buttonSize}
         />

@@ -1,0 +1,49 @@
+{
+  "pages": {
+    "home": {
+      "newGame": "Partida nova",
+      "headlineTitle": "$t(general.lexica)",
+      "multiplayer": "$t(general.multiplayer)"
+    },
+    "newGameMode": {
+      "gameModeName": {
+        "hint": "Nom"
+      },
+      "timeLimit": {
+        "title": "Límit de temps",
+        "description": "Límit de temps en minuts"
+      },
+      "boardSize": "Mida del tauler",
+      "scoreType": {
+        "title": "Tipus de puntuació",
+        "wordLength": "$t(scoreDetails.wordLength)",
+        "letterPoints": "$t(scoreDetails.letterPoints)"
+      }
+    },
+    "lexicons": {
+      "title": "Lèxic",
+      "isBeta": "beta"
+    }
+  },
+  "lexicaGameScreens": {
+    "inGame": {
+      "foundWords": "$t(general.foundWords)"
+    },
+    "results": {
+      "missedWords": "Mots romanents",
+      "foundWords": "$t(general.foundWords)"
+    }
+  },
+  "scoreDetails": {
+    "time": "Temps",
+    "words": "Mots",
+    "score": "Puntuació",
+    "displayPercentage": "{{found}}/{{total}} ({{percentage}}%)",
+    "wordLength": "Longitud dels mots",
+    "letterPoints": "Valor de les lletres"
+  },
+  "general": {
+    "lexica": "Lèxica",
+    "foundWords": "Mots trobats"
+  }
+}

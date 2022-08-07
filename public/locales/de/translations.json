@@ -1,0 +1,64 @@
+{
+  "pages": {
+    "home": {
+      "newGame": "Neues Spiel",
+      "headlineTitle": "$t(general.lexica)",
+      "multiplayer": "$t(general.multiplayer)"
+    },
+    "newGameMode": {
+      "gameModeName": {
+        "hint": "Name",
+        "description": "Zur Auswahl des Spielmodus / Aufzeichnung von Höchsten Punktzahlen"
+      },
+      "timeLimit": {
+        "title": "Zeitbegrenzung",
+        "description": "Zeitlimit in Minuten"
+      },
+      "boardSize": "Spielfeldgröße",
+      "scoreType": {
+        "title": "Wertungsmodus",
+        "wordLength": "$t(scoreDetails.wordLength)",
+        "letterPoints": "$t(scoreDetails.letterPoints)"
+      }
+    },
+    "multiplayer": {
+      "startGameHint": "Wenn alle Spieler bereit sind, solltet ihr alle gleichzeitig mit dem Spiel beginnen.",
+      "startGame": "Spiel starten",
+      "joinGameHint": "Wenn alle Spieler bereit sind, tretet dem Spiel bei.",
+      "joinGame": "Spiel beitreten",
+      "wordCount_one": "{{count}} Wort",
+      "wordCount_other": "{{count}} Wörter"
+    },
+    "lexicons": {
+      "title": "Lexikon",
+      "isBeta": "Beta"
+    }
+  },
+  "gameModeDetails": {
+    "time_one": "{{count}} min",
+    "time_other": "{{count}} min"
+  },
+  "lexicaGameScreens": {
+    "inGame": {
+      "foundWords": "$t(general.foundWords)"
+    },
+    "results": {
+      "missedWords": "Übersehene Wörter",
+      "foundWords": "$t(general.foundWords)"
+    }
+  },
+  "scoreDetails": {
+    "time": "Zeit",
+    "words": "Wörter",
+    "score": "Punkte",
+    "displayPercentage": "{{found}}/{{total}} ({{percentage}}%)",
+    "wordLength": "Wortlänge",
+    "letterPoints": "Buchstabenpunkte"
+  },
+  "general": {
+    "multiplayer": "Mehrspieler",
+    "lexica": "Lexica",
+    "back": "Zurück",
+    "foundWords": "Gefundene Wörter"
+  }
+}

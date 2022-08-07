@@ -1,0 +1,54 @@
+{
+  "pages": {
+    "home": {
+      "newGame": "नया खेल",
+      "headlineTitle": "$t(general.lexica)",
+      "multiplayer": "$t(general.multiplayer)"
+    },
+    "newGameMode": {
+      "gameModeName": {
+        "hint": "नाम",
+        "description": "खेल मोड चुनने के लिए/ ऊँचे स्कोर रिकार्ड करने के लिए"
+      },
+      "timeLimit": {
+        "title": "समय सीमा",
+        "description": "मिनटों में समय सीमा"
+      },
+      "boardSize": "बोर्ड माप",
+      "scoreType": {
+        "title": "स्कोरिंग प्रणाली",
+        "wordLength": "$t(scoreDetails.wordLength)",
+        "letterPoints": "$t(scoreDetails.letterPoints)"
+      }
+    },
+    "lexicons": {
+      "title": "शब्दकोश",
+      "isBeta": "बीटा"
+    }
+  },
+  "gameModeDetails": {
+    "time_one": "{{count}} मिनट",
+    "time_other": "{{count}} मिनटें"
+  },
+  "lexicaGameScreens": {
+    "inGame": {
+      "foundWords": "$t(general.foundWords)"
+    },
+    "results": {
+      "missedWords": "छूटे हुए शब्द",
+      "foundWords": "$t(general.foundWords)"
+    }
+  },
+  "scoreDetails": {
+    "time": "अवधि",
+    "words": "शब्द",
+    "score": "स्कोर",
+    "displayPercentage": "{{found}}/{{total}} ({{percentage}}%)",
+    "wordLength": "शब्द की लंबाई",
+    "letterPoints": "अक्षर अंक"
+  },
+  "general": {
+    "lexica": "लेक्सिका",
+    "foundWords": "खोजे शब्द"
+  }
+}

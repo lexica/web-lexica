@@ -1,0 +1,54 @@
+{
+  "pages": {
+    "home": {
+      "newGame": "Nueva partida",
+      "headlineTitle": "$t(general.lexica)",
+      "multiplayer": "$t(general.multiplayer)"
+    },
+    "newGameMode": {
+      "gameModeName": {
+        "hint": "Nombre",
+        "description": "Para escoger una modalidad de partida / guardar los puntajes más altos"
+      },
+      "timeLimit": {
+        "title": "Límite de tiempo",
+        "description": "Tiempo límite en minutos"
+      },
+      "boardSize": "Tamaño del tablero",
+      "scoreType": {
+        "title": "Tipo de puntaje",
+        "wordLength": "$t(scoreDetails.wordLength)",
+        "letterPoints": "$t(scoreDetails.letterPoints)"
+      }
+    },
+    "lexicons": {
+      "title": "Léxico",
+      "isBeta": "Beta"
+    }
+  },
+  "gameModeDetails": {
+    "time_one": "{{count}} min",
+    "time_other": "{{count}} mins"
+  },
+  "lexicaGameScreens": {
+    "inGame": {
+      "foundWords": "$t(general.foundWords)"
+    },
+    "results": {
+      "missedWords": "Palabras incompletas",
+      "foundWords": "$t(general.foundWords)"
+    }
+  },
+  "scoreDetails": {
+    "time": "Tiempo",
+    "words": "Palabras",
+    "score": "Puntaje",
+    "displayPercentage": "{{found}}/{{total}} ({{percentage}}%)",
+    "wordLength": "Longitud de palabra",
+    "letterPoints": "Letras con puntaje"
+  },
+  "general": {
+    "lexica": "Léxica",
+    "foundWords": "Palabras completadas"
+  }
+}

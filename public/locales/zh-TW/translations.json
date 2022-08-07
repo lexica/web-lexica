@@ -1,0 +1,44 @@
+{
+  "pages": {
+    "home": {
+      "newGame": "新遊戲",
+      "headlineTitle": "$t(general.lexica)",
+      "multiplayer": "$t(general.multiplayer)"
+    },
+    "newGameMode": {
+      "timeLimit": {
+        "title": "時限"
+      },
+      "boardSize": "圖版大小",
+      "scoreType": {
+        "title": "計分方式",
+        "wordLength": "$t(scoreDetails.wordLength)",
+        "letterPoints": "$t(scoreDetails.letterPoints)"
+      }
+    },
+    "lexicons": {
+      "title": "字典",
+      "isBeta": "測試中"
+    }
+  },
+  "lexicaGameScreens": {
+    "inGame": {
+      "foundWords": "$t(general.foundWords)"
+    },
+    "results": {
+      "missedWords": "遺漏的單詞",
+      "foundWords": "$t(general.foundWords)"
+    }
+  },
+  "scoreDetails": {
+    "words": "單詞",
+    "score": "分數",
+    "displayPercentage": "{{found}}/{{total}}（{{percentage}}%）",
+    "wordLength": "單詞長度",
+    "letterPoints": "字母分數"
+  },
+  "general": {
+    "lexica": "Lexica",
+    "foundWords": "找到的單詞"
+  }
+}

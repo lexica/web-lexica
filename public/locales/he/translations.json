@@ -1,0 +1,45 @@
+{
+  "pages": {
+    "home": {
+      "newGame": "משחק חדש",
+      "headlineTitle": "$t(general.lexica)",
+      "multiplayer": "$t(general.multiplayer)"
+    },
+    "newGameMode": {
+      "timeLimit": {
+        "title": "מגבלת זמן"
+      },
+      "boardSize": "גודל הלוח",
+      "scoreType": {
+        "title": "סוג ניקוד",
+        "wordLength": "$t(scoreDetails.wordLength)",
+        "letterPoints": "$t(scoreDetails.letterPoints)"
+      }
+    },
+    "lexicons": {
+      "title": "אוצר מלים",
+      "isBeta": "בטא"
+    }
+  },
+  "lexicaGameScreens": {
+    "inGame": {
+      "foundWords": "$t(general.foundWords)"
+    },
+    "results": {
+      "missedWords": "מילים חסרות",
+      "foundWords": "$t(general.foundWords)"
+    }
+  },
+  "scoreDetails": {
+    "time": "זמן",
+    "words": "מילים",
+    "score": "ניקוד",
+    "displayPercentage": "{{found}}/{{total}} ({{percentage}}%)",
+    "wordLength": "אורך מילה",
+    "letterPoints": "נקודות אות"
+  },
+  "general": {
+    "lexica": "Lexica",
+    "foundWords": "מילים שנמצאו"
+  }
+}

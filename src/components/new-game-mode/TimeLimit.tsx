@@ -1,11 +1,14 @@
-import { ChangeEvent, useCallback, useState } from 'react'
+import { ChangeEvent, useCallback, useContext, useState } from 'react'
 import { ReactComponent as Schedule } from '@material-design-icons/svg/round/schedule.svg'
 
 import Description from './Description'
+import { Translations } from '../../translations'
 
 const TimeLimit = ({ handleTimeUpdate }: { handleTimeUpdate: (time: number) => void }) => {
   const [rawTimeLimit, setRawTimeLimit] = useState('')
-  const title = 'Time Limit'
+  const { translationsFn } = useContext(Translations)
+
+  const title = translationsFn('pages.newGameMode.timeLimit.title')
   const handleTimeLimitChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     setRawTimeLimit(e?.target?.value)
     const time = parseInt(e?.target?.value)
@@ -18,14 +21,14 @@ const TimeLimit = ({ handleTimeUpdate }: { handleTimeUpdate: (time: number) => v
       <input
           type="number"
           className="new-game-mode-text-input new-game-mode-time-limit-text-input"
-          about="Time limit in minutes"
+          about={translationsFn('pages.newGameMode.timeLimit.description')}
           onChange={handleTimeLimitChange}
           value={rawTimeLimit}
           step="1"
           min="1"
       />
       <div className="new-game-mode-time-limit-description">
-        Time limit in minutes
+        {translationsFn('pages.newGameMode.timeLimit.description')}
       </div>
     </div>
   </Description>
