@@ -16,6 +16,7 @@ import { useLocation } from 'react-router'
 import { Language } from '../../../game/language'
 import { makeClasses } from '../../../util/classes'
 import { getBaseUrl } from '../../../util/url'
+import { Translations } from '../../../translations'
 
 const correctnessMap: { [C in LetterCorrectness]: string } = {
   [LetterCorrectness.Perfect]: '🟩',
@@ -27,6 +28,8 @@ enum ShareType {
   Score = 'Score',
   Link = 'Game Link'
 }
+
+const withPrefix = <T extends string>(suffix: T): `lexicleGameScreens.results.${T}` => `lexicleGameScreens.results.${suffix}`
 
 const useShareLink = (wordOfTheDay: boolean) => {
   const { boardDictionary: dictionary } = useContext(Dictionary)
@@ -56,46 +59,50 @@ const useShareLink = (wordOfTheDay: boolean) => {
 
 const useScoreSummary = (wordOfTheDay: boolean) => {
   const score = useContext(ScoreContext)
-  const wordOfTheDayDisplay = useMemo(
-    () => wordOfTheDay
-      ? `Word of the Day ${(new Date()).toLocaleDateString()} `
-      : '',
-    [wordOfTheDay]
-  )
+  const { translationsFn } = useContext(Translations)
   const scoreBreakdown = score.guessScores
     .map(guess => guess.wordBreakdown.map(
       ({ correctness }) => correctnessMap[correctness]
     ).join(''))
     .join('\n')
 
+  const link = useShareLink(wordOfTheDay)
+
   const guessCount = score.guessScores.length
   return useMemo(
-    () => `Lexicle ${wordOfTheDayDisplay}${guessCount}/6\n\n${scoreBreakdown}`,
-    [guessCount, scoreBreakdown, wordOfTheDayDisplay])
+    () => ({
+      shareScore: wordOfTheDay
+        ? translationsFn(withPrefix('shareScoreTextWordOfTheDay'), { date: (new Date()).toLocaleDateString(), numericScore: guessCount, visualScore: scoreBreakdown })
+        : translationsFn(withPrefix('shareScoreText'), { numericScore: guessCount, visualScore: scoreBreakdown }),
+      shareGame: wordOfTheDay
+        ? translationsFn(withPrefix('shareGameTextWordOfTheDay'), { date: (new Date()).toLocaleDateString(), numericScore: guessCount, visualScore: scoreBreakdown, url: link })
+        : translationsFn(withPrefix('shareGameText'), { numericScore: guessCount, visualScore: scoreBreakdown, url: link })
+    }),
+    [guessCount, scoreBreakdown, wordOfTheDay, translationsFn, link])
 }
 
 const Share = ({ wordOfTheDay }: { wordOfTheDay: boolean }): JSX.Element => {
+  const { translationsFn } = useContext(Translations)
   const [{ shareScoreClicked, shareLinkClicked }, setClickFeedback] = useState({
     shareLinkClicked: false,
     shareScoreClicked: false
   })
   const [action, setAction] = useState(ShareType.Score)
-  const link = useShareLink(wordOfTheDay)
   const scoreSummary = useScoreSummary(wordOfTheDay)
 
   const onClickShareScore = useCallback(() => {
-    navigator.clipboard.writeText(scoreSummary)
+    navigator.clipboard.writeText(scoreSummary.shareScore)
     setAction(ShareType.Score)
     setClickFeedback(previous => ({ ...previous, shareScoreClicked: true }))
     setTimeout(() => setClickFeedback(p => ({ ...p, shareScoreClicked: false })), 1010)
   }, [scoreSummary, setAction, setClickFeedback])
 
   const onClickShareScoreAndLink = useCallback(() => {
-    navigator.clipboard.writeText(`${scoreSummary}\n\nSee if you can beat my score: ${link}`)
+    navigator.clipboard.writeText(scoreSummary.shareGame)
     setAction(ShareType.Link)
     setClickFeedback(p => ({ ...p, shareLinkClicked: true }))
     setTimeout(() => setClickFeedback(p => ({ ...p, shareLinkClicked: false })), 1010)
-  }, [scoreSummary, link, setAction, setClickFeedback])
+  }, [scoreSummary, setAction, setClickFeedback])
 
 
   const confirmationClasses = makeClasses(
@@ -115,19 +122,23 @@ const Share = ({ wordOfTheDay }: { wordOfTheDay: boolean }): JSX.Element => {
   )
 
   return <>
-    <div className={confirmationClasses}>{action} Copied to Clipboard!</div>
+    <div className={confirmationClasses}>{
+      action === ShareType.Link
+        ? translationsFn(withPrefix('shareGameConfirmationText'))
+        : translationsFn(withPrefix('shareScoreConfirmationText'))
+    }</div>
     <div className='lexicle-results-share-button-container'>
       <div
         className={shareScoreClasses}
         onClick={onClickShareScore}
       >
-        Share Score
+        {translationsFn(withPrefix('shareScore'))}
       </div>
       <div
         className={shareLinkClasses}
         onClick={onClickShareScoreAndLink}
       >
-        Share Game
+        {translationsFn(withPrefix('shareGame'))}
       </div>
     </div>
   </>
