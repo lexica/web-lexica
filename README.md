@@ -5,6 +5,10 @@
 
 ## News
 
+### Translations working again!
+
+Sorry for the lack of updates on the locked weblate translations. A few settings needed to be adjusted, and now Weblate translations are truely implemented. We apreciate the community support!
+
 ### Now with translations!
 
 Web Lexica now has translations! This is a new feature and may have some bugs. If you find any, please [create an issue](https://github.com/lexica/web-lexica/issues/new).
