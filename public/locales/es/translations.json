@@ -45,7 +45,7 @@
         "lexicle": {
             "headlineTitle": "LEXICLE",
             "random": "Aleatorio",
-            "title": "Lexicle",
+            "title": "Léxico",
             "wordOfTheDay": "Palabra del Día",
             "useWordleWordList": "Usar lista de palabras de Wordle"
         },
@@ -83,7 +83,7 @@
     },
     "gameModeDetails": {
         "time_one": "{{count}} min",
-        "time_other": "{{count}} mins"
+        "time_other": "{{count}} minutos"
     },
     "lexicaGameScreens": {
         "inGame": {
@@ -115,7 +115,7 @@
     "lexicleGameScreens": {
         "results": {
             "shareGameTextWordOfTheDay": "Lexicle Palabra del Día {{date}} {{numericScore}}\n\n{{visualScore}}\n\nA ver si puedes superar mi puntuación: {{url}}",
-            "shareScoreText": "Lexicle {{numericScore}}\n\n{{visualScore}}",
+            "shareScoreText": "Léxico {{numericScore}}\n\n{{visualScore}}",
             "shareScoreConfirmationText": "Puntuación Copiada al Portapapeles!",
             "shareScore": "Compartir puntuación",
             "shareGame": "Compartir partida",
