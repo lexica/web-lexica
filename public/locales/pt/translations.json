@@ -1,54 +1,79 @@
 {
-  "pages": {
-    "home": {
-      "newGame": "Novo Jogo",
-      "headlineTitle": "$t(general.lexica)",
-      "multiplayer": "$t(general.multiplayer)"
+    "pages": {
+        "home": {
+            "newGame": "Novo Jogo",
+            "headlineTitle": "$t(general.lexica)",
+            "multiplayer": "$t(general.multiplayer)"
+        },
+        "newGameMode": {
+            "gameModeName": {
+                "hint": "Nome",
+                "description": "Para escolher o modo de jogo / registar recordes"
+            },
+            "timeLimit": {
+                "title": "Tempo limite",
+                "description": "Limite de tempo em minutos"
+            },
+            "boardSize": "Tamanho do tabuleiro",
+            "scoreType": {
+                "title": "Tipo de Pontuação",
+                "wordLength": "$t(scoreDetails.wordLength)",
+                "letterPoints": "$t(scoreDetails.letterPoints)"
+            },
+            "title": "Novo modo do jogo",
+            "timeAttack": {
+                "off": "Desligado"
+            }
+        },
+        "lexicons": {
+            "title": "Léxico",
+            "isBeta": "Beta"
+        },
+        "multiplayer": {
+            "startGame": "Iniciar jogo",
+            "startGameHint": "Quando todos os jogadores estiverem prontos, todos vocês devem iniciar o jogo ao mesmo tempo.",
+            "joinGameHint": "Quando todos os jogadores estiverem prontos, entre no jogo.",
+            "joinGame": "Entrar no jogo",
+            "wordCount_one": "{{count}} palavra",
+            "wordCount_other": "{{count}} palavras"
+        },
+        "savedGames": {
+            "clearAll": "Limpar tudo",
+            "title": "Jogos gravados",
+            "gameModeName": "Modo do jogo",
+            "delete": "Apagar",
+            "gameModeDetails": "Detalhes fo modo do jogo"
+        },
+        "gameModes": {
+            "title": "Modos do jogo",
+            "addGameMode": "Adicionar modos do jogo"
+        }
     },
-    "newGameMode": {
-      "gameModeName": {
-        "hint": "Nome",
-        "description": "Para escolher o modo de jogo / registar recordes"
-      },
-      "timeLimit": {
-        "title": "Tempo limite",
-        "description": "Limite de tempo em minutos"
-      },
-      "boardSize": "Tamanho do tabuleiro",
-      "scoreType": {
-        "title": "Tipo de Pontuação",
-        "wordLength": "$t(scoreDetails.wordLength)",
-        "letterPoints": "$t(scoreDetails.letterPoints)"
-      }
+    "gameModeDetails": {
+        "time_one": "{{count}} min",
+        "time_other": "{{count}} mins"
     },
-    "lexicons": {
-      "title": "Léxico",
-      "isBeta": "Beta"
+    "lexicaGameScreens": {
+        "inGame": {
+            "foundWords": "$t(general.foundWords)"
+        },
+        "results": {
+            "missedWords": "Palavras a encontrar",
+            "foundWords": "$t(general.foundWords)"
+        }
+    },
+    "scoreDetails": {
+        "time": "Tempo",
+        "words": "Palavras",
+        "score": "Pontuação",
+        "displayPercentage": "{{found}}/{{total}} ({{percentage}}%)",
+        "wordLength": "Tamanho da palavra",
+        "letterPoints": "Pontos de letras"
+    },
+    "general": {
+        "lexica": "Lexica",
+        "foundWords": "Palavras encontradas",
+        "multiplayer": "Multijogador",
+        "back": "Voltar"
     }
-  },
-  "gameModeDetails": {
-    "time_one": "{{count}} min",
-    "time_other": "{{count}} mins"
-  },
-  "lexicaGameScreens": {
-    "inGame": {
-      "foundWords": "$t(general.foundWords)"
-    },
-    "results": {
-      "missedWords": "Palavras a encontrar",
-      "foundWords": "$t(general.foundWords)"
-    }
-  },
-  "scoreDetails": {
-    "time": "Tempo",
-    "words": "Palavras",
-    "score": "Pontuação",
-    "displayPercentage": "{{found}}/{{total}} ({{percentage}}%)",
-    "wordLength": "Tamanho da palavra",
-    "letterPoints": "Pontos de letras"
-  },
-  "general": {
-    "lexica": "Lexica",
-    "foundWords": "Palavras encontradas"
-  }
 }
