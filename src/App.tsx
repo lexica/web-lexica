@@ -6,7 +6,7 @@ import GameModes from './pages/GameModes'
 import Home from './pages/Home'
 import Lexicle from './pages/Lexicle'
 import Multiplayer from './pages/Multiplayer'
-import Options from './pages/Options'
+import Preferences from './pages/Preferences'
 import SinglePlayer from './pages/SinglePlayer'
 
 import './App.css'
@@ -63,7 +63,7 @@ function App() {
                   <Route path="/new-game-mode" element={ <NewGameMode />} />
                   <Route path="/lexicons" element={ <Lexicons />} />
                   <Route path="/multiplayer" element={ <Multiplayer />} />
-                  <Route path="/options" element={ <Options />} />
+                  <Route path="/options" element={ <Preferences />} />
                   <Route path="/singleplayer" element={ <SinglePlayer />} />
                   <Route path="/lexicle/*" element={ <Lexicle/>} />
                   <Route path='/saved-games' element={ <SavedGames />} />

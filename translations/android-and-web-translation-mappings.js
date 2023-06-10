@@ -16,6 +16,14 @@ const translationsFromWebToAndroid = {
         tag: 'string',
         name: 'new_game'
       },
+      preferences: new Reference('general.preferences')
+    },
+    preferences: {
+      title: new Reference('general.preferences'),
+      lexicon: {
+        tag: 'string',
+        name: 'pref_dict'
+      },
     },
     newGameMode: {
       gameModeName: {
@@ -180,6 +188,10 @@ const translationsFromWebToAndroid = {
         tag: 'string',
         name: 'found_words'
       },
+      preferences: {
+        tag: 'string',
+        name: 'prefs'
+      }
   }
 }
 const languageTitlesFromWebToAndroid = {

@@ -4,7 +4,7 @@ const R = require('ramda')
 
 const xmlParser = new XMLParser({ ignoreAttributes: false, attributeNamePrefix: '' })
 
-/** @typedef {{ name: string, '#text'}} StringTagItem */
+/** @typedef {{ name: string, '#text': string }} StringTagItem */
 /** @typedef {{ '#text': string, quantity: string }} PluralsTagItemItem */
 /** @typedef {{ name: string: item: PluralsTagItemItem[] }} PluralsTagItem */
 

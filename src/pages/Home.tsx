@@ -2,7 +2,7 @@ import { ReactComponent as EmojiEvents } from '@material-design-icons/svg/round/
 import { ReactComponent as PlayCircle } from '@material-design-icons/svg/round/play_circle.svg'
 import { ReactComponent as GroupAdd } from '@material-design-icons/svg/round/group_add.svg'
 import { ReactComponent as Grid } from '@material-design-icons/svg/round/grid_on.svg'
-import { ReactComponent as Language } from '@material-design-icons/svg/round/language.svg'
+import { ReactComponent as Settings } from '@material-design-icons/svg/round/settings.svg'
 import { ReactComponent as Redo } from '@material-design-icons/svg/round/redo.svg'
 
 import { useRulesFromStorage } from '../game/rules'
@@ -25,7 +25,7 @@ const GameSettings = (): JSX.Element => {
   const languageTitle = translations.languageTitlesFn(languageCode as any)
 
   return <div className="home-game-options">
-    <Button to='/lexicons' svg={Language} svgTitle={'Lexicon'} prompt={languageTitle} />
+    <Button to='/preferences' svg={Settings} svgTitle={'Preferences'} prompt={languageTitle} />
     <Button to='/game-modes' svg={EmojiEvents} svgTitle="Game Mode" prompt={ruleset.name} />
   </div>
 
