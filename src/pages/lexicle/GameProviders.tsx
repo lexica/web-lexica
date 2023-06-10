@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { ReactNode, useContext, useMemo } from 'react'
-import { WithChildren } from '../../components/GameProviders'
+import { WithChildren } from '../../util/types'
 import { Language, MetadataV1, useLanguageFromLocalStorage } from '../../game/language'
 import { ValidAnswers } from '../../game/lexicle/score'
 import { usePromiseWithMetadata } from '../../util/hooks'

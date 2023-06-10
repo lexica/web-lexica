@@ -1,4 +1,4 @@
-
+import { WithChildren } from '../util/types'
 import './Theme.css'
 
 export enum Themes {
@@ -6,8 +6,6 @@ export enum Themes {
   Dark = 'dark'
 }
 
-const Theme: React.FC<{
-  theme: Themes
-}> = ({ theme, children }) => <div className={`${theme} defaults`}>{children}</div>
+const Theme = ({ theme, children }: WithChildren<{ theme: Themes }>) => <div className={`${theme} defaults`}>{children}</div>
 
 export default Theme

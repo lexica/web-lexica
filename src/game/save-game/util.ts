@@ -3,7 +3,7 @@ import { getIndexMatchingArrayOfLength } from "../../util"
 import { splice } from "../../util/splice"
 import { storage } from "../../util/storage"
 import { isValidGamePath } from "../../util/url"
-import { getB64DelimitedURLBoard } from "../board/hooks"
+import { getB64DelimitedURLBoard } from "../board/util"
 import { ScoreType } from "../score"
 import { gameLocalStorage, GameLocalStorage, LocalStorage, SavedGame } from "./types"
 

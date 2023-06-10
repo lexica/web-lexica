@@ -10,6 +10,7 @@ import { Rules } from '../../../game/rules'
 import { ScoreType } from '../../../game/score'
 import { Guess, GuessAction, GuessActionType, GuessDispatch } from '../../../game/guess'
 import { makeClasses } from '../../../util/classes'
+import { WithChildren } from '../../../util/types'
 
 type LetterProps = {
   row: number,
@@ -54,7 +55,7 @@ const Letter: React.FC<LetterProps> = ({
   </div>
 }
 
-const Row: React.FC<{ row: number }> = ({ row, children }) => <div className="row" key={row} >{children}</div>
+const Row = ({ row, children }: WithChildren<{ row: number }>) => <div className="row" key={row} >{children}</div>
 
 type enumerable = { [key: number]: any }
 

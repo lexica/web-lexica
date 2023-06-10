@@ -1,7 +1,7 @@
 import { useMemo } from "react"
 import { useLocation } from "react-router"
 import { parseURLSearch } from "../../util/url"
-import { getB64DelimitedURLBoard } from "../board/hooks"
+import { getB64DelimitedURLBoard } from "../board/util"
 
 enum UrlParam {
   Board = 'b',

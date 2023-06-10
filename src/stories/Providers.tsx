@@ -8,6 +8,7 @@ import { Timer, TimerContext } from '../game/timer'
 import { getBoard } from '../game/board/util'
 import { logger } from '../util/logger'
 import { LetterScores, LetterScoresContext } from '../game'
+import { WithChildren } from '../util/types'
 
 type DeepPartial<T> = {
   [P in keyof T]?: T[P] extends (infer X)[] ? X[] : DeepPartial<T[P]>
@@ -55,7 +56,7 @@ const scoreDefaults: ScoreState = {
   remainingWords: []
 }
 
-const Providers: React.FC<Partial<ProvidersProps>> = (props) => {
+const Providers = (props: WithChildren<Partial<ProvidersProps>>) => {
   const { children } = props
 
   const evolved: Partial<RequiredProviderProps> = R.evolve({

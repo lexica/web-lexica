@@ -1,4 +1,4 @@
-import { ComponentMeta, ComponentStory } from '@storybook/react'
+import { Meta, StoryFn } from '@storybook/react'
 import { toSeconds } from 'duration-fns'
 import { useContext, useEffect } from 'react'
 
@@ -33,7 +33,7 @@ const ComponentBuilder: React.FC<{
   </Providers>
 }
 
-const metadata: ComponentMeta<typeof ComponentBuilder> = {
+const metadata: Meta = {
   title: 'Score',
   argTypes: {
     ScoreContext: {
@@ -68,7 +68,7 @@ const metadata: ComponentMeta<typeof ComponentBuilder> = {
 
 export default metadata
 
-export const Template: ComponentStory<typeof ComponentBuilder> = (args) => <ComponentBuilder {...args}/>
+export const Template: StoryFn<typeof ComponentBuilder> = (args) => <ComponentBuilder {...args}/>
 
 export const HideTime = Template.bind({})
 HideTime.args = {
