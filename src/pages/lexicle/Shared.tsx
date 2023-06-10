@@ -1,6 +1,7 @@
 import { ReactNode, useEffect , useCallback, useContext, useMemo, useState } from 'react'
 import { ConfirmationEffect } from '../../components/game/Board/hooks'
-import { Board, getB64DelimitedURLBoard } from '../../game/board/hooks'
+import { Board } from '../../game/board/hooks'
+import { getB64DelimitedURLBoard } from '../../game/board/util'
 import { Dictionary, useCustomDictionaryWithBoard } from '../../game/dictionary/hooks'
 import { Guess, GuessDispatch, useGuesses } from '../../game/guess'
 import { Language, useLanguage } from '../../game/language'

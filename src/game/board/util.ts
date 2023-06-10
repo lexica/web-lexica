@@ -2,6 +2,7 @@ import * as R from 'ramda'
 import { Function as F } from 'ts-toolbelt'
 
 import { Board, Letter, Coordinates } from './types'
+import { b64ToUtf8 } from '../../util/base-64'
 
 const splitLineAlongRows = (line: string[]) => {
   const width = Math.sqrt(line.length)
@@ -158,5 +159,10 @@ export const getPossibleTravelDirections = ({ row, column, width }: { row: numbe
   const coordinates = getAllPossibleCoordinates({ rows, columns })
 
   return R.filter(({ row: currentRow, column: currentColumn }) => !(row === currentRow && column === currentColumn), coordinates)
+}
+
+export const getB64DelimitedURLBoard = ({ board, delimiter }: { board: string, delimiter: string }) => {
+  const decoded = b64ToUtf8(board)
+  return decoded.split(delimiter)
 }
 
