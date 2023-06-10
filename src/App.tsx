@@ -31,11 +31,11 @@ function App() {
   const ready = translationsReady && languageTitlesReady
 
   const translationsFn = useCallback<TranslationsFn>((key, options) => {
-    if (!ready) return key
+    if (!ready) return key as any
     return translationsFnUnwrapped(key, options as any)
   }, [ready, translationsFnUnwrapped])
   const languageTitlesFn = useCallback<LanguageTitlesFn>((key, options) => {
-    if (!ready) return key
+    if (!ready) return key as any
     return languageTitlesFnUnwrapped(key, options as any)
   }, [ready, languageTitlesFnUnwrapped])
 

@@ -9,7 +9,7 @@ import './MostRecentGuess.css'
 import { Guess } from '../../game/guess'
 import { Dictionary } from '../../game/dictionary'
 
-const MostRecentGuess: React.FC = () => {
+const MostRecentGuess = (): JSX.Element => {
 
   const rules = useContext(Rules)
   const letterScores = useContext(LetterScores)

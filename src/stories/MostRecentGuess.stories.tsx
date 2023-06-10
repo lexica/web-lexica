@@ -1,4 +1,4 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { StoryFn, Meta } from '@storybook/react'
 
 import MostRecentGuess from '../components/game/MostRecentGuess'
 import Providers from './Providers'
@@ -35,7 +35,8 @@ const ComponentBuilder: React.FC<{
   </Providers>
 }
 
-const componentMeta: ComponentMeta<typeof ComponentBuilder> = {
+// const componentMeta: Meta<typeof ComponentBuilder> = {
+const componentMeta: Meta = {
   title: 'Most Recent Guess',
   argTypes: {
     GuessContext: {
@@ -55,7 +56,7 @@ const componentMeta: ComponentMeta<typeof ComponentBuilder> = {
 
 export default componentMeta
 
-export const Template: ComponentStory<typeof ComponentBuilder> = args => <ComponentBuilder {...args}/>
+export const Template: StoryFn<typeof ComponentBuilder> = args => <ComponentBuilder {...args}/>
 
 export const CorrectFirstGuess = Template.bind({})
 CorrectFirstGuess.args = {

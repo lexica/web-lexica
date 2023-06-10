@@ -1,5 +1,5 @@
 
-import { ComponentMeta, ComponentStory } from '@storybook/react'
+import { Meta, StoryFn } from '@storybook/react'
 import Results from '../components/ResultsScreen'
 import ScoredWordList from '../components/game/ScoredWordList'
 import Score from '../components/game/Score'
@@ -30,7 +30,7 @@ const getLists = () => ({
   ]
 })
 
-const metadata: ComponentMeta<typeof ComponentBuilder> = {
+const metadata: Meta = {
   title: 'Results',
   argTypes: {
     ScoreContext: {
@@ -44,14 +44,14 @@ const metadata: ComponentMeta<typeof ComponentBuilder> = {
   },
   component: Results,
   subcomponents: {
-    ScoredWordList,
-    Score
+    ScoreWordList: ScoredWordList as any,
+    Score: Score as any
   }
 }
 
 export default metadata
 
-export const Template: ComponentStory<typeof ComponentBuilder> = args => <>
+export const Template: StoryFn<typeof ComponentBuilder> = args => <>
   <Cheats/>
   <ComponentBuilder {...args}/>
 </>

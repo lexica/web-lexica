@@ -1,10 +1,10 @@
-import { ComponentMeta, ComponentStory } from '@storybook/react'
+import { Meta, StoryFn } from '@storybook/react'
 
 import StartScreen from '../components/StartScreen'
 import Cheats from './Cheats'
 import Providers from './Providers'
 
-const metadata: ComponentMeta<typeof ComponentBuilder> = {
+const metadata: Meta = {
   title: 'StartScreen',
   component: StartScreen,
   argTypes: {
@@ -51,4 +51,4 @@ const ComponentBuilder: React.FC<{
   <StartScreen {...{ loading, error, pageTitle: 'Storybook Example', handleStart: () => {}}}/>
 </Providers>
 
-export const Template: ComponentStory<typeof ComponentBuilder> = args => <ComponentBuilder {...args}/>
+export const Template: StoryFn<typeof ComponentBuilder> = args => <ComponentBuilder {...args}/>

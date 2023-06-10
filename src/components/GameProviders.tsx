@@ -1,5 +1,6 @@
 import { toSeconds } from 'duration-fns'
-import { ReactNode, useContext, useEffect, useMemo } from 'react'
+import { useContext, useEffect, useMemo } from 'react'
+
 import { LetterScores } from '../game'
 import { BoardContext, BoardRefresh, useBoardFromUrl, useGeneratedBoard } from '../game/board'
 import { Dictionary, DictionaryState, useBoardDictionary } from '../game/dictionary'
@@ -11,8 +12,8 @@ import { Score, useScore } from '../game/score'
 import { Timer, useTimer } from '../game/timer'
 import { useGameUrlParameters } from '../game/url'
 import { sort } from '../util'
+import { WithChildren } from '../util/types'
 
-export type WithChildren<T = {}> = T & { children: ReactNode }
 
 const CommonNewAndShareGameProviders = ({ children }: WithChildren) => {
   const board = useContext(BoardContext)

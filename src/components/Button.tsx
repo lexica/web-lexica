@@ -2,7 +2,7 @@ import { MouseEventHandler } from 'react'
 import { makeClasses } from '../util/classes'
 import Svg, { SvgComponent } from './Svg'
 import { Link } from 'react-router-dom'
-import { WithChildren } from './GameProviders'
+import { WithChildren } from '../util/types'
 import constants, { useConstants } from '../style/constants'
 
 import './Button.css'
