@@ -23,6 +23,7 @@ const translationsFromWebToAndroid = {
       language: new Reference('general.language'),
       lexicon: new Reference('general.lexicon'),
     },
+    languages: { title: new Reference('general.language') },
     newGameMode: {
       gameModeName: {
         hint: {

@@ -36,6 +36,9 @@
       "startGame": "Spustit hru",
       "joinGameHint": "Až budou všichni hráči připraveni, připojte se ke hře.",
       "joinGame": "Připojit se ke hře"
+    },
+    "languages": {
+      "title": "$t(general.language)"
     }
   },
   "scoreDetails": {

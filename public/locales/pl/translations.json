@@ -32,6 +32,9 @@
     },
     "multiplayer": {
       "startGameHint": "Kiedy wszyscy gracze będą gotowi, wszyscy powinni rozpocząć grę w tym samym czasie."
+    },
+    "languages": {
+      "title": "$t(general.language)"
     }
   },
   "lexicaGameScreens": {

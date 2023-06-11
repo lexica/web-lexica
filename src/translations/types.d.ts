@@ -64,6 +64,7 @@ export type TranslationsKeys = {
   'pages.preferences.title': string,
   'pages.preferences.language': string,
   'pages.preferences.lexicon': string,
+  'pages.languages.title': string,
   'gameModeDetails.time': {
     'count': string | number,
   },

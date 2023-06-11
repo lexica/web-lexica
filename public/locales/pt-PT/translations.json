@@ -36,6 +36,9 @@
       "startGame": "Iniciar jogo",
       "joinGameHint": "Quando todos os jogadores estiverem prontos, entre no jogo.",
       "joinGame": "Entrar no jogo"
+    },
+    "languages": {
+      "title": "$t(general.language)"
     }
   },
   "gameModeDetails": {

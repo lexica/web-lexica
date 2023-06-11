@@ -37,6 +37,9 @@
       "title": "$t(general.preferences)",
       "language": "$t(general.language)",
       "lexicon": "$t(general.lexicon)"
+    },
+    "languages": {
+      "title": "$t(general.language)"
     }
   },
   "gameModeDetails": {
