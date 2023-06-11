@@ -53,6 +53,10 @@ const mapTranslationsFromAndroidToWeb = (translationMap, androidTranslation) => 
     const translation = androidTranslation[key]
     const mapping = translationMap[key]
 
+    if (translation.value === undefined) {
+      return acc
+    }
+
     if (translation.tag === 'string' && mapping.tag === 'string') {
       const value = translation.value
       const partialTranslation = makePartialTranslationFromPaths(mapping.paths, value, mapping.transformerFn)

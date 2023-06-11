@@ -3,7 +3,8 @@
     "home": {
       "newGame": "Nouvelle partie",
       "headlineTitle": "$t(general.lexica)",
-      "multiplayer": "$t(general.multiplayer)"
+      "multiplayer": "$t(general.multiplayer)",
+      "preferences": "$t(general.preferences)"
     },
     "newGameMode": {
       "gameModeName": {
@@ -32,6 +33,11 @@
     "lexicons": {
       "title": "Lexique",
       "isBeta": "Bêta"
+    },
+    "preferences": {
+      "title": "$t(general.preferences)",
+      "language": "$t(general.language)",
+      "lexicon": "$t(general.lexicon)"
     }
   },
   "gameModeDetails": {
@@ -59,6 +65,8 @@
     "multiplayer": "Multijoueur",
     "lexica": "Lexica",
     "back": "Retour",
-    "foundWords": "Mots trouvés"
+    "foundWords": "Mots trouvés",
+    "preferences": "Préférences",
+    "lexicon": "Lexique"
   }
 }

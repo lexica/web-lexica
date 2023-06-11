@@ -3,7 +3,8 @@
     "home": {
       "newGame": "Partida nova",
       "headlineTitle": "$t(general.lexica)",
-      "multiplayer": "$t(general.multiplayer)"
+      "multiplayer": "$t(general.multiplayer)",
+      "preferences": "$t(general.preferences)"
     },
     "newGameMode": {
       "gameModeName": {
@@ -23,6 +24,11 @@
     "lexicons": {
       "title": "Lèxic",
       "isBeta": "beta"
+    },
+    "preferences": {
+      "title": "$t(general.preferences)",
+      "language": "$t(general.language)",
+      "lexicon": "$t(general.lexicon)"
     }
   },
   "lexicaGameScreens": {
@@ -44,6 +50,8 @@
   },
   "general": {
     "lexica": "Lèxica",
-    "foundWords": "Mots trobats"
+    "foundWords": "Mots trobats",
+    "preferences": "Configuració",
+    "lexicon": "Lèxic"
   }
 }

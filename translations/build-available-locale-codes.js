@@ -13,10 +13,13 @@ const main = () => {
     /** @type {string[]} */
     const rawCodes = fs.readdirSync('./public/locales', { encoding: 'utf-8' })
 
-    availableLanguages = rawCodes.reduce((acc, rawCode) => ({
-        ...acc,
-        [rawCode]: (new Intl.DisplayNames(toCode(rawCode), { type: 'language' })).of(toCode(rawCode))
-    }), {})
+    availableLanguages = rawCodes.reduce((acc, rawCode) => {
+        const langCode = toCode(rawCode)
+        return {
+            ...acc,
+            [rawCode]: (new Intl.DisplayNames(langCode, { type: 'language' })).of(langCode.toLocaleUpperCase(langCode))
+        }
+    }, {})
 
     fs.writeFileSync('./public/available-locales.json', JSON.stringify(availableLanguages))
 }

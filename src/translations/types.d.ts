@@ -14,6 +14,7 @@ export type TranslationsKeys = {
   'pages.home.highScore': {
     'score': string | number,
   },
+  'pages.home.preferences': string,
   'pages.gameModes.title': string,
   'pages.gameModes.addGameMode': string,
   'pages.newGameMode.title': string,
@@ -60,6 +61,9 @@ export type TranslationsKeys = {
   'pages.lexicons.title': string,
   'pages.lexicons.isBeta': string,
   'pages.singleplayer.title': string,
+  'pages.preferences.title': string,
+  'pages.preferences.language': string,
+  'pages.preferences.lexicon': string,
   'gameModeDetails.time': {
     'count': string | number,
   },
@@ -103,11 +107,14 @@ export type TranslationsKeys = {
   'scoreDetails.letterPoints': string,
   'general.multiplayer': string,
   'general.lexica': string,
+  'general.language': string,
   'general.loading': string,
   'general.error': string,
   'general.back': string,
   'general.foundWords': string,
   'general.paused': string,
+  'general.preferences': string,
+  'general.lexicon': string,
 }
 
 type TranslationsFnSecondArg<K extends keyof TranslationsKeys> = {

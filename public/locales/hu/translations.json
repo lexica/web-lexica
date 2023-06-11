@@ -3,7 +3,8 @@
     "home": {
       "newGame": "Új játék",
       "headlineTitle": "$t(general.lexica)",
-      "multiplayer": "$t(general.multiplayer)"
+      "multiplayer": "$t(general.multiplayer)",
+      "preferences": "$t(general.preferences)"
     },
     "newGameMode": {
       "timeLimit": {
@@ -19,6 +20,11 @@
     "lexicons": {
       "title": "Lexikon",
       "isBeta": "béta"
+    },
+    "preferences": {
+      "title": "$t(general.preferences)",
+      "language": "$t(general.language)",
+      "lexicon": "$t(general.lexicon)"
     }
   },
   "lexicaGameScreens": {
@@ -40,6 +46,8 @@
   },
   "general": {
     "lexica": "Lexica",
-    "foundWords": "Megtalált szavak"
+    "foundWords": "Megtalált szavak",
+    "preferences": "Beállítások",
+    "lexicon": "Lexikon"
   }
 }

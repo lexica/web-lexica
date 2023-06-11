@@ -3,7 +3,8 @@
     "home": {
       "newGame": "لعبة جديدة",
       "headlineTitle": "$t(general.lexica)",
-      "multiplayer": "$t(general.multiplayer)"
+      "multiplayer": "$t(general.multiplayer)",
+      "preferences": "$t(general.preferences)"
     },
     "newGameMode": {
       "timeLimit": {
@@ -17,6 +18,11 @@
     },
     "lexicons": {
       "title": "القاموس"
+    },
+    "preferences": {
+      "title": "$t(general.preferences)",
+      "language": "$t(general.language)",
+      "lexicon": "$t(general.lexicon)"
     }
   },
   "scoreDetails": {
@@ -26,7 +32,9 @@
     "wordLength": "طول الكلمة"
   },
   "general": {
-    "lexica": "ليكسيكا"
+    "lexica": "ليكسيكا",
+    "preferences": "التفضيلات",
+    "lexicon": "القاموس"
   },
   "lexicaGameScreens": {
     "inGame": {

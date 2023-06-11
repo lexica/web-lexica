@@ -36,6 +36,8 @@ export type ButtonProps = {
   fontSizing?: ButtonFontSizing
   /** @default {true} */
   nowrap?: boolean
+  /** @default {false} */
+  svgToSide?: boolean
 }
 
 const contentColors: { [P in ButtonThemeType]: { enabled: string, disabled: string } } = {
@@ -52,7 +54,8 @@ const Button = (props: ButtonProps): JSX.Element => {
     themeType = ButtonThemeType.Standard,
     disabled = false,
     roundedEdges = true,
-    nowrap = false
+    nowrap = false,
+    svgToSide = false,
   } = props
   const constants = useConstants()
   const usingLink = to !== '' && !props.disabled
@@ -62,7 +65,8 @@ const Button = (props: ButtonProps): JSX.Element => {
     `button-component-font-size-${fontSizing}`,
     { condition: disabled, name: 'button-component-disabled' },
     { condition: roundedEdges, name: 'button-component-rounded-edges' },
-    { condition: nowrap, name: 'button-component-nowrap'}
+    { condition: nowrap, name: 'button-component-nowrap'},
+    { condition: svgToSide, true: 'button-with-svg-spread', false: 'button-with-svg-centered' }
   )
 
   const contentColor = contentColors[themeType][disabled ? 'disabled' : 'enabled']

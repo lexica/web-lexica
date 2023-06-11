@@ -1,0 +1,15 @@
+.preferences-page-button-list {
+    margin-inline: 10vw;
+}
+
+.preferences-page-button-list>div {
+    margin-block-end: 1vh;
+}
+.preferences-page-button-list>div:first-child {
+    margin-block-start: 1vh;
+}
+
+
+.preferences-page-button-list>div:last-child {
+    margin-block-end: 0;
+}

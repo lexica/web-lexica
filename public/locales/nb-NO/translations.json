@@ -3,7 +3,8 @@
     "home": {
       "newGame": "Nytt spill",
       "headlineTitle": "$t(general.lexica)",
-      "multiplayer": "$t(general.multiplayer)"
+      "multiplayer": "$t(general.multiplayer)",
+      "preferences": "$t(general.preferences)"
     },
     "newGameMode": {
       "gameModeName": {
@@ -32,6 +33,11 @@
     "lexicons": {
       "title": "Leksikon",
       "isBeta": "beta"
+    },
+    "preferences": {
+      "title": "$t(general.preferences)",
+      "language": "$t(general.language)",
+      "lexicon": "$t(general.lexicon)"
     }
   },
   "gameModeDetails": {
@@ -59,6 +65,8 @@
     "multiplayer": "Flerspiller",
     "lexica": "Lexica",
     "back": "Tilbake",
-    "foundWords": "Oppdagede ord"
+    "foundWords": "Oppdagede ord",
+    "preferences": "Innstillinger",
+    "lexicon": "Leksikon"
   }
 }

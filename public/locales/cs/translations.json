@@ -3,36 +3,64 @@
     "home": {
       "newGame": "Nová hra",
       "headlineTitle": "$t(general.lexica)",
-      "multiplayer": "$t(general.multiplayer)"
+      "multiplayer": "$t(general.multiplayer)",
+      "preferences": "$t(general.preferences)"
     },
     "newGameMode": {
       "timeLimit": {
-        "title": "Časový limit"
+        "title": "Časový limit",
+        "description": "Časový limit v minutách"
       },
       "boardSize": "Velikost herní plochy",
       "scoreType": {
         "title": "Způsob bodování",
         "wordLength": "$t(scoreDetails.wordLength)",
         "letterPoints": "$t(scoreDetails.letterPoints)"
+      },
+      "gameModeName": {
+        "hint": "Název",
+        "description": "Pro výběr herního režimu / zaznamenávání nejvyšších skóre"
       }
     },
     "lexicons": {
       "title": "Slovník",
       "isBeta": "Beta"
+    },
+    "preferences": {
+      "title": "$t(general.preferences)",
+      "language": "$t(general.language)",
+      "lexicon": "$t(general.lexicon)"
+    },
+    "multiplayer": {
+      "startGameHint": "Až budou všichni hráči připraveni, zahajte všichni najednou hru.",
+      "startGame": "Spustit hru",
+      "joinGameHint": "Až budou všichni hráči připraveni, připojte se ke hře.",
+      "joinGame": "Připojit se ke hře"
     }
   },
   "scoreDetails": {
-    "wordLength": "Délka slova"
+    "wordLength": "Délka slova",
+    "time": "Čas",
+    "words": "Slova",
+    "score": "Skóre",
+    "displayPercentage": "{{found}}/{{total}} ({{percentage}}%)",
+    "letterPoints": "Písmenné body"
   },
   "general": {
-    "lexica": "Lexica"
+    "lexica": "Lexica",
+    "multiplayer": "Hra více hráčů",
+    "back": "Zpět",
+    "foundWords": "Nalezená slova",
+    "preferences": "Možnosti",
+    "lexicon": "Slovník"
   },
   "lexicaGameScreens": {
     "inGame": {
       "foundWords": "$t(general.foundWords)"
     },
     "results": {
-      "foundWords": "$t(general.foundWords)"
+      "foundWords": "$t(general.foundWords)",
+      "missedWords": "Vynechaná slova"
     }
   }
 }

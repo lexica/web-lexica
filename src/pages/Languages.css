@@ -1,0 +1,24 @@
+@import "../style/constants.css";
+
+.languages {
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.languages-language {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-left: 1vw;
+  width: 100%;
+  min-height: 7vh;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.languages-language-selected {
+  background-color: var(--color-background-dark-alt);
+}

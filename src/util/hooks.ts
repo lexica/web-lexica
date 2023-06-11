@@ -157,3 +157,9 @@ export const usePromiseWithMetadata = <T>(p: Promise<T>, initialValue: T): { loa
 
   return state as any
 }
+
+export const useStaticValue = <T>(initialValue: T) => {
+  const [value] = useState(initialValue)
+
+  return value
+}

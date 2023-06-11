@@ -3,7 +3,8 @@
     "home": {
       "newGame": "Nydt spil",
       "headlineTitle": "$t(general.lexica)",
-      "multiplayer": "$t(general.multiplayer)"
+      "multiplayer": "$t(general.multiplayer)",
+      "preferences": "$t(general.preferences)"
     },
     "newGameMode": {
       "gameModeName": {
@@ -24,6 +25,11 @@
     "lexicons": {
       "title": "Leksikon",
       "isBeta": "Beta"
+    },
+    "preferences": {
+      "title": "$t(general.preferences)",
+      "language": "$t(general.language)",
+      "lexicon": "$t(general.lexicon)"
     }
   },
   "gameModeDetails": {
@@ -49,6 +55,8 @@
   },
   "general": {
     "lexica": "Lexica",
-    "foundWords": "Fundne ord"
+    "foundWords": "Fundne ord",
+    "preferences": "Indstillinger",
+    "lexicon": "Leksikon"
   }
 }

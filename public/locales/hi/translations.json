@@ -3,7 +3,8 @@
     "home": {
       "newGame": "नया खेल",
       "headlineTitle": "$t(general.lexica)",
-      "multiplayer": "$t(general.multiplayer)"
+      "multiplayer": "$t(general.multiplayer)",
+      "preferences": "$t(general.preferences)"
     },
     "newGameMode": {
       "gameModeName": {
@@ -24,6 +25,11 @@
     "lexicons": {
       "title": "शब्दकोश",
       "isBeta": "बीटा"
+    },
+    "preferences": {
+      "title": "$t(general.preferences)",
+      "language": "$t(general.language)",
+      "lexicon": "$t(general.lexicon)"
     }
   },
   "gameModeDetails": {
@@ -49,6 +55,8 @@
   },
   "general": {
     "lexica": "लेक्सिका",
-    "foundWords": "खोजे शब्द"
+    "foundWords": "खोजे शब्द",
+    "preferences": "प्राथमिकताएँ",
+    "lexicon": "शब्दकोश"
   }
 }

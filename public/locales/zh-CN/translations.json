@@ -3,7 +3,8 @@
     "home": {
       "newGame": "新游戏",
       "headlineTitle": "$t(general.lexica)",
-      "multiplayer": "$t(general.multiplayer)"
+      "multiplayer": "$t(general.multiplayer)",
+      "preferences": "$t(general.preferences)"
     },
     "newGameMode": {
       "gameModeName": {
@@ -31,6 +32,11 @@
     "lexicons": {
       "title": "词典",
       "isBeta": "测试中"
+    },
+    "preferences": {
+      "title": "$t(general.preferences)",
+      "language": "$t(general.language)",
+      "lexicon": "$t(general.lexicon)"
     }
   },
   "gameModeDetails": {
@@ -57,6 +63,8 @@
     "multiplayer": "多人游戏",
     "lexica": "Lexica",
     "back": "返回",
-    "foundWords": "找到的单词"
+    "foundWords": "找到的单词",
+    "preferences": "设置",
+    "lexicon": "词典"
   }
 }
