@@ -290,31 +290,6 @@ const getReduceFromAndroidToWeb = (path, subObject) => (acc, key) => {
 
   return handleFlip({ currentPath, obj: value, acc })
 
-  // if (value.value !== undefined) {
-  //   const existingValue = acc[value.name] || { tag: value.tag, values: [] }
-  //   return {
-  //     ...acc,
-  //     [value.name]: {
-  //       ...existingValue,
-  //       values: [...existingValue.values, {
-  //         ...value.value,
-  //         path: currentPath
-  //       }]
-  //     }
-  //   }
-  // }
-
-  // const paths = acc[value.name] ? acc[value.name].paths : []
-
-  // return {
-  //   ...acc,
-  //   [value.name]: {
-  //     tag: value.tag,
-  //     ...(value.value ? { value: value.value } : {}),
-  //     paths: [...paths, currentPath],
-  //     ...(value.transformerFn ? { transformerFn: value.transformerFn } : {})
-  //   }
-  // }
 }
 
 const flipMap = obj => {
