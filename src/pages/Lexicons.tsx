@@ -1,5 +1,4 @@
 import { useCallback, useContext } from 'react'
-import { useNavigate } from 'react-router'
 
 import {
   MetadataV1,
@@ -10,6 +9,7 @@ import {
 import { Translations } from '../translations'
 import { makeClasses } from '../util/classes'
 import { logger } from '../util/logger'
+import { useSafeNavigateBack } from '../util/url'
 
 import './Lexicons.css'
 
@@ -33,13 +33,13 @@ const Lexicon = ({
   const beta = getBetaLabel(metadata, translations.translationsFn('pages.lexicons.isBeta'))
   const currentCode = useLanguageCodeFromLocalStorage()
 
-  const navigate = useNavigate()
+  const back = useSafeNavigateBack()
 
   const handleOnClick = useCallback(() => {
-    logger.debug('setting language code...', languageCode)
+    logger.debug('setting lexicon code...', languageCode)
     setLanguageInLocalStorage(languageCode)
-    navigate('/')
-  }, [languageCode, navigate])
+    back()
+  }, [languageCode, back])
 
   const classes = makeClasses('lexicons-lexicon', {
     condition: currentCode === languageCode,

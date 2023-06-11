@@ -16,7 +16,14 @@ const translationsFromWebToAndroid = {
         tag: 'string',
         name: 'new_game'
       },
+      preferences: new Reference('general.preferences')
     },
+    preferences: {
+      title: new Reference('general.preferences'),
+      language: new Reference('general.language'),
+      lexicon: new Reference('general.lexicon'),
+    },
+    languages: { title: new Reference('general.language') },
     newGameMode: {
       gameModeName: {
         hint: {
@@ -77,7 +84,7 @@ const translationsFromWebToAndroid = {
           transformerFn: countTransformer
         }
       },
-      wordCount_other: {
+      wordCount_other: [{
         tag: 'plurals',
         name: 'num_available_words_in_game',
         value: {
@@ -85,13 +92,18 @@ const translationsFromWebToAndroid = {
           quantity: 'other',
           transformerFn: countTransformer
         }
-      }
+      }, {
+        tag: 'plurals',
+        name: 'num_available_words_in_game',
+        value: {
+          tag: 'item',
+          quantity: 'many',
+          transformerFn: countTransformer
+        }
+      }]
     },
     lexicons: {
-      title: {
-        tag: 'string',
-        name: 'pref_dict'
-      },
+      title: new Reference('general.lexicon'),
       isBeta: {
         tag: 'string',
         name: 'lexicon_is_in_beta'
@@ -172,6 +184,10 @@ const translationsFromWebToAndroid = {
         tag: 'string',
         name: 'app_name'
       },
+      lexicon: {
+        tag: 'string',
+        name: 'pref_dict'
+      },
       back: {
         tag: 'string',
         name: 'back'
@@ -180,6 +196,10 @@ const translationsFromWebToAndroid = {
         tag: 'string',
         name: 'found_words'
       },
+      preferences: {
+        tag: 'string',
+        name: 'prefs'
+      }
   }
 }
 const languageTitlesFromWebToAndroid = {
@@ -214,6 +234,34 @@ const mergeNestedMappings = (map1, map2) => {
   }, map1, map2)
 }
 
+const handleFlip = ({ currentPath, obj, acc }) => {
+  if (obj.value !== undefined) {
+    const existingValue = acc[obj.name] || { tag: obj.tag, values: [] }
+    return {
+      ...acc,
+      [obj.name]: {
+        ...existingValue,
+        values: [...existingValue.values, {
+          ...obj.value,
+          path: currentPath
+        }]
+      }
+    }
+  }
+
+  const paths = acc[obj.name] ? acc[obj.name].paths : []
+
+  return {
+    ...acc,
+    [obj.name]: {
+      tag: obj.tag,
+      ...(obj.value ? { value: obj.value } : {}),
+      paths: [...paths, currentPath],
+      ...(obj.transformerFn ? { transformerFn: obj.transformerFn } : {})
+    }
+  }
+}
+
 const getReduceFromAndroidToWeb = (path, subObject) => (acc, key) => {
   const value = subObject[key]
   const currentPath = getCurrentPath(path, key)
@@ -229,36 +277,20 @@ const getReduceFromAndroidToWeb = (path, subObject) => (acc, key) => {
     }
   }
 
+  if (Array.isArray(value)) {
+    return value.reduce((acc2, nestedValue) => {
+      return handleFlip({ currentPath, obj: nestedValue, acc: acc2 })
+    }, acc)
+  }
+
   if (value.tag === undefined) {
     const reducer = getReduceFromAndroidToWeb(currentPath, value)
     const nested = Object.keys(value).reduce(reducer, {})
     return mergeNestedMappings(acc, nested)
   }
-  if (value.value !== undefined) {
-    const existingValue = acc[value.name] || { tag: value.tag, values: [] }
-    return {
-      ...acc,
-      [value.name]: {
-        ...existingValue,
-        values: [...existingValue.values, {
-          ...value.value,
-          path: currentPath
-        }]
-      }
-    }
-  }
 
-  const paths = acc[value.name] ? acc[value.name].paths : []
+  return handleFlip({ currentPath, obj: value, acc })
 
-  return {
-    ...acc,
-    [value.name]: {
-      tag: value.tag,
-      ...(value.value ? { value: value.value } : {}),
-      paths: [...paths, currentPath],
-      ...(value.transformerFn ? { transformerFn: value.transformerFn } : {})
-    }
-  }
 }
 
 const flipMap = obj => {

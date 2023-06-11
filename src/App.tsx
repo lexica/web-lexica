@@ -6,7 +6,7 @@ import GameModes from './pages/GameModes'
 import Home from './pages/Home'
 import Lexicle from './pages/Lexicle'
 import Multiplayer from './pages/Multiplayer'
-import Options from './pages/Options'
+import Preferences from './pages/Preferences'
 import SinglePlayer from './pages/SinglePlayer'
 
 import './App.css'
@@ -22,6 +22,7 @@ import { useTranslation } from 'react-i18next'
 import { useCallback } from 'react'
 import { Translations } from './translations'
 import { LanguageTitlesFn, TranslationsFn } from './translations/types'
+import Languages from './pages/Languages'
 
 function App() {
   logger.debug('loading app...')
@@ -62,8 +63,9 @@ function App() {
                   <Route path="/game-modes" element={ <GameModes />} />
                   <Route path="/new-game-mode" element={ <NewGameMode />} />
                   <Route path="/lexicons" element={ <Lexicons />} />
+                  <Route path="/languages" element={ <Languages />} />
                   <Route path="/multiplayer" element={ <Multiplayer />} />
-                  <Route path="/options" element={ <Options />} />
+                  <Route path="/preferences" element={ <Preferences />} />
                   <Route path="/singleplayer" element={ <SinglePlayer />} />
                   <Route path="/lexicle/*" element={ <Lexicle/>} />
                   <Route path='/saved-games' element={ <SavedGames />} />

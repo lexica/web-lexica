@@ -3,7 +3,8 @@
     "home": {
       "newGame": "Новая игра",
       "headlineTitle": "$t(general.lexica)",
-      "multiplayer": "$t(general.multiplayer)"
+      "multiplayer": "$t(general.multiplayer)",
+      "preferences": "$t(general.preferences)"
     },
     "newGameMode": {
       "gameModeName": {
@@ -32,6 +33,14 @@
     "lexicons": {
       "title": "Словарь",
       "isBeta": "Бета"
+    },
+    "preferences": {
+      "title": "$t(general.preferences)",
+      "language": "$t(general.language)",
+      "lexicon": "$t(general.lexicon)"
+    },
+    "languages": {
+      "title": "$t(general.language)"
     }
   },
   "gameModeDetails": {
@@ -59,6 +68,8 @@
     "multiplayer": "Мультиплеер",
     "lexica": "Lexica",
     "back": "Назад",
-    "foundWords": "Найденные слова"
+    "foundWords": "Найденные слова",
+    "preferences": "Настройки",
+    "lexicon": "Словарь"
   }
 }

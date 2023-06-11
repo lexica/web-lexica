@@ -13,5 +13,10 @@
   "ru": "Ruština",
   "en_GB": "Angličtina (UK)",
   "uk": "Ukrajinština",
-  "en_US": "Angličtina (US)"
+  "en_US": "Angličtina (US)",
+  "de_DE_no_diacritics": "Němčina",
+  "es_solo_enne": "Pouze španělské Ñ",
+  "fr_FR_no_diacritics": "Francouzština",
+  "pt_BR": "Portugalština (Brazílie) (rozšířená)",
+  "ru_extended": "Ruština (rozšířená)"
 }

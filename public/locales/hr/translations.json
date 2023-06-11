@@ -1,127 +1,138 @@
 {
-    "pages": {
-        "home": {
-            "newGame": "Nova igra",
-            "headlineTitle": "$t(general.lexica)",
-            "multiplayer": "$t(general.multiplayer)",
-            "title": "Naslovnica",
-            "subtitle": "online",
-            "highScore": "Najviši rezultat: {{score}}",
-            "tryLexicle": "Probaj Lexicle",
-            "resumeGame": "Nastavi igru",
-            "gameMode": "Modus: {{gameMode}}"
-        },
-        "newGameMode": {
-            "gameModeName": {
-                "hint": "Ime",
-                "description": "Za biranje načina igre / zapisivanje najviših rezultata"
-            },
-            "timeLimit": {
-                "title": "Vremensko ograničenje",
-                "description": "Vremensko ograničenje u minutama"
-            },
-            "boardSize": "Veličina ploče",
-            "scoreType": {
-                "title": "Vrsta bodovanja",
-                "wordLength": "$t(scoreDetails.wordLength)",
-                "letterPoints": "$t(scoreDetails.letterPoints)"
-            },
-            "timeAttack": {
-                "hint": "Dodaje ($t(scoreDetails.wordLength) × {{multiplier}}) s po pronađenoj riječi",
-                "off": "Isključeno",
-                "title": "Vrijeme napada"
-            },
-            "saveGameMode": "Spremi modus igre",
-            "title": "Novi modus igre",
-            "minimumWordLength": "Najmanja duljina riječi"
-        },
-        "multiplayer": {
-            "startGameHint": "Kad su svi igrači spremni, svi biste trebali započeti igru u isto vrijeme.",
-            "startGame": "Počni igru",
-            "joinGameHint": "Kad su svi igrači spremni, pridruži se igri.",
-            "joinGame": "Pridruži se igri",
-            "wordCount_one": "{{count}} riječ",
-            "wordCount_other": "{{count}} riječi",
-            "refreshBoard": "Osvježi ploču",
-            "title": "Više igrača",
-            "gameTitle": "Web Lexica igra za više igrača",
-            "newGameTitle": "Nova Web Lexica igra za više igrača"
-        },
-        "lexicons": {
-            "title": "Leksikon",
-            "isBeta": "Beta"
-        },
-        "savedGames": {
-            "gameModeName": "Modus igre",
-            "delete": "Izbriši",
-            "clearAll": "Ukloni sve",
-            "title": "Spremljene igre",
-            "gameModeDetails": "Detalji modusa igre",
-            "remainingTime": "Preostalo vrijeme",
-            "resume": "Nastavi"
-        },
-        "lexicle": {
-            "wordOfTheDay": "Riječ dana",
-            "useWordleWordList": "Koristi Wordleov popis riječi",
-            "title": "Lexicle",
-            "headlineTitle": "LEXICLE",
-            "random": "Slučajno"
-        },
-        "wordOfTheDay": {
-            "title": "Riječ dana"
-        },
-        "random": {
-            "title": "Slučajno"
-        },
-        "gameModes": {
-            "title": "Modusi igre",
-            "addGameMode": "Dodaj modus igre"
-        },
-        "singleplayer": {
-            "title": "Jedan igrač"
-        }
+  "pages": {
+    "home": {
+      "newGame": "Nova igra",
+      "headlineTitle": "$t(general.lexica)",
+      "multiplayer": "$t(general.multiplayer)",
+      "title": "Naslovnica",
+      "subtitle": "online",
+      "highScore": "Najviši rezultat: {{score}}",
+      "tryLexicle": "Probaj Lexicle",
+      "resumeGame": "Nastavi igru",
+      "gameMode": "Modus: {{gameMode}}",
+      "preferences": "$t(general.preferences)"
     },
-    "gameModeDetails": {
-        "time_one": "{{count}} min",
-        "time_other": "{{count}} min"
+    "newGameMode": {
+      "gameModeName": {
+        "hint": "Ime",
+        "description": "Za biranje načina igre / zapisivanje najviših rezultata"
+      },
+      "timeLimit": {
+        "title": "Vremensko ograničenje",
+        "description": "Vremensko ograničenje u minutama"
+      },
+      "boardSize": "Veličina ploče",
+      "scoreType": {
+        "title": "Vrsta bodovanja",
+        "wordLength": "$t(scoreDetails.wordLength)",
+        "letterPoints": "$t(scoreDetails.letterPoints)"
+      },
+      "timeAttack": {
+        "hint": "Dodaje ($t(scoreDetails.wordLength) × {{multiplier}}) s po pronađenoj riječi",
+        "off": "Isključeno",
+        "title": "Vrijeme napada"
+      },
+      "saveGameMode": "Spremi modus igre",
+      "title": "Novi modus igre",
+      "minimumWordLength": "Najmanja duljina riječi"
     },
-    "lexicaGameScreens": {
-        "inGame": {
-            "foundWords": "$t(general.foundWords)",
-            "guesses": "Nagađanja"
-        },
-        "results": {
-            "missedWords": "Propuštene riječi",
-            "foundWords": "$t(general.foundWords)"
-        }
+    "multiplayer": {
+      "startGameHint": "Kad su svi igrači spremni, svi biste trebali započeti igru u isto vrijeme.",
+      "startGame": "Počni igru",
+      "joinGameHint": "Kad su svi igrači spremni, pridruži se igri.",
+      "joinGame": "Pridruži se igri",
+      "wordCount_one": "{{count}} riječ",
+      "wordCount_other": "{{count}} riječi",
+      "refreshBoard": "Osvježi ploču",
+      "title": "Više igrača",
+      "gameTitle": "Web Lexica igra za više igrača",
+      "newGameTitle": "Nova Web Lexica igra za više igrača"
     },
-    "scoreDetails": {
-        "time": "Vrijeme",
-        "words": "Riječi",
-        "score": "Rezultat",
-        "displayPercentage": "{{found}}/{{total}} ({{percentage}} %)",
-        "wordLength": "Duljina riječi",
-        "letterPoints": "Bodovi za riječi"
+    "lexicons": {
+      "title": "Leksikon",
+      "isBeta": "Beta"
     },
-    "general": {
-        "multiplayer": "Više igrača",
-        "lexica": "Lexica",
-        "back": "Natrag",
-        "foundWords": "Pronađene riječi",
-        "loading": "Učitavanje",
-        "error": "Greška",
-        "paused": "Pauzirano"
+    "savedGames": {
+      "gameModeName": "Modus igre",
+      "delete": "Izbriši",
+      "clearAll": "Ukloni sve",
+      "title": "Spremljene igre",
+      "gameModeDetails": "Detalji modusa igre",
+      "remainingTime": "Preostalo vrijeme",
+      "resume": "Nastavi"
     },
-    "lexicleGameScreens": {
-        "results": {
-            "shareScore": "Dijeli rezultat",
-            "shareGame": "Dijeli igru",
-            "shareScoreConfirmationText": "Rezultat kopiran u međuspremnik!",
-            "shareGameConfirmationText": "Poveznica za igru kopirana u međuspremnik!",
-            "shareGameTextWordOfTheDay": "Lexicle riječ dana {{date}} {{numericScore}}\n\n{{visualScore}}\n\nProbaj nadmašiti moj rezultat: {{url}}",
-            "shareScoreTextWordOfTheDay": "Lexicle riječ dana {{date}} {{numericScore}}\n\n{{visualScore}}",
-            "shareScoreText": "Lexicle {{numericScore}}\n\n{{visualScore}}",
-            "shareGameText": "Lexicle {{numericScore}}\n\n{{visualScore}}\n\nProbaj nadmašiti moj rezultat: {{url}}"
-        }
+    "lexicle": {
+      "wordOfTheDay": "Riječ dana",
+      "useWordleWordList": "Koristi Wordleov popis riječi",
+      "title": "Lexicle",
+      "headlineTitle": "LEXICLE",
+      "random": "Slučajno"
+    },
+    "wordOfTheDay": {
+      "title": "Riječ dana"
+    },
+    "random": {
+      "title": "Slučajno"
+    },
+    "gameModes": {
+      "title": "Modusi igre",
+      "addGameMode": "Dodaj modus igre"
+    },
+    "singleplayer": {
+      "title": "Jedan igrač"
+    },
+    "preferences": {
+      "title": "$t(general.preferences)",
+      "language": "$t(general.language)",
+      "lexicon": "$t(general.lexicon)"
+    },
+    "languages": {
+      "title": "$t(general.language)"
     }
+  },
+  "gameModeDetails": {
+    "time_one": "{{count}} min",
+    "time_other": "{{count}} min"
+  },
+  "lexicaGameScreens": {
+    "inGame": {
+      "foundWords": "$t(general.foundWords)",
+      "guesses": "Nagađanja"
+    },
+    "results": {
+      "missedWords": "Propuštene riječi",
+      "foundWords": "$t(general.foundWords)"
+    }
+  },
+  "scoreDetails": {
+    "time": "Vrijeme",
+    "words": "Riječi",
+    "score": "Rezultat",
+    "displayPercentage": "{{found}}/{{total}} ({{percentage}} %)",
+    "wordLength": "Duljina riječi",
+    "letterPoints": "Bodovi za riječi"
+  },
+  "general": {
+    "multiplayer": "Više igrača",
+    "lexica": "Lexica",
+    "back": "Natrag",
+    "foundWords": "Pronađene riječi",
+    "loading": "Učitavanje",
+    "error": "Greška",
+    "paused": "Pauzirano",
+    "preferences": "Postavke",
+    "lexicon": "Leksikon"
+  },
+  "lexicleGameScreens": {
+    "results": {
+      "shareScore": "Dijeli rezultat",
+      "shareGame": "Dijeli igru",
+      "shareScoreConfirmationText": "Rezultat kopiran u međuspremnik!",
+      "shareGameConfirmationText": "Poveznica za igru kopirana u međuspremnik!",
+      "shareGameTextWordOfTheDay": "Lexicle riječ dana {{date}} {{numericScore}}\n\n{{visualScore}}\n\nProbaj nadmašiti moj rezultat: {{url}}",
+      "shareScoreTextWordOfTheDay": "Lexicle riječ dana {{date}} {{numericScore}}\n\n{{visualScore}}",
+      "shareScoreText": "Lexicle {{numericScore}}\n\n{{visualScore}}",
+      "shareGameText": "Lexicle {{numericScore}}\n\n{{visualScore}}\n\nProbaj nadmašiti moj rezultat: {{url}}"
+    }
+  }
 }

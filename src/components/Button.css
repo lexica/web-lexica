@@ -63,19 +63,19 @@
 .button-component-font-size-normal {
   padding: var(--padding-normal)
 }
-.button-component-font-size-normal>svg, .button-component-font-size-normal>a>svg {
+.button-with-svg-centered.button-component-font-size-normal>svg, .button-with-svg-centered.button-component-font-size-normal>a>svg {
   margin-inline-end: calc(2 * var(--padding-normal));
 }
 .button-component-font-size-title {
   padding: var(--padding-title)
 }
-.button-component-font-size-title>svg, .button-component-font-size-title>a>svg {
+.button-with-svg-centered.button-component-font-size-title>svg, .button-with-svg-centered.button-component-font-size-title>a>svg {
   margin-inline-end: calc(2 * var(--padding-title));
 }
 .button-component-font-size-subscript {
   padding: var(--padding-subscript)
 }
-.button-component-font-size-subscript>svg, .button-component-font-size-subscript>a>svg {
+.button-with-svg-centered.button-component-font-size-subscript>svg, .button-with-svg-centered.button-component-font-size-subscript>a>svg {
   margin-inline-end: calc(2 * var(--padding-subscript));
 }
 
@@ -99,4 +99,23 @@
   white-space: nowrap;
   overflow-x: hidden;
   text-overflow: ellipsis;
+}
+
+.button-with-svg-spread {
+  position: relative;
+}
+
+.button-component-font-size-normal.button-with-svg-spread svg {
+  position: absolute;
+  left: calc(var(--padding-normal)*2);
+}
+
+.button-component-font-size-subscript.button-with-svg-spread svg {
+  position: absolute;
+  left: calc(var(--padding-subscript)*2);
+}
+
+.button-component-font-size-title.button-with-svg-spread svg {
+  position: absolute;
+  left: calc(var(--padding-title)*2);
 }

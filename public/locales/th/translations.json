@@ -3,7 +3,8 @@
     "home": {
       "newGame": "เริ่มเกม",
       "headlineTitle": "$t(general.lexica)",
-      "multiplayer": "$t(general.multiplayer)"
+      "multiplayer": "$t(general.multiplayer)",
+      "preferences": "$t(general.preferences)"
     },
     "newGameMode": {
       "boardSize": "ขนาดกระดาน",
@@ -14,6 +15,14 @@
     },
     "lexicons": {
       "title": "พจนาณุกรม"
+    },
+    "preferences": {
+      "title": "$t(general.preferences)",
+      "language": "$t(general.language)",
+      "lexicon": "$t(general.lexicon)"
+    },
+    "languages": {
+      "title": "$t(general.language)"
     }
   },
   "lexicaGameScreens": {
@@ -23,5 +32,9 @@
     "results": {
       "foundWords": "$t(general.foundWords)"
     }
+  },
+  "general": {
+    "preferences": "ตั้งค่า",
+    "lexicon": "พจนาณุกรม"
   }
 }

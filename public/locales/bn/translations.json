@@ -3,7 +3,8 @@
     "home": {
       "newGame": "নতুল খেলা",
       "headlineTitle": "$t(general.lexica)",
-      "multiplayer": "$t(general.multiplayer)"
+      "multiplayer": "$t(general.multiplayer)",
+      "preferences": "$t(general.preferences)"
     },
     "newGameMode": {
       "gameModeName": {
@@ -22,6 +23,14 @@
     "lexicons": {
       "title": "অভিধান",
       "isBeta": "বিটা"
+    },
+    "preferences": {
+      "title": "$t(general.preferences)",
+      "language": "$t(general.language)",
+      "lexicon": "$t(general.lexicon)"
+    },
+    "languages": {
+      "title": "$t(general.language)"
     }
   },
   "scoreDetails": {
@@ -34,7 +43,9 @@
   "general": {
     "multiplayer": "একাধিক খেলোয়াড়",
     "lexica": "লেক্সিকা",
-    "back": "পিছনে"
+    "back": "পিছনে",
+    "preferences": "পছন্দসমূহ",
+    "lexicon": "অভিধান"
   },
   "lexicaGameScreens": {
     "inGame": {

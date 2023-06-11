@@ -9,7 +9,8 @@
       "tryLexicle": "Try Lexicle",
       "resumeGame": "Resume Game",
       "gameMode": "Mode: {{gameMode}}",
-      "highScore": "High Score: {{score}}"
+      "highScore": "High Score: {{score}}",
+      "preferences": "$t(general.preferences)"
     },
     "gameModes": {
       "title": "Game Modes",
@@ -79,6 +80,14 @@
     },
     "singleplayer": {
       "title": "Single Player"
+    },
+    "preferences": {
+      "title": "$t(general.preferences)",
+      "language": "$t(general.language)",
+      "lexicon": "$t(general.lexicon)"
+    },
+    "languages": {
+      "title": "$t(general.language)"
     }
   },
   "gameModeDetails": {
@@ -118,10 +127,13 @@
   "general": {
     "multiplayer": "Multiplayer",
     "lexica": "Lexica",
+    "language": "Language",
     "loading": "Loading",
     "error": "Error",
     "back": "Back",
     "foundWords": "Found Words",
-    "paused": "Paused"
+    "paused": "Paused",
+    "preferences": "Preferences",
+    "lexicon": "Lexicon"
   }
 }

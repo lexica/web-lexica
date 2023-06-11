@@ -2,12 +2,11 @@ import { ReactComponent as EmojiEvents } from '@material-design-icons/svg/round/
 import { ReactComponent as PlayCircle } from '@material-design-icons/svg/round/play_circle.svg'
 import { ReactComponent as GroupAdd } from '@material-design-icons/svg/round/group_add.svg'
 import { ReactComponent as Grid } from '@material-design-icons/svg/round/grid_on.svg'
-import { ReactComponent as Language } from '@material-design-icons/svg/round/language.svg'
+import { ReactComponent as Settings } from '@material-design-icons/svg/round/settings.svg'
 import { ReactComponent as Redo } from '@material-design-icons/svg/round/redo.svg'
 
 import { useRulesFromStorage } from '../game/rules'
 import './Home.css'
-import { useLanguageCodeFromLocalStorage } from '../game/language'
 import { Translations } from '../translations'
 import { useHighScore } from '../game/high-scores'
 import { useSavedGameList } from '../game/save-game'
@@ -18,14 +17,12 @@ import { useContext } from 'react'
 const GameSettings = (): JSX.Element => {
   const [ruleset] = useRulesFromStorage()
 
-  const languageCode = useLanguageCodeFromLocalStorage()
-
   const translations = useContext(Translations)
 
-  const languageTitle = translations.languageTitlesFn(languageCode as any)
+  const preferences = translations.translationsFn('pages.home.preferences')
 
   return <div className="home-game-options">
-    <Button to='/lexicons' svg={Language} svgTitle={'Lexicon'} prompt={languageTitle} />
+    <Button to='/preferences' svg={Settings} svgTitle={'Preferences'} prompt={preferences} />
     <Button to='/game-modes' svg={EmojiEvents} svgTitle="Game Mode" prompt={ruleset.name} />
   </div>
 
@@ -42,16 +39,18 @@ const PlayGameButtons = (): JSX.Element => {
     fontSizing={fontSizing}
     svg={Redo}
     prompt={translationsFn('pages.home.resumeGame')}
+    svgToSide
   />
 
   return <div className="home-game-buttons">
-    <Button to='/singleplayer' svg={PlayCircle} fontSizing={fontSizing} prompt={translationsFn('pages.home.newGame')} />
-    <Button to='/multiplayer' svg={GroupAdd} fontSizing={fontSizing} prompt={translationsFn('pages.home.multiplayer')} />
+    <Button to='/singleplayer' svg={PlayCircle} fontSizing={fontSizing} prompt={translationsFn('pages.home.newGame')} svgToSide />
+    <Button to='/multiplayer' svg={GroupAdd} fontSizing={fontSizing} prompt={translationsFn('pages.home.multiplayer')} svgToSide />
     <Button
       to='/lexicle'
       svg={Grid}
       fontSizing={fontSizing}
       prompt={translationsFn('pages.home.tryLexicle')}
+      svgToSide
     />
     { savedGames?.length > 0 ? resumeGame : ''}
   </div>

@@ -3,7 +3,8 @@
     "home": {
       "newGame": "Nieuw spel",
       "headlineTitle": "$t(general.lexica)",
-      "multiplayer": "$t(general.multiplayer)"
+      "multiplayer": "$t(general.multiplayer)",
+      "preferences": "$t(general.preferences)"
     },
     "newGameMode": {
       "gameModeName": {
@@ -32,6 +33,14 @@
     "lexicons": {
       "title": "Woordenlijst",
       "isBeta": "bèta"
+    },
+    "preferences": {
+      "title": "$t(general.preferences)",
+      "language": "$t(general.language)",
+      "lexicon": "$t(general.lexicon)"
+    },
+    "languages": {
+      "title": "$t(general.language)"
     }
   },
   "gameModeDetails": {
@@ -59,6 +68,8 @@
     "multiplayer": "Meerdere spelers",
     "lexica": "Lexica",
     "back": "Terug",
-    "foundWords": "Gevonden woorden"
+    "foundWords": "Gevonden woorden",
+    "preferences": "Instellingen",
+    "lexicon": "Woordenlijst"
   }
 }

@@ -73,6 +73,7 @@
     "random": {
       "title": "Random"
     },
+    "languages": { "title": "Language" },
     "lexicons": {
       "title": "Lexicon",
       "isBeta": "Beta"
@@ -119,6 +120,7 @@
     "multiplayer": "Multiplayer",
     "lexica": "Lexica",
     "loading": "Loading",
+    "language": "Language",
     "error": "Error",
     "back": "Back",
     "foundWords": "Found Words",

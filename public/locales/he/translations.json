@@ -3,7 +3,8 @@
     "home": {
       "newGame": "משחק חדש",
       "headlineTitle": "$t(general.lexica)",
-      "multiplayer": "$t(general.multiplayer)"
+      "multiplayer": "$t(general.multiplayer)",
+      "preferences": "$t(general.preferences)"
     },
     "newGameMode": {
       "timeLimit": {
@@ -19,6 +20,14 @@
     "lexicons": {
       "title": "אוצר מלים",
       "isBeta": "בטא"
+    },
+    "preferences": {
+      "title": "$t(general.preferences)",
+      "language": "$t(general.language)",
+      "lexicon": "$t(general.lexicon)"
+    },
+    "languages": {
+      "title": "$t(general.language)"
     }
   },
   "lexicaGameScreens": {
@@ -40,6 +49,8 @@
   },
   "general": {
     "lexica": "Lexica",
-    "foundWords": "מילים שנמצאו"
+    "foundWords": "מילים שנמצאו",
+    "preferences": "העדפות",
+    "lexicon": "אוצר מלים"
   }
 }
