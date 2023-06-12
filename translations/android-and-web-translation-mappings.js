@@ -22,6 +22,7 @@ const translationsFromWebToAndroid = {
       title: new Reference('general.preferences'),
       language: new Reference('general.language'),
       lexicon: new Reference('general.lexicon'),
+      androidSettings: new Reference('pages.androidIntegration.title'),
     },
     languages: { title: new Reference('general.language') },
     newGameMode: {
