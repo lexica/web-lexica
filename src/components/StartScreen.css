@@ -71,3 +71,12 @@
 .start-screen-android-app-redirect-options>.button-component:last-child {
   margin-inline-end: 0;
 }
+
+.start-screen-auto-open-in-app-button {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  padding-inline: 20vw;
+  box-sizing: border-box;
+}

@@ -1,4 +1,4 @@
-import { useContext, useMemo } from 'react'
+import { useCallback, useContext, useMemo } from 'react'
 import { ReactComponent as PlayCircle } from '@material-design-icons/svg/round/play_circle.svg'
 import { ReactComponent as Refresh } from '@material-design-icons/svg/round/refresh.svg'
 import { ReactComponent as Android } from '@material-design-icons/svg/round/android.svg'
@@ -17,7 +17,9 @@ import { Rules, RulesContext } from '../game/rules'
 import { Board } from '../game/board/hooks'
 import Button, { ButtonFontSizing, ButtonThemeType } from './Button'
 import { TranslationsFn } from '../translations/types'
-import { isAndroidClient, useAndroidInteropSettings, useAppRedirect } from '../util/android-interop'
+import { isAndroidClient, memoizedRedirectToApp, useAndroidInteropSettings, redirectToApp } from '../util/android-interop'
+import { useStaticValue } from '../util/hooks'
+import { logger } from '../util/logger'
 
 export type StartScreenProps = {
   handleStart: () => any
@@ -39,15 +41,12 @@ const getTranslatedStrings = (joiningGame: boolean, translationsFn: Translations
 }
 
 const RedirectToAndroid = (props: {
-  rules: RulesContext,
-  language: string,
-  board: string[],
+  handleRedirect: () => void
 }): JSX.Element => {
   const {
-    board, rules, language
+    handleRedirect
   } = props
 
-  const { redirectToApp } = useAppRedirect()
   const { autoAppRedirect, setAutoAppRedirect } = useAndroidInteropSettings()
 
   return (
@@ -57,7 +56,7 @@ const RedirectToAndroid = (props: {
           svg={Android}
           prompt="Open in App"
           svgTitle="Open in App"
-          onClick={() => redirectToApp({ ruleset: rules, board, language })}
+          onClick={handleRedirect}
         />
         <Button
           svg={autoAppRedirect ? CheckBox : CheckBoxOutlineBlank}
@@ -102,7 +101,32 @@ const StartScreen: React.FC<StartScreenProps> = ({
 
   const qrCode = showQrCode === true && <ShareGameQrCode {...{ rules, language, board, platform: Platform.Android }}/>
 
+  const { autoAppRedirect } = useAndroidInteropSettings()
+
+  const showBigRedirectButton = useStaticValue(!showQrCode && autoAppRedirect)
+
+  const handleAppRedirect = useCallback(() => {
+    logger.debug('calling app redirect')
+    redirectToApp({ ruleset: rules, board, language })
+  }, [RedirectToAndroid, board, language, rules])
+
   const showAppRedirectOption = !showQrCode && isAndroidClient()
+
+  if (showBigRedirectButton) {
+    memoizedRedirectToApp({ ruleset: rules, board, language })
+    return <div className="start-screen">
+      <div className="start-screen-auto-open-in-app-button" >
+        <Button
+          fontSizing={ButtonFontSizing.Title}
+          onClick={handleAppRedirect}
+          prompt="Open In App"
+          roundedEdges
+          svg={Android}
+          themeType={ButtonThemeType.Emphasis}
+        />
+      </div>
+    </div>
+  }
 
   return <div className="start-screen">
     <div className="start-screen-title">{pageTitle}</div>
@@ -113,7 +137,7 @@ const StartScreen: React.FC<StartScreenProps> = ({
       {showRefreshButton && <Button onClick={handleBoardRefresh} prompt='Refresh Board' svg={Refresh} />}
     </div>
     <div className="start-screen-share-game-qr-code">{!loading && qrCode}</div>
-    { showAppRedirectOption ? (<RedirectToAndroid rules={rules} language={language} board={board} />) : ''
+    { showAppRedirectOption ? (<RedirectToAndroid handleRedirect={handleAppRedirect} />) : ''
     }
     <div className="start-screen-start-prompt">{translations.startGameHint}</div>
     <Button

@@ -1,0 +1,115 @@
+@import "../style/constants.css";
+
+/** -- Variable Definitions -- */
+
+/* background, background-selected */
+[class*=radio-list-component].alt-background {
+  --radio-list-component-background: var(--color-background-dark-alt);
+  --radio-list-component-background-selected: var(--color-background-dark);
+}
+[class*=radio-list-component].main-background {
+  --radio-list-component-background: var(--color-background-dark);
+  --radio-list-component-background-selected: var(--color-background-dark-alt);
+}
+
+/* font-size, hint-font-size */
+[class*=radio-list-component].font-normal {
+  --radio-list-component-font-size: var(--font-size-m);
+  --radio-list-component-hint-font-size: var(--font-size-s);
+}
+[class*=radio-list-component].font-title {
+  --radio-list-component-font-size: var(--font-size-l);
+  --radio-list-component-hint-font-size: var(--font-size-m);
+}
+
+/* padding, hint-padding */
+[class*=radio-list-component].margin-small.font-normal {
+  --radio-list-component-padding: var(--padding-s);
+  --radio-list-component-hint-padding: var(--padding-xs)
+}
+[class*=radio-list-component].margin-normal.font-normal,
+[class*=radio-list-component].margin-small.font-title {
+  --radio-list-component-padding: var(--padding-m);
+  --radio-list-component-hint-padding: var(--padding-s)
+}
+[class*=radio-list-component].margin-large.font-normal,
+[class*=radio-list-component].margin-normal.font-title {
+  --radio-list-component-padding: var(--padding-l);
+  --radio-list-component-hint-padding: var(--padding-m)
+}
+[class*=radio-list-component].margin-large.font-title {
+  --radio-list-component-padding: var(--padding-xl);
+  --radio-list-component-hint-padding: var(--padding-l)
+}
+
+
+.radio-list-component-item-hint {
+  font-size: var(--radio-list-component-hint-font-size);
+  line-height: var(--radio-list-component-hint-font-size);
+  user-select: text;
+}
+
+.radio-list-component {
+  background-color: var(--radio-list-component-background);
+  display: flex
+}
+.radio-list-component.vertical {
+  flex-direction: column;
+}
+.radio-list-component.horizontal {
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.radio-list-component-item-container {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  user-select: none;
+  font-size: var(--radio-list-component-font-size);
+}
+
+.radio-list-component-item-container.vertical {
+  width: 100%;
+}
+
+.radio-list-component-item-radio-container {
+  display: flex;
+  flex-direction: row;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: flex-start;
+  line-height: var(--radio-list-component-font-size);
+}
+
+
+
+
+/* HIGHLIGHT SELECTED ITEM */
+.radio-list-component-item-container.item-selected.highlight-selected {
+  background-color: var(--radio-list-component-background-selected);
+}
+
+.radio-list-component-item-container.highlight-selected.rounded-selection {
+  border-radius: var(--radio-list-component-padding);
+}
+
+
+/* PADDING/MARGINS */
+
+.radio-list-component-item-radio {
+  margin-inline-end: var(--radio-list-component-padding);
+}
+.radio-list-component-item-radio-container>:last-child {
+  margin-inline-end: 0;
+}
+.radio-list-component>div {
+  padding: var(--radio-list-component-padding);
+}
+.radio-list-component-item-hint {
+  margin-block-start: var(--radio-list-component-hint-padding);
+}
+.radio-list-component-item-hint.vertical {
+  margin-inline-start: calc(var(--radio-list-component-font-size) + var(--radio-list-component-padding));
+}

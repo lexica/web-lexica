@@ -23,6 +23,7 @@ import { useCallback } from 'react'
 import { Translations } from './translations'
 import { LanguageTitlesFn, TranslationsFn } from './translations/types'
 import Languages from './pages/Languages'
+import AndroidIntegration from './pages/AndroidIntegration'
 
 function App() {
   logger.debug('loading app...')
@@ -66,6 +67,7 @@ function App() {
                   <Route path="/languages" element={ <Languages />} />
                   <Route path="/multiplayer" element={ <Multiplayer />} />
                   <Route path="/preferences" element={ <Preferences />} />
+                  <Route path="/android-integration" element={ <AndroidIntegration /> } />
                   <Route path="/singleplayer" element={ <SinglePlayer />} />
                   <Route path="/lexicle/*" element={ <Lexicle/>} />
                   <Route path='/saved-games' element={ <SavedGames />} />
