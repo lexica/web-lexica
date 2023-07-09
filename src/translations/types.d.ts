@@ -44,6 +44,9 @@ export type TranslationsKeys = {
   'pages.multiplayer.wordCount': {
     'count': string | number,
   },
+  'pages.multiplayer.openInAppPrompt': string,
+  'pages.multiplayer.alwaysOpenInAppPrompt': string,
+  'pages.multiplayer.alwaysOpenInAppConfirmation': string,
   'pages.savedGames.title': string,
   'pages.savedGames.gameModeName': string,
   'pages.savedGames.gameModeDetails': string,

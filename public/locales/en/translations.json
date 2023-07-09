@@ -50,7 +50,10 @@
       "joinGameHint": "When all players are ready, join the game.",
       "joinGame": "Join game",
       "wordCount_one": "{{count}} word",
-      "wordCount_other": "{{count}} words"
+      "wordCount_other": "{{count}} words",
+      "openInAppPrompt": "Open in App",
+      "alwaysOpenInAppPrompt": "Always Open in App",
+      "alwaysOpenInAppConfirmation": "Shared games will now always open in app. You can change this setting in preferences."
     },
     "savedGames": {
       "title": "Saved Games",

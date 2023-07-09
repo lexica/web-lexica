@@ -20,6 +20,7 @@ import { TranslationsFn } from '../translations/types'
 import { isAndroidClient, memoizedRedirectToApp, useAndroidInteropSettings, redirectToApp } from '../util/android-interop'
 import { useStaticValue } from '../util/hooks'
 import { logger } from '../util/logger'
+import { MaybeRender } from '../util/elements'
 
 export type StartScreenProps = {
   handleStart: () => any
@@ -47,28 +48,35 @@ const RedirectToAndroid = (props: {
     handleRedirect
   } = props
 
+  const { translationsFn } = useContext(Translations)
   const { autoAppRedirect, setAutoAppRedirect } = useAndroidInteropSettings()
+
+  const openInAppPrompt = translationsFn('pages.multiplayer.openInAppPrompt')
+  const alwaysOpenInAppPrompt = translationsFn('pages.multiplayer.alwaysOpenInAppPrompt')
+  const alwaysOpenInAppConfirmation = translationsFn('pages.multiplayer.alwaysOpenInAppConfirmation')
 
   return (
     <>
       <div className='start-screen-android-app-redirect-options'>
         <Button
           svg={Android}
-          prompt="Open in App"
-          svgTitle="Open in App"
+          prompt={openInAppPrompt}
+          svgTitle={openInAppPrompt}
           onClick={handleRedirect}
         />
         <Button
           svg={autoAppRedirect ? CheckBox : CheckBoxOutlineBlank}
-          prompt="Always Open in App"
-          svgTitle="Always Open in App"
+          prompt={alwaysOpenInAppPrompt}
+          svgTitle={alwaysOpenInAppPrompt}
           onClick={() => setAutoAppRedirect(!autoAppRedirect)}
           nowrap
         />
       </div>
-      {autoAppRedirect ? <div className="start-screen-auto-redirect-hint">
-        Shared games will now always open in app. You can change this setting in preferences.
-      </div> : ''}
+      <MaybeRender maybeRender={autoAppRedirect} >
+        <div className="start-screen-auto-redirect-hint">
+          {alwaysOpenInAppConfirmation}
+        </div>
+      </MaybeRender>
     </>
   )
 }
@@ -114,12 +122,13 @@ const StartScreen: React.FC<StartScreenProps> = ({
 
   if (showBigRedirectButton) {
     memoizedRedirectToApp({ ruleset: rules, board, language })
+
     return <div className="start-screen">
       <div className="start-screen-auto-open-in-app-button" >
         <Button
           fontSizing={ButtonFontSizing.Title}
           onClick={handleAppRedirect}
-          prompt="Open In App"
+          prompt={translationsFn('pages.multiplayer.openInAppPrompt')}
           roundedEdges
           svg={Android}
           themeType={ButtonThemeType.Emphasis}
@@ -137,8 +146,9 @@ const StartScreen: React.FC<StartScreenProps> = ({
       {showRefreshButton && <Button onClick={handleBoardRefresh} prompt='Refresh Board' svg={Refresh} />}
     </div>
     <div className="start-screen-share-game-qr-code">{!loading && qrCode}</div>
-    { showAppRedirectOption ? (<RedirectToAndroid handleRedirect={handleAppRedirect} />) : ''
-    }
+    <MaybeRender maybeRender={showAppRedirectOption} >
+      <RedirectToAndroid handleRedirect={handleAppRedirect} />
+    </MaybeRender>
     <div className="start-screen-start-prompt">{translations.startGameHint}</div>
     <Button
       fontSizing={ButtonFontSizing.Title}
