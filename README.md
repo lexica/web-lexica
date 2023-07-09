@@ -5,6 +5,25 @@
 
 ## News
 
+### Android App Support/Language Settings
+
+It's been a while, but development has resumed on `web-lexica` with two new features:
+
+- Android App support
+- Language Setting
+
+#### Language Setting
+
+You can now explicitly set your preferred language in the preferences menu! This is a small update, but I'm sure that it will be helpful for you if your preferred language was not automatically chosen.
+
+Again, many thanks to those who continue to provide translations via Weblate!
+
+#### Android App Support
+
+This is a minor feature, but if you've been annoyed that your friends continue to send `web-lexica` game links instead of app links, you will enjoy this: There is now the option to open the `Lexica` app when you open a shared multiplayer game.
+
+You can also choose to always open shared games in the `Lexica` app, however, due to safety reasons, most browsers will not allow a web page to open an app without some sort of user input, so, as a good second option, you will now be presented with a big button to open the shared game in the `Lexica` app.
+
 ### Translations working again!
 
 Sorry for the lack of updates on the locked weblate translations. A few settings needed to be adjusted, and now Weblate translations are truely implemented. We apreciate the community support!
