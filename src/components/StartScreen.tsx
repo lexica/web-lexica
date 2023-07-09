@@ -13,7 +13,7 @@ import { Language } from '../game/language'
 
 import './StartScreen.css'
 import ShareGameQrCode, { Platform } from './game/ShareGameQrCode'
-import { Rules, RulesContext } from '../game/rules'
+import { Rules } from '../game/rules'
 import { Board } from '../game/board/hooks'
 import Button, { ButtonFontSizing, ButtonThemeType } from './Button'
 import { TranslationsFn } from '../translations/types'
@@ -108,7 +108,7 @@ const StartScreen: React.FC<StartScreenProps> = ({
   const handleAppRedirect = useCallback(() => {
     logger.debug('calling app redirect')
     redirectToApp({ ruleset: rules, board, language })
-  }, [RedirectToAndroid, board, language, rules])
+  }, [board, language, rules])
 
   const showAppRedirectOption = !showQrCode && isAndroidClient()
 

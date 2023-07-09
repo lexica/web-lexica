@@ -163,15 +163,3 @@ export const useStaticValue = <T>(initialValue: T) => {
 
   return value
 }
-
-export const useCallOnce = <T extends (...args: any[]) => void>(fn: T) => {
-  const [_, setFlag] = useState(false)
-  const callOnce = useCallback<T>(((...args: Parameters<T>) => {
-    setFlag(flag => {
-      if (flag) return true
-      fn(...args)
-      return true
-    })
-  }) as any, [fn, setFlag])
-  return callOnce
-}

@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from 'react'
+import { useMemo } from 'react'
 import { v4 as uuid } from 'uuid'
 
 import { makeClasses } from '../util/classes'
