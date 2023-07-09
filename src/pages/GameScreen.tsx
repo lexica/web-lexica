@@ -217,8 +217,11 @@ const ResumedGame = ({ gameUrl }: { gameUrl: string }): JSX.Element => {
  *  - No Resume
  */
 
-const GameScreen = ({ isMultiplayer: m, isNewGame: n }: GameScreenProps): JSX.Element => {
-  const [isMultiplayer, isNewGame] = [m === true, n === true]
+const GameScreen = (props: GameScreenProps): JSX.Element => {
+  const {
+    isMultiplayer = false,
+    isNewGame = false,
+  } = props
   const [shouldUseSavedGame, setShouldUseSavedGame] = useState(false)
   const [path, setPath] = useState('')
 

@@ -50,7 +50,10 @@
       "joinGameHint": "When all players are ready, join the game.",
       "joinGame": "Join game",
       "wordCount_one": "{{count}} word",
-      "wordCount_other": "{{count}} words"
+      "wordCount_other": "{{count}} words",
+      "openInAppPrompt": "Open in App",
+      "alwaysOpenInAppPrompt": "Always Open in App",
+      "alwaysOpenInAppConfirmation": "Shared games will now always open in app. You can change this setting in preferences."
     },
     "savedGames": {
       "title": "Saved Games",
@@ -84,7 +87,19 @@
     "preferences": {
       "title": "$t(general.preferences)",
       "language": "$t(general.language)",
-      "lexicon": "$t(general.lexicon)"
+      "lexicon": "$t(general.lexicon)",
+      "androidSettings": "$t(pages.androidIntegration.title)"
+    },
+    "androidIntegration": {
+      "title": "Android App Settings",
+      "autoDetectAndroidPrompt": "Show \"Open in App\" option if Android is detected",
+      "autoDetectAndroidHint": "Default behavior. If your device type is not being detected properly, choose one of the other options.",
+      "autoRedirectPrompt": "Always open shared games in App",
+      "autoRedirectHint": "When opening a shared game, the web page will try to open the Android Lexica App.",
+      "forceShowAndroidSettingsPrompt": "Show \"Open in App\" button",
+      "forceShowAndroidSettingsHint": "Show the prompt to open a shared game in the Android Lexica app.",
+      "forceHideAndroidSettingsPrompt": "Hide \"Open in App\" button",
+      "forceHideAndroidSettingsHint": "Hide the prompt to open a shared game in the Android Lexica app."
     },
     "languages": {
       "title": "$t(general.language)"

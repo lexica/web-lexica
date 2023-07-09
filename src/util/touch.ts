@@ -20,6 +20,11 @@ export type PointOnGridInfo = {
   pointDistanceFromCenterOfSquare: number
 }
 
+const getUnadjustedIndex = (dimension: number, point: number, offset: number) => {
+  const isNegative = point < 0
+  return Math.floor((point - offset) / dimension) * (isNegative ? -1 : 1)
+}
+
 export const getPointOnGridInfo = ({
   gridOrigin,
   squareDimensions,
@@ -30,11 +35,6 @@ export const getPointOnGridInfo = ({
   const { x: originX, y: originY } = gridOrigin
   const { x: width, y: height } = squareDimensions
   const { x, y } = point
-
-  const getUnadjustedIndex = (dimension: number, point: number, offset: number) => {
-    const isNegative = point < 0
-    return Math.floor((point - offset) / dimension) * (isNegative ? -1 : 1)
-  }
 
   const getOffset = (dimension: number, origin: number) => origin % dimension
   const xOffset = getOffset(width, originX)

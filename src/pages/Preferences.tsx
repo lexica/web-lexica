@@ -1,6 +1,7 @@
 import { useContext } from 'react'
 import { ReactComponent as Language } from '@material-design-icons/svg/round/language.svg'
 import { ReactComponent as Gamepad } from '@material-design-icons/svg/round/gamepad.svg'
+import { ReactComponent as Android } from '@material-design-icons/svg/round/android.svg'
 import { SvgComponent } from '../components/Svg'
 
 import Button, { ButtonFontSizing } from '../components/Button'
@@ -20,10 +21,12 @@ const Preferences = (): JSX.Element => {
   const { translationsFn } = useContext(Translations)
   const language = translationsFn('pages.preferences.language')
   const lexicon = translationsFn('pages.preferences.lexicon')
+  const androidSettings = translationsFn('pages.preferences.androidSettings')
   return (<div className="Page">
     <div className="preferences-page-button-list">
       <PrefButton title={language} to="/languages" svg={Language} />
       <PrefButton title={lexicon} to="/lexicons" svg={Gamepad} />
+      <PrefButton title={androidSettings} to="/android-integration" svg={Android} />
     </div>
   </div>)
 }

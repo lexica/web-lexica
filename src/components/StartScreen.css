@@ -51,3 +51,32 @@
   font-weight: var(--font-weight-light);
   margin-top: auto;
 }
+
+.start-screen-auto-redirect-hint {
+  font-weight: var(--font-weight-light);
+  margin-top: 1vh;
+}
+
+.start-screen-android-app-redirect-options {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 90%;
+}
+
+.start-screen-android-app-redirect-options>.button-component {
+  margin-inline-end: 5vw;
+}
+
+.start-screen-android-app-redirect-options>.button-component:last-child {
+  margin-inline-end: 0;
+}
+
+.start-screen-auto-open-in-app-button {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  padding-inline: 20vw;
+  box-sizing: border-box;
+}

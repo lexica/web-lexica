@@ -65,11 +65,11 @@ const visitNeighbors_ = <T>({ callback, onlyUnvisitedNeighbors }: VisitNeighbors
 
   const results = R.map<Coordinates, VisitedNeighbor | T>(
     ({ row, column }) => {
-      const envokeCallback = () => callback(board[row][column], { row, column })
+      const invokeCallback = () => callback(board[row][column], { row, column })
 
-      if (onlyUnvisitedNeighbors) return board[row][column].visited ? new VisitedNeighbor() : envokeCallback()
+      if (onlyUnvisitedNeighbors) return board[row][column].visited ? new VisitedNeighbor() : invokeCallback()
 
-      return envokeCallback()
+      return invokeCallback()
     }, neighbors)
 
   return results.filter(val => !(val instanceof VisitedNeighbor)) as T[]
