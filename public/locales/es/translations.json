@@ -64,7 +64,10 @@
             "joinGameHint": "Cuando todos los jugadores estén preparados, únete a la partida.",
             "joinGame": "Unirse a la partida",
             "wordCount_one": "{{count}} palabra",
-            "wordCount_other": "{{count}} palabras"
+            "wordCount_other": "{{count}} palabras",
+            "openInAppPrompt": "Abrir en la aplicación",
+            "alwaysOpenInAppConfirmation": "Ahora los juegos compartidos se abrirán siempre en la aplicación. Puedes cambiar esta opción en las preferencias.",
+            "alwaysOpenInAppPrompt": "Abrir siempre en la aplicación"
         },
         "savedGames": {
             "title": "Partidas Guardadas",
@@ -84,10 +87,22 @@
         "preferences": {
             "title": "$t(general.preferences)",
             "language": "$t(general.language)",
-            "lexicon": "$t(general.lexicon)"
+            "lexicon": "$t(general.lexicon)",
+            "androidSettings": "$t(pages.androidIntegration.title)"
         },
         "languages": {
             "title": "$t(general.language)"
+        },
+        "androidIntegration": {
+            "title": "Ajustes de la aplicación para Android",
+            "autoDetectAndroidPrompt": "Mostrar la opción \"Abrir en la aplicación\" si se detecta Android",
+            "autoRedirectPrompt": "Abrir siempre los juegos compartidos en la aplicación",
+            "forceShowAndroidSettingsPrompt": "Mostrar el botón \"Abrir en la aplicación",
+            "forceShowAndroidSettingsHint": "Muestra el mensaje para abrir un juego compartido en la aplicación de Android Lexica.",
+            "forceHideAndroidSettingsPrompt": "Ocultar el botón \"Abrir en la aplicación",
+            "forceHideAndroidSettingsHint": "Ocultar el aviso para abrir un juego compartido en la aplicación Android Lexica.",
+            "autoDetectAndroidHint": "Comportamiento por defecto. Si tu tipo de dispositivo no se detecta correctamente, elige una de las otras opciones.",
+            "autoRedirectHint": "Al abrir un juego compartido, la página web intentará abrir la aplicación Android Lexica."
         }
     },
     "gameModeDetails": {
