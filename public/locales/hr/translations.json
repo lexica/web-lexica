@@ -46,7 +46,10 @@
             "refreshBoard": "Osvježi ploču",
             "title": "Više igrača",
             "gameTitle": "Web Lexica igra za više igrača",
-            "newGameTitle": "Nova Web Lexica igra za više igrača"
+            "newGameTitle": "Nova Web Lexica igra za više igrača",
+            "openInAppPrompt": "Otvori u aplikaciji",
+            "alwaysOpenInAppPrompt": "Uvijek otvori u aplikaciji",
+            "alwaysOpenInAppConfirmation": "Dijeljene igre će se sada uvijek otvarati u aplikaciji. Ovu postavku možeš promijeniti u postavkama."
         },
         "lexicons": {
             "title": "Leksikon",
@@ -84,10 +87,22 @@
         "preferences": {
             "title": "$t(general.preferences)",
             "language": "$t(general.language)",
-            "lexicon": "$t(general.lexicon)"
+            "lexicon": "$t(general.lexicon)",
+            "androidSettings": "$t(pages.androidIntegration.title)"
         },
         "languages": {
             "title": "$t(general.language)"
+        },
+        "androidIntegration": {
+            "autoRedirectPrompt": "Uvijek otvori dijeljene igre u aplikaciji",
+            "forceShowAndroidSettingsPrompt": "Pokaži gumb „Otvori u aplikaciji”",
+            "forceShowAndroidSettingsHint": "Pokaži prozor za otvaranje dijeljene igre u aplikaciji Android Lexica.",
+            "autoDetectAndroidPrompt": "Pokaži opciju „Otvori u aplikaciji” ako se otkrije Android",
+            "title": "Potavke Android aplikacije",
+            "autoDetectAndroidHint": "Standardno ponašanje. Ako se tvoja vrsta uređaja ne prepozna, odaberi jednu od drugih opcija.",
+            "autoRedirectHint": "Prilikom otvaranja dijeljene igre, web stranica će pokušati otvoriti aplikaciju Android Lexica.",
+            "forceHideAndroidSettingsPrompt": "Sakrij gumb „Otvori u aplikaciji”",
+            "forceHideAndroidSettingsHint": "Sakrij prozor za otvaranje dijeljene igre u aplikaciji Android Lexica."
         }
     },
     "gameModeDetails": {
