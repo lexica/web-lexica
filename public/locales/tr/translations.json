@@ -46,7 +46,10 @@
             "newGameTitle": "Web Lexica Yeni Çoklu Oyun",
             "title": "Çok Oyunculu",
             "gameTitle": "Web Lexica Çoklu Oyun",
-            "refreshBoard": "Tahtayı Yenile"
+            "refreshBoard": "Tahtayı Yenile",
+            "alwaysOpenInAppConfirmation": "Paylaşılan oyunlar artık her zaman uygulamada açılacak. Bu ayarı tercihlerden değiştirebilirsiniz.",
+            "alwaysOpenInAppPrompt": "Her Zaman Uygulamada Aç",
+            "openInAppPrompt": "Uygulamada Aç"
         },
         "lexicons": {
             "title": "Sözlük",
@@ -84,10 +87,22 @@
         "preferences": {
             "title": "$t(general.preferences)",
             "language": "$t(general.language)",
-            "lexicon": "$t(general.lexicon)"
+            "lexicon": "$t(general.lexicon)",
+            "androidSettings": "$t(pages.androidIntegration.title)"
         },
         "languages": {
             "title": "$t(general.language)"
+        },
+        "androidIntegration": {
+            "forceShowAndroidSettingsPrompt": "\"Uygulamada Aç\" düğmesini göster",
+            "forceShowAndroidSettingsHint": "Paylaşılan bir oyunu Android Lexica uygulamasında açmak için istek kutusunu göster.",
+            "title": "Android Uygulama Ayarları",
+            "forceHideAndroidSettingsPrompt": "\"Uygulamada Aç\" düğmesini gizle",
+            "autoRedirectHint": "Paylaşılan bir oyunu açarken, web sayfası Android Lexica uygulamasını açmaya çalışacaktır.",
+            "autoRedirectPrompt": "Paylaşılan oyunları her zaman uygulamada aç",
+            "autoDetectAndroidHint": "Öntanımlı davranış. Aygıt türünüz düzgün algılanmıyorsa, diğer seçeneklerden birini seçin.",
+            "autoDetectAndroidPrompt": "Android algılandığında \"Uygulamada Aç\" seçeneğini göster",
+            "forceHideAndroidSettingsHint": "Paylaşılan bir oyunu Android Lexica uygulamasında açmak için istek kutusunu gizle."
         }
     },
     "gameModeDetails": {
