@@ -15,7 +15,7 @@
         "newGameMode": {
             "gameModeName": {
                 "hint": "Ime",
-                "description": "Za biranje načina igre / zapisivanje najviših rezultata"
+                "description": "Za biranje modusa igre / zapisivanje najviših rezultata"
             },
             "timeLimit": {
                 "title": "Vremensko ograničenje",
@@ -43,7 +43,7 @@
             "joinGame": "Pridruži se igri",
             "wordCount_one": "{{count}} riječ",
             "wordCount_other": "{{count}} riječi",
-            "refreshBoard": "Osvježi ploču",
+            "refreshBoard": "Aktualiziraj ploču",
             "title": "Više igrača",
             "gameTitle": "Web Lexica igra za više igrača",
             "newGameTitle": "Nova Web Lexica igra za više igrača",
@@ -123,7 +123,7 @@
         "time": "Vrijeme",
         "words": "Riječi",
         "score": "Rezultat",
-        "displayPercentage": "{{found}}/{{total}} ({{percentage}} %)",
+        "displayPercentage": "{{found}}/{{total}} ({{percentage}} %)",
         "wordLength": "Duljina riječi",
         "letterPoints": "Bodovi za riječi"
     },
@@ -143,8 +143,8 @@
         "results": {
             "shareScore": "Dijeli rezultat",
             "shareGame": "Dijeli igru",
-            "shareScoreConfirmationText": "Rezultat kopiran u međuspremnik!",
-            "shareGameConfirmationText": "Poveznica za igru kopirana u međuspremnik!",
+            "shareScoreConfirmationText": "Rezultat je kopiran u međuspremnik!",
+            "shareGameConfirmationText": "Poveznica za igru je kopirana u međuspremnik!",
             "shareGameTextWordOfTheDay": "Lexicle riječ dana {{date}} {{numericScore}}\n\n{{visualScore}}\n\nProbaj nadmašiti moj rezultat: {{url}}",
             "shareScoreTextWordOfTheDay": "Lexicle riječ dana {{date}} {{numericScore}}\n\n{{visualScore}}",
             "shareScoreText": "Lexicle {{numericScore}}\n\n{{visualScore}}",
