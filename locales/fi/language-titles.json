@@ -1,0 +1,22 @@
+{
+  "ca": "katalaani",
+  "de_DE": "saksa (laajennettu)",
+  "de_DE_no_diacritics": "saksa",
+  "es": "espanja",
+  "es_solo_enne": "Espanja, vain Ñ",
+  "fa": "persia",
+  "fr_FR": "ranska (laajennettu)",
+  "fr_FR_no_diacritics": "ranska",
+  "hu": "unkari",
+  "it": "italia",
+  "ja": "japani",
+  "nl": "hollanti",
+  "pl": "puola",
+  "pt_BR": "Portugali (Brasilia) (laajennettu)",
+  "pt_BR_no_diacritics": "portugali (Brasilia)",
+  "ru": "venäjä",
+  "ru_extended": "venäjä (laajennettu)",
+  "en_GB": "englanti (UK)",
+  "uk": "ukraina",
+  "en_US": "englanti (US)"
+}
