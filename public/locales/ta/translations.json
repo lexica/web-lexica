@@ -3,7 +3,7 @@
         "time": "நேரம்",
         "words": "சொற்கள்",
         "score": "கெலிப்பெண்",
-        "displayPercentage": "{{காணப்படுகிறது}}/{{மொத்த}} ({{சதவீதம்}}%)",
+        "displayPercentage": "{{found}}/{{total}} ({{percentage}}%)",
         "wordLength": "சொல் நீளம்",
         "letterPoints": "கடிதம் புள்ளிகள்"
     },
@@ -22,15 +22,15 @@
     "pages": {
         "home": {
             "title": "வீடு",
-            "headlineTitle": "$ T (general.lexica)",
+            "headlineTitle": "$t(general.lexica)",
             "subtitle": "ஆன்லைனில்",
             "newGame": "புதிய விளையாட்டு",
-            "multiplayer": "$ t (general.multiplayer)",
+            "multiplayer": "$t(general.multiplayer)",
             "tryLexicle": "லெக்சிகல் முயற்சிக்கவும்",
             "resumeGame": "விளையாட்டை மீண்டும் தொடங்குங்கள்",
-            "gameMode": "பயன்முறை: {{கேம்மோட்}}}",
-            "highScore": "அதிக மதிப்பெண்: {{மதிப்பெண்}}",
-            "preferences": "$ t (general.preferences)"
+            "gameMode": "பயன்முறை: {{gameMode}}}",
+            "highScore": "அதிக மதிப்பெண்: {{score}}",
+            "preferences": "$t(general.preferences)"
         },
         "gameModes": {
             "title": "விளையாட்டு முறைகள்",
@@ -42,7 +42,7 @@
             "timeAttack": {
                 "title": "நேர தாக்குதல்",
                 "off": "அணை",
-                "hint": "காணப்படும் ஒரு வார்த்தைக்கு இரண்டாவது (கள்) ஃச் {{பெருக்கி}}) சேர்க்கிறது"
+                "hint": "காணப்படும் ஒரு வார்த்தைக்கு ($t(scoreDetails.wordLength)x{{multiplier}}) விநாடி(கள்) சேர்க்கிறது"
             },
             "gameModeName": {
                 "hint": "பெயர்",
@@ -55,8 +55,8 @@
             "boardSize": "போர்டு அளவு",
             "scoreType": {
                 "title": "மதிப்பெண் வகை",
-                "wordLength": "$ t (scredetails.wordlength)",
-                "letterPoints": "$ t (scoredetails.letterpoints)"
+                "wordLength": "$t(scoreDetails.wordLength)",
+                "letterPoints": "$t(scoreDetails.letterPoints)"
             },
             "saveGameMode": "விளையாட்டு பயன்முறையைச் சேமிக்கவும்"
         },
@@ -69,7 +69,7 @@
             "startGame": "விளையாட்டைத் தொடங்கவும்",
             "joinGameHint": "அனைத்து வீரர்களும் தயாராக இருக்கும்போது, விளையாட்டில் சேரவும்.",
             "joinGame": "விளையாட்டில் சேரவும்",
-            "wordCount_one": "{{எண்ணிக்கை}} சொல்",
+            "wordCount_one": "{{count}} சொல்",
             "wordCount_other": "{{count}} சொற்கள்",
             "openInAppPrompt": "பயன்பாட்டில் திறக்கவும்",
             "alwaysOpenInAppPrompt": "பயன்பாட்டில் எப்போதும் திறக்கவும்",
@@ -105,10 +105,10 @@
             "title": "ஒற்றை வீரர்"
         },
         "preferences": {
-            "title": "$ t (general.preferences)",
-            "language": "$ t (general.language)",
-            "lexicon": "$ t (general.lexicon)",
-            "androidSettings": "$ t (பக்கங்கள்.ஆண்ட்ராய்டின்டெக்ரேசன்.டிடில்)"
+            "title": "$t(general.preferences)",
+            "language": "$t(general.language)",
+            "lexicon": "$t(general.lexicon)",
+            "androidSettings": "$t(pages.androidIntegration.title)"
         },
         "androidIntegration": {
             "title": "ஆண்ட்ராய்டு பயன்பாட்டு அமைப்புகள்",
@@ -122,20 +122,20 @@
             "forceHideAndroidSettingsHint": "ஆண்ட்ராய்டு லெக்சிகா பயன்பாட்டில் பகிரப்பட்ட விளையாட்டைத் திறக்க வரியில் மறைக்கவும்."
         },
         "languages": {
-            "title": "$ t (general.language)"
+            "title": "$t(general.language)"
         }
     },
     "gameModeDetails": {
         "time_one": "{{count}} min",
-        "time_other": "{{எண்ணிக்கை}} நிமிடங்கள்"
+        "time_other": "{{count}} நிமிடங்கள்"
     },
     "lexicaGameScreens": {
         "inGame": {
             "guesses": "யூகங்கள்",
-            "foundWords": "$ t (general.foundwords)"
+            "foundWords": "$t(general.foundWords)"
         },
         "results": {
-            "foundWords": "$ t (general.foundwords)",
+            "foundWords": "$t(general.foundWords)",
             "missedWords": "தவறவிட்ட வார்த்தைகள்"
         }
     },
@@ -143,10 +143,10 @@
         "results": {
             "shareScore": "பகிர் ச்கோர்",
             "shareGame": "விளையாட்டைப் பகிரவும்",
-            "shareGameTextWordOfTheDay": "நாளின் லெக்சிகல் சொல் {{தேதி}} {{numericscore}}\n\n {{விசுவல்ச்கோர்}}}\n\n எனது மதிப்பெண்ணை நீங்கள் வெல்ல முடியுமா என்று பாருங்கள்: {{url}}",
-            "shareScoreTextWordOfTheDay": "நாளின் சொற்பொழிவு சொல் {{தேதி}} {{எண் மதிப்பெண்}}\n {{காட்சி மதிப்பெண்}}",
-            "shareScoreText": "லெக்சிகல் {{எண் மதிப்பெண்}}\n {{காட்சி மதிப்பெண்}}",
-            "shareGameText": "லெக்சிகல் {{numericscore}}}\n\n {{விசுவல்ச்கோர்}}}\n\n எனது மதிப்பெண்ணை நீங்கள் வெல்ல முடியுமா என்று பாருங்கள்: {{url}}",
+            "shareGameTextWordOfTheDay": "நாளின் லெக்சிகல் சொல் {{date}} {{numericScore}}\n\n {{visualScore}}}\n\n எனது மதிப்பெண்ணை நீங்கள் வெல்ல முடியுமா என்று பாருங்கள்: {{url}}",
+            "shareScoreTextWordOfTheDay": "நாளின் சொற்பொழிவுச் சொல் {{date}} {{numericScore}}\n\n{{visualScore}}",
+            "shareScoreText": "சொல் {{numericScore}}\n\n{{visualScore}}",
+            "shareGameText": "லெக்சிகல் {{numericScore}}}\n\n {{visualScore}}}\n\n எனது மதிப்பெண்ணை நீங்கள் வெல்ல முடியுமா என்று பாருங்கள்: {{url}}",
             "shareScoreConfirmationText": "கிளிப்போர்டுக்கு நகலெடுக்கப்பட்ட மதிப்பெண்!",
             "shareGameConfirmationText": "கிளிப்போர்டுக்கு நகலெடுக்கப்பட்ட விளையாட்டு இணைப்பு!"
         }
