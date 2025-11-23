@@ -14,7 +14,7 @@ export enum Platform {
 const getMultiplayerUrl = (platform: Platform) => {
   switch (platform) {
     case Platform.Android:
-      return `${getBaseUrl()}/m`
+      return `${getBaseUrl()}/m/`
     case Platform.Web:
       return `${getBaseUrl()}/multiplayer`
   }
@@ -49,7 +49,7 @@ const ShareGameQrCode = ({
   const size = orientation === ScreenOrientation.Landscape ? landscapeSize : portraitSize
 
   return <QrCode
-    info={`${multiplayerUrl}/${search}`}
+    info={`${multiplayerUrl}?${search}`}
     colors={{
       foreground: constants.colorBackgroundDark,
       background: constants.colorBackgroundLight
