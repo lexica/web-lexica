@@ -37,7 +37,7 @@
             "saveGameMode": "儲存遊戲模式"
         },
         "lexicons": {
-            "title": "詞庫",
+            "title": "$t(general.lexicon)",
             "isBeta": "測試版"
         },
         "preferences": {

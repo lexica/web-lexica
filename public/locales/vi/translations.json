@@ -30,13 +30,14 @@
       "wordCount_other": "{{count}} từ"
     },
     "lexicons": {
-      "title": "Lexicon",
+      "title": "$t(general.lexicon)",
       "isBeta": "Beta"
     },
     "preferences": {
       "title": "$t(general.preferences)",
       "language": "$t(general.language)",
-      "lexicon": "$t(general.lexicon)"
+      "lexicon": "$t(general.lexicon)",
+      "androidSettings": "$t(pages.androidIntegration.title)"
     },
     "languages": {
       "title": "$t(general.language)"

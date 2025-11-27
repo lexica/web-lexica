@@ -23,7 +23,7 @@
       }
     },
     "multiplayer": {
-      "startGameHint": "Keď sú všetci hráči pripravení, mali by ste začať hru naraz.",
+      "startGameHint": "Keď sú všetci hráči pripravení, mali by ste hru začať naraz.",
       "startGame": "Začať hru",
       "joinGameHint": "Keď sú všetci hráči pripravení, pripojte sa k hre.",
       "joinGame": "Pripojiť sa k hre",
@@ -31,13 +31,14 @@
       "wordCount_other": "{{count}} slov"
     },
     "lexicons": {
-      "title": "Slovník",
+      "title": "$t(general.lexicon)",
       "isBeta": "Beta"
     },
     "preferences": {
       "title": "$t(general.preferences)",
       "language": "$t(general.language)",
-      "lexicon": "$t(general.lexicon)"
+      "lexicon": "$t(general.lexicon)",
+      "androidSettings": "$t(pages.androidIntegration.title)"
     },
     "languages": {
       "title": "$t(general.language)"

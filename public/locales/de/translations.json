@@ -12,7 +12,7 @@
         "newGameMode": {
             "gameModeName": {
                 "hint": "Name",
-                "description": "Zur Auswahl des Spielmodus / Aufzeichnung von höchsten Punktzahlen"
+                "description": "Zur Auswahl des Spielmodus / Aufzeichnung von Höchsten Punktzahlen"
             },
             "timeLimit": {
                 "title": "Zeitbegrenzung",
@@ -46,13 +46,14 @@
             "alwaysOpenInAppPrompt": "Immer in der App öffnen"
         },
         "lexicons": {
-            "title": "Lexikon",
+      "title": "$t(general.lexicon)",
             "isBeta": "Beta"
         },
         "preferences": {
             "title": "$t(general.preferences)",
             "language": "$t(general.language)",
-            "lexicon": "$t(general.lexicon)"
+      "lexicon": "$t(general.lexicon)",
+      "androidSettings": "$t(pages.androidIntegration.title)"
         },
         "languages": {
             "title": "$t(general.language)"

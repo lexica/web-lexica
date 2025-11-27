@@ -98,7 +98,7 @@
             "title": "சீரற்ற"
         },
         "lexicons": {
-            "title": "அகராதி",
+      "title": "$t(general.lexicon)",
             "isBeta": "பீட்டா"
         },
         "singleplayer": {

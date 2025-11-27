@@ -8,43 +8,63 @@
     },
     "newGameMode": {
       "timeLimit": {
-        "title": "المهلة الزمنية"
+        "title": "المهلة الزمنية",
+        "description": "المهلة بالدقائق"
       },
       "boardSize": "حجم اللوح",
       "scoreType": {
         "wordLength": "$t(scoreDetails.wordLength)",
-        "letterPoints": "$t(scoreDetails.letterPoints)"
+        "letterPoints": "$t(scoreDetails.letterPoints)",
+        "title": "نوع النتيجة"
+      },
+      "gameModeName": {
+        "hint": "اسم",
+        "description": "لاختيار وضع اللعبة / تسجيل أعلى الدرجات"
       }
     },
     "lexicons": {
-      "title": "القاموس"
+      "title": "$t(general.lexicon)",
+      "isBeta": "تجريبي"
     },
     "preferences": {
       "title": "$t(general.preferences)",
       "language": "$t(general.language)",
-      "lexicon": "$t(general.lexicon)"
+      "lexicon": "$t(general.lexicon)",
+      "androidSettings": "$t(pages.androidIntegration.title)"
     },
     "languages": {
       "title": "$t(general.language)"
+    },
+    "multiplayer": {
+      "startGameHint": "عندما يجهز جميع اللاعبين، عليكم بدء اللعب في الوقت نفسه.",
+      "startGame": "بدء اللعبة",
+      "joinGameHint": "عندما يجهز جميع اللاعبين، انضم إلى اللعبة.",
+      "joinGame": "التحق باللعبة"
     }
   },
   "scoreDetails": {
     "words": "الكلمات",
-    "score": "النقاط",
+    "score": "نتيجة",
     "displayPercentage": "{{found}}/{{total}} ({{percentage}}%)",
-    "wordLength": "طول الكلمة"
+    "wordLength": "طول الكلمة",
+    "time": "الوقت",
+    "letterPoints": "نقاط الحرف"
   },
   "general": {
     "lexica": "ليكسيكا",
     "preferences": "التفضيلات",
-    "lexicon": "القاموس"
+    "lexicon": "القاموس",
+    "multiplayer": "لعب متعدد",
+    "back": "عودة",
+    "foundWords": "الكلمات الموجودة"
   },
   "lexicaGameScreens": {
     "inGame": {
       "foundWords": "$t(general.foundWords)"
     },
     "results": {
-      "foundWords": "$t(general.foundWords)"
+      "foundWords": "$t(general.foundWords)",
+      "missedWords": "الكلمات المفقودة"
     }
   }
 }

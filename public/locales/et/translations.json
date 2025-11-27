@@ -52,7 +52,7 @@
             "alwaysOpenInAppPrompt": "Alati ava rakenduses"
         },
         "lexicons": {
-            "title": "Leksikon",
+            "title": "$t(general.lexicon)",
             "isBeta": "beetaversioon"
         },
         "preferences": {

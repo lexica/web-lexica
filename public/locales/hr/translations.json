@@ -52,7 +52,7 @@
             "alwaysOpenInAppConfirmation": "Dijeljene igre će se sada uvijek otvarati u aplikaciji. Ovu postavku možeš promijeniti u postavkama."
         },
         "lexicons": {
-            "title": "Leksikon",
+            "title": "$t(general.lexicon)",
             "isBeta": "Beta"
         },
         "savedGames": {
