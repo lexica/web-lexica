@@ -33,7 +33,7 @@ const ListSelector = ({
 
   const selected = displayedList === listName
   const title = listName === Lists.FoundWords
-    ? translationsFn('lexicaGameScreens.results.missedWords')
+    ? translationsFn('lexicaGameScreens.results.foundWords')
     : translationsFn('lexicaGameScreens.results.missedWords')
 
   const svg = listName === Lists.FoundWords ? CheckCircle : HighlightOff
