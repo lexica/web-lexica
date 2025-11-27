@@ -62,7 +62,7 @@
     "words": "Mots",
     "score": "Score",
     "displayPercentage": "{{found}}/{{total}} ({{percentage}}%)",
-    "wordLength": "Longueur de Mot",
+    "wordLength": "Longueur des mots",
     "letterPoints": "Valeur des lettres"
   },
   "general": {

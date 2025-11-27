@@ -1,7 +1,7 @@
 {
   "pages": {
     "home": {
-      "newGame": "নতুন খেলা",
+      "newGame": "নতুল খেলা",
       "headlineTitle": "$t(general.lexica)",
       "multiplayer": "$t(general.multiplayer)",
       "preferences": "$t(general.preferences)"
