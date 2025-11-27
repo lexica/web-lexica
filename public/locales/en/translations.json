@@ -78,7 +78,7 @@
       "title": "Random"
     },
     "lexicons": {
-      "title": "Lexicon",
+      "title": "$t(general.lexicon)",
       "isBeta": "Beta"
     },
     "singleplayer": {

@@ -31,13 +31,14 @@
             "wordCount_other": "{{count}} ord"
         },
         "lexicons": {
-            "title": "Leksikon",
+            "title": "$t(general.lexicon)",
             "isBeta": "beta"
         },
         "preferences": {
             "title": "$t(general.preferences)",
             "language": "$t(general.language)",
-            "lexicon": "$t(general.lexicon)"
+            "lexicon": "$t(general.lexicon)",
+            "androidSettings": "$t(pages.androidIntegration.title)"
         },
         "languages": {
             "title": "$t(general.language)"

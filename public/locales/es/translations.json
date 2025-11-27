@@ -37,7 +37,7 @@
             "saveGameMode": "Guardar Modo de Juego"
         },
         "lexicons": {
-            "title": "Léxico",
+      "title": "$t(general.lexicon)",
             "isBeta": "Beta"
         },
         "singleplayer": {

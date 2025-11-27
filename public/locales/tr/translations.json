@@ -52,7 +52,7 @@
             "openInAppPrompt": "Uygulamada Aç"
         },
         "lexicons": {
-            "title": "Sözlük",
+            "title": "$t(general.lexicon)",
             "isBeta": "Beta sürüm"
         },
         "savedGames": {
@@ -128,7 +128,7 @@
         "letterPoints": "Harf Puanı"
     },
     "general": {
-        "multiplayer": "Çok Oyunculu",
+        "multiplayer": "Çok oyunculu",
         "lexica": "Lexica - Sözcük Oyunu",
         "back": "Geri",
         "foundWords": "Bulunan Sözcükler",

@@ -8,26 +8,38 @@
     },
     "newGameMode": {
       "timeLimit": {
-        "title": "מגבלת זמן"
+        "title": "מגבלת זמן",
+        "description": "הגבלת זמן בדקות"
       },
       "boardSize": "גודל הלוח",
       "scoreType": {
         "title": "סוג ניקוד",
         "wordLength": "$t(scoreDetails.wordLength)",
         "letterPoints": "$t(scoreDetails.letterPoints)"
+      },
+      "gameModeName": {
+        "hint": "שם",
+        "description": "לבחירת מצב משחק / תיעוד שיאני הניקוד"
       }
     },
     "lexicons": {
-      "title": "אוצר מלים",
+      "title": "$t(general.lexicon)",
       "isBeta": "בטא"
     },
     "preferences": {
       "title": "$t(general.preferences)",
       "language": "$t(general.language)",
-      "lexicon": "$t(general.lexicon)"
+      "lexicon": "$t(general.lexicon)",
+      "androidSettings": "$t(pages.androidIntegration.title)"
     },
     "languages": {
       "title": "$t(general.language)"
+    },
+    "multiplayer": {
+      "startGameHint": "כשכל השחקנים מוכנים, כולכם אמורים להתחיל את המשחק באותו הזמן.",
+      "startGame": "התחלת משחק",
+      "joinGameHint": "כשכל השחקנים מוכנים, להצטרף למשחק.",
+      "joinGame": "הצטרפות למשחק"
     }
   },
   "lexicaGameScreens": {
@@ -51,6 +63,8 @@
     "lexica": "Lexica",
     "foundWords": "מילים שנמצאו",
     "preferences": "העדפות",
-    "lexicon": "אוצר מלים"
+    "lexicon": "אוצר מלים",
+    "multiplayer": "ריבוי שחקנים",
+    "back": "חזרה"
   }
 }
