@@ -1,5 +1,6 @@
 import { useCallback, useContext } from 'react'
-import { Score as ScoreContext, GuessScore, LetterScore } from '../../../game/lexicle/score'
+import { Score as ScoreContext, } from '../../../game/lexicle/score'
+import type { GuessScore, LetterScore } from '../../../game/lexicle/score'
 import * as R from 'ramda'
 
 import './Score.css'

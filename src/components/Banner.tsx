@@ -1,7 +1,8 @@
-import { createContext, useMemo, useState, useEffect, useContext, MouseEvent } from 'react'
-import { ReactComponent as ArrowBack } from '@material-design-icons/svg/round/arrow_back.svg'
+import { createContext, useMemo, useState, useEffect, useContext } from 'react'
+import type { MouseEvent } from 'react'
+import ArrowBack from '@material-design-icons/svg/round/arrow_back.svg'
 
-import Svg, { SvgComponent } from './Svg'
+import Svg from './Svg'
 
 import './Banner.css'
 import { useLocation } from 'react-router'
@@ -13,7 +14,7 @@ import constants, { useConstants } from '../style/constants'
 import { useSafeNavigateBack } from '../util/url'
 import { makeClasses } from '../util/classes'
 import { Translations } from '../translations'
-import { TranslationsFn } from '../translations/types'
+import type { TranslationsFn } from '../translations/types'
 
 const getPageName = (path: string, translationsFn: TranslationsFn): string => {
   const segment = path.split('/').filter(s => s.length).pop()
@@ -67,7 +68,7 @@ export const RenderInBanner = createContext<RenderInBannerContext>({
 export type RenderableBadgeProps = {
   svgTitle: string,
   prompt?: string,
-  svg?: SvgComponent,
+  svg?: string,
   disabled?: boolean,
   onClick?: (e: MouseEvent<HTMLDivElement>) => void
 }

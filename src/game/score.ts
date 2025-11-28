@@ -1,5 +1,6 @@
 import * as R from 'ramda'
-import { createContext, Reducer, useCallback, useEffect, useReducer } from 'react'
+import { createContext, useCallback, useEffect, useReducer } from 'react'
+import type { Reducer } from 'react'
 import { logger } from '../util/logger'
 
 export type ScoreState = {
@@ -7,29 +8,35 @@ export type ScoreState = {
   remainingWords: string[]
 }
 
-export enum ScoreAction {
-  AddGuess = 'add-guess'
-}
+export const ScoreAction = {
+  AddGuess: 'add-guess'
+} as const
 
-export enum ScoreType {
-  Letters = 'l',
-  Length = 'w'
-}
+type ScoreActionType = typeof ScoreAction[keyof typeof ScoreAction]
 
-enum InternalScoreAction {
-  UpdateDictionary = 'update-dictionary'
-}
+export const ScoreType = {
+  Letters: 'l',
+  Length: 'w'
+} as const
 
-export type ScoreReducerAction<A extends ScoreAction> = {
+export type ScoreTypeType = typeof ScoreType[keyof typeof ScoreType]
+
+const InternalScoreAction = {
+  UpdateDictionary: 'update-dictionary'
+} as const
+
+type InternalScoreActionType = typeof InternalScoreAction[keyof typeof InternalScoreAction]
+
+export type ScoreReducerAction<A extends ScoreActionType> = {
   type: A,
-  info: A extends ScoreAction.AddGuess ? string : never
+  info: A extends (typeof ScoreAction)["AddGuess"] ? string : never
 }
 
-type InternalScoreReducerAction<A extends InternalScoreAction | ScoreAction> = {
+type InternalScoreReducerAction<A extends InternalScoreActionType | ScoreActionType> = {
   type: A,
-  info: A extends ScoreAction.AddGuess
+  info: A extends (typeof ScoreAction)["AddGuess"]
     ? string
-    : A extends InternalScoreAction.UpdateDictionary
+    : A extends (typeof InternalScoreAction)["UpdateDictionary"]
     ? string[]
     : never
 }
@@ -54,7 +61,7 @@ const handleUpdateDictionary = (state: ScoreState, dictionary: string[]): ScoreS
   }
 }
 
-const scoreReducer = <A extends ScoreAction | InternalScoreAction>(state: ScoreState, action: InternalScoreReducerAction<A>): ScoreState => {
+const scoreReducer = <A extends ScoreActionType | InternalScoreActionType>(state: ScoreState, action: InternalScoreReducerAction<A>): ScoreState => {
   switch (action.type) {
     case ScoreAction.AddGuess:
       return handleAddGuess(state, action.info as string)
@@ -69,7 +76,7 @@ export const useScore = (
   boardDictionaryState: { boardDictionary: string[] },
   { foundWords, remainingWords }: ScoreState = { foundWords: [], remainingWords: [] }
 ): [ScoreState, (guess: string) => void] => {
-  const [state, dispatch] = useReducer<Reducer<ScoreState, InternalScoreReducerAction<ScoreAction | InternalScoreAction>>>(scoreReducer, {
+  const [state, dispatch] = useReducer<Reducer<ScoreState, InternalScoreReducerAction<ScoreActionType | InternalScoreActionType>>>(scoreReducer, {
     foundWords,
     remainingWords
   })

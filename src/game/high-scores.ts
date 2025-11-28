@@ -1,13 +1,16 @@
 import { useContext, useEffect, useMemo, useReducer, useState } from 'react'
-import { LetterScores, LetterScoresContext, scoreWord } from '.'
+import { LetterScores, scoreWord } from '.'
+import type { LetterScoresContext } from '.'
 import { logger } from '../util/logger'
 import { storage, useStorage } from '../util/storage'
-import { findRulesetId, Rules, RulesContext, useRulesets } from './rules'
-import { Score, ScoreContext } from './score'
+import { findRulesetId, Rules, useRulesets } from './rules'
+import type { RulesContext } from './rules'
+import { Score } from './score'
+import type { ScoreContext } from './score'
 
-export enum LocalStorage {
-  HighScores = 'high-scores'
-}
+export const LocalStorage = {
+  HighScores: 'high-scores'
+} as const
 
 export type HighScores = { [key: string]: number }
 

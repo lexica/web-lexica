@@ -1,7 +1,9 @@
 import { useCallback, useContext, useMemo } from 'react'
 import { Translations } from '../translations'
 import { useAndroidInteropSettings, AndroidDetectBehavior } from '../util/android-interop'
-import RadioList, { RadioListOption } from '../components/RadioList'
+import type { AndroidDetectBehaviorType } from '../util/android-interop'
+import RadioList from '../components/RadioList'
+import type { RadioListOption } from '../components/RadioList'
 
 
 // const AndroidDetectSettings = (): JSX.Element => {
@@ -9,12 +11,14 @@ import RadioList, { RadioListOption } from '../components/RadioList'
 
 
 // }
-enum IntegrationOption {
-  AutoOpen = 'auto-open',
-  AutoDetect = AndroidDetectBehavior.AutoDetect,
-  ForceShow = AndroidDetectBehavior.ActAsAndroid,
-  ForceHide = AndroidDetectBehavior.ActAsNonAndroid,
-}
+const IntegrationOption = {
+  AutoOpen: 'auto-open',
+  AutoDetect: AndroidDetectBehavior.AutoDetect,
+  ForceShow: AndroidDetectBehavior.ActAsAndroid,
+  ForceHide: AndroidDetectBehavior.ActAsNonAndroid,
+} as const
+
+type IntegrationOptionType = typeof IntegrationOption[keyof typeof IntegrationOption]
 
 const AndroidIntegration = (): JSX.Element => {
   const { androidDetectBehavior, setAndroidDetectBehavior, autoAppRedirect, setAutoAppRedirect } = useAndroidInteropSettings()
@@ -51,10 +55,10 @@ const AndroidIntegration = (): JSX.Element => {
     }
   ], [autoOpenAppPrompt, autoOpenAppHint, autoDetectPrompt,autoDetectHint, forceHidePrompt, forceHideHint, forceShowPrompt, forceShowHint])
 
-  const selectedValue: IntegrationOption = autoAppRedirect ? IntegrationOption.AutoOpen : androidDetectBehavior as any
+  const selectedValue: IntegrationOptionType = autoAppRedirect ? IntegrationOption.AutoOpen : androidDetectBehavior as any
 
   const setSelectedValue = useCallback((value: string) => {
-    const enumVal: IntegrationOption = value as any
+    const enumVal: IntegrationOptionType = value as any
     switch (enumVal) {
     case IntegrationOption.AutoOpen:
       setAutoAppRedirect(true)
@@ -62,7 +66,7 @@ const AndroidIntegration = (): JSX.Element => {
       break
     default:
       setAutoAppRedirect(false)
-      setAndroidDetectBehavior(enumVal as any as AndroidDetectBehavior)
+      setAndroidDetectBehavior(enumVal as any as AndroidDetectBehaviorType)
       break
     }
   }, [setAutoAppRedirect, setAndroidDetectBehavior])

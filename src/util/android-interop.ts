@@ -1,22 +1,24 @@
 import { useCallback, useMemo } from 'react'
 
 import { storage, useStorage } from './storage'
-import { Ruleset } from '../game/rules/types'
+import type { Ruleset } from '../game/rules/types'
 import { getSearchString } from '../game/url'
 import { logger } from './logger'
 
 import * as R from 'ramda'
 
-export enum LocalStorage {
-  BehaviorSetting = 'android-interop-behavior',
-  AutoOpenApp = 'android-interop-auto-open-app',
-}
+export const LocalStorage = {
+  BehaviorSetting: 'android-interop-behavior',
+  AutoOpenApp: 'android-interop-auto-open-app',
+} as const
 
-export enum AndroidDetectBehavior {
-  AutoDetect = 'auto-detect',
-  ActAsAndroid = 'force-android',
-  ActAsNonAndroid = 'force-non-android'
-}
+export const AndroidDetectBehavior = {
+  AutoDetect: 'auto-detect',
+  ActAsAndroid: 'force-android',
+  ActAsNonAndroid: 'force-non-android'
+} as const
+
+export type AndroidDetectBehaviorType = typeof AndroidDetectBehavior[keyof typeof AndroidDetectBehavior]
 
 export const redirectToApp = ({ ruleset, board, language }: { language: string, ruleset: Ruleset, board: string[] }) => {
   if (language.length === 0) {
@@ -63,7 +65,7 @@ export const isAndroidClient = (): boolean => {
   return behavior === AndroidDetectBehavior.AutoDetect && /Android/i.test(navigator.userAgent)
 }
 
-const toADBEnum = (value: string): AndroidDetectBehavior => {
+const toADBEnum = (value: string): AndroidDetectBehaviorType => {
   const index = androidDetectBehaviors.indexOf(value as any)
   if (index < 0) {
     logger.warn(`Unknown android detection behavior: ${value}`)
@@ -76,7 +78,7 @@ export const useAndroidInteropSettings = () => {
   const androidDetectBehavior = useStorage(LocalStorage.BehaviorSetting, AndroidDetectBehavior.AutoDetect, toADBEnum)
   const autoAppRedirect = useStorage(LocalStorage.AutoOpenApp, false, v => v === 'true')
 
-  const setAndroidDetectBehavior = useCallback((behavior: AndroidDetectBehavior) => { storage.set(LocalStorage.BehaviorSetting, behavior) }, [])
+  const setAndroidDetectBehavior = useCallback((behavior: AndroidDetectBehaviorType) => { storage.set(LocalStorage.BehaviorSetting, behavior) }, [])
   const setAutoAppRedirect = useCallback((value: boolean) => { storage.set(LocalStorage.AutoOpenApp, value) }, [])
 
   return useMemo(() => ({

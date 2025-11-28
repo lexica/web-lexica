@@ -1,9 +1,9 @@
-import { ReactNode } from 'react'
-import Svg, { SvgComponent } from '../Svg'
+import type { ReactNode } from 'react'
+import Svg from '../Svg.tsx'
 
 export type DescriptionProps = {
   title: string,
-  svg: SvgComponent,
+  svg: string,
   children?: ReactNode
 }
 

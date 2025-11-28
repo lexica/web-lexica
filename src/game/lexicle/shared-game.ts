@@ -3,14 +3,16 @@ import { useLocation } from "react-router"
 import { parseURLSearch } from "../../util/url"
 import { getB64DelimitedURLBoard } from "../board/util"
 
-enum UrlParam {
-  Board = 'b',
-  WordIndex = 'w',
-  Language = 'l'
-}
+const UrlParam = {
+  Board: 'b',
+  WordIndex: 'w',
+  Language: 'l'
+} as const
+
+type UrlParamType = typeof UrlParam[keyof typeof UrlParam]
 
 type UrlParamMap = {
-  [P in UrlParam]: string
+  [P in UrlParamType]: string
 }
 
 export type GameConfig = {

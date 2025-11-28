@@ -1,15 +1,17 @@
 import { useCallback, useMemo, useRef } from 'react'
-import { ReactComponent as RadioButtonUnchecked } from '@material-design-icons/svg/round/radio_button_unchecked.svg'
-import { ReactComponent as RadioButtonChecked } from '@material-design-icons/svg/round/radio_button_checked.svg'
+import RadioButtonUnchecked from '@material-design-icons/svg/round/radio_button_unchecked.svg'
+import RadioButtonChecked from '@material-design-icons/svg/round/radio_button_checked.svg'
 
 import Svg from './Svg'
 import { useConstants } from '../style/constants'
 
-export enum RadioSize {
-  Subscript = 'subscript',
-  Normal = 'normal',
-  Title = 'title'
-}
+export const RadioSize = {
+  Subscript:'subscript',
+  Normal: 'normal',
+  Title: 'title'
+} as const
+
+export type RadioSizeType = typeof RadioSize[keyof typeof RadioSize]
 
 export type RadioProps<T extends string | number | readonly string[]> = {
   title: string,
@@ -20,7 +22,7 @@ export type RadioProps<T extends string | number | readonly string[]> = {
   className?: string
   onChange: (value: T) => void
   /** @default {RadioSize.Normal} */
-  size?: RadioSize
+  size?: RadioSizeType
 }
 
 function Radio<T extends string | number | readonly string[]>({

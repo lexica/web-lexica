@@ -158,10 +158,10 @@ const createImplementedLanguagesFile = incomingTranslationFolders => {
   )}`
 
   const enumeration = `${R.reduce(
-    (acc, { folder, description }) => `${acc}  ${description} = '${folder}',\n`,
-    'export enum ImplementedLanguage {\n',
+    (acc, { folder, description }) => `${acc}  ${description}: '${folder}',\n`,
+    'export const ImplementedLanguage = {\n',
     descriptions
-  )}}\n`
+  )}} as const\n`
 
   const mapping = `${R.reduce(
     (acc, { folder, description}) => `${acc}  [ImplementedLanguage.${description}]: ${kebabToSnakeCase(folder)},\n`,

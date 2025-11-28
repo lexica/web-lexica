@@ -1,5 +1,5 @@
-import { ChangeEvent, useCallback, useContext, useState } from 'react'
-import { ReactComponent as Schedule } from '@material-design-icons/svg/round/schedule.svg'
+import { type ChangeEvent, useCallback, useContext, useState } from 'react'
+import Schedule from '@material-design-icons/svg/round/schedule.svg'
 
 import Description from './Description'
 import { Translations } from '../../translations'

@@ -1,5 +1,5 @@
 import { useCallback, useContext, useState } from 'react'
-import { ReactComponent as DirectionsRun } from '@material-design-icons/svg/round/directions_run.svg'
+import DirectionsRun from '@material-design-icons/svg/round/directions_run.svg'
 
 import Description from './Description'
 import Radio from '../Radio'

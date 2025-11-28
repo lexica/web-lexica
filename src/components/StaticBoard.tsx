@@ -1,5 +1,5 @@
 import * as R from 'ramda'
-import { Board, Coordinates, Letter, Row } from '../game/board/types'
+import type { Board, Coordinates, Letter, Row } from '../game/board/types'
 
 import './StaticBoard.css'
 

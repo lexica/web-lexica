@@ -1,16 +1,15 @@
 import { createContext, useEffect, useMemo, useState } from 'react'
 
 import { getWordsOnBoard } from './util'
-import { ToWorkerMessage } from './types'
+import type { ToWorkerMessage } from './types'
 
 import { getBoard } from '../board/util'
-import { LanguageState } from '../language'
+import type { LanguageState } from '../language'
 
 import { logger } from '../../util/logger'
 import { promisifyWorker } from '../../util/web-worker'
 
-// eslint-disable-next-line import/no-webpack-loader-syntax
-import Worker from 'worker-loader!./dictionary.worker.ts'
+import Worker from './dictionary.worker.ts?worker'
 
 const worker = window.Worker ? new Worker() : undefined
 

@@ -3,7 +3,7 @@ import { useContext, useEffect, useMemo, useReducer, useState } from 'react'
 import { logger } from '../../util/logger'
 import { Dictionary } from '../dictionary'
 import { Guess } from '../guess'
-import { Score, ScoreState } from './score'
+import { Score, type ScoreState } from './score'
 
 const getHintType = ({ desiredWord, usedLetters }: ScoreState, letter: string) => {
   const letterInclusions = letter.split('').map(l => usedLetters.includes(l))

@@ -2,7 +2,8 @@ import { createContext, useEffect, useMemo, useState } from 'react'
 import { normalize } from 'duration-fns'
 import * as R from 'ramda'
 
-import { DefaultRulesets, LocalStorage, RulesContext, Rulesets } from './types'
+import { DefaultRulesets, LocalStorage } from './types.ts'
+import type { RulesContext, Rulesets } from './types.ts'
 import { defaultRulesets, getRuleset } from './util'
 
 import { useGameUrlParameters } from '../url'

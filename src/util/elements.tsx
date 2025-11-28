@@ -1,4 +1,4 @@
-import { WithChildren } from "./types";
+import type { WithChildren } from "./types";
 
 export const MaybeRender = ({
     maybeRender = false,

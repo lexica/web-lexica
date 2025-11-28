@@ -1,8 +1,8 @@
 import { useCallback, useContext, useState } from 'react'
-import { ReactComponent as EmojiEvents } from '@material-design-icons/svg/round/emoji_events.svg'
+import EmojiEvents from '@material-design-icons/svg/round/emoji_events.svg'
 
 import { getClass } from './util'
-import { ScoreType } from '../../game/score'
+import { ScoreType, type ScoreTypeType } from '../../game/score'
 
 import Description from './Description'
 import Radio from '../Radio'
@@ -12,10 +12,10 @@ const {
   optionClass
 } = getClass
 
-const isScoreType = (type: any): type is ScoreType => [ScoreType.Letters, ScoreType.Length].includes(type)
+const isScoreType = (type: any): type is ScoreTypeType => [ScoreType.Letters, ScoreType.Length].includes(type)
 
-const ScoringType = ({ handleScoreUpdate, scoreTypes }: { handleScoreUpdate: (type: ScoreType) => void, scoreTypes: ScoreType[] }): JSX.Element => {
-  const [scoreType, setScoreType] = useState<ScoreType>('' as any)
+const ScoringType = ({ handleScoreUpdate, scoreTypes }: { handleScoreUpdate: (type: ScoreTypeType) => void, scoreTypes: ScoreTypeType[] }): JSX.Element => {
+  const [scoreType, setScoreType] = useState<ScoreTypeType>('' as any)
   const { translationsFn } = useContext(Translations)
   const title = translationsFn('pages.newGameMode.scoreType.title')
 

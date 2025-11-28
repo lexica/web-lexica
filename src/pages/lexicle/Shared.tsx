@@ -1,4 +1,4 @@
-import { ReactNode, useEffect , useCallback, useContext, useMemo, useState } from 'react'
+import { type ReactNode, useEffect , useCallback, useContext, useMemo, useState } from 'react'
 import { ConfirmationEffect } from '../../components/game/Board/hooks'
 import { Board } from '../../game/board/hooks'
 import { getB64DelimitedURLBoard } from '../../game/board/util'

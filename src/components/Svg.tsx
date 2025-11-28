@@ -1,7 +1,5 @@
-import { CSSProperties } from "react"
+import type { CSSProperties } from "react"
 import constants, { useConstants } from "../style/constants"
-
-export type SvgComponent = React.FunctionComponent<React.SVGProps<SVGSVGElement> & { title?: string }>
 
 export type SvgProps = {
   title: string,
@@ -11,7 +9,7 @@ export type SvgProps = {
 }
 
 export type CustomizableProps = {
-  svg: SvgComponent,
+  svg: string,
   props: {
     title: string,
     width?: number | string,
@@ -25,7 +23,6 @@ const Customizable = ({ svg, props, style }: CustomizableProps): JSX.Element => 
   // The typescript types are wrong for this component.
   // the svgs imported by webpack are not (at least in development) functional components
   // but rather of type react.forward_ref
-  const render: (props: SvgProps) => JSX.Element = (svg as  any).render || svg
   const { fontSize } = useConstants()
   const defaults: Omit<SvgProps, 'title'> = {
     width: fontSize,
@@ -33,12 +30,23 @@ const Customizable = ({ svg, props, style }: CustomizableProps): JSX.Element => 
     fill: constants.colorContentDark
   }
 
-  const withOverrides = { ...defaults, ...props, style }
-  return <>{render(withOverrides)}</>
+  const withOverrides: SvgProps = { ...defaults, ...props }
+  return <div
+    className="svg-div"
+    style={{
+      ...style,
+      width: withOverrides.width,
+      height: withOverrides.height,
+      backgroundColor: withOverrides.fill,
+      mask: `url("${svg}") no-repeat`,
+      maskSize: "cover"
+    }}
+    aria-label={props.title || ""}
+  />
 }
 
 export type StandardProps = {
-  svg: SvgComponent,
+  svg: string,
   title: string
 }
 

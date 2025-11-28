@@ -1,15 +1,15 @@
 import { useCallback, useState, useMemo, useContext } from 'react'
-import { ReactComponent as Save } from '@material-design-icons/svg/round/save.svg'
+import Save from '@material-design-icons/svg/round/save.svg'
 
 import Name from '../components/new-game-mode/Name'
 import TimeLimit from '../components/new-game-mode/TimeLimit'
 import ScoringType from '../components/new-game-mode/ScoringType'
 
-import { ScoreType } from '../game/score'
+import { ScoreType, type ScoreTypeType } from '../game/score'
 import { logger } from '../util/logger'
 import { useBannerBadge } from '../components/Banner'
 import { addRuleset, setCurrentRuleset } from '../game/rules'
-import { Duration } from 'duration-fns'
+import { type Duration } from 'duration-fns'
 import { useNavigate } from 'react-router-dom'
 import BoardSize from '../components/new-game-mode/BoardSize'
 import MinimumWordLength from '../components/new-game-mode/MinimumWordLength'
@@ -33,7 +33,7 @@ const NewGameMode = (): JSX.Element => {
   const [name, setName] = useState('')
   const [timeLimit, setTimeLimit] = useState(0)
   const [boardSize, setBoardSize] = useState(0)
-  const [scoreType, setScoreType] = useState<ScoreType>('invalid' as any)
+  const [scoreType, setScoreType] = useState<ScoreTypeType>('invalid' as any)
   const [minimumWordLength, setMinimumWordLength] = useState(0)
 
   const { translationsFn } = useContext(Translations)

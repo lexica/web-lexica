@@ -1,6 +1,6 @@
 import * as R from "ramda"
 import { deepCopyBoard, visitNeighbors, boardReduce } from "../board/util"
-import { Board, Coordinates } from "../board/types"
+import type { Board, Coordinates } from "../board/types"
 
 
 const visitNeighborsCallback = (remainingWords: string[], lettersSoFar: string, board: Board) =>

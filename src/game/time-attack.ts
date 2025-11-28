@@ -2,9 +2,10 @@ import { useEffect, useRef } from 'react'
 import { normalize } from 'duration-fns'
 
 import { scoreWord } from '.'
-import { Ruleset } from './rules'
-import { ScoreContext, ScoreType } from './score'
-import { TimerContext } from './timer'
+import type { Ruleset } from './rules'
+import { ScoreType } from './score'
+import type { ScoreContext } from './score'
+import type { TimerContext } from './timer'
 import { logger } from '../util/logger'
 
 export const useTimeAttack = (rules: Ruleset, timer: TimerContext, score: ScoreContext) => {

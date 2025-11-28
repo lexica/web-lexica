@@ -1,23 +1,27 @@
-import { MouseEventHandler } from 'react'
+import type { MouseEventHandler } from 'react'
 import { makeClasses } from '../util/classes'
-import Svg, { SvgComponent } from './Svg'
+import Svg from './Svg.tsx'
 import { Link } from 'react-router-dom'
-import { WithChildren } from '../util/types'
+import type { WithChildren } from '../util/types'
 import constants, { useConstants } from '../style/constants'
 
 import './Button.css'
 
-export enum ButtonThemeType {
-  Standard = 'standard',
-  AltStandard = 'alternative-standard',
-  Emphasis = 'emphasis'
-}
+export const ButtonThemeType = {
+  Standard: 'standard',
+  AltStandard: 'alternative-standard',
+  Emphasis: 'emphasis'
+} as const
 
-export enum ButtonFontSizing {
-  Normal = 'normal',
-  Title = 'title',
-  Subscript = 'subscript'
-}
+type ButtonThemeTypeType = typeof ButtonThemeType[keyof typeof ButtonThemeType]
+
+export const ButtonFontSizing = {
+  Normal: 'normal',
+  Title: 'title',
+  Subscript: 'subscript'
+} as const
+
+type ButtonFontSizingType = typeof ButtonFontSizing[keyof typeof ButtonFontSizing]
 
 export type ButtonProps = {
   /** @default {false} */
@@ -27,20 +31,20 @@ export type ButtonProps = {
   /** @default {true} */
   roundedEdges?: boolean,
   /** @default {ButtonThemeType.Standard} */
-  themeType?: ButtonThemeType,
-  svg?: SvgComponent,
+  themeType?: ButtonThemeTypeType,
+  svg?: string,
   /** @default prompt is used */
   svgTitle?: string,
   prompt: string,
   /** @default {ButtonFontSizing.Normal} */
-  fontSizing?: ButtonFontSizing
+  fontSizing?: ButtonFontSizingType
   /** @default {true} */
   nowrap?: boolean
   /** @default {false} */
   svgToSide?: boolean
 }
 
-const contentColors: { [P in ButtonThemeType]: { enabled: string, disabled: string } } = {
+const contentColors: { [P in ButtonThemeTypeType]: { enabled: string, disabled: string } } = {
   [ButtonThemeType.Emphasis]: { enabled: constants.colorBackgroundLight, disabled: constants.colorContentLowContrastDark },
   [ButtonThemeType.Standard]: { enabled: constants.colorContentDark, disabled: constants.colorContentLowContrastDark },
   [ButtonThemeType.AltStandard]: { enabled: constants.colorContentDark, disabled: constants.colorContentLowContrastDark }

@@ -1,4 +1,4 @@
-import { ReactComponent as GridView } from '@material-design-icons/svg/round/grid_view.svg'
+import GridView from '@material-design-icons/svg/round/grid_view.svg'
 
 import { getClass } from './util'
 

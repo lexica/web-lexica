@@ -4,9 +4,9 @@ import { useCallback, useContext, useMemo } from 'react'
 import { storage, useStorage } from './storage'
 import { Translations } from '../translations'
 
-export enum LocalStorage {
-    Language = 'i18nextLng'
-}
+export const LocalStorage = {
+    Language: 'i18nextLng'
+} as const
 
 export const getLanguageChoices = (): Promise<{ [languageCode: string]: string }> => {
     return axios.get('/web-lexica/available-locales.json').then(({ data }) => data)

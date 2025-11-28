@@ -1,20 +1,23 @@
-import { createContext, Dispatch, Reducer, useEffect, useReducer, useState } from 'react'
+import { createContext, useEffect, useReducer, useState } from 'react'
+import type { Dispatch, Reducer } from 'react'
 import { logger } from '../util/logger'
 import { deepCopyBoard, getBoard, getPossibleTravelDirections, getUnvisitedBoard } from './board/util'
-import { Board, Coordinates } from './board/types'
+import type { Board, Coordinates } from './board/types'
 
-export enum GuessAction {
-  EnterLetter = 'enter-letter',
-  BeginGuess = 'begin-guess',
-  EndGuess = 'end-guess',
-  __UpdateBoard = 'updateBoard'
-}
+export const GuessAction = {
+  EnterLetter: 'enter-letter',
+  BeginGuess: 'begin-guess',
+  EndGuess: 'end-guess',
+  __UpdateBoard: 'updateBoard'
+} as const
 
-export type GuessActionType<A extends GuessAction> = {
+type GuessActionEnumType = typeof GuessAction[keyof typeof GuessAction]
+
+export type GuessActionType<A extends GuessActionEnumType> = {
   type: A
-  info: A extends GuessAction.EnterLetter
+  info: A extends (typeof GuessAction)["EnterLetter"]
     ? Coordinates
-    : A extends GuessAction.__UpdateBoard
+    : A extends (typeof GuessAction)["__UpdateBoard"]
     ? Board
     : never
 }
@@ -127,7 +130,7 @@ const handleUpdateBoard = (state: GuessState, board: Board): GuessState => ({
   board: deepCopyBoard(board)
 })
 
-export const guessReducer = <A extends GuessAction>(state: GuessState, action: GuessActionType<A>) => {
+export const guessReducer = <A extends GuessActionEnumType>(state: GuessState, action: GuessActionType<A>) => {
   // logger.debug(`Guess reducer called... action type: ${action.type}`)
   switch (action.type) {
     case GuessAction.__UpdateBoard:
@@ -143,7 +146,7 @@ export const guessReducer = <A extends GuessAction>(state: GuessState, action: G
   }
 }
 
-type GuessReducer = Reducer<GuessState, GuessActionType<GuessAction>>
+type GuessReducer = Reducer<GuessState, GuessActionType<GuessActionEnumType>>
 
 export const useGuesses = (board: string[], preexistingGuesses: string[] = []) => {
   const [stateBoard] = useState(getBoard(board))
@@ -177,6 +180,6 @@ export const Guess = createContext<GuessContext>({
   isGuessing: false
 })
 
-export type GuessDispatchContext = Dispatch<GuessActionType<GuessAction>>
+export type GuessDispatchContext = Dispatch<GuessActionType<GuessActionEnumType>>
 
 export const GuessDispatch = createContext<GuessDispatchContext>(() => {})

@@ -8,7 +8,7 @@ import { Timer, TimerContext } from '../game/timer'
 import { getBoard } from '../game/board/util'
 import { logger } from '../util/logger'
 import { LetterScores, LetterScoresContext } from '../game'
-import { WithChildren } from '../util/types'
+import type { WithChildren } from '../util/types'
 
 type DeepPartial<T> = {
   [P in keyof T]?: T[P] extends (infer X)[] ? X[] : DeepPartial<T[P]>

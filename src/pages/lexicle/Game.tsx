@@ -1,4 +1,4 @@
-import { ReactNode, useCallback, useMemo, useState } from 'react'
+import { type ReactNode, useCallback, useMemo, useState } from 'react'
 import Board from '../../components/game/Board'
 import Results from '../../components/game/lexicle/Results'
 import Score from '../../components/game/lexicle/Score'

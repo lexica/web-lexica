@@ -1,11 +1,13 @@
-import { WithChildren } from '../util/types'
+import type { WithChildren } from '../util/types'
 import './Theme.css'
 
-export enum Themes {
-  Light = 'light',
-  Dark = 'dark'
-}
+export const Themes = {
+  Light: 'light',
+  Dark: 'dark'
+} as const
 
-const Theme = ({ theme, children }: WithChildren<{ theme: Themes }>) => <div className={`${theme} defaults`}>{children}</div>
+export type ThemesType = typeof Themes[keyof typeof Themes]
+
+const Theme = ({ theme, children }: WithChildren<{ theme: ThemesType }>) => <div className={`${theme} defaults`}>{children}</div>
 
 export default Theme

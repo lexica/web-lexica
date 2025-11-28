@@ -3,7 +3,7 @@ import { logger } from "../../util/logger"
 import { isValidGamePath, useGamePath } from "../../util/url"
 import { Score } from "../score"
 import { useSaveBoard, useSaveGameRuleset, useSaveGuesses, useSaveLanguageMetadata, useSaveScore, useSaveTime } from "./sub-hoooks"
-import { SavedGame, UseSaveGameState } from "./types"
+import type { SavedGame, UseSaveGameState } from "./types"
 import { addGameToSavedGames, clearSaveGameData, loadGame, removeGameFromSavedGames } from "./util"
 
 export { useSavedGames } from './sub-hoooks'

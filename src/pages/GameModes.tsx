@@ -1,7 +1,8 @@
 import { useCallback, useContext } from 'react'
-import { ReactComponent as Add } from '@material-design-icons/svg/round/add.svg'
+import Add from '@material-design-icons/svg/round/add.svg'
 
-import { Ruleset, Rulesets, setCurrentRuleset, useRulesets, useRulesFromStorage } from '../game/rules'
+import { setCurrentRuleset, useRulesets, useRulesFromStorage } from '../game/rules'
+import type { Ruleset, Rulesets } from '../game/rules'
 import GameModeDetails from '../components/GameModeDetails'
 import constants, { useConstants } from "../style/constants"
 import { makeClasses } from '../util/classes'

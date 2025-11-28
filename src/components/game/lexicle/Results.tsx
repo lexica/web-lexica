@@ -1,6 +1,7 @@
 import { useCallback, useContext, useState, useMemo } from 'react'
 import { Guess } from '../../../game/guess'
 import { LetterCorrectness, Score as ScoreContext } from '../../../game/lexicle/score'
+import type { LetterCorrectnessType } from '../../../game/lexicle/score'
 
 import StaticBoard from '../../StaticBoard'
 import Score from './Score'
@@ -18,16 +19,18 @@ import { makeClasses } from '../../../util/classes'
 import { getBaseUrl } from '../../../util/url'
 import { Translations } from '../../../translations'
 
-const correctnessMap: { [C in LetterCorrectness]: string } = {
+const correctnessMap: { [C in LetterCorrectnessType]: string } = {
   [LetterCorrectness.Perfect]: '🟩',
   [LetterCorrectness.InWord]: '🟨',
   [LetterCorrectness.NotInWord]: '⬛'
 }
 
-enum ShareType {
-  Score = 'Score',
-  Link = 'Game Link'
-}
+const ShareType = {
+  Score: 'Score',
+  Link: 'Game Link'
+} as const
+
+type ShareTypeType = typeof ShareType[keyof typeof ShareType]
 
 const withPrefix = <T extends string>(suffix: T): `lexicleGameScreens.results.${T}` => `lexicleGameScreens.results.${suffix}`
 
@@ -87,7 +90,7 @@ const Share = ({ wordOfTheDay }: { wordOfTheDay: boolean }): JSX.Element => {
     shareLinkClicked: false,
     shareScoreClicked: false
   })
-  const [action, setAction] = useState(ShareType.Score)
+  const [action, setAction] = useState<ShareTypeType>(ShareType.Score)
   const scoreSummary = useScoreSummary(wordOfTheDay)
 
   const onClickShareScore = useCallback(() => {

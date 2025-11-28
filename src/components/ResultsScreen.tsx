@@ -1,6 +1,6 @@
 import { useCallback, useContext, useMemo, useState } from 'react'
-import { ReactComponent as CheckCircle } from '@material-design-icons/svg/round/check_circle.svg'
-import { ReactComponent as HighlightOff } from '@material-design-icons/svg/round/highlight_off.svg'
+import CheckCircle from '@material-design-icons/svg/round/check_circle.svg'
+import HighlightOff from '@material-design-icons/svg/round/highlight_off.svg'
 
 import { LetterScores, orderByWordScore } from "../game"
 import ScoredWordList from './game/ScoredWordList'
@@ -13,15 +13,17 @@ import Button, { ButtonThemeType } from './Button'
 import './ResultsScreen.css'
 import { Translations } from '../translations'
 
-enum Lists {
-  FoundWords = 'found',
-  MissedWords = 'missed'
-}
+const Lists = {
+  FoundWords:'found',
+  MissedWords: 'missed'
+} as const
+
+type ListsType = typeof Lists[keyof typeof Lists]
 
 type ListSelectorProps = {
-  listName: Lists,
-  displayedList: Lists,
-  updateDisplayedList: (list: Lists) => void,
+  listName: ListsType,
+  displayedList: ListsType,
+  updateDisplayedList: (list: ListsType) => void,
 }
 
 const ListSelector = ({
@@ -49,7 +51,7 @@ const Results: React.FC = () => {
   const { translationsFn } = useContext(Translations)
   const letterScores = useContext(LetterScores)
 
-  const [displayedList, updateDisplayedList] = useState(Lists.FoundWords)
+  const [displayedList, updateDisplayedList] = useState<ListsType>(Lists.FoundWords)
   const { score: scoreType } = useContext(Rules)
   const orderedFoundWords = useMemo(() => orderByWordScore(foundWords, scoreType, letterScores), [foundWords, scoreType, letterScores])
   const orderedMissedWords = useMemo(() => orderByWordScore(remainingWords, scoreType, letterScores), [remainingWords, scoreType, letterScores])

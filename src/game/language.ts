@@ -23,9 +23,11 @@ export type LanguageState = {
   dictionary: string[]
 }
 
-export enum LocalStorage {
-  LanguageCode = 'game-language'
-}
+export const LocalStorage = {
+  LanguageCode: 'game-language'
+} as const
+
+export type LocalStorageType = typeof LocalStorage[keyof typeof LocalStorage]
 
 const getAvailableLanguages = () => axios.get<string[]>(
   `${getBaseUrl()}/lexica/api/v1/languages.json`
