@@ -25,5 +25,5 @@
     "noUncheckedSideEffectImports": true
   },
   "include": ["src"],
-  "exclude": ["**/__spec__/**/*"]
+  "exclude": ["**/*.test.*", "**/*.spec.*", "src/setupTests.ts"]
 }

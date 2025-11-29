@@ -1,11 +1,11 @@
-name: Run a test build
+name: Run tests and build
 
 on:
   pull_request:
     branches: [ master ]
 
 jobs:
-  run-build:
+  run-tests-and-build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -15,6 +15,9 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-      
+
+      - name: Run tests
+        run: npm test
+
       - name: Make test build
         run: npm run build

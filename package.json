@@ -34,9 +34,8 @@
   "scripts": {
     "start": "vite",
     "build": "node ./translations/build-available-locale-codes.js && tsc -b && vite build",
-    "test": "echo NOT IMPLEMENTED && exit 1"
+    "test": "vitest run"
   },
-  "proxy": "https://lexica.github.io",
   "homepage": "https://lexica.github.io/web-lexica",
   "eslintConfig": {
     "extends": [
@@ -67,11 +66,16 @@
     ]
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.0",
+    "@testing-library/user-event": "^14.6.1",
     "@types/ramda": "~0.29.2",
     "@types/react-router": "~5.1.20",
     "@types/react-router-dom": "^5.3.3",
     "commander": "~10.0.1",
     "fast-xml-parser": "~4.2.4",
-    "language-tags": "~1.0.8"
+    "jsdom": "^27.2.0",
+    "language-tags": "~1.0.8",
+    "vitest": "^4.0.14"
   }
 }
