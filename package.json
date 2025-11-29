@@ -33,7 +33,7 @@
   },
   "scripts": {
     "start": "vite",
-    "build": "node ./translations/build-available-locale-codes.js && tsc -b && vite build",
+    "build": "node ./translations/build-available-locale-codes.js && tsc -b && vite build --base=/web-lexica/",
     "test": "vitest run"
   },
   "homepage": "https://lexica.github.io/web-lexica",
