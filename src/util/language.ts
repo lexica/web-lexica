@@ -12,6 +12,7 @@ export const getLanguageChoices = (): Promise<{ [languageCode: string]: string }
     return axios.get('/web-lexica/available-locales.json').then(({ data }) => data)
 }
 
+// @ts-ignore
 export const saveLanguageChoice = (choice: string) => {
 }
 

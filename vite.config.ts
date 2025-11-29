@@ -8,5 +8,8 @@ export default defineConfig({
     proxy: {
         "/lexica/api": "https://lexica.github.io"
     }
+  },
+  build: {
+    outDir: "build"
   }
 })

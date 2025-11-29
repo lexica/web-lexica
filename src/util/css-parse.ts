@@ -25,7 +25,7 @@ const argToString = (arg: any, expression: string) => {
   const isUnit = RegExp(`^(${units.join('|')})\\b`)
   if (R.isNil(arg)) return isUnit.test(expression) ? '0' : ''
 
-  return arg.toString()
+  return (arg as Number).toString()
 }
 
 const makeExpression = (strings: TemplateStringsArray, ...args: any[]) => {
@@ -50,7 +50,7 @@ export const useCssExp = (expression: TemplateStringsArray, ...args: any[]) => {
   const { size: { width, height } } = useElementSize(ElementIdentifier.Type, 'body')
 
   useEffect(() => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    // @ts-ignore eslint-disable-next-line @typescript-eslint/no-unused-vars
     const _ = [width, height]
 
     setResult(cssExp(expression, ...args))

@@ -20,7 +20,6 @@ const getMultiplierName = (multiplier: number) => {
 const TimeAttack = ({
   handleTimeAttackUpdate,
   timeAttackMultipliers,
-  selectedMultiplier
 }: TimeAttackProps): JSX.Element => {
   const [multiplier, setMultiplier] = useState(0)
   const { translationsFn } = useContext(Translations)

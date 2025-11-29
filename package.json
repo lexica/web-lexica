@@ -26,7 +26,7 @@
     "react-dom": "~18.2.0",
     "react-i18next": "~12.3.1",
     "react-router-dom": "~6.12.1",
-    "typescript": "~5.1.3",
+    "typescript": "~5.9.3",
     "typescript-eslint": "^8.48.0",
     "uuid": "~9.0.0",
     "vite": "^7.2.4"
@@ -34,9 +34,7 @@
   "scripts": {
     "start": "vite",
     "build": "node ./translations/build-available-locale-codes.js && tsc -b && vite build",
-    "test": "echo NOT IMPLEMENTED && exit 1",
-    "storybook": "start-storybook -p 6006 -s public",
-    "build-storybook": "build-storybook -s public"
+    "test": "echo NOT IMPLEMENTED && exit 1"
   },
   "proxy": "https://lexica.github.io",
   "homepage": "https://lexica.github.io/web-lexica",

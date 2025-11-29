@@ -9,7 +9,7 @@ export type VisibilityStateType = typeof VisibilityState[keyof typeof Visibility
 
 const getVisibilityState = () => document.visibilityState === 'hidden' ? VisibilityState.Hidden : VisibilityState.Visible
 
-export const usePageVisibility = (coerceToVisibleOrHidden: boolean = true): VisibilityStateType => {
+export const usePageVisibility = (): VisibilityStateType => {
     const [visibilityState, setVisibilityState] = useState<VisibilityStateType>(getVisibilityState())
 
     useEffect(() => {

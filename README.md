@@ -105,8 +105,6 @@ This project uses `create-react-app` and, after running `yarn` at the project's 
 
 For production-ready builds, `yarn build` can be run.
 
-The project also uses [`Storybook`](https://storybook.js.org) for individual `React` component tweaking and documentation. The `Storybook` stories have been neglected lately and may or may not have up-to-date settings and documentation. `Storybook` can be started by running `yarn storybook`
-
 The app uses `lexica.github.io`'s language API in order to load dictionaries and other language metadata.
 
 For offline development, you can use the `populate-mock-api.sh` script to populate the `mock-api` folder with a local copy of `Lexica`'s api retreieved from `lexica.github.io`. you will then need to host that folder (`npx serve ./mock-api` for example) and, unfortunately, change the `proxy` field in `package.json` to point to your static server.
