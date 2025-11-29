@@ -1,11 +1,11 @@
-const R = require('ramda')
-const { program, Option } = require('commander')
-const { readdirSync, existsSync, mkdirSync, writeFileSync } = require('fs')
-const translationMaps = require('./android-and-web-translation-mappings')
-const pathUtil = require('path')
-const { folderHasTranslations, getAndroidTranslationsFromFolder } = require('./android-translations')
-const { mapTranslationsFromAndroidToWeb } = require('./map-translations')
-const typeHints = require('./make-ts-type-helper')
+import * as R from 'ramda'
+import { program, Option } from 'commander'
+import { readdirSync, existsSync, mkdirSync, writeFileSync } from 'node:fs'
+import * as translationMaps from './android-and-web-translation-mappings.js'
+import pathUtil from 'node:path'
+import { folderHasTranslations, getAndroidTranslationsFromFolder } from './android-translations.js'
+import { mapTranslationsFromAndroidToWeb } from './map-translations.js'
+import * as typeHints from './make-ts-type-helper.js'
 
 const {
   languageTitlesFromAndroidToWeb,
@@ -25,7 +25,7 @@ const writeToFile = (path, content) => {
   writeFileSync(path, JSON.stringify(content, null, 2), { encoding: 'utf-8' })
 }
 
-const handleMergeTranslations = (args, options) => {
+const handleMergeTranslations = async (args, options) => {
   /** @type {{ androidTranslationsDir: string, webTranslationsDir: string, clobber: boolean, print: boolean, tee: boolean }} */
   const {
     androidTranslationsDir,
@@ -88,9 +88,9 @@ const handleMergeTranslations = (args, options) => {
     }
   }
 
-  const getExistingTranslationFile = pathToTranslationFile => {
+  const getExistingTranslationFile = async pathToTranslationFile => {
     const absPath = pathUtil.resolve(pathToTranslationFile)
-    return existsSync(absPath) ? require(absPath) : {}
+    return existsSync(absPath) ? (await import(absPath, { with: { type: "json" } })).default : {}
   }
 
   if (update && enableWrite) {
@@ -101,7 +101,7 @@ const handleMergeTranslations = (args, options) => {
       const mergeAndUpdate = (existing, update) => R.mergeDeepWith((_existingVal, updateVal) => updateVal, existing, update)
       if (translations) {
         const path = `${translationsDir}/translations.json`
-        const existingTranslations = getExistingTranslationFile(path)
+        const existingTranslations = await getExistingTranslationFile(path)
         const merged = mergeAndUpdate(existingTranslations, translations)
         writeToFile(path, merged)
       }
@@ -141,7 +141,7 @@ const handleMergeTranslations = (args, options) => {
   }
 }
 
-const handleGenerateTypeHints = (options) => {
+const handleGenerateTypeHints = async (options) => {
   /** @type {{ sourceFileTranslations: string, sourceFileLanguageTitles: string, outFile: string }} */
   const {
     sourceFileTranslations,
@@ -153,13 +153,15 @@ const handleGenerateTypeHints = (options) => {
   const languageTitlesFile = pathUtil.resolve(sourceFileLanguageTitles)
   const destinationFile = pathUtil.resolve(outFile)
 
+  const translationsRaw = await import(translationsFile, { with: { type: "json" } })
   const translationsPart = typeHints.makeTsFileFromTypeHintsObject(
-    typeHints.getTypeHintsObject(require(translationsFile)),
+    typeHints.getTypeHintsObject(translationsRaw.default),
     'Translations',
     true
   )
+  const languageTitlesRaw = await import(languageTitlesFile, { with: { type: "json" } })
   const languageTitlesPart = typeHints.makeTsFileFromTypeHintsObject(
-    typeHints.getTypeHintsObject(require(languageTitlesFile)),
+    typeHints.getTypeHintsObject(languageTitlesRaw.default),
     'LanguageTitles',
     false
   )
@@ -190,7 +192,7 @@ const main = () => {
   program.parse(process.argv)
 }
 
-if (require.main === module) main()
+if (import.meta.main) main()
 
 
 

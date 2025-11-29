@@ -16,7 +16,7 @@ const stripBrackets = s => s.replace(/{{([^}]*)}}/, '$1')
  * @param {any} fullTranslations 
  * @returns {{ [key: string]: any }}
  */
-const getTypeHintsObject = fullTranslations => {
+export const getTypeHintsObject = fullTranslations => {
   const getPath = (path, key) => path ? `${path}.${key}` : key
   const getReducer = (obj, pathSoFar = '') => (acc, key) => {
     const path = getPath(pathSoFar, key)
@@ -48,7 +48,7 @@ const getTypeHintsObject = fullTranslations => {
   return Object.keys(fullTranslations).reduce(reducer, {})
 }
 
-const makeTsFileFromTypeHintsObject = (typeHintsObject, name, includeImports = true) => {
+export const makeTsFileFromTypeHintsObject = (typeHintsObject, name, includeImports = true) => {
   const interpolationType = 'string | number'
   const helperType = `${name}Keys`
   const renderedHelperType = Object.keys(typeHintsObject).reduce((acc, key) => {
@@ -79,9 +79,4 @@ export type ${funcType} = {
   const imports = includeImports ? `import { TOptionsBase } from 'i18next'\n` : ''
 
   return [imports, renderedHelperType, renderedTranslationFunctionType].join('\n')
-}
-
-module.exports = {
-  getTypeHintsObject,
-  makeTsFileFromTypeHintsObject
 }
