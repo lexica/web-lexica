@@ -1,7 +1,7 @@
 import { useCallback, useContext } from 'react'
 
 import {
-  MetadataV1,
+  type MetadataV1,
   setLanguageInLocalStorage,
   useLanguageCodeFromLocalStorage,
   useMultipleLanguageMetadata

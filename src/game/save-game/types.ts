@@ -1,8 +1,8 @@
-import { GuessContext } from "../guess"
-import { LanguageContext, MetadataV1 } from "../language"
-import { RulesContext, Ruleset } from "../rules"
-import { ScoreContext, ScoreState } from "../score"
-import { TimerContext } from "../timer"
+import type { GuessContext } from "../guess"
+import type { LanguageContext, MetadataV1 } from "../language"
+import type { RulesContext, Ruleset } from "../rules"
+import type { ScoreContext, ScoreState } from "../score"
+import type { TimerContext } from "../timer"
 
 
 export type UseSaveGameOnBlurArguments = {
@@ -15,18 +15,20 @@ export type UseSaveGameOnBlurArguments = {
   url: string
 }
 
-export enum LocalStorage {
-  SavedGames  = 'saved-games'
-}
+export const LocalStorage = {
+  SavedGames : 'saved-games'
+} as const
 
-export enum GameLocalStorage {
-  Score = 'score',
-  Timer = 'timer',
-  Guesses = 'guesses',
-  Board = 'board',
-  Rules = 'rules',
-  Language = 'language'
-}
+export const GameLocalStorage = {
+  Score: 'score',
+  Timer: 'timer',
+  Guesses: 'guesses',
+  Board: 'board',
+  Rules: 'rules',
+  Language: 'language'
+} as const
+
+export type GameLocalStorageType = typeof GameLocalStorage[keyof typeof GameLocalStorage]
 
 export const gameLocalStorage = [
   GameLocalStorage.Score,

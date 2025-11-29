@@ -1,4 +1,4 @@
-import { Ruleset } from '../../game/rules'
+import type { Ruleset } from '../../game/rules'
 import { getSearchString } from '../../game/url'
 import constants from '../../style/constants'
 import { useCssExp } from '../../util/css-parse'
@@ -6,12 +6,14 @@ import { ScreenOrientation, useOrientation } from '../../util/hooks'
 import { getBaseUrl } from '../../util/url'
 import QrCode from '../QrCode'
 
-export enum Platform {
-  Android = 'android',
-  Web = 'web'
-}
+export const Platform = {
+  Android: 'android',
+  Web: 'web'
+} as const
 
-const getMultiplayerUrl = (platform: Platform) => {
+export type PlatformType = typeof Platform[keyof typeof Platform]
+
+const getMultiplayerUrl = (platform: PlatformType) => {
   switch (platform) {
     case Platform.Android:
       return `${getBaseUrl()}/m/`
@@ -21,7 +23,7 @@ const getMultiplayerUrl = (platform: Platform) => {
 }
 
 export type ShareGameQrCodeProps = {
-  platform: Platform
+  platform: PlatformType
   rules: Ruleset
   board: string[]
   language: string

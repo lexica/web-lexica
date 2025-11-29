@@ -1,6 +1,6 @@
-const { readFileSync, existsSync } = require('fs')
-const { XMLParser } = require('fast-xml-parser')
-const R = require('ramda')
+import { readFileSync, existsSync } from 'fs'
+import { XMLParser } from 'fast-xml-parser'
+import * as R from 'ramda'
 
 const xmlParser = new XMLParser({ ignoreAttributes: false, attributeNamePrefix: '' })
 
@@ -36,7 +36,7 @@ const parseXml = file => xmlParser.parse(file, {
 
 
 /** @type {(folderPath: string) => boolean} */
-const folderHasTranslations = folderPath => {
+export const folderHasTranslations = folderPath => {
   const file = readTranslationXML(folderPath)
   if (R.isNil(file)) return false
 
@@ -95,12 +95,9 @@ const deriveAndroidTranslationsFromXML = originalXML => {
   }
 }
 
-module.exports = {
-  /** @type {(folderPath: string) => AndroidTranslation} */
-  getAndroidTranslationsFromFolder: R.pipe(
-    readTranslationXML,
-    parseXml,
-    deriveAndroidTranslationsFromXML
-  ),
-  folderHasTranslations
-}
+/** @type {(folderPath: string) => AndroidTranslation} */
+export const getAndroidTranslationsFromFolder = R.pipe(
+  readTranslationXML,
+  parseXml,
+  deriveAndroidTranslationsFromXML
+)

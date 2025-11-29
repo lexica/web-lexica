@@ -1,7 +1,8 @@
 import * as R from 'ramda'
 import { createContext, useEffect, useMemo, useReducer, useState } from 'react'
 
-import { MetadataV1, getLanguageMetadata } from '../language'
+import { getLanguageMetadata } from '../language.ts'
+import type { MetadataV1 } from '../language.ts'
 import { useGameUrlParameters } from '../url'
 import { splitWordIntoLetters } from '../words'
 

@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react"
 
-export enum VisibilityState {
-    Visible = 'visible',
-    Hidden = 'hidden'
-}
+export const VisibilityState = {
+    Visible: 'visible',
+    Hidden: 'hidden'
+} as const
+
+export type VisibilityStateType = typeof VisibilityState[keyof typeof VisibilityState]
 
 const getVisibilityState = () => document.visibilityState === 'hidden' ? VisibilityState.Hidden : VisibilityState.Visible
 
-export const usePageVisibility = (coerceToVisibleOrHidden: boolean = true): VisibilityState => {
-    const [visibilityState, setVisibilityState] = useState<VisibilityState>(getVisibilityState())
+export const usePageVisibility = (): VisibilityStateType => {
+    const [visibilityState, setVisibilityState] = useState<VisibilityStateType>(getVisibilityState())
 
     useEffect(() => {
         const eventHandler = () => setVisibilityState(getVisibilityState())

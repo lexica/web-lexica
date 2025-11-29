@@ -1,6 +1,6 @@
 import { useCallback, useContext, useState } from 'react'
 import { Translations } from '../../translations'
-import { OnChangeEvent } from './types'
+import type { OnChangeEvent } from './types'
 
 const Name = ({ handleNameUpdate }: { handleNameUpdate: (name: string) => void}) => {
   const [rawName, setRawName] = useState('')

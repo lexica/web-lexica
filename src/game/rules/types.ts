@@ -1,10 +1,10 @@
-import { Duration } from 'duration-fns'
-import { ScoreType } from '../score'
+import type { Duration } from 'duration-fns'
+import type { ScoreTypeType } from '../score'
 
 export type RulesContext = {
   minimumWordLength: number,
   time: Duration,
-  score: ScoreType,
+  score: ScoreTypeType,
   boardWidth: number,
   name: string
   timeAttack?: number
@@ -15,18 +15,22 @@ export type Ruleset = RulesContext & { name: string, boardWidth: number }
 export type Rulesets = {
   [key: string]: Ruleset
 } & {
-  [P in DefaultRulesets]: Ruleset
+  [P in DefaultRulesetsType]: Ruleset
 }
 
-export enum LocalStorage {
-  CurrentRulesetId = 'current-rule-set',
-  Rulesets = 'rulesets',
-  DefaultRulesets = 'default-rulesets'
-}
+export const LocalStorage = {
+  CurrentRulesetId: 'current-rule-set',
+  Rulesets: 'rulesets',
+  DefaultRulesets: 'default-rulesets'
+} as const
 
-export enum DefaultRulesets {
-  Sprint = 'sprint',
-  Marathon = 'marathon',
-  LetterPoints = 'letter-points',
-  TimeAttack = 'time-attack'
-}
+export type LocalStorageType = typeof LocalStorage[keyof typeof LocalStorage]
+
+export const DefaultRulesets = {
+  Sprint: 'sprint',
+  Marathon: 'marathon',
+  LetterPoints: 'letter-points',
+  TimeAttack: 'time-attack'
+} as const
+
+export type DefaultRulesetsType = typeof DefaultRulesets[keyof typeof DefaultRulesets]

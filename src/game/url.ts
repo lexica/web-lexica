@@ -1,21 +1,24 @@
-import { Duration, toSeconds } from 'duration-fns'
+import { toSeconds } from 'duration-fns'
+import type { Duration } from 'duration-fns'
 import { useMemo } from 'react'
 import { useLocation } from 'react-router'
 import { utf8ToB64 } from '../util/base-64'
 import { HighestSupportedMinimumVersion } from '../util/compatibility-android'
 import { parseURLSearch } from '../util/url'
-import { ScoreType } from './score'
+import type { ScoreTypeType } from './score'
 
-export enum GameParamMap {
-  Board = 'b',
-  Language = 'l',
-  Time = 't',
-  Score = 's',
-  MinimumWordLength = 'm',
-  MinimumVersion = 'mv',
-  Version = 'v',
-  TimeAttack = 'ta'
-}
+export const GameParamMap = {
+  Board: 'b',
+  Language: 'l',
+  Time: 't',
+  Score: 's',
+  MinimumWordLength: 'm',
+  MinimumVersion: 'mv',
+  Version: 'v',
+  TimeAttack: 'ta'
+} as const
+
+export type GameParamMapType = typeof GameParamMap[keyof typeof GameParamMap]
 
 export const encodeBoard = (board: string[]): string => {
   const stringified = board.join(',')
@@ -27,7 +30,7 @@ export type GetSearchStringArgs = {
   board: string[],
   language: string,
   time: Duration,
-  score: ScoreType,
+  score: ScoreTypeType,
   minimumWordLength: number
   timeAttack?: number
 }
@@ -62,7 +65,7 @@ export type GameURLParams = {
   b: string,
   l: string,
   t: string,
-  s: ScoreType,
+  s: ScoreTypeType,
   m: string,
   mv: string,
   v: string,

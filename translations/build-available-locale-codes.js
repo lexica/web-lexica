@@ -4,7 +4,7 @@
  * Is called with `yarn build`
  */
 
-const fs = require('fs')
+import fs from 'fs'
 
 /** @type {(rawCode: string) => string} */
 const toCode = rawCode => rawCode.replace(/_/g, '-')
@@ -13,7 +13,7 @@ const main = () => {
     /** @type {string[]} */
     const rawCodes = fs.readdirSync('./public/locales', { encoding: 'utf-8' })
 
-    availableLanguages = rawCodes.reduce((acc, rawCode) => {
+    const availableLanguages = rawCodes.reduce((acc, rawCode) => {
         const langCode = toCode(rawCode)
         return {
             ...acc,
@@ -26,6 +26,6 @@ const main = () => {
 
 
 
-if (require.main == module) {
+if (import.meta.main) {
     main()
 }

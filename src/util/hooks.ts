@@ -1,14 +1,17 @@
-import { Reducer, useCallback, useEffect, useMemo, useReducer, useState } from 'react'
+import { useCallback, useEffect, useMemo, useReducer, useState } from 'react'
+import type { Reducer } from 'react'
 
 import { logger } from './logger'
 
-export enum ElementIdentifier {
-  Class = 'class',
-  Id = 'id',
-  Type = 'type'
-}
+export const ElementIdentifier = {
+  Class: 'class',
+  Id: 'id',
+  Type: 'type'
+} as const
 
-const getElementBasedOnIdentifier = (type: ElementIdentifier, identifier: string) => {
+type ElementIdentifierType = typeof ElementIdentifier[keyof typeof ElementIdentifier]
+
+const getElementBasedOnIdentifier = (type: ElementIdentifierType, identifier: string) => {
   switch (type) {
     case ElementIdentifier.Class:
       return document.getElementsByClassName(identifier)[0]
@@ -32,7 +35,7 @@ export type ElementSizeInfo = {
   }
 }
 
-export const useElementSize = (identifierType: ElementIdentifier, identifier: string) => {
+export const useElementSize = (identifierType: ElementIdentifierType, identifier: string) => {
   const { elementName, elementNameType } = useMemo(
     () => ({ elementName: identifier, elementNameType: identifierType }),
     [identifier, identifierType]
@@ -92,17 +95,19 @@ export const useScreenSize = () => {
   return size
 }
 
-export enum ScreenOrientation {
-  Landscape = 'landscape',
-  Portrait = 'portrait'
-}
+export const ScreenOrientation = {
+  Landscape: 'landscape',
+  Portrait: 'portrait'
+} as const
+
+export type ScreenOrientationType = typeof ScreenOrientation[keyof typeof ScreenOrientation]
 
 type OrientationAction = { width: number, height: number }
 
 export const useOrientation = () => {
   const { size } = useElementSize(ElementIdentifier.Type, 'body')
 
-  const [orientation, setOrientation] = useReducer<Reducer<ScreenOrientation, OrientationAction>>(
+  const [orientation, setOrientation] = useReducer<Reducer<ScreenOrientationType, OrientationAction>>(
     ((state, { width, height}) => {
       const newOrientation = height >= width
         ? ScreenOrientation.Portrait

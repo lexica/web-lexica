@@ -4,7 +4,7 @@ import { LetterScores, scoreWord } from '../../game'
 import { Score as ScoreContext} from '../../game/score'
 import { Rules } from '../../game/rules'
 import './Score.css'
-import { secondsBetweenDates, Timer, TimerContext } from '../../game/timer'
+import { secondsBetweenDates, Timer, type TimerContext } from '../../game/timer'
 import { Translations } from '../../translations'
 
 const getTime = (timeInSeconds: number) => {
@@ -45,7 +45,7 @@ const Score: React.FC<{
     const { remainingTime } = state
     const interval = setInterval((() => setRemainingTime(getRemainingTime(remainingTime, state))), 400)
 
-    return () => interval && clearInterval(interval)
+    return () => { interval && clearInterval(interval) }
   }, [state, setRemainingTime, state.remainingTime])
 
   useEffect(() => {

@@ -1,15 +1,16 @@
-import { ReactComponent as Timer } from '@material-design-icons/svg/round/timer.svg'
-import { ReactComponent as GridView } from '@material-design-icons/svg/round/grid_view.svg'
-import { ReactComponent as DirectionsRun } from '@material-design-icons/svg/round/directions_run.svg'
-import { ReactComponent as EmojiEvents } from '@material-design-icons/svg/round/emoji_events.svg'
-import { ReactComponent as Sort } from '@material-design-icons/svg/round/sort.svg'
+import Timer from '@material-design-icons/svg/round/timer.svg'
+import GridView from '@material-design-icons/svg/round/grid_view.svg'
+import DirectionsRun from '@material-design-icons/svg/round/directions_run.svg'
+import EmojiEvents from '@material-design-icons/svg/round/emoji_events.svg'
+import Sort from '@material-design-icons/svg/round/sort.svg'
 import { toMinutes } from 'duration-fns'
-import { TranslationsFn } from '../translations/types'
+import type { TranslationsFn } from '../translations/types'
 import { Translations } from '../translations'
 
-import Svg, { SvgComponent } from './Svg'
+import Svg from './Svg'
 import { useContext } from 'react'
-import { Rules, Ruleset } from '../game/rules'
+import { Rules } from '../game/rules'
+import type { Ruleset } from '../game/rules'
 
 import './GameModeDetails.css'
 
@@ -49,7 +50,7 @@ const GameModeDetails = ({
 
   const getOverrides = (title: string) => ({ ...overrides, title })
 
-  const getSvg = (svg: SvgComponent, title: string) => <Svg.Customizable svg={svg} props={getOverrides(title)}/>
+  const getSvg = (svg: string, title: string) => <Svg.Customizable svg={svg} props={getOverrides(title)}/>
 
   return <div style={size !== undefined ? { fontSize: size } : {}} className="game-mode-details-container">
       <div className="game-mode-details-info">

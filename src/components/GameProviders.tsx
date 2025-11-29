@@ -3,16 +3,16 @@ import { useContext, useEffect, useMemo } from 'react'
 
 import { LetterScores } from '../game'
 import { BoardContext, BoardRefresh, useBoardFromUrl, useGeneratedBoard } from '../game/board'
-import { Dictionary, DictionaryState, useBoardDictionary } from '../game/dictionary'
+import { Dictionary, type DictionaryState, useBoardDictionary } from '../game/dictionary'
 import { Guess, GuessDispatch, useGuesses } from '../game/guess'
-import { Language, LanguageState, useLanguage, useLanguageFromLocalStorage } from '../game/language'
+import { Language, type LanguageState, useLanguage, useLanguageFromLocalStorage } from '../game/language'
 import { Rules, useRulesFromQueryString, useRulesFromStorage } from '../game/rules'
 import { GameLocalStorage, useResumedGame } from '../game/save-game'
 import { Score, useScore } from '../game/score'
 import { Timer, useTimer } from '../game/timer'
 import { useGameUrlParameters } from '../game/url'
 import { sort } from '../util'
-import { WithChildren } from '../util/types'
+import type { WithChildren } from '../util/types'
 
 
 const CommonNewAndShareGameProviders = ({ children }: WithChildren) => {

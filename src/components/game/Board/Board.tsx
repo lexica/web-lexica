@@ -4,13 +4,15 @@ import * as R from 'ramda'
 import './Board.css'
 import { ConfirmationEffect } from './hooks'
 
-import { getPointOnGridInfo, GetPointOnGridInfoArguments } from '../../../util/touch'
+import { getPointOnGridInfo, } from '../../../util/touch'
+import type { GetPointOnGridInfoArguments } from '../../../util/touch'
 import { getLetterScore, LetterScores,  } from '../../../game'
 import { Rules } from '../../../game/rules'
 import { ScoreType } from '../../../game/score'
-import { Guess, GuessAction, GuessActionType, GuessDispatch } from '../../../game/guess'
+import { Guess, GuessAction, GuessDispatch } from '../../../game/guess'
+import type { GuessActionType } from '../../../game/guess'
 import { makeClasses } from '../../../util/classes'
-import { WithChildren } from '../../../util/types'
+import type { WithChildren } from '../../../util/types'
 
 type LetterProps = {
   row: number,
@@ -73,8 +75,8 @@ export const Board: React.FC = () => {
 
   const handleClick = (clicked: boolean) => {
     clicked
-      ? dispatch({ type: GuessAction.BeginGuess } as GuessActionType<GuessAction.BeginGuess>)
-      : dispatch({ type: GuessAction.EndGuess } as GuessActionType<GuessAction.EndGuess>)
+      ? dispatch({ type: GuessAction.BeginGuess } as GuessActionType<typeof GuessAction["BeginGuess"]>)
+      : dispatch({ type: GuessAction.EndGuess } as GuessActionType<typeof GuessAction["EndGuess"]>)
   }
 
   const boardWidth = board.width

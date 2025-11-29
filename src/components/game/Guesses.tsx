@@ -32,13 +32,15 @@ const getGuessInfo = (guess: string, guesses: string[], dictionary: string[], in
   return { isFirstGuess, isInDictionary }
 }
 
-export enum GuessOrientation {
-  Vertical = 'vertical',
-  Horizontal = 'horizontal'
-}
+export const GuessOrientation = {
+  Vertical: 'vertical',
+  Horizontal: 'horizontal'
+} as const
+
+export type GuessOrientationType = typeof GuessOrientation[keyof typeof GuessOrientation]
 
 export type GuessesProps = {
- orientation: GuessOrientation
+ orientation: GuessOrientationType
 }
 
 const Guesses: React.FC<GuessesProps> = ({ orientation }) => {

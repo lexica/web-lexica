@@ -1,5 +1,4 @@
-const R = require('ramda')
-const { logger } = require('@storybook/node-logger')
+import * as R from 'ramda'
 /** @typedef {(val: string) => string} TransformerFn */
 
 /** @type {TransformerFn} */
@@ -7,7 +6,7 @@ const countTransformer = str => str.replace(/%(\d\$)?d/, '{{count}}')
 
 class Reference { constructor(ref) { this.ref = ref } toString() { return `$t(${this.ref})` } }
 
-const translationsFromWebToAndroid = {
+export const translationsFromWebToAndroid = {
   pages: {
     home: {
       headlineTitle: new Reference('general.lexica'),
@@ -203,7 +202,7 @@ const translationsFromWebToAndroid = {
       }
   }
 }
-const languageTitlesFromWebToAndroid = {
+export const languageTitlesFromWebToAndroid = {
   ca: { tag: 'string', name: 'pref_dict_ca' },
   de_DE: { tag: 'string', name: 'pref_dict_de_DE' },
   de_DE_no_diacritics: { tag: 'string', name: 'pref_dict_de_DE_no_diacritics' },
@@ -231,7 +230,7 @@ const getCurrentPath = (path, key) =>  path ? `${path}.${key}` : key
 const mergeNestedMappings = (map1, map2) => {
   return R.mergeDeepWithKey((key, item1, item2) => {
     if (key === '$references') return [...item1, ...item2]
-    logger.warn(`had an unexpected key collision while merging nested translation mappings. key: ${key}`)
+    console.warn(`had an unexpected key collision while merging nested translation mappings. key: ${key}`)
   }, map1, map2)
 }
 
@@ -305,11 +304,9 @@ const flipMap = obj => {
 /** @typedef {{ referenceTo: string, path: string }} ReferenceEntry */
 /** @typedef {{ [key: string]: StringTag | PluralTag } & { '$references'?: ReferenceEntry[] }} AndroidToWebMap */
 
-module.exports = {
-  translationsFromWebToAndroid,
-  languageTitlesFromWebToAndroid,
-  /** @type {AndroidToWebMap} */
-  translationsFromAndroidToWeb: flipMap(translationsFromWebToAndroid),
-  /** @type {AndroidToWebMap} */
-  languageTitlesFromAndroidToWeb: flipMap(languageTitlesFromWebToAndroid)
-}
+/** @type {AndroidToWebMap} */
+export const translationsFromAndroidToWeb = flipMap(translationsFromWebToAndroid)
+
+/** @type {AndroidToWebMap} */
+export const languageTitlesFromAndroidToWeb = flipMap(languageTitlesFromWebToAndroid)
+

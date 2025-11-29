@@ -1,9 +1,9 @@
-import {ReactComponent as Calendar } from '@material-design-icons/svg/round/calendar_today.svg'
-import {ReactComponent as Shuffle } from '@material-design-icons/svg/round/shuffle.svg'
+import Calendar from '@material-design-icons/svg/round/calendar_today.svg'
+import Shuffle from '@material-design-icons/svg/round/shuffle.svg'
 import { useCallback, useContext, useMemo } from 'react'
 import { Route, Routes } from 'react-router-dom'
-import { ReactComponent as Unchecked } from '@material-design-icons/svg/round/check_box_outline_blank.svg'
-import { ReactComponent as Checked } from '@material-design-icons/svg/round/check_box.svg'
+import Unchecked from '@material-design-icons/svg/round/check_box_outline_blank.svg'
+import Checked from '@material-design-icons/svg/round/check_box.svg'
 import Button, { ButtonFontSizing } from '../components/Button'
 import MainTitle from '../components/MainTitle'
 import Random from './lexicle/Random'
@@ -15,7 +15,7 @@ import { storage, useStorage } from '../util/storage'
 import './Lexicle.css'
 import { Translations } from '../translations'
 
-enum LocalStorage { UseWordleWords = 'use-wordle-words' }
+const LocalStorage = { UseWordleWords: 'use-wordle-words' } as const
 
 const toggleUseWordleWords = (initialValue: boolean) => {
     const storedValue = storage.get<boolean>({ key: LocalStorage.UseWordleWords })

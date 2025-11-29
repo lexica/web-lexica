@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useState } from "react"
 import { useLocation, useNavigate } from "react-router"
 import { getB64DelimitedURLBoard } from "../game/board/util"
-import { GameParamMap, GameURLParams } from "../game/url"
+import { GameParamMap } from "../game/url"
+import type { GameURLParams } from "../game/url"
 
 export const parseURLSearch = <T = any>(search: string): T => {
   const keyValuePairs = search.replace('?', '').split('&')

@@ -1,4 +1,4 @@
-import { ToWorkerMessage } from './types'
+import type { ToWorkerMessage } from './types'
 import { getWordsOnBoard } from './util'
 
 onmessage = (e: MessageEvent<ToWorkerMessage>) => {

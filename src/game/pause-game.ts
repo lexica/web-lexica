@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { usePageVisibility, VisibilityState } from "../util/page-visibility-api"
-import { TimerContext } from "./timer"
+import type { TimerContext } from "./timer"
 
 export const usePauseGameOnHidden = (timer: TimerContext) => {
   const [isPaused, setIsPaused] = useState(false)

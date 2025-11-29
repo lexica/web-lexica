@@ -1,12 +1,15 @@
-import { Duration, toSeconds } from 'duration-fns'
+import { toSeconds } from 'duration-fns'
+import type { Duration } from 'duration-fns'
 import * as R from 'ramda'
 import { v4 as uuid } from 'uuid'
 
-import { DefaultRulesets, LocalStorage, Ruleset, Rulesets } from './types'
+import { DefaultRulesets, LocalStorage, } from './types'
+import type { DefaultRulesetsType } from './types'
+import type { Ruleset, Rulesets } from './types'
 import { ScoreType } from '../score'
 import { GameStorage } from '../../util/storage'
 
-export const defaultRulesets: { [P in DefaultRulesets]: Ruleset } = {
+export const defaultRulesets: { [P in DefaultRulesetsType]: Ruleset } = {
   [DefaultRulesets.Sprint]: {
     name: 'Sprint',
     time: { minutes: 3 } as Duration,

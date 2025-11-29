@@ -1,13 +1,15 @@
 import axios from 'axios'
-import { ReactNode, useContext, useMemo } from 'react'
-import { WithChildren } from '../../util/types'
-import { Language, MetadataV1, useLanguageFromLocalStorage } from '../../game/language'
+import { type ReactNode, useContext, useMemo } from 'react'
+import type { WithChildren } from '../../util/types'
+import { Language, type MetadataV1, useLanguageFromLocalStorage } from '../../game/language'
 import { ValidAnswers } from '../../game/lexicle/score'
 import { usePromiseWithMetadata } from '../../util/hooks'
 
-const getMetadata = () => axios.get<MetadataV1>('/web-lexica/api/wordle-en-US/metadata.json').then(({ data }) => data)
-const getValidWords = () => axios.get<string[]>('/web-lexica/api/wordle-en-US/valid-words.json').then(({ data }) => data)
-const getAnswers = () => axios.get<string[]>('/web-lexica/api/wordle-en-US/dictionary.json').then(({ data }) => data)
+const baseUrl = ["localhost", "127.0.0.1"].includes(window.location.hostname) ? "" : "/web-lexica"
+
+const getMetadata = () => axios.get<MetadataV1>(`${baseUrl}/api/wordle-en-US/metadata.json`).then(({ data }) => data)
+const getValidWords = () => axios.get<string[]>(`${baseUrl}/api/wordle-en-US/valid-words.json`).then(({ data }) => data)
+const getAnswers = () => axios.get<string[]>(`${baseUrl}/api/wordle-en-US/dictionary.json`).then(({ data }) => data)
 
 const Loading = () => <div>Loading...</div>
 

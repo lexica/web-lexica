@@ -10,11 +10,13 @@ import { Language } from "../language"
 import { Rules } from "../rules"
 import { Score } from "../score"
 import { Timer } from "../timer"
-import { encodeBoard, GameParamMap, GameURLParams } from "../url"
+import { encodeBoard, GameParamMap } from "../url"
+import type { GameURLParams } from "../url"
 import { GameLocalStorage, LocalStorage } from "./types"
+import type { GameLocalStorageType } from "./types"
 import { getGameLocalStorageKey } from "./util"
 
-const useLocalStorageKey = (storageKey: GameLocalStorage) => getGameLocalStorageKey(useGamePath(), storageKey)
+const useLocalStorageKey = (storageKey: GameLocalStorageType) => getGameLocalStorageKey(useGamePath(), storageKey)
 
 export const useSavedGames = () => {
   const memoizedDefault = useMemo<string[]>(() => [], [])

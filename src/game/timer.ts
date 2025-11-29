@@ -1,7 +1,7 @@
-import { Duration, sum, toSeconds, normalize } from 'duration-fns'
+import { sum, toSeconds, normalize } from 'duration-fns'
+import type { Duration } from 'duration-fns'
 import React, {
   createContext,
-  Reducer,
   useCallback,
   useEffect,
   useMemo,
@@ -9,6 +9,7 @@ import React, {
   useRef,
   useState
 } from 'react'
+import type  { Reducer } from 'react'
 import { logger } from '../util/logger'
 
 type TimerState = {
@@ -17,15 +18,17 @@ type TimerState = {
   startTime: Date,
 }
 
-enum TimerAction {
-  Pause = 'pause',
-  Resume = 'resume',
-  AddTime = 'add-time',
-  Reset = 'reset',
-}
+const TimerAction = {
+  Pause: 'pause',
+  Resume: 'resume',
+  AddTime: 'add-time',
+  Reset: 'reset',
+} as const
+
+type TimerActionType = typeof TimerAction[keyof typeof TimerAction]
 
 type TimerReducerAction = {
-  type: TimerAction,
+  type: TimerActionType,
   info: Date | Duration
 }
 
@@ -98,7 +101,7 @@ export type UseTimer = {
   state: TimerState
 }
 
-const getIntervalCallback = (state: TimerState, intervalRef: React.MutableRefObject<NodeJS.Timeout | undefined>, timeEndCallbacks: (() => void)[]) => {
+const getIntervalCallback = (state: TimerState, intervalRef: React.MutableRefObject<number | undefined>, timeEndCallbacks: (() => void)[]) => {
   // const id = uuid()
   return () => {
     if (state.isPaused) {
@@ -153,7 +156,7 @@ export const useTimer = (totalTimeInSeconds: number): UseTimer => {
 
   const getRemainingTime = useCallback(() => state.remainingTime - secondsBetweenDates(state.startTime, new Date()), [state])
 
-  const intervalRef = useRef<NodeJS.Timeout | undefined>(undefined)
+  const intervalRef = useRef<number | undefined>(undefined)
   const remainingTimeRef = useRef(totalTimeInSeconds)
 
   useEffect(() => {
@@ -187,7 +190,7 @@ export const useTimer = (totalTimeInSeconds: number): UseTimer => {
     }
 
     // interval cleanup
-    return () => intervalRef.current && clearInterval(intervalRef.current)
+    return () => { intervalRef.current && clearInterval(intervalRef.current) }
   }, [intervalRef, state, callbacks])
 
   return useMemo(

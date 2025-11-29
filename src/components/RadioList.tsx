@@ -3,7 +3,7 @@ import { v4 as uuid } from 'uuid'
 
 import { makeClasses } from '../util/classes'
 import { useStaticValue } from '../util/hooks'
-import Radio, { RadioSize } from './Radio'
+import Radio, { RadioSize, type RadioSizeType } from './Radio'
 
 import './RadioList.css'
 import { MaybeRender } from '../util/elements'
@@ -62,7 +62,7 @@ type RadioItemProps<T extends StrNumStrArr, RLP extends RadioListProps<T> = Radi
   selected: T,
   renderOnSelected: RLP['renderOnSelected'],
   group: Exclude<RLP['group'], undefined>,
-  size: RadioSize
+  size: RadioSizeType
 }
 
 function RadioItem<T extends StrNumStrArr>(props: RadioItemProps<T>): JSX.Element {

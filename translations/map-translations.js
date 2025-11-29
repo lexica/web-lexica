@@ -1,5 +1,5 @@
-const R = require('ramda')
-const { mergeObjects } = require('./util')
+import * as R from 'ramda'
+import { mergeObjects } from './util.js'
 
 /** @type {(path: string) => { pathSegments: string[], key: string }} */
 const getPathAndKey = path => {
@@ -40,7 +40,7 @@ const makeReferences = references => references.reduce((acc, { path, referenceTo
  * @param {import('./android-and-web-translation-mappings').AndroidToWebMap} translationMap 
  * @param {import('./android-translations').AndroidTranslation} androidTranslation 
  */
-const mapTranslationsFromAndroidToWeb = (translationMap, androidTranslation) => {
+export const mapTranslationsFromAndroidToWeb = (translationMap, androidTranslation) => {
   const androidKeys = Object.keys(androidTranslation)
   const mappingKeys = Object.keys(translationMap)
   const commonKeys = mappingKeys.filter(k => androidKeys.includes(k))
@@ -84,7 +84,3 @@ const mapTranslationsFromAndroidToWeb = (translationMap, androidTranslation) => 
 // const getTranslations = () => genericGetTranslations(translationsFromAndroidToWeb)
 
 // const getLanguageTitles = () => genericGetTranslations(languageTitlesFromAndroidToWeb)
-
-module.exports = {
-  mapTranslationsFromAndroidToWeb
-}

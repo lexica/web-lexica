@@ -1,12 +1,14 @@
 import { createContext, useCallback, useEffect, useMemo, useState } from 'react'
 
-export enum LetterCorrectness {
-  Perfect = 'perfect',
-  InWord = 'in-word',
-  NotInWord = 'not-in-word'
-}
+export const LetterCorrectness = {
+  Perfect: 'perfect',
+  InWord: 'in-word',
+  NotInWord: 'not-in-word'
+} as const
 
-export type LetterScore = { letter: string, correctness: LetterCorrectness }
+export type LetterCorrectnessType = typeof LetterCorrectness[keyof typeof LetterCorrectness]
+
+export type LetterScore = { letter: string, correctness: LetterCorrectnessType }
 
 export type GuessScore = {
     word: string,

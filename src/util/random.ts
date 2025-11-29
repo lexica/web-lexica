@@ -1,7 +1,7 @@
 /* eslint-disable no-mixed-operators */
 
 import * as R from "ramda";
-import { Function as Func } from 'ts-toolbelt'
+import type { Function as Func } from 'ts-toolbelt'
 
 
 // source: https://stackoverflow.com/questions/521295/seeding-the-random-number-generator-in-javascript

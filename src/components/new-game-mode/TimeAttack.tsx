@@ -1,5 +1,5 @@
 import { useCallback, useContext, useState } from 'react'
-import { ReactComponent as DirectionsRun } from '@material-design-icons/svg/round/directions_run.svg'
+import DirectionsRun from '@material-design-icons/svg/round/directions_run.svg'
 
 import Description from './Description'
 import Radio from '../Radio'
@@ -20,7 +20,6 @@ const getMultiplierName = (multiplier: number) => {
 const TimeAttack = ({
   handleTimeAttackUpdate,
   timeAttackMultipliers,
-  selectedMultiplier
 }: TimeAttackProps): JSX.Element => {
   const [multiplier, setMultiplier] = useState(0)
   const { translationsFn } = useContext(Translations)

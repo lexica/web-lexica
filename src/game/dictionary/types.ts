@@ -1,4 +1,4 @@
-import { Board } from '../board/types'
+import type { Board } from '../board/types'
 
 export type ToWorkerMessage = {
   board: Board,

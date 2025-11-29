@@ -4,21 +4,23 @@ import { Score } from '../../../game/score'
 import { Guess } from '../../../game/guess'
 import { logger } from '../../../util/logger'
 
-enum ConfirmationType {
-  Correct = 'correct',
-  Stale = 'stale',
-  Incorrect = 'incorrect'
+const ConfirmationFeedback = {
+  Correct: 'correct',
+  Stale: 'stale',
+  Incorrect: 'incorrect'
 }
 
-const getConfirmationType = (lastGuess: string, { foundWords, remainingWords }: { foundWords: string[], remainingWords: string[] }, guesses: string[]) => {
+type ConfirmationFeedbackType = typeof ConfirmationFeedback[keyof typeof ConfirmationFeedback]
+
+const getConfirmationType = (lastGuess: string, { foundWords, remainingWords }: { foundWords: string[], remainingWords: string[] }, guesses: string[]): ConfirmationFeedbackType => {
   const lastFoundWord = foundWords[foundWords.length -1]
   logger.debug({ lastGuess, lastFoundWord })
   const isCorrectGuess = lastGuess === lastFoundWord || remainingWords.includes(lastGuess)
   if (isCorrectGuess && guesses.indexOf(lastGuess) === guesses.length -1)
-    return ConfirmationType.Correct
+    return ConfirmationFeedback.Correct
 
-  if (foundWords.includes(lastGuess)) return ConfirmationType.Stale
-  return ConfirmationType.Incorrect
+  if (foundWords.includes(lastGuess)) return ConfirmationFeedback.Stale
+  return ConfirmationFeedback.Incorrect
 }
 
 export const noConfirmationEffect = (_: boolean, __: string) => {

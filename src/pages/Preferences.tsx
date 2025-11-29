@@ -1,14 +1,13 @@
 import { useContext } from 'react'
-import { ReactComponent as Language } from '@material-design-icons/svg/round/language.svg'
-import { ReactComponent as Gamepad } from '@material-design-icons/svg/round/gamepad.svg'
-import { ReactComponent as Android } from '@material-design-icons/svg/round/android.svg'
-import { SvgComponent } from '../components/Svg'
+import Language from '@material-design-icons/svg/round/language.svg'
+import Gamepad from '@material-design-icons/svg/round/gamepad.svg'
+import Android from '@material-design-icons/svg/round/android.svg'
 
 import Button, { ButtonFontSizing } from '../components/Button'
 import './Preferences.css'
 import { Translations } from '../translations'
 
-const PrefButton = ({ to, title, svg }: { to: string, title: string, svg: SvgComponent }) => <Button
+const PrefButton = ({ to, title, svg }: { to: string, title: string, svg: string }) => <Button
   svgTitle={title}
   svg={svg}
   prompt={title}

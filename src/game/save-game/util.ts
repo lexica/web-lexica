@@ -5,9 +5,10 @@ import { storage } from "../../util/storage"
 import { isValidGamePath } from "../../util/url"
 import { getB64DelimitedURLBoard } from "../board/util"
 import { ScoreType } from "../score"
-import { gameLocalStorage, GameLocalStorage, LocalStorage, SavedGame } from "./types"
+import { gameLocalStorage, LocalStorage, GameLocalStorage } from "./types"
+import type { GameLocalStorageType, SavedGame } from './types'
 
-export const getGameLocalStorageKey = (gameUrl: string, storageKey: GameLocalStorage) => `${storageKey}-${gameUrl}`
+export const getGameLocalStorageKey = (gameUrl: string, storageKey: GameLocalStorageType) => `${storageKey}-${gameUrl}`
 
 export const defaultSavedGame: SavedGame = {
   [GameLocalStorage.Board]: [],
@@ -85,7 +86,7 @@ export const clearSaveGameData = (gameUrl: string) => {
   removeGameFromSavedGames(gameUrl)
 }
 
-const isGameLocalStorageBaseKey = (maybeKey: string): maybeKey is GameLocalStorage => gameLocalStorage.includes(maybeKey as any)
+const isGameLocalStorageBaseKey = (maybeKey: string): maybeKey is GameLocalStorageType => gameLocalStorage.includes(maybeKey as any)
 
 const isGameLocalStorageKey = (maybeKey: string) => {
   const baseKey = maybeKey.split('-')[0]

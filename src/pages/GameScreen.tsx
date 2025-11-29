@@ -88,7 +88,6 @@ const useAutoStart = (shouldAutoStart: boolean, condition: boolean, handleStart:
 const Game = ({
   autoStart: shouldAutoStart,
   showQrCode,
-  isMultiplayer
 }: GameProps): JSX.Element => {
   const autoStart = shouldAutoStart === true
 

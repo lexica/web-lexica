@@ -2,9 +2,11 @@ import i18n from 'i18next';
 import Backend from 'i18next-http-backend';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import { initReactI18next } from 'react-i18next';
-import { TranslationsFn, LanguageTitlesFn } from './types'
+import type { TranslationsFn, LanguageTitlesFn } from './types'
 import { createContext } from 'react';
 import { logger } from '../util/logger';
+
+const basePath = ["localhost", "127.0.0.1"].includes(window.location.hostname) ? "" : "/web-lexica"
 
 i18n
   .use(Backend)
@@ -19,7 +21,7 @@ i18n
     },
 
     backend: {
-      loadPath: '/web-lexica/locales/{{lng}}/{{ns}}.json'
+      loadPath: `${basePath}/locales/{{lng}}/{{ns}}.json`
     },
     detection: {
       order: ['localStorage', 'navigator'],

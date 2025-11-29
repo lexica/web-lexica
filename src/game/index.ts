@@ -1,7 +1,7 @@
 import * as R from 'ramda'
 import { createContext } from 'react'
-import { MetadataV1 } from './language'
-import { ScoreType } from './score'
+import type { MetadataV1 } from './language'
+import { ScoreType, type ScoreTypeType } from './score'
 import { splitWordIntoLetters } from './words'
 
 export const getLetterScore = (letter: string, letterScores: MetadataV1['letterScores']) => letterScores[letter]
@@ -26,7 +26,7 @@ const lengthScores = [
 
 const scoreWordByLength = ({ length }: string) => lengthScores[length]
 
-export const scoreWord = (word: string, scoreType: ScoreType, letterScores: MetadataV1['letterScores']) => {
+export const scoreWord = (word: string, scoreType: ScoreTypeType, letterScores: MetadataV1['letterScores']) => {
   switch (scoreType) {
     case ScoreType.Letters:
       return scoreWordByLetterScores(word, letterScores)
@@ -37,7 +37,7 @@ export const scoreWord = (word: string, scoreType: ScoreType, letterScores: Meta
   }
 }
 
-export const orderByWordScore = (dictionary: string[], scoreType: ScoreType, letterScores: MetadataV1['letterScores']) => R.sortWith(
+export const orderByWordScore = (dictionary: string[], scoreType: ScoreTypeType, letterScores: MetadataV1['letterScores']) => R.sortWith(
   [R.descend<string>((word) => scoreWord(word, scoreType, letterScores)), R.ascend<string>(R.identity)],
   dictionary
 )

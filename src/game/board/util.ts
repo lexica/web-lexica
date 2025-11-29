@@ -1,7 +1,7 @@
 import * as R from 'ramda'
-import { Function as F } from 'ts-toolbelt'
+import type { Function as F } from 'ts-toolbelt'
 
-import { Board, Letter, Coordinates } from './types'
+import type { Board, Letter, Coordinates } from './types'
 import { b64ToUtf8 } from '../../util/base-64'
 
 const splitLineAlongRows = (line: string[]) => {

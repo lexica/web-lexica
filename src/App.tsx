@@ -21,7 +21,7 @@ import SavedGames from './pages/SavedGames'
 import { useTranslation } from 'react-i18next'
 import { useCallback } from 'react'
 import { Translations } from './translations'
-import { LanguageTitlesFn, TranslationsFn } from './translations/types'
+import type { LanguageTitlesFn, TranslationsFn } from './translations/types'
 import Languages from './pages/Languages'
 import AndroidIntegration from './pages/AndroidIntegration'
 
