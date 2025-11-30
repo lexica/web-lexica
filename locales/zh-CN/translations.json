@@ -1,0 +1,74 @@
+{
+  "pages": {
+    "home": {
+      "newGame": "新游戏",
+      "headlineTitle": "$t(general.lexica)",
+      "multiplayer": "$t(general.multiplayer)",
+      "preferences": "$t(general.preferences)"
+    },
+    "newGameMode": {
+      "gameModeName": {
+        "hint": "名称",
+        "description": "用于选择游戏模式 / 记录高分"
+      },
+      "timeLimit": {
+        "title": "时限",
+        "description": "分钟为单位的时间限制"
+      },
+      "boardSize": "版面",
+      "scoreType": {
+        "title": "计分方式",
+        "wordLength": "$t(scoreDetails.wordLength)",
+        "letterPoints": "$t(scoreDetails.letterPoints)"
+      }
+    },
+    "multiplayer": {
+      "startGameHint": "当所有玩家准备就绪，你们应该同时开始游戏。",
+      "startGame": "开始游戏",
+      "joinGameHint": "当所有玩家准备就绪后，加入游戏。",
+      "joinGame": "加入游戏",
+      "wordCount_other": "{{count}} 单词"
+    },
+    "lexicons": {
+      "title": "$t(general.lexicon)",
+      "isBeta": "测试中"
+    },
+    "preferences": {
+      "title": "$t(general.preferences)",
+      "language": "$t(general.language)",
+      "lexicon": "$t(general.lexicon)",
+      "androidSettings": "$t(pages.androidIntegration.title)"
+    },
+    "languages": {
+      "title": "$t(general.language)"
+    }
+  },
+  "gameModeDetails": {
+    "time_other": "{{count}} 分钟"
+  },
+  "lexicaGameScreens": {
+    "inGame": {
+      "foundWords": "$t(general.foundWords)"
+    },
+    "results": {
+      "missedWords": "遗漏的单词",
+      "foundWords": "$t(general.foundWords)"
+    }
+  },
+  "scoreDetails": {
+    "time": "时间",
+    "words": "单词",
+    "score": "分数",
+    "displayPercentage": "{{found}}/{{total}}（{{percentage}}%）",
+    "wordLength": "单词长度",
+    "letterPoints": "字母分数"
+  },
+  "general": {
+    "multiplayer": "多人游戏",
+    "lexica": "Lexica",
+    "back": "返回",
+    "foundWords": "找到的单词",
+    "preferences": "设置",
+    "lexicon": "词典"
+  }
+}

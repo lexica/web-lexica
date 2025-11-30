@@ -1,0 +1,118 @@
+{
+    "pages": {
+        "home": {
+            "newGame": "Neues Spiel",
+            "headlineTitle": "$t(general.lexica)",
+            "multiplayer": "$t(general.multiplayer)",
+            "preferences": "$t(general.preferences)",
+            "subtitle": "online",
+            "resumeGame": "Spiel fortsetzen",
+            "gameMode": "Modus: {{gameMode}}"
+        },
+        "newGameMode": {
+            "gameModeName": {
+                "hint": "Name",
+                "description": "Zur Auswahl des Spielmodus / Aufzeichnung von Höchsten Punktzahlen"
+            },
+            "timeLimit": {
+                "title": "Zeitbegrenzung",
+                "description": "Zeitlimit in Minuten"
+            },
+            "boardSize": "Spielfeldgröße",
+            "scoreType": {
+                "title": "Wertungsmodus",
+                "wordLength": "$t(scoreDetails.wordLength)",
+                "letterPoints": "$t(scoreDetails.letterPoints)"
+            },
+            "title": "Neuer Spielmodus",
+            "minimumWordLength": "Mindestwortlänge",
+            "saveGameMode": "Spielmodus speichern",
+            "timeAttack": {
+                "title": "Zeitangriff",
+                "off": "Aus",
+                "hint": "Fügt ($t(scoreDetails.wordLength) x {{multiplier}}) Sekunde(n) für jedes gefundene Wort hinzu"
+            }
+        },
+        "multiplayer": {
+            "startGameHint": "Wenn alle Spieler bereit sind, solltet ihr alle gleichzeitig mit dem Spiel beginnen.",
+            "startGame": "Spiel starten",
+            "joinGameHint": "Wenn alle Spieler bereit sind, tretet dem Spiel bei.",
+            "joinGame": "Spiel beitreten",
+            "wordCount_one": "{{count}} Wort",
+            "wordCount_other": "{{count}} Wörter",
+            "title": "Mehrspieler",
+            "refreshBoard": "Spielfeld auffrischen",
+            "openInAppPrompt": "In der App öffnen",
+            "alwaysOpenInAppPrompt": "Immer in der App öffnen"
+        },
+        "lexicons": {
+      "title": "$t(general.lexicon)",
+            "isBeta": "Beta"
+        },
+        "preferences": {
+            "title": "$t(general.preferences)",
+            "language": "$t(general.language)",
+      "lexicon": "$t(general.lexicon)",
+      "androidSettings": "$t(pages.androidIntegration.title)"
+        },
+        "languages": {
+            "title": "$t(general.language)"
+        },
+        "gameModes": {
+            "title": "Spielmodi",
+            "addGameMode": "Spielmodus hinzufügen"
+        },
+        "lexicle": {
+            "random": "Zufällig",
+            "wordOfTheDay": "Wort des Tages"
+        },
+        "wordOfTheDay": {
+            "title": "Wort des Tages"
+        },
+        "random": {
+            "title": "Zufällig"
+        },
+        "savedGames": {
+            "title": "Gespeicherte Spiele",
+            "gameModeName": "Spielmodus",
+            "remainingTime": "Verbleibende Zeit",
+            "resume": "Fortsetzen",
+            "delete": "Löschen"
+        },
+        "singleplayer": {
+            "title": "Einzelspieler"
+        },
+        "androidIntegration": {
+            "title": "Android App-Einstellungen"
+        }
+    },
+    "gameModeDetails": {
+        "time_one": "{{count}} min",
+        "time_other": "{{count}} min"
+    },
+    "lexicaGameScreens": {
+        "inGame": {
+            "foundWords": "$t(general.foundWords)"
+        },
+        "results": {
+            "missedWords": "Übersehene Wörter",
+            "foundWords": "$t(general.foundWords)"
+        }
+    },
+    "scoreDetails": {
+        "time": "Zeit",
+        "words": "Wörter",
+        "score": "Punkte",
+        "displayPercentage": "{{found}}/{{total}} ({{percentage}}%)",
+        "wordLength": "Wortlänge",
+        "letterPoints": "Buchstabenpunkte"
+    },
+    "general": {
+        "multiplayer": "Mehrspieler",
+        "lexica": "Lexica",
+        "back": "Zurück",
+        "foundWords": "Gefundene Wörter",
+        "preferences": "Einstellungen",
+        "lexicon": "Lexikon"
+    }
+}

@@ -1,0 +1,88 @@
+{
+    "pages": {
+        "home": {
+            "newGame": "Nowa gra",
+            "headlineTitle": "$t(general.lexica)",
+            "multiplayer": "$t(general.multiplayer)",
+            "preferences": "$t(general.preferences)",
+            "title": "Strona główna",
+            "subtitle": "online",
+            "tryLexicle": "Wypróbuj Lexicle",
+            "resumeGame": "Wznów grę",
+            "gameMode": "Tryb: {{gameMode}}",
+            "highScore": "Najwyższy wynik: {{score}}"
+        },
+        "newGameMode": {
+            "gameModeName": {
+                "hint": "Nazwa",
+                "description": "Do wybierania trybu gry / zapisywania najlepszych wyników"
+            },
+            "timeLimit": {
+                "title": "Limit czasu",
+                "description": "Limit czasu w minutach"
+            },
+            "boardSize": "Rozmiar planszy",
+            "scoreType": {
+                "title": "Typ punktacji",
+                "wordLength": "$t(scoreDetails.wordLength)",
+                "letterPoints": "$t(scoreDetails.letterPoints)"
+            },
+            "timeAttack": {
+                "hint": "Dodaje ($t(scoreDetails.wordLength) x {{multiplier}}) sekund po znalezieniu wyrazu",
+                "off": "Wyłącz"
+            },
+            "saveGameMode": "Zapisz tryb gry",
+            "title": "Nowy tryb gry",
+            "minimumWordLength": "Minimalna długość słowa"
+        },
+        "lexicons": {
+            "title": "$t(general.lexicon)",
+            "isBeta": "Beta"
+        },
+        "preferences": {
+            "title": "$t(general.preferences)",
+            "language": "$t(general.language)",
+            "lexicon": "$t(general.lexicon)",
+            "androidSettings": "$t(pages.androidIntegration.title)"
+        },
+        "multiplayer": {
+            "startGameHint": "Kiedy wszyscy gracze będą gotowi, wszyscy powinni rozpocząć grę w tym samym czasie.",
+            "title": "Wielu graczy",
+            "startGame": "Rozpocznij grę",
+            "joinGameHint": "Kiedy wszyscy gracze są gotowi, dołącz do gry.",
+            "joinGame": "Dołącz do gry"
+        },
+        "languages": {
+            "title": "$t(general.language)"
+        },
+        "gameModes": {
+            "addGameMode": "Dodaj tryb gry",
+            "title": "Tryby gry"
+        }
+    },
+    "lexicaGameScreens": {
+        "inGame": {
+            "foundWords": "$t(general.foundWords)"
+        },
+        "results": {
+            "missedWords": "Brakujące słowa",
+            "foundWords": "$t(general.foundWords)"
+        }
+    },
+    "scoreDetails": {
+        "time": "Czas",
+        "words": "Słowa",
+        "score": "Wynik",
+        "displayPercentage": "{{found}}/{{total}} ({{percentage}}%)",
+        "wordLength": "Długość słowa",
+        "letterPoints": "Punty Liter"
+    },
+    "general": {
+        "lexica": "Lexica",
+        "foundWords": "Znalezione słowa",
+        "preferences": "Preferencje",
+        "lexicon": "Leksykon",
+        "multiplayer": "Wielu graczy",
+        "back": "Wstecz"
+    }
+}

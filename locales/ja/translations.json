@@ -1,0 +1,57 @@
+{
+  "pages": {
+    "home": {
+      "newGame": "新しいゲーム",
+      "headlineTitle": "$t(general.lexica)",
+      "multiplayer": "$t(general.multiplayer)",
+      "preferences": "$t(general.preferences)"
+    },
+    "newGameMode": {
+      "timeLimit": {
+        "title": "制限時間"
+      },
+      "boardSize": "ボード サイズ",
+      "scoreType": {
+        "title": "得点の種類",
+        "wordLength": "$t(scoreDetails.wordLength)",
+        "letterPoints": "$t(scoreDetails.letterPoints)"
+      }
+    },
+    "lexicons": {
+      "title": "$t(general.lexicon)",
+      "isBeta": "ベータ"
+    },
+    "preferences": {
+      "title": "$t(general.preferences)",
+      "language": "$t(general.language)",
+      "lexicon": "$t(general.lexicon)",
+      "androidSettings": "$t(pages.androidIntegration.title)"
+    },
+    "languages": {
+      "title": "$t(general.language)"
+    }
+  },
+  "lexicaGameScreens": {
+    "inGame": {
+      "foundWords": "$t(general.foundWords)"
+    },
+    "results": {
+      "missedWords": "ミスした単語",
+      "foundWords": "$t(general.foundWords)"
+    }
+  },
+  "scoreDetails": {
+    "time": "時間",
+    "words": "単語",
+    "score": "スコア",
+    "displayPercentage": "{{found}}/{{total}} ({{percentage}}%)",
+    "wordLength": "単語の長さ",
+    "letterPoints": "文字のポイント"
+  },
+  "general": {
+    "lexica": "Lexica",
+    "foundWords": "見つけた単語",
+    "preferences": "設定",
+    "lexicon": "レキシコン"
+  }
+}

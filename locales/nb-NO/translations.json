@@ -1,0 +1,76 @@
+{
+    "pages": {
+        "home": {
+            "newGame": "Nytt spill",
+            "headlineTitle": "$t(general.lexica)",
+            "multiplayer": "$t(general.multiplayer)",
+            "preferences": "$t(general.preferences)"
+        },
+        "newGameMode": {
+            "gameModeName": {
+                "hint": "Navn",
+                "description": "For valg av spillmodus / opptak av topp-poengsummer"
+            },
+            "timeLimit": {
+                "title": "Tidsgrense",
+                "description": "Tidsgrense i minutter"
+            },
+            "boardSize": "Brettstørrelse",
+            "scoreType": {
+                "title": "Poengivningstype",
+                "wordLength": "$t(scoreDetails.wordLength)",
+                "letterPoints": "$t(scoreDetails.letterPoints)"
+            }
+        },
+        "multiplayer": {
+            "startGameHint": "Når alle spillere er klare, bør alle starte spillet samtidig.",
+            "startGame": "Start spillet",
+            "joinGameHint": "Når alle spillere er klare, kan spillet begynne.",
+            "joinGame": "Ta del i spill",
+            "wordCount_one": "{{count}} ord",
+            "wordCount_other": "{{count}} ord"
+        },
+        "lexicons": {
+            "title": "$t(general.lexicon)",
+            "isBeta": "beta"
+        },
+        "preferences": {
+            "title": "$t(general.preferences)",
+            "language": "$t(general.language)",
+            "lexicon": "$t(general.lexicon)",
+            "androidSettings": "$t(pages.androidIntegration.title)"
+        },
+        "languages": {
+            "title": "$t(general.language)"
+        }
+    },
+    "gameModeDetails": {
+        "time_one": "ett min.",
+        "time_other": "{{count}} min."
+    },
+    "lexicaGameScreens": {
+        "inGame": {
+            "foundWords": "$t(general.foundWords)"
+        },
+        "results": {
+            "missedWords": "Uoppdagede ord",
+            "foundWords": "$t(general.foundWords)"
+        }
+    },
+    "scoreDetails": {
+        "time": "Tid",
+        "words": "Ord",
+        "score": "Poengsum",
+        "displayPercentage": "{{found}}/{{total}} ({{percentage}}%)",
+        "wordLength": "Ordlengde",
+        "letterPoints": "Bokstavpoeng"
+    },
+    "general": {
+        "multiplayer": "Flerspiller",
+        "lexica": "Lexica",
+        "back": "Tilbake",
+        "foundWords": "Oppdagede ord",
+        "preferences": "Innstillinger",
+        "lexicon": "Leksikon"
+    }
+}

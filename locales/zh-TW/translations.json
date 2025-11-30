@@ -1,0 +1,154 @@
+{
+    "pages": {
+        "home": {
+            "newGame": "新遊戲",
+            "headlineTitle": "$t(general.lexica)",
+            "multiplayer": "$t(general.multiplayer)",
+            "preferences": "$t(general.preferences)",
+            "title": "主頁",
+            "subtitle": "線上",
+            "tryLexicle": "嘗試 Lexicle",
+            "resumeGame": "恢復遊戲",
+            "highScore": "高分：{{score}}",
+            "gameMode": "模式：{{gameMode}}"
+        },
+        "newGameMode": {
+            "timeLimit": {
+                "title": "時間限制",
+                "description": "時間限制以分鐘為單位"
+            },
+            "boardSize": "圖版大小",
+            "scoreType": {
+                "title": "計分方式",
+                "wordLength": "$t(scoreDetails.wordLength)",
+                "letterPoints": "$t(scoreDetails.letterPoints)"
+            },
+            "timeAttack": {
+                "off": "關閉",
+                "title": "時間攻擊",
+                "hint": "每個找到的單詞增加 $t(scoreDetails.wordLength) x {{multiplier}} 秒"
+            },
+            "title": "新遊戲模式",
+            "minimumWordLength": "最短單詞長度",
+            "gameModeName": {
+                "hint": "名稱",
+                "description": "用於選擇遊戲模式／記錄高分"
+            },
+            "saveGameMode": "儲存遊戲模式"
+        },
+        "lexicons": {
+            "title": "$t(general.lexicon)",
+            "isBeta": "測試版"
+        },
+        "preferences": {
+            "title": "$t(general.preferences)",
+            "language": "$t(general.language)",
+            "lexicon": "$t(general.lexicon)",
+            "androidSettings": "$t(pages.androidIntegration.title)"
+        },
+        "languages": {
+            "title": "$t(general.language)"
+        },
+        "gameModes": {
+            "addGameMode": "新增遊戲模式",
+            "title": "遊戲模式"
+        },
+        "multiplayer": {
+            "title": "多人遊戲",
+            "gameTitle": "網路 Lexica 多人遊戲",
+            "newGameTitle": "網路 Lexica 新多人遊戲",
+            "refreshBoard": "重新整理圖版",
+            "startGame": "開始遊戲",
+            "wordCount_one": "{{count}} 單詞",
+            "wordCount_other": "{{count}} 單詞",
+            "startGameHint": "當所有玩家都準備就緒時，你們應該同時開始遊戲。",
+            "joinGame": "加入遊戲",
+            "openInAppPrompt": "在應用程式中開啟",
+            "joinGameHint": "當所有玩家都準備就緒時加入遊戲。",
+            "alwaysOpenInAppPrompt": "總是在應用程式中開啟",
+            "alwaysOpenInAppConfirmation": "已分享的遊戲現在將總是在應用程式中開啟。你可以在偏好設定中變更此設定。"
+        },
+        "savedGames": {
+            "gameModeName": "遊戲模式",
+            "gameModeDetails": "遊戲模式詳細資訊",
+            "clearAll": "清除全部",
+            "title": "已儲存的遊戲",
+            "remainingTime": "剩餘時間",
+            "resume": "恢復",
+            "delete": "刪除"
+        },
+        "lexicle": {
+            "title": "Lexicle",
+            "headlineTitle": "LEXICLE",
+            "wordOfTheDay": "每日一詞",
+            "random": "隨機",
+            "useWordleWordList": "使用 Wordle 單詞列表"
+        },
+        "wordOfTheDay": {
+            "title": "每日一詞"
+        },
+        "random": {
+            "title": "隨機"
+        },
+        "singleplayer": {
+            "title": "單人遊戲"
+        },
+        "androidIntegration": {
+            "title": "Android 應用程式設定",
+            "autoDetectAndroidPrompt": "如果偵測到為 Android，則顯示「在應用程式中開啟」選項",
+            "autoDetectAndroidHint": "預設行為。如果未正確偵測你的裝置類型，請選擇其他選項。",
+            "autoRedirectPrompt": "總是在應用程式中開啟已分享的遊戲",
+            "autoRedirectHint": "開啟已分享的遊戲時，網頁會嘗試開啟 Android 的 Lexica 應用程式。",
+            "forceShowAndroidSettingsPrompt": "顯示「在應用程式中開啟」按鈕",
+            "forceShowAndroidSettingsHint": "顯示提示以在 Android Lexica 應用程式中開啟已分享的遊戲。",
+            "forceHideAndroidSettingsPrompt": "隱藏「在應用程式中開啟」按鈕",
+            "forceHideAndroidSettingsHint": "隱藏在 Android Lexica 應用程式中開啟已分享的遊戲的提示。"
+        }
+    },
+    "lexicaGameScreens": {
+        "inGame": {
+            "foundWords": "$t(general.foundWords)",
+            "guesses": "猜測"
+        },
+        "results": {
+            "missedWords": "遺漏的單詞",
+            "foundWords": "$t(general.foundWords)"
+        }
+    },
+    "scoreDetails": {
+        "words": "單詞",
+        "score": "分數",
+        "displayPercentage": "{{found}}／{{total}}（{{percentage}}%）",
+        "wordLength": "單詞長度",
+        "letterPoints": "字母分數",
+        "time": "時間"
+    },
+    "general": {
+        "lexica": "Lexica",
+        "foundWords": "找到的單詞",
+        "preferences": "偏好設定",
+        "lexicon": "詞庫",
+        "paused": "已暫停",
+        "multiplayer": "多人遊戲",
+        "language": "語言",
+        "back": "返回",
+        "loading": "正在載入",
+        "error": "錯誤"
+    },
+    "lexicleGameScreens": {
+        "results": {
+            "shareGameText": "Lexicle {{numericScore}}\n\n{{visualScore}}\n\n看看你是否能超越我的分數：{{url}}",
+            "shareScoreConfirmationText": "分數已複製至剪貼簿！",
+            "shareScore": "分享得分",
+            "shareGame": "分享遊戲",
+            "shareGameTextWordOfTheDay": "Lexicle 每日一詞 {{date}} {{numericScore}}\n\n{{visualScore}}\n\n看看你是否能超越我的分數：{{url}}",
+            "shareScoreTextWordOfTheDay": "Lexicle 每日一詞 {{date}} {{numericScore}}\n\n{{visualScore}}",
+            "shareScoreText": "Lexicle {{numericScore}}\n\n{{visualScore}}",
+            "shareGameConfirmationText": "遊戲連結已複製至剪貼簿！"
+        }
+    },
+    "gameModeDetails": {
+        "time_other": "{{count}} 分鐘",
+        "time_one": "{{count}} 分鐘"
+    }
+}

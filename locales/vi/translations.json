@@ -1,0 +1,74 @@
+{
+  "pages": {
+    "home": {
+      "newGame": "Trò chơi mới",
+      "headlineTitle": "$t(general.lexica)",
+      "multiplayer": "$t(general.multiplayer)",
+      "preferences": "$t(general.preferences)"
+    },
+    "newGameMode": {
+      "gameModeName": {
+        "hint": "Tên",
+        "description": "Để chọn chế độ chơi / ghi lại điểm cao"
+      },
+      "timeLimit": {
+        "title": "Giới hạn thời gian",
+        "description": "Giới hạn thời gian tính bằng phút"
+      },
+      "boardSize": "Kích thước bảng",
+      "scoreType": {
+        "title": "Kiểu tính điểm",
+        "wordLength": "$t(scoreDetails.wordLength)",
+        "letterPoints": "$t(scoreDetails.letterPoints)"
+      }
+    },
+    "multiplayer": {
+      "startGameHint": "Khi tất cả người chơi đã sẵn sàng, tất cả các bạn nên bắt đầu trò chơi cùng một lúc.",
+      "startGame": "Bắt đầu chơi",
+      "joinGameHint": "Khi tất cả người chơi đã sẵn sàng, hãy tham gia trò chơi.",
+      "joinGame": "Tham gia trò chơi",
+      "wordCount_other": "{{count}} từ"
+    },
+    "lexicons": {
+      "title": "$t(general.lexicon)",
+      "isBeta": "Beta"
+    },
+    "preferences": {
+      "title": "$t(general.preferences)",
+      "language": "$t(general.language)",
+      "lexicon": "$t(general.lexicon)",
+      "androidSettings": "$t(pages.androidIntegration.title)"
+    },
+    "languages": {
+      "title": "$t(general.language)"
+    }
+  },
+  "gameModeDetails": {
+    "time_other": "{{count}} phút"
+  },
+  "lexicaGameScreens": {
+    "inGame": {
+      "foundWords": "$t(general.foundWords)"
+    },
+    "results": {
+      "missedWords": "Từ bị bỏ lỡ",
+      "foundWords": "$t(general.foundWords)"
+    }
+  },
+  "scoreDetails": {
+    "time": "Thời gian",
+    "words": "Từ",
+    "score": "Điểm",
+    "displayPercentage": "{{found}}/{{total}} ({{percentage}}%)",
+    "wordLength": "Độ dài của từ",
+    "letterPoints": "Điểm cho từng chữ cái"
+  },
+  "general": {
+    "multiplayer": "Nhiều người chơi",
+    "lexica": "Lexica",
+    "back": "Quay lại",
+    "foundWords": "Từ đã tìm thấy",
+    "preferences": "Cài đặt",
+    "lexicon": "Lexicon"
+  }
+}

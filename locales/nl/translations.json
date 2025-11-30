@@ -1,0 +1,76 @@
+{
+  "pages": {
+    "home": {
+      "newGame": "Nieuw spel",
+      "headlineTitle": "$t(general.lexica)",
+      "multiplayer": "$t(general.multiplayer)",
+      "preferences": "$t(general.preferences)"
+    },
+    "newGameMode": {
+      "gameModeName": {
+        "hint": "Naam",
+        "description": "Voor het kiezen van de spelmodus/noteren van topscores"
+      },
+      "timeLimit": {
+        "title": "Tijdslimiet",
+        "description": "Tijdslimiet, in minuten"
+      },
+      "boardSize": "Bordgrootte",
+      "scoreType": {
+        "title": "Scorenotatie",
+        "wordLength": "$t(scoreDetails.wordLength)",
+        "letterPoints": "$t(scoreDetails.letterPoints)"
+      }
+    },
+    "multiplayer": {
+      "startGameHint": "Als alle spelers klaarzitten, kunnen ze het spel tegelijkertijd starten.",
+      "startGame": "Spel starten",
+      "joinGameHint": "Als alle spelers klaarzitten, kun je deelnemen aan het spel.",
+      "joinGame": "Deelnemen aan spel",
+      "wordCount_one": "{{count}} woord",
+      "wordCount_other": "{{count}} woorden"
+    },
+    "lexicons": {
+      "title": "$t(general.lexicon)",
+      "isBeta": "bèta"
+    },
+    "preferences": {
+      "title": "$t(general.preferences)",
+      "language": "$t(general.language)",
+      "lexicon": "$t(general.lexicon)",
+      "androidSettings": "$t(pages.androidIntegration.title)"
+    },
+    "languages": {
+      "title": "$t(general.language)"
+    }
+  },
+  "gameModeDetails": {
+    "time_one": "{{count}} min.",
+    "time_other": "{{count}} min."
+  },
+  "lexicaGameScreens": {
+    "inGame": {
+      "foundWords": "$t(general.foundWords)"
+    },
+    "results": {
+      "missedWords": "Gemiste woorden",
+      "foundWords": "$t(general.foundWords)"
+    }
+  },
+  "scoreDetails": {
+    "time": "Tijd",
+    "words": "Woorden",
+    "score": "Score",
+    "displayPercentage": "{{found}}/{{total}} ({{percentage}}%)",
+    "wordLength": "Woordlengte",
+    "letterPoints": "Letterpunten"
+  },
+  "general": {
+    "multiplayer": "Meerdere spelers",
+    "lexica": "Lexica",
+    "back": "Terug",
+    "foundWords": "Gevonden woorden",
+    "preferences": "Instellingen",
+    "lexicon": "Woordenlijst"
+  }
+}

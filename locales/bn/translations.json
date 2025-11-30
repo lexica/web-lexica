@@ -1,0 +1,59 @@
+{
+  "pages": {
+    "home": {
+      "newGame": "নতুল খেলা",
+      "headlineTitle": "$t(general.lexica)",
+      "multiplayer": "$t(general.multiplayer)",
+      "preferences": "$t(general.preferences)"
+    },
+    "newGameMode": {
+      "gameModeName": {
+        "hint": "নাম"
+      },
+      "timeLimit": {
+        "title": "সময় সীমা"
+      },
+      "boardSize": "বোর্ডের আকার",
+      "scoreType": {
+        "title": "স্কোরিং প্রকার",
+        "wordLength": "$t(scoreDetails.wordLength)",
+        "letterPoints": "$t(scoreDetails.letterPoints)"
+      }
+    },
+    "lexicons": {
+      "title": "$t(general.lexicon)",
+      "isBeta": "বিটা"
+    },
+    "preferences": {
+      "title": "$t(general.preferences)",
+      "language": "$t(general.language)",
+      "lexicon": "$t(general.lexicon)",
+      "androidSettings": "$t(pages.androidIntegration.title)"
+    },
+    "languages": {
+      "title": "$t(general.language)"
+    }
+  },
+  "scoreDetails": {
+    "time": "সময়",
+    "words": "শব্দ",
+    "score": "সংখ্যা",
+    "wordLength": "শব্দ দৈর্ঘ্য",
+    "letterPoints": "অক্ষর সংখ্যা"
+  },
+  "general": {
+    "multiplayer": "একাধিক খেলোয়াড়",
+    "lexica": "লেক্সিকা",
+    "back": "পিছনে",
+    "preferences": "পছন্দসমূহ",
+    "lexicon": "অভিধান"
+  },
+  "lexicaGameScreens": {
+    "inGame": {
+      "foundWords": "$t(general.foundWords)"
+    },
+    "results": {
+      "foundWords": "$t(general.foundWords)"
+    }
+  }
+}

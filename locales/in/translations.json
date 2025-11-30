@@ -1,0 +1,99 @@
+{
+    "pages": {
+        "home": {
+            "newGame": "Permainan Baru",
+            "headlineTitle": "$t(general.lexica)",
+            "multiplayer": "$t(general.multiplayer)",
+            "title": "Beranda",
+            "subtitle": "daring",
+            "tryLexicle": "Coba Lexicle",
+            "preferences": "$t(general.preferences)",
+            "resumeGame": "Lanjutkan Permainan",
+            "gameMode": "Mode: {{gameMode}}",
+            "highScore": "Skor tinggi: {{score}}"
+        },
+        "newGameMode": {
+            "gameModeName": {
+                "hint": "Nama",
+                "description": "Untuk memilih mode permainan / rekaman skor tinggi"
+            },
+            "timeLimit": {
+                "title": "Batas Waktu",
+                "description": "Batas waktu dalam menit"
+            },
+            "boardSize": "Ukuran Papan",
+            "scoreType": {
+                "title": "Jenis Penilaian",
+                "wordLength": "$t(scoreDetails.wordLength)",
+                "letterPoints": "$t(scoreDetails.letterPoints)"
+            },
+            "title": "Mode Permainan Baru",
+            "timeAttack": {
+                "title": "Serangan waktu",
+                "hint": "Tambah ($t(scoreDetails.wordLength) x {{multiplier}}) detik per kata yang ditemukan",
+                "off": "Mati"
+            },
+            "minimumWordLength": "Panjang Kata Minimum",
+            "saveGameMode": "Simpan Mode Permainan"
+        },
+        "multiplayer": {
+            "startGameHint": "Ketika semua pemain sudah siap, kalian harus memulai permainan pada waktu yang sama.",
+            "startGame": "Mulai permainan",
+            "joinGameHint": "Ketika semua pemain sudah siap, bergabung ke permainan.",
+            "joinGame": "Gabung ke permainan",
+            "wordCount_other": "{{count}} kata",
+            "wordCount_one": "{{count}} kata",
+            "alwaysOpenInAppPrompt": "Selalu Buka di Aplikasi",
+            "openInAppPrompt": "Buka di Aplikasi",
+            "title": "Multi-pemain",
+            "gameTitle": "Game Multipemain Web Lexica",
+            "newGameTitle": "Permainan Multipemain Baru Web Lexica",
+            "refreshBoard": "Segarkan Papan"
+        },
+        "lexicons": {
+            "title": "$t(general.lexicon)",
+            "isBeta": "Beta"
+        },
+        "preferences": {
+            "title": "$t(general.preferences)",
+            "language": "$t(general.language)",
+            "lexicon": "$t(general.lexicon)",
+            "androidSettings": "$t(pages.androidIntegration.title)"
+        },
+        "languages": {
+            "title": "$t(general.language)"
+        },
+        "gameModes": {
+            "title": "Mode Permainan",
+            "addGameMode": "Tambahkan Mode Permainan"
+        }
+    },
+    "gameModeDetails": {
+        "time_other": "{{count}} menit"
+    },
+    "lexicaGameScreens": {
+        "inGame": {
+            "foundWords": "$t(general.foundWords)"
+        },
+        "results": {
+            "missedWords": "Kata Yang Terlewat",
+            "foundWords": "$t(general.foundWords)"
+        }
+    },
+    "scoreDetails": {
+        "time": "Waktu",
+        "words": "Kata",
+        "score": "Nilai",
+        "displayPercentage": "{{found}}/{{total}} ({{percentage}}%)",
+        "wordLength": "Panjang Kata",
+        "letterPoints": "Poin Huruf"
+    },
+    "general": {
+        "multiplayer": "Multi-pemain",
+        "lexica": "Lexica",
+        "back": "Kembali",
+        "foundWords": "Kata Yang Ditemukan",
+        "preferences": "Preferensi",
+        "lexicon": "Lexicon"
+    }
+}
