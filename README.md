@@ -82,15 +82,14 @@ Here's some highlights of the bug fixes:
 Highlights of the tooling modernization:
 
 #### Dropped `yarn` in favor of `npm`
-While (imo) a bit less ergonomic than `npm`, we were stuck on a very old version of `yarn` that just wasn't useful enough to justify using. `npm` on the other hand is a good fit for this smaller project and lowers the barrier to entry.
 
-
+While `yarn` is (imo) a bit more ergonomic than `npm`, we were stuck on a very old version of `yarn` that just wasn't useful enough to justify its use. `npm` on the other hand is a good fit for this smaller project and lowers the barrier to entry.
 
 #### Upgraded from node `v16.x` all the way to `v24.x`
+
 This was a fairly easy change because this is a web-app, so we weren't using `node` that much except for local development.
 
 #### Moving from `create-react-app` to `vite`
-
 
 Web development is a constant cycle it seems. There's always a new tool, always a new framework. It's enough to make ditching `react` entirely and just using `javascript+html+css` an attractive idea. That would require a lot of work tho, so I'll refrain. For now.
 
