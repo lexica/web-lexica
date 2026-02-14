@@ -1,0 +1,70 @@
+{
+  "pages": {
+    "home": {
+      "newGame": "Nová hra",
+      "headlineTitle": "$t(general.lexica)",
+      "multiplayer": "$t(general.multiplayer)",
+      "preferences": "$t(general.preferences)"
+    },
+    "newGameMode": {
+      "timeLimit": {
+        "title": "Časový limit",
+        "description": "Časový limit v minutách"
+      },
+      "boardSize": "Velikost herní plochy",
+      "scoreType": {
+        "title": "Způsob bodování",
+        "wordLength": "$t(scoreDetails.wordLength)",
+        "letterPoints": "$t(scoreDetails.letterPoints)"
+      },
+      "gameModeName": {
+        "hint": "Název",
+        "description": "Pro výběr herního režimu / zaznamenávání nejvyšších skóre"
+      }
+    },
+    "lexicons": {
+      "title": "$t(general.lexicon)",
+      "isBeta": "Beta"
+    },
+    "preferences": {
+      "title": "$t(general.preferences)",
+      "language": "$t(general.language)",
+      "lexicon": "$t(general.lexicon)",
+      "androidSettings": "$t(pages.androidIntegration.title)"
+    },
+    "multiplayer": {
+      "startGameHint": "Až budou všichni hráči připraveni, zahajte všichni najednou hru.",
+      "startGame": "Spustit hru",
+      "joinGameHint": "Až budou všichni hráči připraveni, připojte se ke hře.",
+      "joinGame": "Připojit se ke hře"
+    },
+    "languages": {
+      "title": "$t(general.language)"
+    }
+  },
+  "scoreDetails": {
+    "wordLength": "Délka slova",
+    "time": "Čas",
+    "words": "Slova",
+    "score": "Skóre",
+    "displayPercentage": "{{found}}/{{total}} ({{percentage}}%)",
+    "letterPoints": "Písmenné body"
+  },
+  "general": {
+    "lexica": "Lexica",
+    "multiplayer": "Hra více hráčů",
+    "back": "Zpět",
+    "foundWords": "Nalezená slova",
+    "preferences": "Možnosti",
+    "lexicon": "Slovník"
+  },
+  "lexicaGameScreens": {
+    "inGame": {
+      "foundWords": "$t(general.foundWords)"
+    },
+    "results": {
+      "foundWords": "$t(general.foundWords)",
+      "missedWords": "Vynechaná slova"
+    }
+  }
+}

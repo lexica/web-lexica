@@ -1,0 +1,57 @@
+{
+  "pages": {
+    "home": {
+      "newGame": "بازی جدید",
+      "headlineTitle": "$t(general.lexica)",
+      "multiplayer": "$t(general.multiplayer)",
+      "preferences": "$t(general.preferences)"
+    },
+    "newGameMode": {
+      "timeLimit": {
+        "title": "محدودیت زمان"
+      },
+      "boardSize": "اندازهٔ صفحه",
+      "scoreType": {
+        "title": "نوع امتیازگیری",
+        "wordLength": "$t(scoreDetails.wordLength)",
+        "letterPoints": "$t(scoreDetails.letterPoints)"
+      }
+    },
+    "lexicons": {
+      "title": "$t(general.lexicon)",
+      "isBeta": "نسخه آزمایشی (بتا)"
+    },
+    "preferences": {
+      "title": "$t(general.preferences)",
+      "language": "$t(general.language)",
+      "lexicon": "$t(general.lexicon)",
+      "androidSettings": "$t(pages.androidIntegration.title)"
+    },
+    "languages": {
+      "title": "$t(general.language)"
+    }
+  },
+  "lexicaGameScreens": {
+    "inGame": {
+      "foundWords": "$t(general.foundWords)"
+    },
+    "results": {
+      "missedWords": "واژه‌های پیدا نشده",
+      "foundWords": "$t(general.foundWords)"
+    }
+  },
+  "scoreDetails": {
+    "time": "زمان",
+    "words": "واژه‌ها",
+    "score": "امتیاز",
+    "displayPercentage": "{{found}}/{{total}} ({{percentage}}%)",
+    "wordLength": "طول واژه",
+    "letterPoints": "امتیاز هر حرف"
+  },
+  "general": {
+    "lexica": "لکسیکا",
+    "foundWords": "واژه‌های پیدا شده",
+    "preferences": "تنظیمات",
+    "lexicon": "واژه‌نامه"
+  }
+}

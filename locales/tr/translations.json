@@ -1,0 +1,154 @@
+{
+    "pages": {
+        "home": {
+            "newGame": "Yeni Oyun",
+            "headlineTitle": "$t(general.lexica)",
+            "multiplayer": "$t(general.multiplayer)",
+            "tryLexicle": "Lexicle'ı Dene",
+            "resumeGame": "Oyuna Devam Et",
+            "gameMode": "Mod: {{gameMode}}",
+            "highScore": "Yüksek Puan: {{score}}",
+            "title": "Ana Sayfa",
+            "subtitle": "çevrim içi",
+            "preferences": "$t(general.preferences)"
+        },
+        "newGameMode": {
+            "gameModeName": {
+                "hint": "Ad",
+                "description": "Oyun modunu seçmek / yüksek puanları kaydetmek için"
+            },
+            "timeLimit": {
+                "title": "Zaman Sınırı",
+                "description": "Dakika cinsinden zaman sınırı"
+            },
+            "boardSize": "Tahta Boyutu",
+            "scoreType": {
+                "title": "Puanlama Türü",
+                "wordLength": "$t(scoreDetails.wordLength)",
+                "letterPoints": "$t(scoreDetails.letterPoints)"
+            },
+            "minimumWordLength": "Asgari Sözcük Uzunluğu",
+            "timeAttack": {
+                "title": "Zaman Saldırısı",
+                "off": "Kapalı",
+                "hint": "Bulunan sözcük başına ($t(scoreDetails.wordLength) x {{multiplier}}) saniye ekler"
+            },
+            "title": "Yeni Oyun Modu",
+            "saveGameMode": "Oyun Modunu Kaydet"
+        },
+        "multiplayer": {
+            "startGameHint": "Tüm oyuncular hazır olduğunda, hepiniz oyuna aynı anda başlamalısınız.",
+            "startGame": "Oyunu başlat",
+            "joinGameHint": "Tüm oyuncular hazır olduğunda oyuna katılın.",
+            "joinGame": "Oyuna katıl",
+            "wordCount_one": "{{count}} sözcük",
+            "wordCount_other": "{{count}} sözcük",
+            "newGameTitle": "Web Lexica Yeni Çoklu Oyun",
+            "title": "Çok Oyunculu",
+            "gameTitle": "Web Lexica Çoklu Oyun",
+            "refreshBoard": "Tahtayı Yenile",
+            "alwaysOpenInAppConfirmation": "Paylaşılan oyunlar artık her zaman uygulamada açılacak. Bu ayarı tercihlerden değiştirebilirsiniz.",
+            "alwaysOpenInAppPrompt": "Her Zaman Uygulamada Aç",
+            "openInAppPrompt": "Uygulamada Aç"
+        },
+        "lexicons": {
+            "title": "$t(general.lexicon)",
+            "isBeta": "Beta sürüm"
+        },
+        "savedGames": {
+            "resume": "Devam Et",
+            "delete": "Sil",
+            "clearAll": "Tümünü Temizle",
+            "title": "Kaydedilen Oyunlar",
+            "gameModeName": "Oyun Modu",
+            "gameModeDetails": "Oyun Modu Ayrıntıları",
+            "remainingTime": "Kalan Süre"
+        },
+        "lexicle": {
+            "title": "Lexicle",
+            "headlineTitle": "LEXICLE",
+            "wordOfTheDay": "Günün Sözcüğü",
+            "random": "Rastgele",
+            "useWordleWordList": "Wordle Sözcük Listesini Kullan"
+        },
+        "wordOfTheDay": {
+            "title": "Günün Sözcüğü"
+        },
+        "gameModes": {
+            "title": "Oyun Modları",
+            "addGameMode": "Oyun Modu Ekle"
+        },
+        "random": {
+            "title": "Rastgele"
+        },
+        "singleplayer": {
+            "title": "Tek Oyunculu"
+        },
+        "preferences": {
+            "title": "$t(general.preferences)",
+            "language": "$t(general.language)",
+            "lexicon": "$t(general.lexicon)",
+            "androidSettings": "$t(pages.androidIntegration.title)"
+        },
+        "languages": {
+            "title": "$t(general.language)"
+        },
+        "androidIntegration": {
+            "forceShowAndroidSettingsPrompt": "\"Uygulamada Aç\" düğmesini göster",
+            "forceShowAndroidSettingsHint": "Paylaşılan bir oyunu Android Lexica uygulamasında açmak için istek kutusunu göster.",
+            "title": "Android Uygulama Ayarları",
+            "forceHideAndroidSettingsPrompt": "\"Uygulamada Aç\" düğmesini gizle",
+            "autoRedirectHint": "Paylaşılan bir oyunu açarken, web sayfası Android Lexica uygulamasını açmaya çalışacaktır.",
+            "autoRedirectPrompt": "Paylaşılan oyunları her zaman uygulamada aç",
+            "autoDetectAndroidHint": "Öntanımlı davranış. Aygıt türünüz düzgün algılanmıyorsa, diğer seçeneklerden birini seçin.",
+            "autoDetectAndroidPrompt": "Android algılandığında \"Uygulamada Aç\" seçeneğini göster",
+            "forceHideAndroidSettingsHint": "Paylaşılan bir oyunu Android Lexica uygulamasında açmak için istek kutusunu gizle."
+        }
+    },
+    "gameModeDetails": {
+        "time_one": "{{count}} dak",
+        "time_other": "{{count}} dak"
+    },
+    "lexicaGameScreens": {
+        "inGame": {
+            "foundWords": "$t(general.foundWords)",
+            "guesses": "Tahminler"
+        },
+        "results": {
+            "missedWords": "Bulunamayan Sözcükler",
+            "foundWords": "$t(general.foundWords)"
+        }
+    },
+    "scoreDetails": {
+        "time": "Süre",
+        "words": "Sözcükler",
+        "score": "Puan",
+        "displayPercentage": "{{found}}/{{total}} ({{percentage}}%)",
+        "wordLength": "Sözcük Uzunluğu",
+        "letterPoints": "Harf Puanı"
+    },
+    "general": {
+        "multiplayer": "Çok oyunculu",
+        "lexica": "Lexica - Sözcük Oyunu",
+        "back": "Geri",
+        "foundWords": "Bulunan Sözcükler",
+        "paused": "Duraklatıldı",
+        "loading": "Yükleniyor",
+        "error": "Hata",
+        "preferences": "Tercihler",
+        "lexicon": "Sözlük",
+        "language": "Dil"
+    },
+    "lexicleGameScreens": {
+        "results": {
+            "shareScore": "Puanı Paylaş",
+            "shareGameText": "Lexicle {{numericScore}}\n\n{{visualScore}}\n\nBakalım benim puanımı geçebilecek misin? {{url}}",
+            "shareGame": "Oyunu Paylaş",
+            "shareGameTextWordOfTheDay": "Lexicle Günün Sözcüğü {{date}} {{numericScore}}\n\n{{visualScore}}\n\nBakalım benim puanımı geçebilecek misin? {{url}}",
+            "shareScoreText": "Lexicle {{numericScore}}\n\n{{visualScore}}",
+            "shareScoreConfirmationText": "Puan Panoya Kopyalandı!",
+            "shareGameConfirmationText": "Oyun Bağlantısı Panoya Kopyalandı!",
+            "shareScoreTextWordOfTheDay": "Lexicle Günün Sözcüğü {{date}} {{numericScore}}\n\n{{visualScore}}"
+        }
+    }
+}

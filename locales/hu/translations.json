@@ -1,0 +1,57 @@
+{
+  "pages": {
+    "home": {
+      "newGame": "Új játék",
+      "headlineTitle": "$t(general.lexica)",
+      "multiplayer": "$t(general.multiplayer)",
+      "preferences": "$t(general.preferences)"
+    },
+    "newGameMode": {
+      "timeLimit": {
+        "title": "Időkorlát"
+      },
+      "boardSize": "Táblaméret",
+      "scoreType": {
+        "title": "Pontozás típusa",
+        "wordLength": "$t(scoreDetails.wordLength)",
+        "letterPoints": "$t(scoreDetails.letterPoints)"
+      }
+    },
+    "lexicons": {
+      "title": "$t(general.lexicon)",
+      "isBeta": "béta"
+    },
+    "preferences": {
+      "title": "$t(general.preferences)",
+      "language": "$t(general.language)",
+      "lexicon": "$t(general.lexicon)",
+      "androidSettings": "$t(pages.androidIntegration.title)"
+    },
+    "languages": {
+      "title": "$t(general.language)"
+    }
+  },
+  "lexicaGameScreens": {
+    "inGame": {
+      "foundWords": "$t(general.foundWords)"
+    },
+    "results": {
+      "missedWords": "Hiányzó szavak",
+      "foundWords": "$t(general.foundWords)"
+    }
+  },
+  "scoreDetails": {
+    "time": "Idő",
+    "words": "Szavak",
+    "score": "Pontszám",
+    "displayPercentage": "{{found}}/{{total}} ({{percentage}}%)",
+    "wordLength": "Szóhossz",
+    "letterPoints": "Betűpontok"
+  },
+  "general": {
+    "lexica": "Lexica",
+    "foundWords": "Megtalált szavak",
+    "preferences": "Beállítások",
+    "lexicon": "Lexikon"
+  }
+}

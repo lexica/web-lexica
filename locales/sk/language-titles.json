@@ -1,0 +1,22 @@
+{
+  "ca": "Katalánčina",
+  "de_DE": "Nemčina (rozšírená)",
+  "de_DE_no_diacritics": "Nemčina",
+  "es": "Španielčina",
+  "es_solo_enne": "Ñ iba v Španielčine",
+  "fa": "Perzština",
+  "fr_FR": "Francúzština (rozšírená)",
+  "fr_FR_no_diacritics": "Francúzština",
+  "hu": "Maďarčina",
+  "it": "Taliančina",
+  "ja": "Japončina",
+  "nl": "Holandčina",
+  "pl": "Poľština",
+  "pt_BR": "Portugalčina (Brazília) (rozšírená)",
+  "pt_BR_no_diacritics": "Portugalčina (Brazília)",
+  "ru": "Ruština",
+  "ru_extended": "Ruština (rozšírená)",
+  "en_GB": "Angličtina (Spojené kráľovstvo)",
+  "uk": "Ukrajinčina",
+  "en_US": "Angličtina (USA)"
+}

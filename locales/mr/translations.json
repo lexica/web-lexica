@@ -1,0 +1,57 @@
+{
+  "pages": {
+    "home": {
+      "newGame": "नवीन खेळ",
+      "headlineTitle": "$t(general.lexica)",
+      "multiplayer": "$t(general.multiplayer)",
+      "preferences": "$t(general.preferences)"
+    },
+    "newGameMode": {
+      "timeLimit": {
+        "title": "वेळ मर्यादा"
+      },
+      "boardSize": "बोर्डाचा आकार",
+      "scoreType": {
+        "title": "गुणांकन प्रकार",
+        "wordLength": "$t(scoreDetails.wordLength)",
+        "letterPoints": "$t(scoreDetails.letterPoints)"
+      }
+    },
+    "lexicons": {
+      "title": "$t(general.lexicon)",
+      "isBeta": "बीटा"
+    },
+    "preferences": {
+      "title": "$t(general.preferences)",
+      "language": "$t(general.language)",
+      "lexicon": "$t(general.lexicon)",
+      "androidSettings": "$t(pages.androidIntegration.title)"
+    },
+    "languages": {
+      "title": "$t(general.language)"
+    }
+  },
+  "lexicaGameScreens": {
+    "inGame": {
+      "foundWords": "$t(general.foundWords)"
+    },
+    "results": {
+      "missedWords": "सुटलेले शब्द",
+      "foundWords": "$t(general.foundWords)"
+    }
+  },
+  "scoreDetails": {
+    "time": "वेळ",
+    "words": "शब्द",
+    "score": "गुणांक",
+    "displayPercentage": "{{found}}/{{total}} ({{percentage}}%)",
+    "wordLength": "शब्दाची लांबी",
+    "letterPoints": "अक्षराचे गुण"
+  },
+  "general": {
+    "lexica": "लेक्सिका",
+    "foundWords": "सापडलेले शब्द",
+    "preferences": "पसंती",
+    "lexicon": "कोश"
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "pages": {
+    "home": {
+      "newGame": "Partida nova",
+      "headlineTitle": "$t(general.lexica)",
+      "multiplayer": "$t(general.multiplayer)",
+      "preferences": "$t(general.preferences)"
+    },
+    "newGameMode": {
+      "gameModeName": {
+        "hint": "Nom"
+      },
+      "timeLimit": {
+        "title": "Límit de temps",
+        "description": "Límit de temps en minuts"
+      },
+      "boardSize": "Mida del tauler",
+      "scoreType": {
+        "title": "Tipus de puntuació",
+        "wordLength": "$t(scoreDetails.wordLength)",
+        "letterPoints": "$t(scoreDetails.letterPoints)"
+      }
+    },
+    "lexicons": {
+      "title": "$t(general.lexicon)",
+      "isBeta": "beta"
+    },
+    "preferences": {
+      "title": "$t(general.preferences)",
+      "language": "$t(general.language)",
+      "lexicon": "$t(general.lexicon)",
+      "androidSettings": "$t(pages.androidIntegration.title)"
+    },
+    "languages": {
+      "title": "$t(general.language)"
+    }
+  },
+  "lexicaGameScreens": {
+    "inGame": {
+      "foundWords": "$t(general.foundWords)"
+    },
+    "results": {
+      "missedWords": "Mots romanents",
+      "foundWords": "$t(general.foundWords)"
+    }
+  },
+  "scoreDetails": {
+    "time": "Temps",
+    "words": "Mots",
+    "score": "Puntuació",
+    "displayPercentage": "{{found}}/{{total}} ({{percentage}}%)",
+    "wordLength": "Longitud dels mots",
+    "letterPoints": "Valor de les lletres"
+  },
+  "general": {
+    "lexica": "Lèxica",
+    "foundWords": "Mots trobats",
+    "preferences": "Configuració",
+    "lexicon": "Lèxic"
+  }
+}

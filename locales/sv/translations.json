@@ -1,0 +1,69 @@
+{
+  "pages": {
+    "home": {
+      "newGame": "Nytt spel",
+      "headlineTitle": "$t(general.lexica)",
+      "multiplayer": "$t(general.multiplayer)",
+      "preferences": "$t(general.preferences)"
+    },
+    "newGameMode": {
+      "gameModeName": {
+        "hint": "Namn",
+        "description": "For välj av spelläge / inspelning av poängsummar"
+      },
+      "timeLimit": {
+        "title": "Tidsbegränsning",
+        "description": "Tidsgräns i minuter"
+      },
+      "boardSize": "Brädesstorlek",
+      "scoreType": {
+        "title": "Poängräkning",
+        "wordLength": "$t(scoreDetails.wordLength)",
+        "letterPoints": "$t(scoreDetails.letterPoints)"
+      }
+    },
+    "multiplayer": {
+      "joinGame": "Gå med i spel"
+    },
+    "lexicons": {
+      "title": "$t(general.lexicon)",
+      "isBeta": "Beta"
+    },
+    "preferences": {
+      "title": "$t(general.preferences)",
+      "language": "$t(general.language)",
+      "lexicon": "$t(general.lexicon)",
+      "androidSettings": "$t(pages.androidIntegration.title)"
+    },
+    "languages": {
+      "title": "$t(general.language)"
+    }
+  },
+  "gameModeDetails": {
+    "time_one": "{{count}} min",
+    "time_other": "{{count}} min"
+  },
+  "lexicaGameScreens": {
+    "inGame": {
+      "foundWords": "$t(general.foundWords)"
+    },
+    "results": {
+      "missedWords": "Misslyckade ord",
+      "foundWords": "$t(general.foundWords)"
+    }
+  },
+  "scoreDetails": {
+    "time": "Tid",
+    "words": "Ord",
+    "score": "Poäng",
+    "displayPercentage": "{{found}}/{{total}} ({{percentage}}%)",
+    "wordLength": "Ordlängd",
+    "letterPoints": "Bokstavspoäng"
+  },
+  "general": {
+    "lexica": "Lexica",
+    "foundWords": "Hittade ord",
+    "preferences": "Inställningar",
+    "lexicon": "Lexikon"
+  }
+}

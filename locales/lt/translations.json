@@ -1,0 +1,76 @@
+{
+  "pages": {
+    "home": {
+      "newGame": "Naujas žaidimas",
+      "headlineTitle": "$t(general.lexica)",
+      "multiplayer": "$t(general.multiplayer)",
+      "preferences": "$t(general.preferences)"
+    },
+    "newGameMode": {
+      "gameModeName": {
+        "hint": "Pavadinimas",
+        "description": "Žaidimo rėžimo pasirinkimui / rekordų fiksavimui"
+      },
+      "timeLimit": {
+        "title": "Laiko limitas",
+        "description": "Laiko limitas minutėmis"
+      },
+      "boardSize": "Lentos dydis",
+      "scoreType": {
+        "title": "Vertinimo tipas",
+        "wordLength": "$t(scoreDetails.wordLength)",
+        "letterPoints": "$t(scoreDetails.letterPoints)"
+      }
+    },
+    "multiplayer": {
+      "startGameHint": "Kai visi žaidėjai bus pasiruošę, žaidimą turėtumėte pradėti vienu metu.",
+      "startGame": "Pradėti žaidimą",
+      "joinGameHint": "Kai visi žaidėjai bus pasiruošę, prisijunkite prie žaidimo.",
+      "joinGame": "Prisijungti prie žaidimo",
+      "wordCount_one": "{{count}} žodis",
+      "wordCount_other": "{{count}} žodžių"
+    },
+    "lexicons": {
+      "title": "$t(general.lexicon)",
+      "isBeta": "Beta"
+    },
+    "preferences": {
+      "title": "$t(general.preferences)",
+      "language": "$t(general.language)",
+      "lexicon": "$t(general.lexicon)",
+      "androidSettings": "$t(pages.androidIntegration.title)"
+    },
+    "languages": {
+      "title": "$t(general.language)"
+    }
+  },
+  "gameModeDetails": {
+    "time_one": "{{count}} min.",
+    "time_other": "{{count}} min."
+  },
+  "lexicaGameScreens": {
+    "inGame": {
+      "foundWords": "$t(general.foundWords)"
+    },
+    "results": {
+      "missedWords": "Praleisti žodžiai",
+      "foundWords": "$t(general.foundWords)"
+    }
+  },
+  "scoreDetails": {
+    "time": "Laikas",
+    "words": "Žodžiai",
+    "score": "Taškai",
+    "displayPercentage": "{{found}}/{{total}} ({{percentage}}%)",
+    "wordLength": "Žodžio ilgis",
+    "letterPoints": "Taškai už raides"
+  },
+  "general": {
+    "multiplayer": "Daugelio žaidėjų rėžimas",
+    "lexica": "Lexica",
+    "back": "Atgal",
+    "foundWords": "Rasti žodžiai",
+    "preferences": "Nuostatos",
+    "lexicon": "Žodynas"
+  }
+}

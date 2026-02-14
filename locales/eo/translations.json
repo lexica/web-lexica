@@ -1,0 +1,76 @@
+{
+  "pages": {
+    "home": {
+      "newGame": "Nova ludo",
+      "headlineTitle": "$t(general.lexica)",
+      "multiplayer": "$t(general.multiplayer)",
+      "preferences": "$t(general.preferences)"
+    },
+    "newGameMode": {
+      "gameModeName": {
+        "hint": "Nomo",
+        "description": "Por elekti ludreĝimon / registri plej bonajn poentarojn"
+      },
+      "timeLimit": {
+        "title": "Tempolimo",
+        "description": "Tempolimo en minutoj"
+      },
+      "boardSize": "Grando de Tabulo",
+      "scoreType": {
+        "title": "Tipo de Poentaro",
+        "wordLength": "$t(scoreDetails.wordLength)",
+        "letterPoints": "$t(scoreDetails.letterPoints)"
+      }
+    },
+    "multiplayer": {
+      "startGameHint": "Kiam ĉiuj ludantoj pretas, ĉiuj ekludu samtempe.",
+      "startGame": "Ekludi",
+      "joinGameHint": "Kiam ĉiuj ludantoj pretas, aliĝu al la ludo.",
+      "joinGame": "Aliĝi al ludo",
+      "wordCount_one": "{{count}} vorto",
+      "wordCount_other": "{{count}} vortoj"
+    },
+    "lexicons": {
+      "title": "$t(general.lexicon)",
+      "isBeta": "Beta-Versio"
+    },
+    "preferences": {
+      "title": "$t(general.preferences)",
+      "language": "$t(general.language)",
+      "lexicon": "$t(general.lexicon)",
+      "androidSettings": "$t(pages.androidIntegration.title)"
+    },
+    "languages": {
+      "title": "$t(general.language)"
+    }
+  },
+  "gameModeDetails": {
+    "time_one": "{{count}} minuto",
+    "time_other": "{{count}} minutoj"
+  },
+  "lexicaGameScreens": {
+    "inGame": {
+      "foundWords": "$t(general.foundWords)"
+    },
+    "results": {
+      "missedWords": "Ne Trovitaj Vortoj",
+      "foundWords": "$t(general.foundWords)"
+    }
+  },
+  "scoreDetails": {
+    "time": "Tempo",
+    "words": "Vortoj",
+    "score": "Poentoj",
+    "displayPercentage": "{{found}}/{{total}} ({{percentage}}%)",
+    "wordLength": "Vortolongo",
+    "letterPoints": "Literaj Poentoj"
+  },
+  "general": {
+    "multiplayer": "Pluraj ludantoj",
+    "lexica": "Lexica",
+    "back": "Reen",
+    "foundWords": "Trovitaj Vortoj",
+    "preferences": "Agordoj",
+    "lexicon": "Vortaro"
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "pages": {
+    "home": {
+      "newGame": "משחק חדש",
+      "headlineTitle": "$t(general.lexica)",
+      "multiplayer": "$t(general.multiplayer)",
+      "preferences": "$t(general.preferences)"
+    },
+    "newGameMode": {
+      "timeLimit": {
+        "title": "מגבלת זמן",
+        "description": "הגבלת זמן בדקות"
+      },
+      "boardSize": "גודל הלוח",
+      "scoreType": {
+        "title": "סוג ניקוד",
+        "wordLength": "$t(scoreDetails.wordLength)",
+        "letterPoints": "$t(scoreDetails.letterPoints)"
+      },
+      "gameModeName": {
+        "hint": "שם",
+        "description": "לבחירת מצב משחק / תיעוד שיאני הניקוד"
+      }
+    },
+    "lexicons": {
+      "title": "$t(general.lexicon)",
+      "isBeta": "בטא"
+    },
+    "preferences": {
+      "title": "$t(general.preferences)",
+      "language": "$t(general.language)",
+      "lexicon": "$t(general.lexicon)",
+      "androidSettings": "$t(pages.androidIntegration.title)"
+    },
+    "languages": {
+      "title": "$t(general.language)"
+    },
+    "multiplayer": {
+      "startGameHint": "כשכל השחקנים מוכנים, כולכם אמורים להתחיל את המשחק באותו הזמן.",
+      "startGame": "התחלת משחק",
+      "joinGameHint": "כשכל השחקנים מוכנים, להצטרף למשחק.",
+      "joinGame": "הצטרפות למשחק"
+    }
+  },
+  "lexicaGameScreens": {
+    "inGame": {
+      "foundWords": "$t(general.foundWords)"
+    },
+    "results": {
+      "missedWords": "מילים חסרות",
+      "foundWords": "$t(general.foundWords)"
+    }
+  },
+  "scoreDetails": {
+    "time": "זמן",
+    "words": "מילים",
+    "score": "ניקוד",
+    "displayPercentage": "{{found}}/{{total}} ({{percentage}}%)",
+    "wordLength": "אורך מילה",
+    "letterPoints": "נקודות אות"
+  },
+  "general": {
+    "lexica": "Lexica",
+    "foundWords": "מילים שנמצאו",
+    "preferences": "העדפות",
+    "lexicon": "אוצר מלים",
+    "multiplayer": "ריבוי שחקנים",
+    "back": "חזרה"
+  }
+}

@@ -1,0 +1,154 @@
+{
+    "pages": {
+        "home": {
+            "newGame": "Nova igra",
+            "headlineTitle": "$t(general.lexica)",
+            "multiplayer": "$t(general.multiplayer)",
+            "title": "Naslovnica",
+            "subtitle": "online",
+            "highScore": "Najviši rezultat: {{score}}",
+            "tryLexicle": "Probaj Lexicle",
+            "resumeGame": "Nastavi igru",
+            "gameMode": "Modus: {{gameMode}}",
+            "preferences": "$t(general.preferences)"
+        },
+        "newGameMode": {
+            "gameModeName": {
+                "hint": "Ime",
+                "description": "Za biranje modusa igre / zapisivanje najviših rezultata"
+            },
+            "timeLimit": {
+                "title": "Vremensko ograničenje",
+                "description": "Vremensko ograničenje u minutama"
+            },
+            "boardSize": "Veličina ploče",
+            "scoreType": {
+                "title": "Vrsta bodovanja",
+                "wordLength": "$t(scoreDetails.wordLength)",
+                "letterPoints": "$t(scoreDetails.letterPoints)"
+            },
+            "timeAttack": {
+                "hint": "Dodaje ($t(scoreDetails.wordLength) × {{multiplier}}) s po pronađenoj riječi",
+                "off": "Isključeno",
+                "title": "Vrijeme napada"
+            },
+            "saveGameMode": "Spremi modus igre",
+            "title": "Novi modus igre",
+            "minimumWordLength": "Najmanja duljina riječi"
+        },
+        "multiplayer": {
+            "startGameHint": "Kad su svi igrači spremni, svi biste trebali započeti igru u isto vrijeme.",
+            "startGame": "Počni igru",
+            "joinGameHint": "Kad su svi igrači spremni, pridruži se igri.",
+            "joinGame": "Pridruži se igri",
+            "wordCount_one": "{{count}} riječ",
+            "wordCount_other": "{{count}} riječi",
+            "refreshBoard": "Aktualiziraj ploču",
+            "title": "Više igrača",
+            "gameTitle": "Web Lexica igra za više igrača",
+            "newGameTitle": "Nova Web Lexica igra za više igrača",
+            "openInAppPrompt": "Otvori u aplikaciji",
+            "alwaysOpenInAppPrompt": "Uvijek otvori u aplikaciji",
+            "alwaysOpenInAppConfirmation": "Dijeljene igre će se sada uvijek otvarati u aplikaciji. Ovu postavku možeš promijeniti u postavkama."
+        },
+        "lexicons": {
+            "title": "$t(general.lexicon)",
+            "isBeta": "Beta"
+        },
+        "savedGames": {
+            "gameModeName": "Modus igre",
+            "delete": "Izbriši",
+            "clearAll": "Ukloni sve",
+            "title": "Spremljene igre",
+            "gameModeDetails": "Detalji modusa igre",
+            "remainingTime": "Preostalo vrijeme",
+            "resume": "Nastavi"
+        },
+        "lexicle": {
+            "wordOfTheDay": "Riječ dana",
+            "useWordleWordList": "Koristi Wordleov popis riječi",
+            "title": "Lexicle",
+            "headlineTitle": "LEXICLE",
+            "random": "Slučajno"
+        },
+        "wordOfTheDay": {
+            "title": "Riječ dana"
+        },
+        "random": {
+            "title": "Slučajno"
+        },
+        "gameModes": {
+            "title": "Modusi igre",
+            "addGameMode": "Dodaj modus igre"
+        },
+        "singleplayer": {
+            "title": "Jedan igrač"
+        },
+        "preferences": {
+            "title": "$t(general.preferences)",
+            "language": "$t(general.language)",
+            "lexicon": "$t(general.lexicon)",
+            "androidSettings": "$t(pages.androidIntegration.title)"
+        },
+        "languages": {
+            "title": "$t(general.language)"
+        },
+        "androidIntegration": {
+            "autoRedirectPrompt": "Uvijek otvori dijeljene igre u aplikaciji",
+            "forceShowAndroidSettingsPrompt": "Pokaži gumb „Otvori u aplikaciji”",
+            "forceShowAndroidSettingsHint": "Pokaži prozor za otvaranje dijeljene igre u aplikaciji Android Lexica.",
+            "autoDetectAndroidPrompt": "Pokaži opciju „Otvori u aplikaciji” ako se otkrije Android",
+            "title": "Potavke Android aplikacije",
+            "autoDetectAndroidHint": "Standardno ponašanje. Ako se tvoja vrsta uređaja ne prepozna, odaberi jednu od drugih opcija.",
+            "autoRedirectHint": "Prilikom otvaranja dijeljene igre, web stranica će pokušati otvoriti aplikaciju Android Lexica.",
+            "forceHideAndroidSettingsPrompt": "Sakrij gumb „Otvori u aplikaciji”",
+            "forceHideAndroidSettingsHint": "Sakrij prozor za otvaranje dijeljene igre u aplikaciji Android Lexica."
+        }
+    },
+    "gameModeDetails": {
+        "time_one": "{{count}} min",
+        "time_other": "{{count}} min"
+    },
+    "lexicaGameScreens": {
+        "inGame": {
+            "foundWords": "$t(general.foundWords)",
+            "guesses": "Nagađanja"
+        },
+        "results": {
+            "missedWords": "Propuštene riječi",
+            "foundWords": "$t(general.foundWords)"
+        }
+    },
+    "scoreDetails": {
+        "time": "Vrijeme",
+        "words": "Riječi",
+        "score": "Rezultat",
+        "displayPercentage": "{{found}}/{{total}} ({{percentage}} %)",
+        "wordLength": "Duljina riječi",
+        "letterPoints": "Bodovi za riječi"
+    },
+    "general": {
+        "multiplayer": "Više igrača",
+        "lexica": "Lexica",
+        "back": "Natrag",
+        "foundWords": "Pronađene riječi",
+        "loading": "Učitavanje",
+        "error": "Greška",
+        "paused": "Pauzirano",
+        "preferences": "Postavke",
+        "lexicon": "Leksikon",
+        "language": "Jezik"
+    },
+    "lexicleGameScreens": {
+        "results": {
+            "shareScore": "Dijeli rezultat",
+            "shareGame": "Dijeli igru",
+            "shareScoreConfirmationText": "Rezultat je kopiran u međuspremnik!",
+            "shareGameConfirmationText": "Poveznica za igru je kopirana u međuspremnik!",
+            "shareGameTextWordOfTheDay": "Lexicle riječ dana {{date}} {{numericScore}}\n\n{{visualScore}}\n\nProbaj nadmašiti moj rezultat: {{url}}",
+            "shareScoreTextWordOfTheDay": "Lexicle riječ dana {{date}} {{numericScore}}\n\n{{visualScore}}",
+            "shareScoreText": "Lexicle {{numericScore}}\n\n{{visualScore}}",
+            "shareGameText": "Lexicle {{numericScore}}\n\n{{visualScore}}\n\nProbaj nadmašiti moj rezultat: {{url}}"
+        }
+    }
+}
