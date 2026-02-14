@@ -5,9 +5,7 @@ import { logger } from './util/logger'
 import GameModes from './pages/GameModes'
 import Home from './pages/Home'
 import Lexicle from './pages/Lexicle'
-import Multiplayer from './pages/Multiplayer'
 import Preferences from './pages/Preferences'
-import SinglePlayer from './pages/SinglePlayer'
 
 import './App.css'
 import './style/scrollbar.css'
@@ -24,6 +22,9 @@ import { Translations } from './translations'
 import type { LanguageTitlesFn, TranslationsFn } from './translations/types'
 import Languages from './pages/Languages'
 import AndroidIntegration from './pages/AndroidIntegration'
+import GameScreen from './pages/GameScreen'
+
+const baseName = (["localhost", "127.0.0.1"].includes(window.location.hostname)) ? "/" : "/web-lexica"
 
 function App() {
   logger.debug('loading app...')
@@ -55,7 +56,7 @@ function App() {
         ><RenderInBanner.Provider
           value={context}
         >
-          <BrowserRouter basename="/web-lexica">
+          <BrowserRouter basename={baseName}>
             <Routes>
               <Route  path="/" element={<Home />}/>
               <Route path="/*" element={<>
@@ -65,10 +66,10 @@ function App() {
                   <Route path="/new-game-mode" element={ <NewGameMode />} />
                   <Route path="/lexicons" element={ <Lexicons />} />
                   <Route path="/languages" element={ <Languages />} />
-                  <Route path="/multiplayer" element={ <Multiplayer />} />
+                  <Route path="/multiplayer" element={ <GameScreen isMultiplayer />} />
                   <Route path="/preferences" element={ <Preferences />} />
                   <Route path="/android-integration" element={ <AndroidIntegration /> } />
-                  <Route path="/singleplayer" element={ <SinglePlayer />} />
+                  <Route path="/singleplayer" element={ <GameScreen />} />
                   <Route path="/lexicle/*" element={ <Lexicle/>} />
                   <Route path='/saved-games' element={ <SavedGames />} />
                 </Routes>

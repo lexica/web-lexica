@@ -20,8 +20,6 @@ import { Translations } from '../translations'
 
 export type GameScreenProps = {
   isMultiplayer?: boolean,
-  isNewGame?: boolean
-  isResumedGame?: boolean
 }
 
 const LoadingScreen = (): JSX.Element => {
@@ -165,40 +163,6 @@ const useUpdatingSearchString = (shouldUpdateSearch: boolean) => {
   }, [board, language, shouldUpdateSearch, rules, setSearchParameters])
 }
 
-const NewGame = ({ isMultiplayer }: { isMultiplayer: boolean }): JSX.Element => {
-  return <NewGameProviders>
-    <Game
-      showQrCode={isMultiplayer}
-      isMultiplayer={isMultiplayer}
-      autoStart={!isMultiplayer}
-    />
-  </NewGameProviders>
-}
-
-const Multiplayer = (): JSX.Element => {
-
-  return <SharedGameProviders>
-    <Game showQrCode={false} isMultiplayer />
-  </SharedGameProviders>
-}
-
-const ResumedGame = ({ gameUrl }: { gameUrl: string }): JSX.Element => {
-  const navigate = useNavigate()
-  useEffect(() => {
-    logger.debug('calling ResumedGame useEffect...')
-    navigate(gameUrl, { replace: true })
-  }, [gameUrl, navigate])
-  return <ResumedGameProviders
-    gamePath={gameUrl}
-  >
-    <Game
-      isMultiplayer={gameUrl.includes('multiplayer')}
-      showQrCode={false}
-      autoStart
-    />
-  </ResumedGameProviders>
-}
-
 
 /**
  * 
@@ -216,13 +180,24 @@ const ResumedGame = ({ gameUrl }: { gameUrl: string }): JSX.Element => {
  *  - No Resume
  */
 
-const GameScreen = (props: GameScreenProps): JSX.Element => {
-  const {
-    isMultiplayer = false,
-    isNewGame = false,
-  } = props
-  const [shouldUseSavedGame, setShouldUseSavedGame] = useState(false)
-  const [path, setPath] = useState('')
+const GameScreen = ({ isMultiplayer = false }: GameScreenProps): JSX.Element => {
+  const [search] = useState(window.location.search)
+  const isNewGame = !isMultiplayer || search === ''
+
+  const [savedGamePath] = useState(() => {
+    const gamePath = getGamePath()
+    if (!isValidGamePath(gamePath)) return null
+    if (!savedGameExistsForUrl(gamePath)) return null
+    return gamePath
+  })
+
+  const navigate = useNavigate()
+  useEffect(() => {
+    if (savedGamePath) {
+      logger.debug('calling ResumedGame useEffect...')
+      navigate(savedGamePath, { replace: true })
+    }
+  }, [savedGamePath, navigate])
 
   const refreshBoard = useContext(BoardRefresh)
   useEffect(() => {
@@ -230,21 +205,31 @@ const GameScreen = (props: GameScreenProps): JSX.Element => {
     return refreshBoard
   }, [refreshBoard])
 
-  useEffect(() => {
-    const gamePath = getGamePath()
-    if (!isValidGamePath(gamePath)) return
+  if (savedGamePath) return (
+    <ResumedGameProviders gamePath={savedGamePath}>
+      <Game
+        isMultiplayer={savedGamePath.includes('multiplayer')}
+        showQrCode={false}
+        autoStart
+      />
+    </ResumedGameProviders>
+  )
 
-    const savedGameExists = savedGameExistsForUrl(gamePath)
-    if (!savedGameExists) return
+  if (isNewGame) return (
+    <NewGameProviders>
+      <Game
+        showQrCode={isMultiplayer}
+        isMultiplayer={isMultiplayer}
+        autoStart={!isMultiplayer}
+      />
+    </NewGameProviders>
+  )
 
-    setShouldUseSavedGame(true)
-    setPath(gamePath)
-  }, [setShouldUseSavedGame])
-  
-  if (shouldUseSavedGame) return <ResumedGame gameUrl={path} />
-
-  if (isNewGame) return <NewGame isMultiplayer={isMultiplayer}/>
-  return <Multiplayer/>
+  return (
+    <SharedGameProviders>
+      <Game showQrCode={false} isMultiplayer />
+    </SharedGameProviders>
+  )
 }
 
 export default GameScreen
