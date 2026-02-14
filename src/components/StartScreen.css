@@ -80,3 +80,18 @@
   padding-inline: 20vw;
   box-sizing: border-box;
 }
+
+
+@media screen and (orientation: landscape) {
+  .start-screen-share-game-qr-code>.qr-code>svg {
+    width: min(55vw, 55vh);
+    height: min(55vw, 55vh);
+  }
+}
+
+@media screen and (orientation: portrait) {
+  .start-screen-share-game-qr-code>.qr-code>svg {
+    width: min(95vw, 55vh);
+    height: min(95vw, 55vh);
+  }
+}
