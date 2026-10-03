@@ -1,0 +1,76 @@
+{
+  "pages": {
+    "home": {
+      "newGame": "Новая игра",
+      "headlineTitle": "$t(general.lexica)",
+      "multiplayer": "$t(general.multiplayer)",
+      "preferences": "$t(general.preferences)"
+    },
+    "newGameMode": {
+      "gameModeName": {
+        "hint": "Имя",
+        "description": "Для выбора режима / записи рекордов"
+      },
+      "timeLimit": {
+        "title": "Временной лимит",
+        "description": "Ограничение по времени в минутах"
+      },
+      "boardSize": "Размер поля",
+      "scoreType": {
+        "title": "Начисление очков",
+        "wordLength": "$t(scoreDetails.wordLength)",
+        "letterPoints": "$t(scoreDetails.letterPoints)"
+      }
+    },
+    "multiplayer": {
+      "startGameHint": "Когда все игроки будут готовы, вы должны начать игру одновременно.",
+      "startGame": "Начать игру",
+      "joinGameHint": "Когда все игроки будут готовы, присоединяйтесь к игре.",
+      "joinGame": "Присоединиться к игре",
+      "wordCount_one": "{{count}} слово",
+      "wordCount_other": "{{count}} слов"
+    },
+    "lexicons": {
+      "title": "$t(general.lexicon)",
+      "isBeta": "Бета"
+    },
+    "preferences": {
+      "title": "$t(general.preferences)",
+      "language": "$t(general.language)",
+      "lexicon": "$t(general.lexicon)",
+      "androidSettings": "$t(pages.androidIntegration.title)"
+    },
+    "languages": {
+      "title": "$t(general.language)"
+    }
+  },
+  "gameModeDetails": {
+    "time_one": "{{count}} минута",
+    "time_other": "{{count}} минут"
+  },
+  "lexicaGameScreens": {
+    "inGame": {
+      "foundWords": "$t(general.foundWords)"
+    },
+    "results": {
+      "missedWords": "Пропущенные слова",
+      "foundWords": "$t(general.foundWords)"
+    }
+  },
+  "scoreDetails": {
+    "time": "Время",
+    "words": "Слова",
+    "score": "Очки",
+    "displayPercentage": "{{found}}/{{total}} ({{percentage}}%)",
+    "wordLength": "По длине слов",
+    "letterPoints": "По очкам букв"
+  },
+  "general": {
+    "multiplayer": "Мультиплеер",
+    "lexica": "Lexica",
+    "back": "Назад",
+    "foundWords": "Найденные слова",
+    "preferences": "Настройки",
+    "lexicon": "Словарь"
+  }
+}

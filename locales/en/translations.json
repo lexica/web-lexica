@@ -1,0 +1,154 @@
+{
+  "pages": {
+    "home": {
+      "title": "Home",
+      "headlineTitle": "$t(general.lexica)",
+      "subtitle": "online",
+      "newGame": "New Game",
+      "multiplayer": "$t(general.multiplayer)",
+      "tryLexicle": "Try Lexicle",
+      "resumeGame": "Resume Game",
+      "gameMode": "Mode: {{gameMode}}",
+      "highScore": "High Score: {{score}}",
+      "preferences": "$t(general.preferences)"
+    },
+    "gameModes": {
+      "title": "Game Modes",
+      "addGameMode": "Add Game Mode"
+    },
+    "newGameMode": {
+      "title": "New Game Mode",
+      "minimumWordLength": "Minimum Word Length",
+      "timeAttack": {
+        "title": "Time Attack",
+        "off": "Off",
+        "hint": "Adds ($t(scoreDetails.wordLength) x {{multiplier}}) second(s) per word found"
+      },
+      "gameModeName": {
+        "hint": "Name",
+        "description": "For choosing game mode / recording high scores"
+      },
+      "timeLimit": {
+        "title": "Time Limit",
+        "description": "Time limit in minutes"
+      },
+      "boardSize": "Board Size",
+      "scoreType": {
+        "title": "Scoring Type",
+        "wordLength": "$t(scoreDetails.wordLength)",
+        "letterPoints": "$t(scoreDetails.letterPoints)"
+      },
+      "saveGameMode": "Save Game Mode"
+    },
+    "multiplayer": {
+      "title": "Multiplayer",
+      "gameTitle": "Web Lexica Multiplayer Game",
+      "newGameTitle": "Web Lexica New Multiplayer Game",
+      "refreshBoard": "Refresh Board",
+      "startGameHint": "When all players are ready, you should all start the game at the same time.",
+      "startGame": "Start game",
+      "joinGameHint": "When all players are ready, join the game.",
+      "joinGame": "Join game",
+      "wordCount_one": "{{count}} word",
+      "wordCount_other": "{{count}} words",
+      "openInAppPrompt": "Open in App",
+      "alwaysOpenInAppPrompt": "Always Open in App",
+      "alwaysOpenInAppConfirmation": "Shared games will now always open in app. You can change this setting in preferences."
+    },
+    "savedGames": {
+      "title": "Saved Games",
+      "gameModeName": "Game Mode",
+      "gameModeDetails": "Game Mode Details",
+      "remainingTime": "Remaining Time",
+      "resume": "Resume",
+      "delete": "Delete",
+      "clearAll": "Clear All"
+    },
+    "lexicle": {
+      "title": "Lexicle",
+      "headlineTitle": "LEXICLE",
+      "wordOfTheDay": "Word Of The Day",
+      "random": "Random",
+      "useWordleWordList": "Use Wordle Word List"
+    },
+    "wordOfTheDay": {
+      "title": "Word Of The Day"
+    },
+    "random": {
+      "title": "Random"
+    },
+    "lexicons": {
+      "title": "$t(general.lexicon)",
+      "isBeta": "Beta"
+    },
+    "singleplayer": {
+      "title": "Single Player"
+    },
+    "preferences": {
+      "title": "$t(general.preferences)",
+      "language": "$t(general.language)",
+      "lexicon": "$t(general.lexicon)",
+      "androidSettings": "$t(pages.androidIntegration.title)"
+    },
+    "androidIntegration": {
+      "title": "Android App Settings",
+      "autoDetectAndroidPrompt": "Show \"Open in App\" option if Android is detected",
+      "autoDetectAndroidHint": "Default behavior. If your device type is not being detected properly, choose one of the other options.",
+      "autoRedirectPrompt": "Always open shared games in App",
+      "autoRedirectHint": "When opening a shared game, the web page will try to open the Android Lexica App.",
+      "forceShowAndroidSettingsPrompt": "Show \"Open in App\" button",
+      "forceShowAndroidSettingsHint": "Show the prompt to open a shared game in the Android Lexica app.",
+      "forceHideAndroidSettingsPrompt": "Hide \"Open in App\" button",
+      "forceHideAndroidSettingsHint": "Hide the prompt to open a shared game in the Android Lexica app."
+    },
+    "languages": {
+      "title": "$t(general.language)"
+    }
+  },
+  "gameModeDetails": {
+    "time_one": "{{count}} min",
+    "time_other": "{{count}} mins"
+  },
+  "lexicaGameScreens": {
+    "inGame": {
+      "guesses": "Guesses",
+      "foundWords": "$t(general.foundWords)"
+    },
+    "results": {
+      "foundWords": "$t(general.foundWords)",
+      "missedWords": "Missed Words"
+    }
+  },
+  "lexicleGameScreens": {
+    "results": {
+      "shareScore": "Share Score",
+      "shareGame": "Share Game",
+      "shareGameTextWordOfTheDay": "Lexicle Word of the Day {{date}} {{numericScore}}\n\n{{visualScore}}\n\nSee if you can beat my score: {{url}}",
+      "shareScoreTextWordOfTheDay": "Lexicle Word of the Day {{date}} {{numericScore}}\n\n{{visualScore}}",
+      "shareScoreText": "Lexicle {{numericScore}}\n\n{{visualScore}}",
+      "shareGameText": "Lexicle {{numericScore}}\n\n{{visualScore}}\n\nSee if you can beat my score: {{url}}",
+      "shareScoreConfirmationText": "Score Copied to Clipboard!",
+      "shareGameConfirmationText": "Game Link Copied to Clipboard!"
+    }
+  },
+  "scoreDetails": {
+    "time": "Time",
+    "words": "Words",
+    "score": "Score",
+    "displayPercentage": "{{found}}/{{total}} ({{percentage}}%)",
+    "wordLength": "Word Length",
+    "letterPoints": "Letter Points"
+  },
+  "general": {
+    "multiplayer": "Multiplayer",
+    "lexica": "Lexica",
+    "language": "Language",
+    "loading": "Loading",
+    "error": "Error",
+    "back": "Back",
+    "foundWords": "Found Words",
+    "paused": "Paused",
+    "preferences": "Preferences",
+    "lexicon": "Lexicon"
+  }
+}

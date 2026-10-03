@@ -1,0 +1,154 @@
+{
+    "scoreDetails": {
+        "time": "நேரம்",
+        "words": "சொற்கள்",
+        "score": "கெலிப்பெண்",
+        "displayPercentage": "{{found}}/{{total}} ({{percentage}}%)",
+        "wordLength": "சொல் நீளம்",
+        "letterPoints": "கடிதம் புள்ளிகள்"
+    },
+    "general": {
+        "lexica": "லெக்சிகா",
+        "language": "மொழி",
+        "loading": "ஏற்றுகிறது",
+        "multiplayer": "மல்டிபிளேயர்",
+        "error": "பிழை",
+        "back": "பின்",
+        "foundWords": "சொற்கள் கிடைத்தன",
+        "paused": "இடைநிறுத்தப்பட்டது",
+        "preferences": "விருப்பத்தேர்வுகள்",
+        "lexicon": "அகராதி"
+    },
+    "pages": {
+        "home": {
+            "title": "வீடு",
+            "headlineTitle": "$t(general.lexica)",
+            "subtitle": "ஆன்லைனில்",
+            "newGame": "புதிய விளையாட்டு",
+            "multiplayer": "$t(general.multiplayer)",
+            "tryLexicle": "லெக்சிகல் முயற்சிக்கவும்",
+            "resumeGame": "விளையாட்டை மீண்டும் தொடங்குங்கள்",
+            "gameMode": "பயன்முறை: {{gameMode}}}",
+            "highScore": "அதிக மதிப்பெண்: {{score}}",
+            "preferences": "$t(general.preferences)"
+        },
+        "gameModes": {
+            "title": "விளையாட்டு முறைகள்",
+            "addGameMode": "விளையாட்டு பயன்முறையைச் சேர்க்கவும்"
+        },
+        "newGameMode": {
+            "title": "புதிய விளையாட்டு முறை",
+            "minimumWordLength": "குறைந்தபட்ச சொல் நீளம்",
+            "timeAttack": {
+                "title": "நேர தாக்குதல்",
+                "off": "அணை",
+                "hint": "காணப்படும் ஒரு வார்த்தைக்கு ($t(scoreDetails.wordLength)x{{multiplier}}) விநாடி(கள்) சேர்க்கிறது"
+            },
+            "gameModeName": {
+                "hint": "பெயர்",
+                "description": "விளையாட்டு பயன்முறையைத் தேர்ந்தெடுப்பதற்கும் அதிக மதிப்பெண்களைப் பதிவு செய்வதற்கும்"
+            },
+            "timeLimit": {
+                "title": "நேர வரம்பு",
+                "description": "நிமிடங்களில் கால காலநீடிப்பு"
+            },
+            "boardSize": "போர்டு அளவு",
+            "scoreType": {
+                "title": "மதிப்பெண் வகை",
+                "wordLength": "$t(scoreDetails.wordLength)",
+                "letterPoints": "$t(scoreDetails.letterPoints)"
+            },
+            "saveGameMode": "விளையாட்டு பயன்முறையைச் சேமிக்கவும்"
+        },
+        "multiplayer": {
+            "title": "மல்டிபிளேயர்",
+            "gameTitle": "வலை லெக்சிகா மல்டிபிளேயர் விளையாட்டு",
+            "newGameTitle": "வலை லெக்சிகா புதிய மல்டிபிளேயர் விளையாட்டு",
+            "refreshBoard": "பலகை புதுப்பிக்கவும்",
+            "startGameHint": "எல்லா வீரர்களும் தயாராக இருக்கும்போது, நீங்கள் அனைவரும் ஒரே நேரத்தில் விளையாட்டைத் தொடங்க வேண்டும்.",
+            "startGame": "விளையாட்டைத் தொடங்கவும்",
+            "joinGameHint": "அனைத்து வீரர்களும் தயாராக இருக்கும்போது, விளையாட்டில் சேரவும்.",
+            "joinGame": "விளையாட்டில் சேரவும்",
+            "wordCount_one": "{{count}} சொல்",
+            "wordCount_other": "{{count}} சொற்கள்",
+            "openInAppPrompt": "பயன்பாட்டில் திறக்கவும்",
+            "alwaysOpenInAppPrompt": "பயன்பாட்டில் எப்போதும் திறக்கவும்",
+            "alwaysOpenInAppConfirmation": "பகிரப்பட்ட விளையாட்டுகள் இப்போது எப்போதும் பயன்பாட்டில் திறக்கப்படும். இந்த அமைப்பை நீங்கள் விருப்பங்களில் மாற்றலாம்."
+        },
+        "savedGames": {
+            "title": "சேமித்த விளையாட்டுகள்",
+            "gameModeName": "விளையாட்டு முறை",
+            "gameModeDetails": "விளையாட்டு முறை விவரங்கள்",
+            "remainingTime": "மீதமுள்ள நேரம்",
+            "resume": "மீண்டும் தொடங்குங்கள்",
+            "delete": "அழி",
+            "clearAll": "அனைத்தையும் அழிக்கவும்"
+        },
+        "lexicle": {
+            "title": "லெக்சிகல்",
+            "headlineTitle": "லெக்சிகல்",
+            "wordOfTheDay": "அன்றைய சொல்",
+            "random": "சீரற்ற",
+            "useWordleWordList": "வேர்டல் வேர்ட் பட்டியலைப் பயன்படுத்தவும்"
+        },
+        "wordOfTheDay": {
+            "title": "அன்றைய சொல்"
+        },
+        "random": {
+            "title": "சீரற்ற"
+        },
+        "lexicons": {
+      "title": "$t(general.lexicon)",
+            "isBeta": "பீட்டா"
+        },
+        "singleplayer": {
+            "title": "ஒற்றை வீரர்"
+        },
+        "preferences": {
+            "title": "$t(general.preferences)",
+            "language": "$t(general.language)",
+            "lexicon": "$t(general.lexicon)",
+            "androidSettings": "$t(pages.androidIntegration.title)"
+        },
+        "androidIntegration": {
+            "title": "ஆண்ட்ராய்டு பயன்பாட்டு அமைப்புகள்",
+            "autoDetectAndroidPrompt": "ஆண்ட்ராய்டு கண்டறியப்பட்டால் \"பயன்பாட்டில் திறந்திருக்கும்\" விருப்பத்தைக் காட்டு",
+            "autoDetectAndroidHint": "இயல்புநிலை நடத்தை. உங்கள் சாதன வகை சரியாக கண்டறியப்படாவிட்டால், மற்ற விருப்பங்களில் ஒன்றைத் தேர்வுசெய்க.",
+            "autoRedirectPrompt": "பயன்பாட்டில் எப்போதும் பகிரப்பட்ட விளையாட்டுகளைத் திறக்கவும்",
+            "autoRedirectHint": "பகிரப்பட்ட விளையாட்டைத் திறக்கும்போது, வலைப்பக்கம் ஆண்ட்ராய்டு லெக்சிகா பயன்பாட்டைத் திறக்க முயற்சிக்கும்.",
+            "forceShowAndroidSettingsPrompt": "\"பயன்பாட்டில் திற\" பொத்தானைக் காட்டு",
+            "forceShowAndroidSettingsHint": "ஆண்ட்ராய்டு லெக்சிகா பயன்பாட்டில் பகிரப்பட்ட விளையாட்டைத் திறக்க வரியில் காண்பி.",
+            "forceHideAndroidSettingsPrompt": "\"பயன்பாட்டில் திற\" பொத்தானை மறைக்கவும்",
+            "forceHideAndroidSettingsHint": "ஆண்ட்ராய்டு லெக்சிகா பயன்பாட்டில் பகிரப்பட்ட விளையாட்டைத் திறக்க வரியில் மறைக்கவும்."
+        },
+        "languages": {
+            "title": "$t(general.language)"
+        }
+    },
+    "gameModeDetails": {
+        "time_one": "{{count}} min",
+        "time_other": "{{count}} நிமிடங்கள்"
+    },
+    "lexicaGameScreens": {
+        "inGame": {
+            "guesses": "யூகங்கள்",
+            "foundWords": "$t(general.foundWords)"
+        },
+        "results": {
+            "foundWords": "$t(general.foundWords)",
+            "missedWords": "தவறவிட்ட வார்த்தைகள்"
+        }
+    },
+    "lexicleGameScreens": {
+        "results": {
+            "shareScore": "பகிர் ச்கோர்",
+            "shareGame": "விளையாட்டைப் பகிரவும்",
+            "shareGameTextWordOfTheDay": "நாளின் லெக்சிகல் சொல் {{date}} {{numericScore}}\n\n {{visualScore}}}\n\n எனது மதிப்பெண்ணை நீங்கள் வெல்ல முடியுமா என்று பாருங்கள்: {{url}}",
+            "shareScoreTextWordOfTheDay": "நாளின் சொற்பொழிவுச் சொல் {{date}} {{numericScore}}\n\n{{visualScore}}",
+            "shareScoreText": "சொல் {{numericScore}}\n\n{{visualScore}}",
+            "shareGameText": "லெக்சிகல் {{numericScore}}}\n\n {{visualScore}}}\n\n எனது மதிப்பெண்ணை நீங்கள் வெல்ல முடியுமா என்று பாருங்கள்: {{url}}",
+            "shareScoreConfirmationText": "கிளிப்போர்டுக்கு நகலெடுக்கப்பட்ட மதிப்பெண்!",
+            "shareGameConfirmationText": "கிளிப்போர்டுக்கு நகலெடுக்கப்பட்ட விளையாட்டு இணைப்பு!"
+        }
+    }
+}

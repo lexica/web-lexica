@@ -1,0 +1,76 @@
+{
+  "pages": {
+    "home": {
+      "newGame": "Нова гра",
+      "headlineTitle": "$t(general.lexica)",
+      "multiplayer": "$t(general.multiplayer)",
+      "preferences": "$t(general.preferences)"
+    },
+    "newGameMode": {
+      "gameModeName": {
+        "hint": "Назва",
+        "description": "Для вибору ігрового режиму / запису високих балів"
+      },
+      "timeLimit": {
+        "title": "Тривалість гри",
+        "description": "Обмеження часу в хвилинах"
+      },
+      "boardSize": "Розмір поля",
+      "scoreType": {
+        "title": "Метод підрахунку",
+        "wordLength": "$t(scoreDetails.wordLength)",
+        "letterPoints": "$t(scoreDetails.letterPoints)"
+      }
+    },
+    "multiplayer": {
+      "startGameHint": "Коли всі гравці готові, вам слід розпочати гру одночасно.",
+      "startGame": "Почати гру",
+      "joinGameHint": "Коли всі гравці будуть готові, приєднуйтесь до гри.",
+      "joinGame": "Приєднатись до гри",
+      "wordCount_one": "{{count}} слово",
+      "wordCount_other": "{{count}} слів"
+    },
+    "lexicons": {
+      "title": "$t(general.lexicon)",
+      "isBeta": "Бета"
+    },
+    "preferences": {
+      "title": "$t(general.preferences)",
+      "language": "$t(general.language)",
+      "lexicon": "$t(general.lexicon)",
+      "androidSettings": "$t(pages.androidIntegration.title)"
+    },
+    "languages": {
+      "title": "$t(general.language)"
+    }
+  },
+  "gameModeDetails": {
+    "time_one": "{{count}} хв",
+    "time_other": "{{count}} хв"
+  },
+  "lexicaGameScreens": {
+    "inGame": {
+      "foundWords": "$t(general.foundWords)"
+    },
+    "results": {
+      "missedWords": "Пропущені слова",
+      "foundWords": "$t(general.foundWords)"
+    }
+  },
+  "scoreDetails": {
+    "time": "Час",
+    "words": "Слова",
+    "score": "Бали",
+    "displayPercentage": "{{found}}/{{total}} ({{percentage}}%)",
+    "wordLength": "За довжиною слів",
+    "letterPoints": "За балами букв"
+  },
+  "general": {
+    "multiplayer": "Багатокористувацька гра",
+    "lexica": "Lexica",
+    "back": "Назад",
+    "foundWords": "Знайдені слова",
+    "preferences": "Налаштування",
+    "lexicon": "Лексикон"
+  }
+}

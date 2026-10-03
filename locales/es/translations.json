@@ -1,0 +1,154 @@
+{
+    "pages": {
+        "home": {
+            "newGame": "Nueva partida",
+            "headlineTitle": "$t(general.lexica)",
+            "multiplayer": "$t(general.multiplayer)",
+            "subtitle": "en línea",
+            "title": "Menú principal",
+            "tryLexicle": "Prueba Lexicle",
+            "resumeGame": "Continuar partida",
+            "gameMode": "Modo: {{gameMode}}",
+            "highScore": "Mejor Puntuación: {{score}}",
+            "preferences": "$t(general.preferences)"
+        },
+        "newGameMode": {
+            "gameModeName": {
+                "hint": "Nombre",
+                "description": "Para escoger una modalidad de partida / guardar los puntajes más altos"
+            },
+            "timeLimit": {
+                "title": "Límite de tiempo",
+                "description": "Tiempo límite en minutos"
+            },
+            "boardSize": "Tamaño del tablero",
+            "scoreType": {
+                "title": "Tipo de puntaje",
+                "wordLength": "$t(scoreDetails.wordLength)",
+                "letterPoints": "$t(scoreDetails.letterPoints)"
+            },
+            "minimumWordLength": "Longitud mínima de palabra",
+            "timeAttack": {
+                "title": "Ataque Temporal",
+                "off": "Desactivado",
+                "hint": "Añade ($t(scoreDetails.wordLength) x {{multiplier}}) segundo(s) por palabra encontrada"
+            },
+            "title": "Nuevo Modo de Juego",
+            "saveGameMode": "Guardar Modo de Juego"
+        },
+        "lexicons": {
+            "title": "$t(general.lexicon)",
+            "isBeta": "Beta"
+        },
+        "singleplayer": {
+            "title": "Un solo jugador"
+        },
+        "lexicle": {
+            "headlineTitle": "LEXICLE",
+            "random": "Aleatorio",
+            "title": "Léxico",
+            "wordOfTheDay": "Palabra del Día",
+            "useWordleWordList": "Usar lista de palabras de Wordle"
+        },
+        "gameModes": {
+            "title": "Modos de juego",
+            "addGameMode": "Añadir modo de juego"
+        },
+        "multiplayer": {
+            "title": "Multijugador",
+            "gameTitle": "Web de Lexica Juego Multijugador",
+            "newGameTitle": "Web de Lexica nuevo juego multijugador",
+            "refreshBoard": "Refrescar tablero",
+            "startGameHint": "Cuando todos los jugadores estéis preparados, deberéis empezar la partida al mismo tiempo.",
+            "startGame": "Empezar partida",
+            "joinGameHint": "Cuando todos los jugadores estén preparados, únete a la partida.",
+            "joinGame": "Unirse a la partida",
+            "wordCount_one": "{{count}} palabra",
+            "wordCount_other": "{{count}} palabras",
+            "openInAppPrompt": "Abrir en la aplicación",
+            "alwaysOpenInAppConfirmation": "Ahora los juegos compartidos se abrirán siempre en la aplicación. Puedes cambiar esta opción en las preferencias.",
+            "alwaysOpenInAppPrompt": "Abrir siempre en la aplicación"
+        },
+        "savedGames": {
+            "title": "Partidas Guardadas",
+            "gameModeName": "Modo de juego",
+            "gameModeDetails": "Detalles sobre Modo de Juego",
+            "remainingTime": "Tiempo Restante",
+            "resume": "Continuar",
+            "delete": "Borrar",
+            "clearAll": "Limpiar todo"
+        },
+        "wordOfTheDay": {
+            "title": "Palabra del Día"
+        },
+        "random": {
+            "title": "Aleatorio"
+        },
+        "preferences": {
+            "title": "$t(general.preferences)",
+            "language": "$t(general.language)",
+            "lexicon": "$t(general.lexicon)",
+            "androidSettings": "$t(pages.androidIntegration.title)"
+        },
+        "languages": {
+            "title": "$t(general.language)"
+        },
+        "androidIntegration": {
+            "title": "Ajustes de la aplicación para Android",
+            "autoDetectAndroidPrompt": "Mostrar la opción \"Abrir en la aplicación\" si se detecta Android",
+            "autoRedirectPrompt": "Abrir siempre los juegos compartidos en la aplicación",
+            "forceShowAndroidSettingsPrompt": "Mostrar el botón \"Abrir en la aplicación",
+            "forceShowAndroidSettingsHint": "Muestra el mensaje para abrir un juego compartido en la aplicación de Android Lexica.",
+            "forceHideAndroidSettingsPrompt": "Ocultar el botón \"Abrir en la aplicación",
+            "forceHideAndroidSettingsHint": "Ocultar el aviso para abrir un juego compartido en la aplicación Android Lexica.",
+            "autoDetectAndroidHint": "Comportamiento por defecto. Si tu tipo de dispositivo no se detecta correctamente, elige una de las otras opciones.",
+            "autoRedirectHint": "Al abrir un juego compartido, la página web intentará abrir la aplicación Android Lexica."
+        }
+    },
+    "gameModeDetails": {
+        "time_one": "{{count}} min",
+        "time_other": "{{count}} minutos"
+    },
+    "lexicaGameScreens": {
+        "inGame": {
+            "foundWords": "$t(general.foundWords)",
+            "guesses": "Aciertos"
+        },
+        "results": {
+            "missedWords": "Palabras incompletas",
+            "foundWords": "$t(general.foundWords)"
+        }
+    },
+    "scoreDetails": {
+        "time": "Tiempo",
+        "words": "Palabras",
+        "score": "Puntuación",
+        "displayPercentage": "{{found}}/{{total}} ({{percentage}}%)",
+        "wordLength": "Longitud de palabra",
+        "letterPoints": "Letras con puntuación"
+    },
+    "general": {
+        "lexica": "Léxica",
+        "foundWords": "Palabras completadas",
+        "error": "Error",
+        "back": "Atrás",
+        "paused": "Pausado",
+        "multiplayer": "Multijugador",
+        "loading": "Cargando",
+        "preferences": "Preferencias",
+        "lexicon": "Léxico",
+        "language": "Idioma"
+    },
+    "lexicleGameScreens": {
+        "results": {
+            "shareGameTextWordOfTheDay": "Lexicle Palabra del Día {{date}} {{numericScore}}\n\n{{visualScore}}\n\nA ver si puedes superar mi puntuación: {{url}}",
+            "shareScoreText": "Léxico {{numericScore}}\n\n{{visualScore}}",
+            "shareScoreConfirmationText": "Puntuación Copiada al Portapapeles!",
+            "shareScore": "Compartir puntuación",
+            "shareGame": "Compartir partida",
+            "shareScoreTextWordOfTheDay": "Lexicle Palabra del día {{date}} {{numericScore}}\n\n{{visualScore}}",
+            "shareGameText": "Lexicle {{numericScore}}\n\n{{visualScore}}\n\nA ver si puedes superar mi puntuación: {{url}}",
+            "shareGameConfirmationText": "Dirección del Juego Copiada al Portapapeles!"
+        }
+    }
+}

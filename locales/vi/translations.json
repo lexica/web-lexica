@@ -1,0 +1,154 @@
+{
+    "pages": {
+        "home": {
+            "newGame": "Trò chơi mới",
+            "headlineTitle": "$t(general.lexica)",
+            "multiplayer": "$t(general.multiplayer)",
+            "preferences": "$t(general.preferences)",
+            "title": "Trang chủ",
+            "subtitle": "trực tuyến",
+            "tryLexicle": "Chơi thử Lexicle",
+            "resumeGame": "Chơi tiếp",
+            "gameMode": "Chế độ: {{gameMode}}",
+            "highScore": "Điểm cao nhất: {{score}}"
+        },
+        "newGameMode": {
+            "gameModeName": {
+                "hint": "Tên",
+                "description": "Để chọn chế độ chơi / ghi lại điểm cao"
+            },
+            "timeLimit": {
+                "title": "Giới hạn thời gian",
+                "description": "Giới hạn thời gian tính bằng phút"
+            },
+            "boardSize": "Kích thước bảng",
+            "scoreType": {
+                "title": "Kiểu tính điểm",
+                "wordLength": "$t(scoreDetails.wordLength)",
+                "letterPoints": "$t(scoreDetails.letterPoints)"
+            },
+            "title": "Chế độ mới",
+            "minimumWordLength": "Độ dài từ tối thiểu",
+            "timeAttack": {
+                "title": "Đua thời gian",
+                "off": "Tắt",
+                "hint": "Mỗi từ tìm được cộng thêm ($t(scoreDetails.wordLength) x {{multiplier}}) giây"
+            },
+            "saveGameMode": "Lưu chế độ"
+        },
+        "multiplayer": {
+            "startGameHint": "Khi tất cả người chơi đã sẵn sàng, tất cả các bạn nên bắt đầu trò chơi cùng một lúc.",
+            "startGame": "Bắt đầu chơi",
+            "joinGameHint": "Khi tất cả người chơi đã sẵn sàng, hãy tham gia trò chơi.",
+            "joinGame": "Tham gia trò chơi",
+            "wordCount_other": "{{count}} từ",
+            "title": "Nhiều người chơi",
+            "gameTitle": "Ván Web Lexica nhiều người chơi",
+            "newGameTitle": "Ván mới Web Lexica nhiều người chơi",
+            "refreshBoard": "Làm mới bảng",
+            "wordCount_one": "{{count}} từ",
+            "openInAppPrompt": "Mở trong ứng dụng",
+            "alwaysOpenInAppPrompt": "Luôn mở trong ứng dụng",
+            "alwaysOpenInAppConfirmation": "Từ giờ, ván được chia sẻ sẽ luôn mở trong ứng dụng. Bạn có thể đổi lại trong phần Cài đặt."
+        },
+        "lexicons": {
+            "title": "$t(general.lexicon)",
+            "isBeta": "Beta"
+        },
+        "preferences": {
+            "title": "$t(general.preferences)",
+            "language": "$t(general.language)",
+            "lexicon": "$t(general.lexicon)",
+            "androidSettings": "$t(pages.androidIntegration.title)"
+        },
+        "languages": {
+            "title": "$t(general.language)"
+        },
+        "gameModes": {
+            "title": "Chế độ chơi",
+            "addGameMode": "Thêm chế độ"
+        },
+        "savedGames": {
+            "title": "Ván đã lưu",
+            "gameModeName": "Chế độ chơi",
+            "gameModeDetails": "Chi tiết chế độ",
+            "remainingTime": "Thời gian còn lại",
+            "resume": "Chơi tiếp",
+            "delete": "Xóa",
+            "clearAll": "Xóa hết"
+        },
+        "lexicle": {
+            "title": "Lexicle",
+            "headlineTitle": "LEXICLE",
+            "wordOfTheDay": "Từ của ngày",
+            "random": "Ngẫu nhiên",
+            "useWordleWordList": "Dùng bộ từ của Wordle"
+        },
+        "wordOfTheDay": {
+            "title": "Từ của ngày"
+        },
+        "random": {
+            "title": "Ngẫu nhiên"
+        },
+        "singleplayer": {
+            "title": "Chơi đơn"
+        },
+        "androidIntegration": {
+            "title": "Cài đặt ứng dụng Android",
+            "autoDetectAndroidPrompt": "Hiện tùy chọn \"Mở trong ứng dụng\" khi phát hiện Android",
+            "autoDetectAndroidHint": "Mặc định. Nếu thiết bị của bạn không được nhận diện đúng, hãy chọn một tùy chọn khác.",
+            "autoRedirectPrompt": "Luôn mở ván được chia sẻ trong ứng dụng",
+            "autoRedirectHint": "Khi bạn mở ván được chia sẻ, trang web sẽ thử mở ứng dụng Lexica trên Android.",
+            "forceShowAndroidSettingsPrompt": "Hiện nút \"Mở trong ứng dụng\"",
+            "forceShowAndroidSettingsHint": "Hiện lời nhắc mở ván được chia sẻ bằng ứng dụng Lexica trên Android.",
+            "forceHideAndroidSettingsPrompt": "Ẩn nút \"Mở trong ứng dụng\"",
+            "forceHideAndroidSettingsHint": "Ẩn lời nhắc mở ván được chia sẻ bằng ứng dụng Lexica trên Ẩn lời nhắc mở ván được chia sẻ bằng ứng dụng Lexica trên Android.."
+        }
+    },
+    "gameModeDetails": {
+        "time_other": "{{count}} phút",
+        "time_one": "{{count}} phút"
+    },
+    "lexicaGameScreens": {
+        "inGame": {
+            "foundWords": "$t(general.foundWords)",
+            "guesses": "Lượt đoán"
+        },
+        "results": {
+            "missedWords": "Từ bị bỏ lỡ",
+            "foundWords": "$t(general.foundWords)"
+        }
+    },
+    "scoreDetails": {
+        "time": "Thời gian",
+        "words": "Từ",
+        "score": "Điểm",
+        "displayPercentage": "{{found}}/{{total}} ({{percentage}}%)",
+        "wordLength": "Độ dài của từ",
+        "letterPoints": "Điểm cho từng chữ cái"
+    },
+    "general": {
+        "multiplayer": "Nhiều người chơi",
+        "lexica": "Lexica",
+        "back": "Quay lại",
+        "foundWords": "Từ đã tìm thấy",
+        "preferences": "Cài đặt",
+        "lexicon": "Lexicon",
+        "language": "Ngôn ngữ",
+        "loading": "Đang tải",
+        "error": "Lỗi",
+        "paused": "Tạm dừng"
+    },
+    "lexicleGameScreens": {
+        "results": {
+            "shareScore": "Chia sẻ số điểm",
+            "shareGame": "Chia sẻ ván chơi",
+            "shareGameTextWordOfTheDay": "Lexicle Từ của ngày {{date}} {{numericScore}}\n\n{{visualScore}}\n\nThử xem bạn có hơn điểm mình không: {{url}}",
+            "shareScoreTextWordOfTheDay": "Lexicle Từ của ngày {{date}} {{numericScore}}\n\n{{visualScore}}",
+            "shareScoreText": "Lexicle {{numericScore}}\n\n{{visualScore}}",
+            "shareGameText": "Lexicle {{numericScore}}\n\n{{visualScore}}\n\nThử xem bạn có hơn điểm mình không: {{url}}",
+            "shareScoreConfirmationText": "Đã sao chép điểm!",
+            "shareGameConfirmationText": "Đã sao chép link ván chơi!"
+        }
+    }
+}

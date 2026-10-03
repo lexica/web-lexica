@@ -1,0 +1,12 @@
+{
+    "pages": {
+        "home": {
+            "headlineTitle": "$t(general.lexica)",
+            "multiplayer": "$t(general.multiplayer)",
+            "tryLexicle": "لیکسیکل آزماؤ",
+            "subtitle": "آنلائین",
+            "title": "گھر",
+            "newGame": "نویں کھیڈ"
+        }
+    }
+}

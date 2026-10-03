@@ -1,0 +1,76 @@
+{
+  "pages": {
+    "home": {
+      "newGame": "Uusi peli",
+      "headlineTitle": "$t(general.lexica)",
+      "multiplayer": "$t(general.multiplayer)",
+      "preferences": "$t(general.preferences)"
+    },
+    "newGameMode": {
+      "gameModeName": {
+        "hint": "Nimi",
+        "description": "Pelitilan valintaa ja ennätysten talletusta varten"
+      },
+      "timeLimit": {
+        "title": "Aikaraja",
+        "description": "Aikaraja minuutteina"
+      },
+      "boardSize": "Laudan koko",
+      "scoreType": {
+        "title": "Pisteytystapa",
+        "wordLength": "$t(scoreDetails.wordLength)",
+        "letterPoints": "$t(scoreDetails.letterPoints)"
+      }
+    },
+    "multiplayer": {
+      "startGameHint": "Kun kaikki pelaajat ovat valmiina, aloittakaa peli samaan aikaan.",
+      "startGame": "Aloita peli",
+      "joinGameHint": "Kun kaikki pelaajat ovat valmiina, liity peliin.",
+      "joinGame": "Liity peliin",
+      "wordCount_one": "{{count}} sana",
+      "wordCount_other": "{{count}} sanaa"
+    },
+    "lexicons": {
+      "title": "$t(general.lexicon)",
+      "isBeta": "Beta"
+    },
+    "preferences": {
+      "title": "$t(general.preferences)",
+      "language": "$t(general.language)",
+      "lexicon": "$t(general.lexicon)",
+      "androidSettings": "$t(pages.androidIntegration.title)"
+    },
+    "languages": {
+      "title": "$t(general.language)"
+    }
+  },
+  "gameModeDetails": {
+    "time_one": "{{count}} min",
+    "time_other": "{{count}} min"
+  },
+  "lexicaGameScreens": {
+    "inGame": {
+      "foundWords": "$t(general.foundWords)"
+    },
+    "results": {
+      "missedWords": "Löytämättömät sanat",
+      "foundWords": "$t(general.foundWords)"
+    }
+  },
+  "scoreDetails": {
+    "time": "Aika",
+    "words": "Sanat",
+    "score": "Pisteet",
+    "displayPercentage": "{{found}}/{{total}} ({{percentage}} %)",
+    "wordLength": "Sanojen pituus",
+    "letterPoints": "Kirjainpisteet"
+  },
+  "general": {
+    "multiplayer": "Moninpeli",
+    "lexica": "Lexica",
+    "back": "Takaisin",
+    "foundWords": "Löydetyt sanat",
+    "preferences": "Asetukset",
+    "lexicon": "Leksikko"
+  }
+}

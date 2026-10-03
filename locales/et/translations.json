@@ -1,0 +1,154 @@
+{
+    "pages": {
+        "home": {
+            "newGame": "Uus mäng",
+            "headlineTitle": "$t(general.lexica)",
+            "multiplayer": "$t(general.multiplayer)",
+            "preferences": "$t(general.preferences)",
+            "title": "Avaleht",
+            "subtitle": "võrgus",
+            "tryLexicle": "Proovi Lexicle't",
+            "resumeGame": "Jätka mängu",
+            "highScore": "Parim tulemus: {{score}}",
+            "gameMode": "Mängutüüp: {{gameMode}}"
+        },
+        "newGameMode": {
+            "gameModeName": {
+                "hint": "Nimi",
+                "description": "Mängutüübi valimiseks ja tulemuste salvestamiseks"
+            },
+            "timeLimit": {
+                "title": "Ajapiirang",
+                "description": "Ajapiirang minutites"
+            },
+            "boardSize": "Mängulaua suurus",
+            "scoreType": {
+                "title": "Punktiarvestuse tüüp",
+                "wordLength": "$t(scoreDetails.wordLength)",
+                "letterPoints": "$t(scoreDetails.letterPoints)"
+            },
+            "timeAttack": {
+                "off": "Välja lülitatud",
+                "hint": "Lisab $t(scoreDetails.wordLength) x {{multiplier}} sekundi(t) iga leitud sõna kohta",
+                "title": "Ajarünnak"
+            },
+            "title": "Uus mängutüüp",
+            "minimumWordLength": "Sõna väikseim pikkus",
+            "saveGameMode": "Salvesta mängutüüp"
+        },
+        "multiplayer": {
+            "startGameHint": "Kui kõik mängijad on valmis, siis palun alustage mängimist ühe korraga.",
+            "startGame": "Alusta mängu",
+            "joinGameHint": "Liitu mänguga, kui kõik mängijad on valmis.",
+            "joinGame": "Liitu mänguga",
+            "wordCount_one": "{{count}} sõna",
+            "wordCount_other": "{{count}} sõna",
+            "title": "Mitmikmäng",
+            "gameTitle": "Lexica veebis - mitmikmäng",
+            "newGameTitle": "Lexica veebis - uus mitmikmäng",
+            "refreshBoard": "Laadi mänguväli uuesti",
+            "alwaysOpenInAppConfirmation": "Jagatud mängud (mitmikmängud) nüüd alati avatakse rakenduses. Sa saad seda käitumist muuta seadistustes.",
+            "openInAppPrompt": "Ava rakenduses",
+            "alwaysOpenInAppPrompt": "Alati ava rakenduses"
+        },
+        "lexicons": {
+            "title": "$t(general.lexicon)",
+            "isBeta": "beetaversioon"
+        },
+        "preferences": {
+            "title": "$t(general.preferences)",
+            "language": "$t(general.language)",
+            "lexicon": "$t(general.lexicon)",
+            "androidSettings": "$t(pages.androidIntegration.title)"
+        },
+        "languages": {
+            "title": "$t(general.language)"
+        },
+        "gameModes": {
+            "title": "Mängutüübid",
+            "addGameMode": "Lisa uus mängutüüp"
+        },
+        "lexicle": {
+            "headlineTitle": "LEXICLE",
+            "wordOfTheDay": "Päeva sõna",
+            "random": "Juhuslik",
+            "useWordleWordList": "Kasuta Wordle'i sõnadeloendit",
+            "title": "Lexicle"
+        },
+        "savedGames": {
+            "remainingTime": "Aega lõpuni",
+            "title": "Salvestatud mängud",
+            "gameModeDetails": "Teave mängutüübi kohta",
+            "resume": "Jätka",
+            "delete": "Kustuta",
+            "gameModeName": "Mängutüüp",
+            "clearAll": "Eemalda kõik"
+        },
+        "wordOfTheDay": {
+            "title": "Päeva sõna"
+        },
+        "random": {
+            "title": "Juhuslik"
+        },
+        "singleplayer": {
+            "title": "Üksikmäng"
+        },
+        "androidIntegration": {
+            "autoDetectAndroidPrompt": "Kui Androidi rakendus on tuvastatud, siis kuva „Ava rakenduses“",
+            "autoDetectAndroidHint": "Vaikimisi lahendus. Kui sinu nutiseadme tüüpi tuvastamine ei toimi korralikult, siis eelista mõnda muud valikut.",
+            "autoRedirectPrompt": "Alati ava jagatud mängud (mitmikmängud) rakenduses",
+            "autoRedirectHint": "Jagatud mängu avamisel veebileht üritab avada Lexica Androidi rakendust.",
+            "forceShowAndroidSettingsPrompt": "Näita nuppu „Ava rakenduses“",
+            "forceHideAndroidSettingsPrompt": "Peida „Ava rakenduses“ nupp",
+            "forceHideAndroidSettingsHint": "Peida valikuvaade, mis võimaldab avada jagatud mängu Lexica Androidi rakenduses.",
+            "title": "Androidi rakenduse seadistused",
+            "forceShowAndroidSettingsHint": "Näita valikuvaadet, mis võimaldab avada jagatud mängu Lexica Androidi rakenduses."
+        }
+    },
+    "gameModeDetails": {
+        "time_one": "{{count}} minut",
+        "time_other": "{{count}} minutit"
+    },
+    "lexicaGameScreens": {
+        "inGame": {
+            "foundWords": "$t(general.foundWords)",
+            "guesses": "Pakkumised"
+        },
+        "results": {
+            "missedWords": "Leidmata sõnad",
+            "foundWords": "$t(general.foundWords)"
+        }
+    },
+    "scoreDetails": {
+        "time": "Aeg",
+        "words": "Sõnu",
+        "score": "Tulemus",
+        "displayPercentage": "{{found}}/{{total}} ({{percentage}}%)",
+        "wordLength": "Sõnade pikkus",
+        "letterPoints": "Tähepunktid"
+    },
+    "general": {
+        "multiplayer": "Mitmikmäng",
+        "lexica": "Lexica",
+        "back": "Tagasi",
+        "foundWords": "Leitud sõnad",
+        "preferences": "Eelistused",
+        "lexicon": "Leksikon",
+        "paused": "Peatatud",
+        "loading": "Laadime andmeid",
+        "error": "Viga",
+        "language": "Keel"
+    },
+    "lexicleGameScreens": {
+        "results": {
+            "shareScore": "Jaga tulemust",
+            "shareScoreTextWordOfTheDay": "Lexicle päeva sõna {{date}} {{numericScore}}\n\n{{visualScore}}",
+            "shareScoreText": "Lexicle päeva sõna {{numericScore}}\n\n{{visualScore}}",
+            "shareScoreConfirmationText": "Tulemus on kopeeritud lõikelauale!",
+            "shareGame": "Jaga mängu",
+            "shareGameTextWordOfTheDay": "Lexicle päeva sõna {{date}} {{numericScore}}\n\n{{visualScore}}\n\nProovi saada selles mängus paremat tulemust: {{url}}",
+            "shareGameText": "Lexicle {{numericScore}}\n\n{{visualScore}}\n\nProovi saada selles mängus paremat tulemust: {{url}}",
+            "shareGameConfirmationText": "Mängu link on kopeeritud lõikelauale!"
+        }
+    }
+}

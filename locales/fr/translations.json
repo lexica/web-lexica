@@ -1,0 +1,76 @@
+{
+  "pages": {
+    "home": {
+      "newGame": "Nouvelle partie",
+      "headlineTitle": "$t(general.lexica)",
+      "multiplayer": "$t(general.multiplayer)",
+      "preferences": "$t(general.preferences)"
+    },
+    "newGameMode": {
+      "gameModeName": {
+        "hint": "Nom",
+        "description": "Pour choisir le mode de jeu / enregistrer des scores élevés"
+      },
+      "timeLimit": {
+        "title": "Durée d\\'une partie",
+        "description": "Limite de temps en minutes"
+      },
+      "boardSize": "Taille de la grille",
+      "scoreType": {
+        "title": "Mode de décompte des points",
+        "wordLength": "$t(scoreDetails.wordLength)",
+        "letterPoints": "$t(scoreDetails.letterPoints)"
+      }
+    },
+    "multiplayer": {
+      "startGameHint": "Lorsque tous les joueurs sont prêts, vous devez tous commencer la partie en même temps.",
+      "startGame": "Commencer la partie",
+      "joinGameHint": "Lorsque tous les joueurs sont prêts, rejoignez la partie.",
+      "joinGame": "Rejoindre la partie",
+      "wordCount_one": "{{count}} mot",
+      "wordCount_other": "{{count}} mots"
+    },
+    "lexicons": {
+      "title": "$t(general.lexicon)",
+      "isBeta": "Bêta"
+    },
+    "preferences": {
+      "title": "$t(general.preferences)",
+      "language": "$t(general.language)",
+      "lexicon": "$t(general.lexicon)",
+      "androidSettings": "$t(pages.androidIntegration.title)"
+    },
+    "languages": {
+      "title": "$t(general.language)"
+    }
+  },
+  "gameModeDetails": {
+    "time_one": "{{count}} min",
+    "time_other": "{{count}} min"
+  },
+  "lexicaGameScreens": {
+    "inGame": {
+      "foundWords": "$t(general.foundWords)"
+    },
+    "results": {
+      "missedWords": "Mots manqués",
+      "foundWords": "$t(general.foundWords)"
+    }
+  },
+  "scoreDetails": {
+    "time": "Temps",
+    "words": "Mots",
+    "score": "Score",
+    "displayPercentage": "{{found}}/{{total}} ({{percentage}}%)",
+    "wordLength": "Longueur des mots",
+    "letterPoints": "Valeur des lettres"
+  },
+  "general": {
+    "multiplayer": "Multijoueur",
+    "lexica": "Lexica",
+    "back": "Retour",
+    "foundWords": "Mots trouvés",
+    "preferences": "Préférences",
+    "lexicon": "Lexique"
+  }
+}
