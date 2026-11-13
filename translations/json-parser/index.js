@@ -1,315 +1,19 @@
 import assert from 'node:assert'
 import { randomUUID } from 'node:crypto'
 
+import { ReproduceableJSONParseError, ReproduceableJSONUnexpectedEnd, ReproduceableJSONUnexpectedSymbol } from './errors.js'
+import { getTokens } from './tokenizer.js'
+import { SCALARS, NAME_TO_SYMBOL, AState, OState, TState, JSym } from './types.js'
+import { getLinesFromJson } from './util.js'
+
+
+/**
+  * @import {Token, ParseContext} from './type-helper.d.ts'
+  * @import {LineInfo} from './util.js'
+  */
+
 const MAX_DEPTH = 100
 
-/** @type {(jsonStr: string) => ({ start: number, end: number, line: string, index: number })[]} */
-const makeLines = jsonStr => {
-  /** @type {ReturnType<typeof makeLines>} */
-  const lines = []
-  const peek = i => (i + 1) < jsonStr.length ? jsonStr[i + 1] : '\0'
-
-  let start = 0
-  let line = ''
-  for (let i = 0; i < jsonStr.length; i++) {
-    const currChar = jsonStr[i]
-    if (currChar === '\n' || currChar === '\r' && peek(i) === '\n') {
-      if (currChar === '\r') {
-        i++
-      }
-      lines.push({ start, end: i, line, index: lines.length })
-      start = i + 1
-      line = ''
-    } else { 
-      line += currChar
-    }
-
-  }
-  if (line.length) {
-    lines.push({ start, end: jsonStr.length - 1, line, index: lines.length })
-  }
-  return lines
-}
-const JSym = /** @type {const} */ ({
-  OBrace: 'open-curly',
-  CBrace: 'closed-curly',
-  OBracket: 'open-bracket',
-  CBracket: 'closed-bracket',
-  Colon: 'colon',
-  Comma: 'comma',
-  Str: 'string',
-  Num: 'number',
-  Nul: 'null',
-  True: 'true',
-  False: 'false',
-  End: 'end',
-})
-/**
-  * @typedef {(typeof JSym)[keyof typeof JSym]} JsonSymbol
-  */
-
-/**
-  * @typedef {import('./types.d.ts').JScalar} JScalar
-  * @typedef {{ startPos: number, length: number, startWhitespace: string, row: number, col: number}} BaseToken
-  * @typedef {({
-  *   symbol: (typeof SCALARS)[number],
-  *   val: JScalar,
-  * } | {
-  *   symbol: Exclude<JsonSymbol, typeof SCALARS[number]>,
-  *   val: undefined,
-  * }) & BaseToken} Token
-  */
-
-const WHITESPACE = /** @type {const} */ ([' ', '\t', '\n', '\r'])
-const DIGITS = /** @type {const} */ (['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'])
-const NUMERIC = /** @type {const} */ ([...DIGITS, '-', '.', 'e', 'E', '+'])
-
-/** @type {{ [sym: string]: JsonSymbol }} */
-const SYMBOL_TO_NAME = {
-  '{': JSym.OBrace,
-  '}': JSym.CBrace,
-  '[': JSym.OBracket,
-  ']': JSym.CBracket,
-  ':': JSym.Colon,
-  ',': JSym.Comma,
-}
-
-const SCALARS = /** @type {const} */ ([
-  JSym.Str,
-  JSym.Num,
-  JSym.Nul,
-  JSym.True,
-  JSym.False,
-])
-
-/** @type {{ [P in typeof JSym[keyof typeof JSym]: string }} */
-const NAME_TO_SYMBOL = {
-  ...SCALARS.reduce((acc, s) => ({ ...acc, [s]: s }), {}),
-  [JSym.End]: 'END',
-  [JSym.OBrace]: '{',
-  [JSym.CBrace]: '}',
-  [JSym.OBracket]: '[',
-  [JSym.CBracket]: ']',
-  [JSym.Colon]: ':',
-  [JSym.Comma]: ',',
-}
-
-
-const NAME_TO_LITERAL = /** {const} */ ({
-  [JSym.Nul]: null,
-  [JSym.True]: true,
-  [JSym.False]: false,
-})
-
-const TState = /** @type {const} */ ({
-  Root: 'root',
-  Obj: 'object',
-  Arr: 'array',
-})
-
-const OState = /** @type {const} */ ({
-  Start: 'start',
-  GetKey: 'key',
-  GetCol: 'colon',
-  GetVal: 'val',
-  Next: 'next',
-})
-
-const AState = /** @type {const} */ ({
-  Start: 'start',
-  GetVal: 'val',
-  Next: 'next'
-})
-
-
-/** @typedef {import('./types.d.ts').JVal} JVal */
-
-/**
-  * @typedef {typeof TState} TStateT
-  * @typedef {typeof OState} OStateT
-  * @typedef {typeof AState} AStateT
-  * @typedef {{
-  *   stateType: TStateT['Root'],
-  *   current: JVal[],
-  *   startTok: Token,
-  *   id: import('node:crypto').UUID,
-  * }} RootContext
-  * @typedef {{
-  *   subState: OStateT['GetVal']
-  *   key: string,
-  * } | {
-  *   subState: OStateT['Next' | 'GetKey' | 'Start']
-  * }} OSubState
-  * @typedef {{
-  *   stateType: TStateT['Obj'],
-  *   current: Map<string, JVal>
-  *   startTok: Token,
-  *   id: import('node:crypto').UUID,
-  * } & OSubState} ObjectContext
-  * @typedef {{
-  *   stateType: TStateT['Arr'],
-  *   current: JVal[],
-  *   subState: AStateT[keyof AStateT],
-  *   startTok: Token,
-  *   id: import('node:crypto').UUID,
-  * }} ArrayContext
-  * @typedef {RootContext | ObjectContext | ArrayContext} ParseContext
-  */
-
-/** @type {ParseContext} */
-const asdfasdf = {}
-
-asdfasdf.id
-const getTokens = (jsonStr) => {
-  /** @type {Token[]} */
-  const tokens = []
-  const lines = makeLines(jsonStr)
-  const getRowAndCol = index => {
-    const line = lines.find(({ start }) => start <= index)
-    if (!line) return { row: -1, col: -1 }
-
-    return { row: line.index, col: index - line.start }
-  }
-  /** @type {(msg: string, err?: Error) => Error} */
-  const makeErr = (msg, err) => {
-    if (!err) return new Error(msg)
-    return new Error(msg + '\nOriginal error:\n' + err.message)
-  }
-  const peek = i => (i + 1) < jsonStr.length ? jsonStr[i + 1] : '\0'
-
-  for (let i = 0; i < jsonStr.length; i++) {
-    let currChar = jsonStr[i]
-    let whitespace = ''
-    while (i < jsonStr.length && WHITESPACE.includes(currChar)) {
-      i += 1
-      whitespace += currChar
-      currChar = jsonStr[i]
-    }
-
-    // we whitespace skipped to the end of the jsonStr
-    if (i >= jsonStr.length) {
-      tokens.push({
-        symbol: JSym.End,
-        whitespace,
-        ...getRowAndCol(jsonStr.length - 1), // feels safer.
-        val: undefined,
-        startPos: jsonStr.length - 1,
-        length: 1,
-      })
-      continue
-    }
-
-    if ([...DIGITS, '-'].includes(currChar)) {
-      // number
-      const start = i
-      let numStr = ''
-      while (true) {
-        numStr += jsonStr[i]
-        if (NUMERIC.includes(peek(i))) {
-          i += 1
-        } else break
-      }
-      const end = i
-      let numVal
-      try {
-        numVal = JSON.parse(numStr)
-      } catch (e) {
-        const printable = getPrintableToken({ startPos: start, length: end - start, ...getRowAndCol(start) }, lines)
-        throw makeErr(`Couldn't parse number starting at position ${start}. Number in question: '${numStr}'\n${printable}`, e)
-      }
-      tokens.push({
-        symbol: JSym.Num,
-        val: numVal,
-        startPos: start,
-        length: numStr.length,
-        whitespace,
-        ...getRowAndCol(start),
-      })
-      continue
-    }
-    if (currChar === '"') {
-      let escCount = 0
-      const start = i
-      let strStr = ''
-      do {
-        strStr += currChar
-        // const currChar_ = currChar
-        if (currChar === '\\')  escCount += 1 
-        else escCount = 0
-        i += 1
-        if (i >= jsonStr.length) break
-        currChar = jsonStr[i]
-      } while (escCount % 2 === 1 || currChar !== '"')
-      if (i < jsonStr.length) {
-        strStr += currChar
-      }
-      const end = i
-      let strVal
-      try {
-        strVal = JSON.parse(strStr)
-      } catch(e) {
-        const printable = getPrintableToken({ startPos: start, length: end - start, ...getRowAndCol(start) }, lines)
-        throw makeErr(`Couldn't parse string starting at position ${start}. String in question: '${strStr}'\n${printable}`, e)
-      }
-
-      tokens.push({
-        symbol: JSym.Str,
-        val: strVal,
-        startPos: start,
-        length: strStr.length,
-        whitespace,
-        ...getRowAndCol(start)
-      })
-      continue
-    }
-
-    if (SYMBOL_TO_NAME[currChar] !== undefined) {
-      tokens.push({
-        symbol: SYMBOL_TO_NAME[currChar],
-        startPos: i,
-        length: 1,
-        val: undefined,
-        whitespace,
-        ...getRowAndCol(i),
-      })
-      continue
-    }
-
-
-    let found = false
-    for(const literal of [JSym.Nul, JSym.True, JSym.False]) {
-      if (jsonStr.slice(i, i + literal.length) !== literal) continue
-
-      tokens.push({
-        symbol: literal,
-        startPos: i,
-        length: literal.length,
-        val: NAME_TO_LITERAL[literal],
-        whitespace,
-        ...getRowAndCol(i),
-      })
-      i += literal.length - 1
-      found = true
-      break
-    }
-    if (found) continue
-    const escaped = JSON.stringify(currChar).replace(/(^"|"$)/g, '')
-    throw new ReproduceableJSONUnexpectedSymbol(null, { startPos: i, ...getRowAndCol(i), symbol: escaped, length: 1 }, lines)
-  }
-  return tokens
-}
-
-
-/** @type {(token: Token, lines: ReturnType<typeof makeLines>} */
-const getPrintableToken = (token, lines) => {
-  if (token.row >= lines.length) return `ERR: Couldn't print token. Symbol: '${token.symbol}'. value: '${token.val === undefined ? '' : token.val}'`
-
-  const { line } = lines[token.row]
-  const markerBegin = token.col > 0 ? (new Array(token.col)).fill(' ').join('') : ''
-  const marker = (new Array(Math.min(token.length, 1))).fill('^').join('')
-  return `${line}\n${markerBegin}${marker}`
-
-}
 
 /** @type {(prefill: Partial<ParseContext>) => ParseContext} */
 const getNewContext = (prefill = {}) => ({
@@ -320,58 +24,13 @@ const getNewContext = (prefill = {}) => ({
   ...prefill,
 })
 
-class ReproduceableJSONParseError extends Error {
-  constructor(message, token, lines, options) {
-    super(message, options)
-    this.token = token
-    this.tokenPrintable = getPrintableToken(token, lines)
-    this.message = `${message}\nLocation: ${this.getLineVerbose()}\n${this.tokenPrintable}`
-  }
-  getLineVerbose(token = undefined) {
-    if (!token) {
-      token = this.token
-    }
-    return `line ${token.row + 1}, column ${token.col}`
-  }
-  getLineTerse(token = undefined) {
-    if (!token) {
-      token = this.token
-    }
-    return `L#${token.row + 1}:${token.col}`
-  }
-}
-class ReproduceableJSONUnexpectedSymbol extends ReproduceableJSONParseError {
-  constructor(expected, token, lines, options) {
-    super('', token, lines, options)
-    const sym = NAME_TO_SYMBOL[this.token.symbol] ?? this.token.symbol
-    const messagePrefix = `Parsing error: Unexpected symbol '${sym}' found at ${this.getLineVerbose()}.`
-    if (expected) {
-      this.message = `${messagePrefix} expected ${expected} instead.\n${this.tokenPrintable}`
-    } else {
-      this.message = `${messagePrefix}\n${this.tokenPrintable}`
-    }
-  }
-}
-class ReproduceableJSONUnexpectedEnd extends ReproduceableJSONParseError {
-  constructor(expected, token, lines, options) {
-    super('', token, lines, options)
-    const messagePrefix = `Parsing error: Unexpected end of JSON at ${this.getLineVerbose()}.`
-    if (expected) {
-      this.message = `${messagePrefix} expected ${expected} instead.\n${this.tokenPrintable}`
-    } else {
-      this.message = `${messagePrefix}\n${this.tokenPrintable}`
-    }
-  }
-}
-
-
 /**
   * @typedef {{
   *   currContext: ParseContext,
   *   token: Token,
   *   isFirstToken: boolean,
   *   handleCloseContext: () => ParseContext,
-  *   lines: ReturnType<typeof makeLines>,
+  *   lines: LineInfo[],
   * }} StateHandlerParams
   */
 
@@ -547,7 +206,7 @@ const closeCurrentContext = (currContext, stack) => {
 
 export const parseReproduceableJSON = (jsonStr) => {
   const tokens = getTokens(jsonStr)
-  const lines = makeLines(jsonStr)
+  const lines = getLinesFromJson(jsonStr)
   // Early Exit
   if (!tokens.length) {
     throw new ReproduceableJSONParseError("Unexpected end of JSON: No tokens were found!", { row: 0, col: 0, length: 0 }, lines)
