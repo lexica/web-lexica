@@ -1,11 +1,13 @@
 import * as R from 'ramda'
 import { program, Option } from 'commander'
-import { readdirSync, existsSync, mkdirSync, writeFileSync } from 'node:fs'
+import { readdirSync, existsSync, mkdirSync, writeFileSync, unlinkSync } from 'node:fs'
+import { writeFile } from 'node:fs/promises'
 import * as translationMaps from './android-and-web-translation-mappings.js'
 import pathUtil from 'node:path'
 import { folderHasTranslations, getAndroidTranslationsFromFolder } from './android-translations.js'
 import { mapTranslationsFromAndroidToWeb } from './map-translations.js'
 import * as typeHints from './make-ts-type-helper.js'
+import StreamZip from 'node-stream-zip'
 
 const {
   languageTitlesFromAndroidToWeb,
@@ -25,6 +27,24 @@ const writeToFile = (path, content) => {
   writeFileSync(path, JSON.stringify(content, null, 2), { encoding: 'utf-8' })
 }
 
+const handleDownload = async downloadPath => {
+  const downloadURL = 'https://hosted.weblate.org/api/components/lexica/strings/file/'
+  const weblateToken = process.env["WEBLATE_TOKEN"]
+  if (!weblateToken?.length) {
+    console.error("WEBLATE_TOKEN is unset.")
+    process.exit(1)
+  }
+  mkdirSync(downloadPath, { recursive: true })
+  const req = await fetch(downloadURL, { headers: { 'Authorization': `Bearer ${weblateToken}` } })
+  const resp = await req.blob()
+  const filePath = pathUtil.join(downloadPath, 'tmp-translations.zip')
+  await writeFile(filePath, resp.stream())
+  const zip = new StreamZip.async({ file: filePath })
+
+  await zip.extract(null, downloadPath)
+  unlinkSync(filePath)
+}
+
 const handleMergeTranslations = async (args, options) => {
   /** @type {{ androidTranslationsDir: string, webTranslationsDir: string, clobber: boolean, print: boolean, tee: boolean }} */
   const {
@@ -33,8 +53,16 @@ const handleMergeTranslations = async (args, options) => {
     clobber,
     update,
     print,
-    tee
+    tee,
+    download
   } = options
+
+  if (download) {
+    const downloadPath = androidTranslationsDir.replace(/\/lexica\/strings\/app\/src\/main\/res$/, '')
+    await handleDownload(downloadPath)
+  }
+
+
   const getInputFolderPath = folder => `${androidTranslationsDir}/${folder}`
 
   const makeTranslationDir = (languageCode) => {
@@ -175,6 +203,12 @@ const main = () => {
     .version('0.0.1')
   program.command('merge-translations')
     .argument('<string...>', 'one or more country code to merge, or "all" to merge all codes')
+    .option(
+      '-d, --download',
+      'download lexica translations to the --android-translations-dir (stripping off the /lexica/strings/app/src/main/res part of the path)\n'
+      + 'NOTE: the env var WEBLATE_TOKEN must contain a valid api key from weblate to use this option.',
+      false,
+    )
     .option('-a, --android-translations-dir <string>', 'path to the Lexica translations directory',  './tmp-translations/lexica/strings/app/src/main/res')
     .option('-w, --web-translations-dir <string>', 'path to the Web Lexica translations directory', './public/locales')
     .addOption(new Option('-c, --clobber', 'Replace existing Web Lexica translations with Lexica translations, does not merge translations at all').default(false).conflicts('update'))
