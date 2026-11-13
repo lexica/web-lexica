@@ -70,6 +70,8 @@ const JSym = /** @type {const} */ ({
   Str: 'string',
   Num: 'number',
   Nul: 'null',
+  True: 'true',
+  False: 'false',
   End: 'end',
 })
 /**
@@ -77,7 +79,7 @@ const JSym = /** @type {const} */ ({
   */
 
 /**
-  * @typedef {string | number | null} JScalar
+  * @typedef {string | number | null | boolean} JScalar
   * @typedef {{
   *   symbol: (typeof SCALARS)[number],
   *   val: JScalar,
@@ -93,7 +95,7 @@ const JSym = /** @type {const} */ ({
 
 const WHITESPACE = /** @type {const} */ ([' ', '\t', '\n', '\r'])
 const DIGITS = /** @type {const} */ (['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'])
-const NUMERIC = /** @type {const} */ ([...DIGITS, '-', '.', 'e', 'E'])
+const NUMERIC = /** @type {const} */ ([...DIGITS, '-', '.', 'e', 'E', '+'])
 
 /** @type {{ [sym: string]: JsonSymbol }} */
 const SYMBOL_TO_NAME = {
@@ -105,10 +107,18 @@ const SYMBOL_TO_NAME = {
   ',': JSym.Comma,
 }
 
+const NAME_TO_LITERAL = /** {const} */ ({
+  [JSym.Nul]: null,
+  [JSym.True]: true,
+  [JSym.False]: false,
+})
+
 const SCALARS = /** @type {const} */ ([
   JSym.Str,
   JSym.Num,
-  JSym.Nul
+  JSym.Nul,
+  JSym.True,
+  JSym.False,
 ])
 
 const TState = /** @type {const} */ ({
@@ -191,6 +201,10 @@ export const parseWithMap = (jsonStr) => {
       i += 1
       currChar = jsonStr[i]
     }
+
+    // we whitespace skipped to the end of the jsonStr
+    if (i >= jsonStr.length) break
+
     if ([...DIGITS, '-'].includes(currChar)) {
       // number
       const start = i
@@ -261,16 +275,21 @@ export const parseWithMap = (jsonStr) => {
     }
 
 
-    if (currChar === 'n' && i + 3 < jsonStr.length && jsonStr.slice(i, i+ 4) === 'null') {
+    let found = false
+    for(const literal of [JSym.Nul, JSym.True, JSym.False]) {
+      if (jsonStr.slice(i, i + literal.length) !== literal) continue
+
       tokens.push({
-        symbol: JSym.Nul,
+        symbol: literal,
         startPos: i,
-        endPos: i+3,
-        val: null
+        endPos: i + literal.length - 1,
+        val: NAME_TO_LITERAL[literal],
       })
-      i += 3
-      continue
+      i += literal.length - 1
+      found = true
+      break
     }
+    if (found) continue
     throw new Error(`Unexpected symbol found at ${i + 1}: ${currChar}`)
   }
 
@@ -329,7 +348,7 @@ export const parseWithMap = (jsonStr) => {
           stack.push(currContext)
           currContext = {
             stateType: TState.Obj,
-            subState: OState.GetKey,
+            subState: OState.Start,
             current: new Map(),
             startTok: tok,
           }

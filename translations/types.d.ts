@@ -1,1 +1,1 @@
-export type JVal = string | number | null | JVal[] | Map<string, JVal>
+export type JVal = boolean | string | number | null | JVal[] | Map<string, JVal>
