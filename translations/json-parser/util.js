@@ -1,8 +1,3 @@
-import { ReproduceableJSONParseError, ReproduceableJSONUnexpectedSymbol } from './errors.js'
-import { whitespaceStart, isReproduceable, whitespaceEnd, toReproducedString, SCALARS, JSym } from './types.js'
-
-/** @import {JVal, ReproduceableJVal, ReproduceableMap, ReproduceableArray, JScalar, Reproduceable, Token} from './type-helper.d.ts' */
-
 /** @typedef {{ start: number, end: number, line: string, index: number }} LineInfo */
 /** @type {(jsonStr: string) => LineInfo[]} */
 export const getLinesFromJson = jsonStr => {
@@ -40,6 +35,5 @@ export const getPrintableToken = (token, lines) => {
   const markerBegin = token.col > 0 ? (new Array(token.col)).fill(' ').join('') : ''
   const marker = (new Array(Math.min(token.length, 1))).fill('^').join('')
   return `${line}\n${markerBegin}${marker}`
-
 }
 

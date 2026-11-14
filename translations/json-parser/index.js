@@ -5,6 +5,8 @@ import { ReproduceableJSONParseError, ReproduceableJSONUnexpectedEnd, Reproducea
 import { getTokens } from './tokenizer.js'
 import { SCALARS, NAME_TO_SYMBOL, AState, OState, TState, JSym } from './types.js'
 import { getLinesFromJson } from './util.js'
+import { readdir } from 'node:fs/promises'
+import { statSync } from 'node:fs'
 
 
 /**
@@ -259,72 +261,31 @@ export const parseReproduceableJSON = (jsonStr) => {
 }
 
 
-const main = async () => {
-  const fs = await import('node:fs/promises')
-  const TEST_DIR = './translations/test-parsing'
-  const dirContents = await fs.readdir(TEST_DIR)
-  /** @type {(testFile: string) => Promise<{ filename: string, implementation: boolean, correct: boolean, passed: boolean, err: Error, out: JVal }> */
-  const runTest = async testFile => {
-    const testPath = TEST_DIR + '/' + testFile
-    const fileContents = await fs.readFile(testPath, { encoding: 'utf8' })
-    let failed = false
-    let err = undefined
-    let out = undefined
-    try {
-      out = parseReproduceableJSON(fileContents)
-    } catch (e) {
-      err = e
-      failed = true
-    }
-    if (testFile.startsWith('y_')) {
-      return {
-        filename: testFile,
-        correct: !failed,
-        passed: !failed,
-        err,
-        out,
-        implementation: false,
-      }
-    } else if (testFile.startsWith('n_')) {
-      return {
-        filename: testFile,
-        correct: failed,
-        passed: !failed,
-        err,
-        out,
-        implementation: false,
-      }
-    } else if (testFile.startsWith('i_')) {
-      return {
-        filename: testFile,
-        correct: true,
-        passed: !failed,
-        err,
-        out,
-        implementation: true,
-      }
-    }
-  }
-  const testResults = []
-  for(const testFile of dirContents.filter(f => f.endsWith('.json'))) {
-    const result = await runTest(testFile)
-    if (result.implementation === true && result.passed === false) {
-      console.log(`Soft Fail: ${testFile} didn't parse!`)
-    } else if (result.correct != true){
-      console.log(`Failure:   ${testFile} failed it's test: it should have ${result.passed ? 'failed to parse' : 'parsed successfully'}`)
-      testResults.push(result)
-    } else if (result.passed) {
-    }
+const stringifyProp = (k, v, indent, indentCount) => {
+  const getIndent = getGetIndent(indentCount)
+  return `${getIndent(indent)}${JSON.stringify(k)}: ${stringifyReproduceableJSONRecurse(v, indent, true, indentCount)}`
+}
+const getGetIndent = count => level => level === 0 ? '' : (new Array(level * count)).fill(' ').join('')
 
-  }
-  for (const result of testResults) {
-    const whatHappened = result.passed ? 'passed when it should have failed' : 'failed when it should have passed'
-    const clue = result.passed ? result.out : result.err
+const stringifyReproduceableJSONRecurse = (obj, indent = 0, isValue = false, indentCount = 2) => {
+  const getIndent = getGetIndent(indentCount)
+  const indentation = isValue ? '' : getIndent(indent)
 
-    console.log(`Test file ${result.filename} ${whatHappened}. Clue:`)
-    console.log(clue)
+  if (obj === undefined) return ''
+  if (obj instanceof Map) {
+    if (obj.size === 0) return `${indentation}{}`
+    return `${indentation}{\n${[...obj].map(([k, v]) => stringifyProp(k, v, indent + 1, indentCount)).join(',\n')}\n${getIndent(indent)}}`
   }
+  if (obj === null) return `${indentation}null`
+  if (['string', 'boolean', 'number'].includes(typeof obj)) {
+    return `${indentation}${JSON.stringify(obj)}`
+  }
+  if (Array.isArray(obj)) {
+    if (obj.length === 0) return indentation + '[]'
+    return `${indentation}[\n${obj.map(v => stringifyReproduceableJSONRecurse(v, indent + 1, false, indentCount)).join(',\n')}\n${getIndent(indent)}]`
+  }
+  throw new Error(`OH NOOOOO!!!! '${obj}'`)
 }
 
-if (import.meta.main) main()
+export const stringifyReproduceableJSON = (obj, indentCount = 2) => stringifyReproduceableJSONRecurse(obj, 0, false, indentCount)
 

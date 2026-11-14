@@ -1,3 +1,4 @@
+import { ReproduceableJSONUnexpectedSymbol } from './errors.js'
 import { DIGITS, NAME_TO_LITERAL, WHITESPACE, SYMBOL_TO_NAME, JSym, NUMERIC } from './types.js'
 import { getLinesFromJson } from './util.js'
 
@@ -22,10 +23,8 @@ export const getTokens = (jsonStr) => {
 
   for (let i = 0; i < jsonStr.length; i++) {
     let currChar = jsonStr[i]
-    let whitespace = ''
     while (i < jsonStr.length && WHITESPACE.includes(currChar)) {
       i += 1
-      whitespace += currChar
       currChar = jsonStr[i]
     }
 
@@ -33,7 +32,6 @@ export const getTokens = (jsonStr) => {
     if (i >= jsonStr.length) {
       tokens.push({
         symbol: JSym.End,
-        whitespace,
         ...getRowAndCol(jsonStr.length - 1), // feels safer.
         val: undefined,
         startPos: jsonStr.length - 1,
@@ -65,7 +63,6 @@ export const getTokens = (jsonStr) => {
         val: numVal,
         startPos: start,
         length: numStr.length,
-        whitespace,
         ...getRowAndCol(start),
       })
       continue
@@ -100,7 +97,6 @@ export const getTokens = (jsonStr) => {
         val: strVal,
         startPos: start,
         length: strStr.length,
-        whitespace,
         ...getRowAndCol(start)
       })
       continue
@@ -112,7 +108,6 @@ export const getTokens = (jsonStr) => {
         startPos: i,
         length: 1,
         val: undefined,
-        whitespace,
         ...getRowAndCol(i),
       })
       continue
@@ -128,7 +123,6 @@ export const getTokens = (jsonStr) => {
         startPos: i,
         length: literal.length,
         val: NAME_TO_LITERAL[literal],
-        whitespace,
         ...getRowAndCol(i),
       })
       i += literal.length - 1

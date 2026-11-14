@@ -1,4 +1,5 @@
 import { getPrintableToken } from './util.js'
+import { NAME_TO_SYMBOL } from './types.js'
 
 export class ReproduceableJSONParseError extends Error {
   constructor(message, token, lines, options) {

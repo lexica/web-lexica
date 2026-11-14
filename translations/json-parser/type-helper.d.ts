@@ -15,7 +15,7 @@ export type JVal = JScalar | JVal[] | Map<string, JVal>
 export type JsonSymbol = (typeof JSym)[keyof typeof JSym]
 export type JsonScalarSymbol = (typeof SCALARS)[number]
 
-type BaseToken = { startPos: number, length: number, whitespace: string, row: number, col: number}
+type BaseToken = { startPos: number, length: number, row: number, col: number}
 type ScalarToken = { symbol: JsonScalarSymbol, val: JScalar }
 type OtherToken = { symbol: Exclude<JsonSymbol, JsonScalarSymbol>, val: undefined }
 export type Token = (ScalarToken | OtherToken) & BaseToken
