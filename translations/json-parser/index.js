@@ -10,7 +10,7 @@ import { statSync } from 'node:fs'
 
 
 /**
-  * @import {Token, ParseContext} from './type-helper.d.ts'
+  * @import {Token, ParseContext, JVal} from './type-helper.d.ts'
   * @import {LineInfo} from './util.js'
   */
 
@@ -267,6 +267,7 @@ const stringifyProp = (k, v, indent, indentCount) => {
 }
 const getGetIndent = count => level => level === 0 ? '' : (new Array(level * count)).fill(' ').join('')
 
+/** @type {(obj: JVal, indent?: number, isValue?: boolean, indentCount?: number) => string} */
 const stringifyReproduceableJSONRecurse = (obj, indent = 0, isValue = false, indentCount = 2) => {
   const getIndent = getGetIndent(indentCount)
   const indentation = isValue ? '' : getIndent(indent)
@@ -287,5 +288,9 @@ const stringifyReproduceableJSONRecurse = (obj, indent = 0, isValue = false, ind
   throw new Error(`OH NOOOOO!!!! '${obj}'`)
 }
 
-export const stringifyReproduceableJSON = (obj, indentCount = 2) => stringifyReproduceableJSONRecurse(obj, 0, false, indentCount)
+export const stringifyReproduceableJSON = (obj, indentCount = 2) => {
+  const stringified = stringifyReproduceableJSONRecurse(obj, 0, false, indentCount)
+
+  if (stringified.indexOf('\n') >= 0) return stringified + '\n'
+}
 

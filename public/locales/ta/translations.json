@@ -98,7 +98,7 @@
             "title": "சீரற்ற"
         },
         "lexicons": {
-      "title": "$t(general.lexicon)",
+            "title": "$t(general.lexicon)",
             "isBeta": "பீட்டா"
         },
         "singleplayer": {
