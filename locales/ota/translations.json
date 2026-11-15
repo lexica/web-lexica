@@ -1,0 +1,32 @@
+{
+    "pages": {
+        "home": {
+            "title": "آنا صحیفە",
+            "subtitle": "چوریم ایچی"
+        },
+        "newGameMode": {
+            "timeAttack": {
+                "off": "قاپالی"
+            },
+            "gameModeName": {
+                "hint": "آد"
+            }
+        },
+        "multiplayer": {
+            "title": "چوق اویونجولی"
+        },
+        "savedGames": {
+            "resume": "دوام ایت",
+            "delete": "سیل"
+        },
+        "lexicle": {
+            "random": "راستگەلە"
+        },
+        "random": {
+            "title": "راستگەلە"
+        },
+        "lexicons": {
+            "title": "سوزلك"
+        }
+    }
+}

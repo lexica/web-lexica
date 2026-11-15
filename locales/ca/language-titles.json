@@ -1,0 +1,22 @@
+{
+  "ca": "Català",
+  "de_DE": "Alemany (Ampliat)",
+  "de_DE_no_diacritics": "Alemany",
+  "es": "Castellà",
+  "es_solo_enne": "Només Espanyol Ñ",
+  "fa": "Persa",
+  "fr_FR": "Francès (Ampliat)",
+  "fr_FR_no_diacritics": "Francès",
+  "hu": "Hongarès",
+  "it": "Italià",
+  "ja": "Japonès",
+  "nl": "Neerlandès",
+  "pl": "Polonès",
+  "pt_BR": "Portuguès (Brasil) (Ampliat)",
+  "pt_BR_no_diacritics": "Portuguès (Brasil)",
+  "ru": "Rus",
+  "ru_extended": "Rus (Ampliat)",
+  "en_GB": "Anglès (Regne Unit)",
+  "uk": "Ucraïnès",
+  "en_US": "Anglès (Estats Units)"
+}
