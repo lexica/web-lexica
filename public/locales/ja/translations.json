@@ -15,6 +15,10 @@
         "title": "得点の種類",
         "wordLength": "$t(scoreDetails.wordLength)",
         "letterPoints": "$t(scoreDetails.letterPoints)"
+      },
+      "hints": {
+        "hintMode": "ヒントモード",
+        "hintDesc": "各文字で使用できる単語の数を表示します"
       }
     },
     "lexicons": {

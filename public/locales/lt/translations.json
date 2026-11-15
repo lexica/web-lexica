@@ -20,6 +20,10 @@
         "title": "Vertinimo tipas",
         "wordLength": "$t(scoreDetails.wordLength)",
         "letterPoints": "$t(scoreDetails.letterPoints)"
+      },
+      "hints": {
+        "hintMode": "Užuominų režimas",
+        "hintDesc": "Parodo, kiek žodžių galima sudaryti iš kiekvienos raidės"
       }
     },
     "multiplayer": {

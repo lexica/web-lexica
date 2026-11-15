@@ -20,6 +20,10 @@
         "title": "Tipo di punteggio",
         "wordLength": "$t(scoreDetails.wordLength)",
         "letterPoints": "$t(scoreDetails.letterPoints)"
+      },
+      "hints": {
+        "hintMode": "Modalità suggerimento",
+        "hintDesc": "Mostra il numero di parole in cui ogni lettera può essere utilizzata"
       }
     },
     "multiplayer": {

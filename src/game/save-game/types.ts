@@ -1,6 +1,6 @@
 import type { GuessContext } from "../guess"
 import type { LanguageContext, MetadataV1 } from "../language"
-import type { RulesContext, Ruleset } from "../rules"
+import type { HintType, RulesContext, Ruleset } from "../rules"
 import type { ScoreContext, ScoreState } from "../score"
 import type { TimerContext } from "../timer"
 
@@ -25,7 +25,8 @@ export const GameLocalStorage = {
   Guesses: 'guesses',
   Board: 'board',
   Rules: 'rules',
-  Language: 'language'
+  Language: 'language',
+  Hints: 'hints',
 } as const
 
 export type GameLocalStorageType = typeof GameLocalStorage[keyof typeof GameLocalStorage]
@@ -36,7 +37,7 @@ export const gameLocalStorage = [
   GameLocalStorage.Guesses,
   GameLocalStorage.Board,
   GameLocalStorage.Rules,
-  GameLocalStorage.Language
+  GameLocalStorage.Language,
 ] as const
 
 export type SavedGame = {
@@ -45,7 +46,7 @@ export type SavedGame = {
   [GameLocalStorage.Guesses]: string[],
   [GameLocalStorage.Board]: string[],
   [GameLocalStorage.Rules]: RulesContext,
-  [GameLocalStorage.Language]: MetadataV1
+  [GameLocalStorage.Language]: MetadataV1,
 }
 
 export type UseSaveGameState = {

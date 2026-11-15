@@ -20,6 +20,10 @@
         "title": "स्कोरिंग प्रणाली",
         "wordLength": "$t(scoreDetails.wordLength)",
         "letterPoints": "$t(scoreDetails.letterPoints)"
+      },
+      "hints": {
+        "hintMode": "संकेत मोड",
+        "hintDesc": "प्रत्येक पत्र में इस्तेमाल किए जा सकने वाले शब्दों की संख्या दिखाता है"
       }
     },
     "lexicons": {

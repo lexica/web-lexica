@@ -20,6 +20,10 @@
         "title": "Typ bodovania",
         "wordLength": "$t(scoreDetails.wordLength)",
         "letterPoints": "$t(scoreDetails.letterPoints)"
+      },
+      "hints": {
+        "hintMode": "Režim nápovedy",
+        "hintDesc": "Ukáže počet slov, v ktorých sa dané písmeno vyskytuje"
       }
     },
     "multiplayer": {

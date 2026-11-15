@@ -82,6 +82,7 @@ const rulesetsAreEquivalent = (a: Ruleset, b: Ruleset) => {
     && a.score === b.score
     && toSeconds(a.time) === toSeconds(b.time)
     && a.timeAttack === b.timeAttack
+    && [...(a.hints ?? [])].sort().join('') === [...(b.hints ?? [])].sort().join('')
 }
 
 export const findRulesetId = (rulesets: Rulesets, rules: Ruleset) => {

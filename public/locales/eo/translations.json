@@ -20,6 +20,10 @@
         "title": "Tipo de Poentaro",
         "wordLength": "$t(scoreDetails.wordLength)",
         "letterPoints": "$t(scoreDetails.letterPoints)"
+      },
+      "hints": {
+        "hintMode": "Reĝimo de sugestoj",
+        "hintDesc": "Montri la nombron de vortoj en kiuj literoj troviĝas"
       }
     },
     "multiplayer": {

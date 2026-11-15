@@ -34,7 +34,11 @@
                 "off": "Mati"
             },
             "minimumWordLength": "Panjang Kata Minimum",
-            "saveGameMode": "Simpan Mode Permainan"
+            "saveGameMode": "Simpan Mode Permainan",
+            "hints": {
+                "hintMode": "Modus",
+                "hintDesc": "Tampilkan jumlah kata masing-masing huruf dapat digunakan dalam"
+            }
         },
         "multiplayer": {
             "startGameHint": "Ketika semua pemain sudah siap, kalian harus memulai permainan pada waktu yang sama.",

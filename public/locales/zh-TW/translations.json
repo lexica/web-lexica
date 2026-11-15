@@ -34,7 +34,11 @@
                 "hint": "名稱",
                 "description": "用於選擇遊戲模式／記錄高分"
             },
-            "saveGameMode": "儲存遊戲模式"
+            "saveGameMode": "儲存遊戲模式",
+            "hints": {
+                "hintMode": "提示模式",
+                "hintDesc": "顯示每個字母可以用於的單詞數"
+            }
         },
         "lexicons": {
             "title": "$t(general.lexicon)",

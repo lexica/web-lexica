@@ -15,6 +15,10 @@
         "title": "نوع امتیازگیری",
         "wordLength": "$t(scoreDetails.wordLength)",
         "letterPoints": "$t(scoreDetails.letterPoints)"
+      },
+      "hints": {
+        "hintMode": "حالت راهنما",
+        "hintDesc": "نمایش تعداد کلماتی که از هر حرف در آن‌ها می‌توان استفاده کرد"
       }
     },
     "lexicons": {

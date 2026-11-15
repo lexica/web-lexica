@@ -34,7 +34,11 @@
             },
             "title": "Uus mängutüüp",
             "minimumWordLength": "Sõna väikseim pikkus",
-            "saveGameMode": "Salvesta mängutüüp"
+            "saveGameMode": "Salvesta mängutüüp",
+            "hints": {
+                "hintMode": "Vihje tüüp",
+                "hintDesc": "Näitab kui mitmes sõnas iga tähte saab kasutada"
+            }
         },
         "multiplayer": {
             "startGameHint": "Kui kõik mängijad on valmis, siis palun alustage mängimist ühe korraga.",

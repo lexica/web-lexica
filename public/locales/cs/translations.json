@@ -20,6 +20,10 @@
       "gameModeName": {
         "hint": "Název",
         "description": "Pro výběr herního režimu / zaznamenávání nejvyšších skóre"
+      },
+      "hints": {
+        "hintMode": "Režim nápovědy",
+        "hintDesc": "Zobrazí počet slov, ve kterých lze použít jednotlivá písmena"
       }
     },
     "lexicons": {

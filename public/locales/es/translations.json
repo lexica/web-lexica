@@ -34,7 +34,11 @@
                 "hint": "Añade ($t(scoreDetails.wordLength) x {{multiplier}}) segundo(s) por palabra encontrada"
             },
             "title": "Nuevo Modo de Juego",
-            "saveGameMode": "Guardar Modo de Juego"
+            "saveGameMode": "Guardar Modo de Juego",
+            "hints": {
+                "hintMode": "Modo asistido",
+                "hintDesc": "Muestra el número de palabras que pueden hacerse con cada letra"
+            }
         },
         "lexicons": {
             "title": "$t(general.lexicon)",

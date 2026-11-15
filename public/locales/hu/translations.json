@@ -15,6 +15,10 @@
         "title": "Pontozás típusa",
         "wordLength": "$t(scoreDetails.wordLength)",
         "letterPoints": "$t(scoreDetails.letterPoints)"
+      },
+      "hints": {
+        "hintMode": "Tipp mód",
+        "hintDesc": "Megjeleníti a szavak számát, amelyekben az egyes betűket használni lehet"
       }
     },
     "lexicons": {

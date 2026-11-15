@@ -56,6 +56,16 @@ export const translationsFromWebToAndroid = {
         },
         wordLength: new Reference('scoreDetails.wordLength'),
         letterPoints: new Reference('scoreDetails.letterPoints')
+      },
+      hints: {
+        hintMode: {
+          tag: 'string',
+          name: 'pref_hintMode'
+        },
+        hintDesc: {
+          tag: 'string',
+          name: 'pref_hintMode_summary'
+        }
       }
     },
     multiplayer: {
@@ -173,7 +183,7 @@ export const translationsFromWebToAndroid = {
     letterPoints: {
       tag: 'string',
       name: 'letter_points'
-    }
+    },
   },
   general: {
       multiplayer: {

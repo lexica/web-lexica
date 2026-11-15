@@ -20,6 +20,10 @@
         "title": "计分方式",
         "wordLength": "$t(scoreDetails.wordLength)",
         "letterPoints": "$t(scoreDetails.letterPoints)"
+      },
+      "hints": {
+        "hintMode": "提示模式",
+        "hintDesc": "显示每个字母可以用于多少个单词"
       }
     },
     "multiplayer": {

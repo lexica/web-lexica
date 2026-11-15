@@ -20,6 +20,10 @@
                 "title": "Poengivningstype",
                 "wordLength": "$t(scoreDetails.wordLength)",
                 "letterPoints": "$t(scoreDetails.letterPoints)"
+            },
+            "hints": {
+                "hintMode": "Hintmodus",
+                "hintDesc": "Viser antall ord hver bokstav kan brukes i"
             }
         },
         "multiplayer": {

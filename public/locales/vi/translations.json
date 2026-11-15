@@ -34,7 +34,11 @@
                 "off": "Tắt",
                 "hint": "Mỗi từ tìm được cộng thêm ($t(scoreDetails.wordLength) x {{multiplier}}) giây"
             },
-            "saveGameMode": "Lưu chế độ"
+            "saveGameMode": "Lưu chế độ",
+            "hints": {
+                "hintMode": "Chế độ gợi ý",
+                "hintDesc": "Hiện số lượng các từ mà mỗi chữ cái có thể được sử dụng trong đó"
+            }
         },
         "multiplayer": {
             "startGameHint": "Khi tất cả người chơi đã sẵn sàng, tất cả các bạn nên bắt đầu trò chơi cùng một lúc.",

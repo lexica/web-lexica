@@ -20,6 +20,10 @@
         "title": "Scorenotatie",
         "wordLength": "$t(scoreDetails.wordLength)",
         "letterPoints": "$t(scoreDetails.letterPoints)"
+      },
+      "hints": {
+        "hintMode": "Tips tonen",
+        "hintDesc": "Toont het aantal woorden waarin letters kunnen worden gebruikt"
       }
     },
     "multiplayer": {

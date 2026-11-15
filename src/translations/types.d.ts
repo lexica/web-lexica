@@ -33,6 +33,8 @@ export type TranslationsKeys = {
   'pages.newGameMode.scoreType.wordLength': string,
   'pages.newGameMode.scoreType.letterPoints': string,
   'pages.newGameMode.saveGameMode': string,
+  'pages.newGameMode.hints.hintMode': string,
+  'pages.newGameMode.hints.hintDesc': string,
   'pages.multiplayer.title': string,
   'pages.multiplayer.gameTitle': string,
   'pages.multiplayer.newGameTitle': string,

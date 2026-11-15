@@ -18,6 +18,9 @@
         "title": "স্কোরিং প্রকার",
         "wordLength": "$t(scoreDetails.wordLength)",
         "letterPoints": "$t(scoreDetails.letterPoints)"
+      },
+      "hints": {
+        "hintMode": "সহায়তা মোড"
       }
     },
     "lexicons": {

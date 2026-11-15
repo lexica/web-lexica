@@ -58,7 +58,11 @@
                 "wordLength": "$t(scoreDetails.wordLength)",
                 "letterPoints": "$t(scoreDetails.letterPoints)"
             },
-            "saveGameMode": "விளையாட்டு பயன்முறையைச் சேமிக்கவும்"
+            "saveGameMode": "விளையாட்டு பயன்முறையைச் சேமிக்கவும்",
+            "hints": {
+                "hintMode": "குறிப்பு பயன்முறை",
+                "hintDesc": "ஒவ்வொரு கடிதமும் பயன்படுத்தக்கூடிய சொற்களின் எண்ணிக்கையைக் காட்டுகிறது"
+            }
         },
         "multiplayer": {
             "title": "மல்டிபிளேயர்",

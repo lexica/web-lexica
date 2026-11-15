@@ -3,7 +3,7 @@ import { normalize } from 'duration-fns'
 import * as R from 'ramda'
 
 import { DefaultRulesets, LocalStorage } from './types.ts'
-import type { RulesContext, Rulesets } from './types.ts'
+import type { HintType, RulesContext, Rulesets } from './types.ts'
 import { defaultRulesets, getRuleset } from './util'
 
 import { useGameUrlParameters } from '../url'
@@ -32,7 +32,8 @@ export const useRulesFromQueryString = (board: string[]): RulesContext => {
       score: params.score,
       boardWidth: Math.floor(Math.sqrt(board.length)),
       name: 'Shared with you',
-      timeAttack: params.timeAttack
+      timeAttack: params.timeAttack,
+      hints: params?.hints?.split('') as HintType[] ?? undefined
     } as RulesContext
   }, [params, board])
 }

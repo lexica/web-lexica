@@ -38,7 +38,11 @@
         "wordLength": "$t(scoreDetails.wordLength)",
         "letterPoints": "$t(scoreDetails.letterPoints)"
       },
-      "saveGameMode": "Save Game Mode"
+      "saveGameMode": "Save Game Mode",
+      "hints": {
+        "hintMode": "Hint mode",
+        "hintDesc": "Shows the number of words each letter can be used in"
+      }
     },
     "multiplayer": {
       "title": "Multiplayer",

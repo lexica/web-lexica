@@ -20,6 +20,10 @@
         "title": "Начисление очков",
         "wordLength": "$t(scoreDetails.wordLength)",
         "letterPoints": "$t(scoreDetails.letterPoints)"
+      },
+      "hints": {
+        "hintMode": "Режим подсказки",
+        "hintDesc": "Показывает количество слов, в которых можно использовать каждую букву"
       }
     },
     "multiplayer": {

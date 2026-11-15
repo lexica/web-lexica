@@ -20,6 +20,10 @@
         "title": "Cureya Puandanê",
         "wordLength": "$t(scoreDetails.wordLength)",
         "letterPoints": "$t(scoreDetails.letterPoints)"
+      },
+      "hints": {
+        "hintMode": "Moda serristeyê",
+        "hintDesc": "Hejmara peyvan rê dide yên ku tîp tê de derbas dibin î"
       }
     },
     "lexicons": {

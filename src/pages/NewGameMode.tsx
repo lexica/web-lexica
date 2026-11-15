@@ -17,6 +17,7 @@ import MinimumWordLength from '../components/new-game-mode/MinimumWordLength'
 import './NewGameMode.css'
 import TimeAttack from '../components/new-game-mode/TimeAttack'
 import { Translations } from '../translations'
+import HintMode from '../components/new-game-mode/HintMode'
 
 const validTimeLimit = (time: number) => time > 0
 const validName = (name: string) => /([\w\s\d_-]+)/.test(name)
@@ -29,6 +30,7 @@ const isValidTimeAttackMultiplier = (multiplier: number) => multiplier >= 0
 
 const NewGameMode = (): JSX.Element => {
   const [timeAttack, setTimeAttack] = useState(0)
+  const [hints, setHints] = useState(false)
 
   const [name, setName] = useState('')
   const [timeLimit, setTimeLimit] = useState(0)
@@ -62,13 +64,14 @@ const NewGameMode = (): JSX.Element => {
       score: scoreType,
       name,
       time: { minutes: timeLimit } as Duration,
-      timeAttack
+      timeAttack,
+      hints: hints ? ['n'] : undefined,
     })
 
     setCurrentRuleset(id)
 
     navigate('/')
-  }, [isValid, timeLimit, boardSize, name, scoreType, minimumWordLength, navigate, timeAttack])
+  }, [isValid, timeLimit, boardSize, name, scoreType, minimumWordLength, navigate, timeAttack, hints])
 
   useBannerBadge({
     disabled: !isValid,
@@ -85,6 +88,7 @@ const NewGameMode = (): JSX.Element => {
     <ScoringType handleScoreUpdate={setScoreType} scoreTypes={scoreTypes} />
     <MinimumWordLength handleLengthUpdate={setMinimumWordLength} wordLengths={wordLengths} />
     <TimeAttack handleTimeAttackUpdate={setTimeAttack} timeAttackMultipliers={timeAttackMultipliers} selectedMultiplier={timeAttack} />
+    <HintMode handleHintModeUpdate={setHints} hintStatus={hints} />
   </div>
 }
 
