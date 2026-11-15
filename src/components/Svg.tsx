@@ -38,7 +38,8 @@ const Customizable = ({ svg, props, style }: CustomizableProps): JSX.Element => 
       width: withOverrides.width,
       height: withOverrides.height,
       backgroundColor: withOverrides.fill,
-      mask: `url("${svg}") no-repeat`,
+      maskImage: `url("${svg}")`,
+      maskRepeat: 'no-repeat',
       maskSize: "cover"
     }}
     aria-label={props.title || ""}

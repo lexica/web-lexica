@@ -1,6 +1,4 @@
-import * as R from 'ramda'
-import { createContext, useCallback, useEffect, useReducer } from 'react'
-import type { Reducer } from 'react'
+import { createContext, type Reducer, useCallback, useEffect, useReducer } from 'react'
 import { logger } from '../util/logger'
 
 export type ScoreState = {
@@ -46,7 +44,7 @@ const handleAddGuess = (state: ScoreState, guess: string): ScoreState => {
   if(remainingWords.includes(guess)) {
     return {
       foundWords: [...foundWords, guess],
-      remainingWords: R.filter(word => word !== guess, remainingWords)
+      remainingWords: [...remainingWords].filter(word => word !== guess)
     }
   }
 

@@ -20,6 +20,10 @@
         "title": "Poängräkning",
         "wordLength": "$t(scoreDetails.wordLength)",
         "letterPoints": "$t(scoreDetails.letterPoints)"
+      },
+      "hints": {
+        "hintMode": "Ledtrådsläge",
+        "hintDesc": "Visar hur många ord varje bokstav kan bli använd i"
       }
     },
     "multiplayer": {

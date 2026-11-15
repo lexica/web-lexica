@@ -34,7 +34,11 @@
                 "hint": "Bulunan sözcük başına ($t(scoreDetails.wordLength) x {{multiplier}}) saniye ekler"
             },
             "title": "Yeni Oyun Modu",
-            "saveGameMode": "Oyun Modunu Kaydet"
+            "saveGameMode": "Oyun Modunu Kaydet",
+            "hints": {
+                "hintMode": "İpucu modu",
+                "hintDesc": "Her harfin kullanılabileceği sözcük sayısını gösterir"
+            }
         },
         "multiplayer": {
             "startGameHint": "Tüm oyuncular hazır olduğunda, hepiniz oyuna aynı anda başlamalısınız.",

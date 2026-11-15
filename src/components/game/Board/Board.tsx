@@ -7,12 +7,13 @@ import { ConfirmationEffect } from './hooks'
 import { getPointOnGridInfo, } from '../../../util/touch'
 import type { GetPointOnGridInfoArguments } from '../../../util/touch'
 import { getLetterScore, LetterScores,  } from '../../../game'
-import { Rules } from '../../../game/rules'
+import { HintTypeMap, Rules } from '../../../game/rules'
 import { ScoreType } from '../../../game/score'
 import { Guess, GuessAction, GuessDispatch } from '../../../game/guess'
 import type { GuessActionType } from '../../../game/guess'
 import { makeClasses } from '../../../util/classes'
 import type { WithChildren } from '../../../util/types'
+import { LetterHints } from '../../../game/letterHints'
 
 type LetterProps = {
   row: number,
@@ -32,15 +33,17 @@ const Letter: React.FC<LetterProps> = ({
 
   const guessDispatch = useContext(GuessDispatch)
 
-  const { score: scoreType } = useContext(Rules)
+  const { score: scoreType, hints = [] } = useContext(Rules)
 
   const letterScores = useContext(LetterScores)
+  const letterHints = useContext(LetterHints)
 
   const classes = makeClasses('spacer', { condition: visited, name: 'visited' }, feedbackClasses)
 
   const dispatchMoveEvent = () => guessDispatch({ type: GuessAction.EnterLetter, info: { row, column } })
 
   const showScore = scoreType === ScoreType.Letters || undefined
+  const showNumberHints = hints.includes(HintTypeMap.Number)
 
   return <div
     className={classes}
@@ -54,6 +57,7 @@ const Letter: React.FC<LetterProps> = ({
       <div className="letter">{letter.toUpperCase()}</div>
     </div>
     {showScore && <div className="board-letter-score">{getLetterScore(letter, letterScores)}</div>}
+    {showNumberHints ? <div className="board-letter-hints">{letterHints[`${row}-${column}`]}</div> : ''}
   </div>
 }
 

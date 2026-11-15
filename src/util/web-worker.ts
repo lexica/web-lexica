@@ -1,4 +1,5 @@
 import { v4 as uuid } from 'uuid'
+import { logger } from './logger'
 
 export type ToWorkerPayload = {
   requestId: string
@@ -13,6 +14,7 @@ type FromWorkerPayload<T> = {
 export const promisifyWorker = <T extends ToWorkerPayload, F>(worker: InstanceType<typeof window.Worker>, payload: Omit<T, 'requestId'>): Promise<F> => {
   return new Promise<F>((respond, reject) => {
     const requestId = uuid()
+    logger.debug(`Sending event. requestId: ${requestId}`, { payload })
     worker!.postMessage({ ...payload, requestId })
     worker!.addEventListener('message', (e: MessageEvent<FromWorkerPayload<F>>) => {
       const { data } = e

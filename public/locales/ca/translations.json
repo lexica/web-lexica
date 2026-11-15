@@ -19,6 +19,10 @@
         "title": "Tipus de puntuació",
         "wordLength": "$t(scoreDetails.wordLength)",
         "letterPoints": "$t(scoreDetails.letterPoints)"
+      },
+      "hints": {
+        "hintMode": "Mode de pistes",
+        "hintDesc": "Mostra el nombre de mots en què es pot usar cada lletra"
       }
     },
     "lexicons": {

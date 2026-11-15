@@ -24,11 +24,21 @@ const getCallingFunction = () => {
   return callee
 }
 
+const isDebug = (() => {
+  try {
+    return ["localhost", "127.0.0.1"].includes(window?.location?.hostname)
+  } catch (_) {
+    // we're in a web worker.
+    return true
+  }
+
+})()
+
 export const logger = {
   error: console.error,
   info: console.info,
   warn: console.warn,
-  debug: (["localhost", "127.0.0.1"].includes(window.location.hostname) === false) ? (..._: any[]) => {} : (...logs: any[]) => {
+  debug: (isDebug === false) ? (..._: any[]) => {} : (...logs: any[]) => {
     const logString = logs.map(log => {
       if (isPrimitive(log)) return log.toString()
 

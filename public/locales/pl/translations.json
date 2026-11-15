@@ -33,7 +33,11 @@
             },
             "saveGameMode": "Zapisz tryb gry",
             "title": "Nowy tryb gry",
-            "minimumWordLength": "Minimalna długość słowa"
+            "minimumWordLength": "Minimalna długość słowa",
+            "hints": {
+                "hintMode": "Tryb podpowiedzi",
+                "hintDesc": "Pokazuje liczbę słów, w których można użyć każdej litery"
+            }
         },
         "lexicons": {
             "title": "$t(general.lexicon)",

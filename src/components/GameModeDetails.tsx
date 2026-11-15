@@ -3,6 +3,7 @@ import GridView from '@material-design-icons/svg/round/grid_view.svg'
 import DirectionsRun from '@material-design-icons/svg/round/directions_run.svg'
 import EmojiEvents from '@material-design-icons/svg/round/emoji_events.svg'
 import Sort from '@material-design-icons/svg/round/sort.svg'
+import MedicalServices from '@material-design-icons/svg/round/medical_services.svg'
 import { toMinutes } from 'duration-fns'
 import type { TranslationsFn } from '../translations/types'
 import { Translations } from '../translations'
@@ -45,6 +46,7 @@ const GameModeDetails = ({
   const { translationsFn } = useContext(Translations)
 
   const timeAttack = rules.timeAttack !== undefined ? rules.timeAttack : 0
+  const hintMode = rules.hints?.length ?? 0 > 0
 
   const overrides = getOverrideObject(size, color)
 
@@ -78,6 +80,13 @@ const GameModeDetails = ({
         </div>
         : ''
       }
+      {hintMode ?  <div
+        className="game-mode-details-info"
+      >
+        {getSvg(MedicalServices, 'Time Attack')}
+        <div>{translationsFn('pages.newGameMode.hints.hintMode')}</div>
+      </div>
+      : ''}
     </div>
 }
 

@@ -34,7 +34,11 @@
             },
             "saveGameMode": "Spremi modus igre",
             "title": "Novi modus igre",
-            "minimumWordLength": "Najmanja duljina riječi"
+            "minimumWordLength": "Najmanja duljina riječi",
+            "hints": {
+                "hintMode": "Modus savjeta",
+                "hintDesc": "Prikazuje broj riječi u kojem se svako slovo može koristiti"
+            }
         },
         "multiplayer": {
             "startGameHint": "Kad su svi igrači spremni, svi biste trebali započeti igru u isto vrijeme.",

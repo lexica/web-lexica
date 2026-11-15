@@ -20,6 +20,10 @@
         "title": "Mode de décompte des points",
         "wordLength": "$t(scoreDetails.wordLength)",
         "letterPoints": "$t(scoreDetails.letterPoints)"
+      },
+      "hints": {
+        "hintMode": "Mode astuce",
+        "hintDesc": "Affiche le nombre de mots dans lesquels chaque lettre peut être utilisée"
       }
     },
     "multiplayer": {

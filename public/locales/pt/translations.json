@@ -24,6 +24,10 @@
       "title": "Novo modo do jogo",
       "timeAttack": {
         "off": "Desligado"
+      },
+      "hints": {
+        "hintMode": "Modo de dicas",
+        "hintDesc": "Mostra a quantidade de palavras em que cada letra pode ser usada"
       }
     },
     "lexicons": {

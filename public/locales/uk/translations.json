@@ -20,6 +20,10 @@
         "title": "Метод підрахунку",
         "wordLength": "$t(scoreDetails.wordLength)",
         "letterPoints": "$t(scoreDetails.letterPoints)"
+      },
+      "hints": {
+        "hintMode": "Режим підказки",
+        "hintDesc": "Показує кількість слів, у яких можна застосувати кожну букву"
       }
     },
     "multiplayer": {

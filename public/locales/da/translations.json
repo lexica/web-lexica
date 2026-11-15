@@ -20,6 +20,10 @@
         "title": "Scoringstype",
         "wordLength": "$t(scoreDetails.wordLength)",
         "letterPoints": "$t(scoreDetails.letterPoints)"
+      },
+      "hints": {
+        "hintMode": "Hintmodus",
+        "hintDesc": "Vis antallet ord hver bogstav kan bruges i"
       }
     },
     "lexicons": {

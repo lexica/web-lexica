@@ -20,6 +20,10 @@
         "title": "Τύπος βαθμολόγησης",
         "wordLength": "$t(scoreDetails.wordLength)",
         "letterPoints": "$t(scoreDetails.letterPoints)"
+      },
+      "hints": {
+        "hintMode": "Λειτουργία υποδείξεων",
+        "hintDesc": "Εμφανίζει τον αριθμό των λέξεων στις οποίες μπορεί να χρησιμοποιηθεί κάθε γράμμα"
       }
     },
     "lexicons": {

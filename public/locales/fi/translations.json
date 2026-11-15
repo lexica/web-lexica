@@ -20,6 +20,10 @@
         "title": "Pisteytystapa",
         "wordLength": "$t(scoreDetails.wordLength)",
         "letterPoints": "$t(scoreDetails.letterPoints)"
+      },
+      "hints": {
+        "hintMode": "Vihje­tila",
+        "hintDesc": "Näyttää, kuinka monessa sanassa kutakin kirjainta voi käyttää"
       }
     },
     "multiplayer": {

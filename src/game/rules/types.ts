@@ -1,6 +1,13 @@
 import type { Duration } from 'duration-fns'
 import type { ScoreTypeType } from '../score'
 
+export const HintTypeMap = {
+  Color: 'c',
+  Number: 'n',
+} as const
+
+export type HintType = typeof HintTypeMap[keyof typeof HintTypeMap]
+
 export type RulesContext = {
   minimumWordLength: number,
   time: Duration,
@@ -8,6 +15,7 @@ export type RulesContext = {
   boardWidth: number,
   name: string
   timeAttack?: number
+  hints?: HintType[]
 }
 
 export type Ruleset = RulesContext & { name: string, boardWidth: number }

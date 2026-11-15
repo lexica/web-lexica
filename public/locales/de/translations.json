@@ -31,6 +31,10 @@
                 "title": "Zeitangriff",
                 "off": "Aus",
                 "hint": "Fügt ($t(scoreDetails.wordLength) x {{multiplier}}) Sekunde(n) für jedes gefundene Wort hinzu"
+            },
+            "hints": {
+                "hintMode": "Hinweise",
+                "hintDesc": "Zeigt die Anzahl Wörter in der jeder Buchstabe verwendet werden kann"
             }
         },
         "multiplayer": {

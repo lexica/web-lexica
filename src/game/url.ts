@@ -6,6 +6,7 @@ import { utf8ToB64 } from '../util/base-64'
 import { HighestSupportedMinimumVersion } from '../util/compatibility-android'
 import { parseURLSearch } from '../util/url'
 import type { ScoreTypeType } from './score'
+import type { HintType } from './rules'
 
 export const GameParamMap = {
   Board: 'b',
@@ -15,8 +16,10 @@ export const GameParamMap = {
   MinimumWordLength: 'm',
   MinimumVersion: 'mv',
   Version: 'v',
-  TimeAttack: 'ta'
+  TimeAttack: 'ta',
+  Hints: 'h',
 } as const
+
 
 export type GameParamMapType = typeof GameParamMap[keyof typeof GameParamMap]
 
@@ -31,8 +34,9 @@ export type GetSearchStringArgs = {
   language: string,
   time: Duration,
   score: ScoreTypeType,
-  minimumWordLength: number
-  timeAttack?: number
+  minimumWordLength: number,
+  timeAttack?: number,
+  hints?: HintType[],
 }
 
 export const getSearchString = ({
@@ -41,7 +45,8 @@ export const getSearchString = ({
   time: duration,
   score,
   minimumWordLength,
-  timeAttack
+  timeAttack,
+  hints,
 }: GetSearchStringArgs) => {
   const board = encodeBoard(boardArray)
   const time = toSeconds(duration)
@@ -57,10 +62,10 @@ export const getSearchString = ({
   ]
 
   timeAttack && keyValuePairs.push([GameParamMap.TimeAttack, timeAttack])
+  hints && keyValuePairs.push([GameParamMap.Hints, hints.join('')])
 
   return `${keyValuePairs.map(kv => kv.join('=')).join('&')}`
 }
-
 export type GameURLParams = {
   b: string,
   l: string,
@@ -69,13 +74,15 @@ export type GameURLParams = {
   m: string,
   mv: string,
   v: string,
-  ta?: string
+  ta?: string,
+  h?: string,
 }
 
 const parseGameParameters = (urlParams: GameURLParams) => {
   const language = urlParams[GameParamMap.Language]
   const minimumVersion = parseInt(urlParams[GameParamMap.MinimumVersion])
   const timeAttack = urlParams?.ta && parseInt(urlParams.ta)
+  const hints = urlParams?.h
 
   return {
     board: urlParams[GameParamMap.Board],
@@ -85,7 +92,8 @@ const parseGameParameters = (urlParams: GameURLParams) => {
     minimumWordLength: parseInt(urlParams[GameParamMap.MinimumWordLength]),
     minimumVersion,
     version: parseInt(urlParams[GameParamMap.Version]),
-    timeAttack
+    timeAttack,
+    hints,
   }
 }
 

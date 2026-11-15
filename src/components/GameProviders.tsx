@@ -3,7 +3,7 @@ import { useContext, useEffect, useMemo } from 'react'
 
 import { LetterScores } from '../game'
 import { BoardContext, BoardRefresh, useBoardFromUrl, useGeneratedBoard } from '../game/board'
-import { Dictionary, type DictionaryState, useBoardDictionary } from '../game/dictionary'
+import { Dictionary, type DictionaryState, useBoardDictionary, useBoardHints } from '../game/dictionary'
 import { Guess, GuessDispatch, useGuesses } from '../game/guess'
 import { Language, type LanguageState, useLanguage, useLanguageFromLocalStorage } from '../game/language'
 import { Rules, useRulesFromQueryString, useRulesFromStorage } from '../game/rules'
@@ -13,6 +13,7 @@ import { Timer, useTimer } from '../game/timer'
 import { useGameUrlParameters } from '../game/url'
 import { sort } from '../util'
 import type { WithChildren } from '../util/types'
+import { useLetterHints, LetterHints } from '../game/letterHints'
 
 
 const CommonNewAndShareGameProviders = ({ children }: WithChildren) => {
@@ -20,11 +21,13 @@ const CommonNewAndShareGameProviders = ({ children }: WithChildren) => {
   const language = useContext(Language)
   const rules= useContext(Rules)
   const dictionary = useBoardDictionary(language, board, rules.minimumWordLength)
+  const hints = useBoardHints(dictionary.boardDictionary, board)
   const [guess, dispatchGuess] = useGuesses(board)
 
   const timer = useTimer(toSeconds(rules.time))
 
   const [score, dispatchScoreUpdate] = useScore(dictionary)
+  const letterHints = useLetterHints(score, hints, board)
 
   const lastGuess = useMemo(() => guess.guesses[guess.guesses.length - 1], [guess])
 
@@ -35,11 +38,13 @@ const CommonNewAndShareGameProviders = ({ children }: WithChildren) => {
   return <Guess.Provider value={guess}>
     <GuessDispatch.Provider value={dispatchGuess}>
       <Dictionary.Provider value={dictionary}>
-        <Score.Provider value={score}>
-          <Timer.Provider value={timer}>
-            {children}
-          </Timer.Provider>
-        </Score.Provider>
+        <LetterHints.Provider value={letterHints}>
+          <Score.Provider value={score}>
+            <Timer.Provider value={timer}>
+              {children}
+            </Timer.Provider>
+          </Score.Provider>
+        </LetterHints.Provider>
       </Dictionary.Provider>
     </GuessDispatch.Provider>
   </Guess.Provider>
@@ -114,6 +119,8 @@ export const ResumedGameProviders = ({ gamePath, children }: WithChildren<{ game
   const timer = useTimer(resumedGame.timer)
 
   const [score, dispatchScoreUpdate] = useScore(boardDictionary, resumedGame[GameLocalStorage.Score])
+  const hints = useBoardHints(boardDictionary.boardDictionary, board)
+  const letterHints = useLetterHints(score, hints, board)
 
   const lastGuess = useMemo(() => guess.guesses[guess.guesses.length - 1], [guess])
 
@@ -128,13 +135,15 @@ export const ResumedGameProviders = ({ gamePath, children }: WithChildren<{ game
           <BoardContext.Provider value={board}>
             <Guess.Provider value={guess}>
               <GuessDispatch.Provider value={dispatchGuess}>
-                <Dictionary.Provider value={boardDictionary}>
-                  <Score.Provider value={score}>
-                    <Timer.Provider value={timer}>
-                      {children}
-                    </Timer.Provider>
-                  </Score.Provider>
-                </Dictionary.Provider>
+                <LetterHints.Provider value={letterHints}>
+                  <Dictionary.Provider value={boardDictionary}>
+                    <Score.Provider value={score}>
+                      <Timer.Provider value={timer}>
+                        {children}
+                      </Timer.Provider>
+                    </Score.Provider>
+                  </Dictionary.Provider>
+                </LetterHints.Provider>
               </GuessDispatch.Provider>
             </Guess.Provider>
           </BoardContext.Provider>

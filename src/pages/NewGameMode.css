@@ -186,3 +186,9 @@
   text-align: left;
   align-self: center;
 }
+
+.new-game-mode-hint-mode-input-holder {
+  display: flex;
+  flex-direction: row;
+}
+

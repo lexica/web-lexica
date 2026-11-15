@@ -54,6 +54,11 @@
   bottom: 0;
   right: 0;
 }
+.board-letter-hints {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
 
 :root {
   --activator-container-scaler: 0.66;
@@ -123,6 +128,8 @@
   .spacer:first-child:nth-last-child(6) ~ .spacer>.activator>.letter {
     font-size: var(--vertical-6-font-size);
   }
+  .spacer:first-child:nth-last-child(6)>.board-letter-hints,
+  .spacer:first-child:nth-last-child(6) ~ .spacer>.board-letter-hints,
   .spacer:first-child:nth-last-child(6)>.board-letter-score,
   .spacer:first-child:nth-last-child(6) ~ .spacer>.board-letter-score {
     --size: calc((var(--vertical-6-spacer-size) - var(--vertical-6-activator-size)) * .6);
@@ -145,6 +152,8 @@
   .spacer:first-child:nth-last-child(5) ~ .spacer>.activator>.letter {
     font-size: var(--vertical-5-font-size);
   }
+  .spacer:first-child:nth-last-child(5)>.board-letter-hints,
+  .spacer:first-child:nth-last-child(5) ~ .spacer>.board-letter-hints,
   .spacer:first-child:nth-last-child(5)>.board-letter-score,
   .spacer:first-child:nth-last-child(5) ~ .spacer>.board-letter-score {
     --size: calc((var(--vertical-5-spacer-size) - var(--vertical-5-activator-size)) * .6);
@@ -167,6 +176,9 @@
   .spacer:first-child:nth-last-child(4) ~ .spacer>.activator>.letter {
     font-size: var(--vertical-4-font-size);
   }
+
+  .spacer:first-child:nth-last-child(4)>.board-letter-hints,
+  .spacer:first-child:nth-last-child(4) ~ .spacer>.board-letter-hints,
   .spacer:first-child:nth-last-child(4)>.board-letter-score,
   .spacer:first-child:nth-last-child(4) ~ .spacer>.board-letter-score {
     --size: calc((var(--vertical-4-spacer-size) - var(--vertical-4-activator-size)) * .6);
@@ -191,6 +203,8 @@
   .spacer:first-child:nth-last-child(6) ~ .spacer>.activator>.letter {
     font-size: var(--horizontal-6-font-size);
   }
+  .spacer:first-child:nth-last-child(6)>.board-letter-hints,
+  .spacer:first-child:nth-last-child(6) ~ .spacer>.board-letter-hints,
   .spacer:first-child:nth-last-child(6)>.board-letter-score,
   .spacer:first-child:nth-last-child(6) ~ .spacer>.board-letter-score {
     --size: calc((var(--horizontal-6-spacer-size) - var(--horizontal-6-activator-size)) * .6);
@@ -213,6 +227,8 @@
   .spacer:first-child:nth-last-child(5) ~ .spacer>.activator>.letter {
     font-size: var(--horizontal-5-font-size);
   }
+  .spacer:first-child:nth-last-child(5)>.board-letter-hints,
+  .spacer:first-child:nth-last-child(5) ~ .spacer>.board-letter-hints,
   .spacer:first-child:nth-last-child(5)>.board-letter-score,
   .spacer:first-child:nth-last-child(5) ~ .spacer>.board-letter-score {
     --size: calc((var(--horizontal-5-spacer-size) - var(--horizontal-5-activator-size)) * .6);
@@ -235,6 +251,8 @@
   .spacer:first-child:nth-last-child(4) ~ .spacer>.activator>.letter {
     font-size: var(--horizontal-4-font-size);
   }
+  .spacer:first-child:nth-last-child(4)>.board-letter-hints,
+  .spacer:first-child:nth-last-child(4) ~ .spacer>.board-letter-hints,
   .spacer:first-child:nth-last-child(4)>.board-letter-score,
   .spacer:first-child:nth-last-child(4) ~ .spacer>.board-letter-score {
     --size: calc((var(--horizontal-4-spacer-size) - var(--horizontal-4-activator-size)) * .6);
