@@ -18,19 +18,19 @@ import { LetterHints } from '../../../game/letterHints'
 import { Direction, Directions, type DirectionT } from './types'
 
 type LetterProps = {
-  row: number,
-  column: number,
-  x: number,
-  y: number,
+  displayRow: number,
+  displayColumn: number,
+  boardRow: number,
+  boardColumn: number,
   letter: string,
   visited: boolean,
 }
 
 const Letter: React.FC<LetterProps> = ({
-  row,
-  column,
-  x,
-  y,
+  displayRow,
+  displayColumn,
+  boardRow,
+  boardColumn,
   letter,
   visited,
 }) => {
@@ -46,14 +46,14 @@ const Letter: React.FC<LetterProps> = ({
 
   const classes = makeClasses('spacer', { condition: visited, name: 'visited' }, feedbackClasses)
 
-  const dispatchMoveEvent = () => guessDispatch({ type: GuessAction.EnterLetter, info: { row: x, column: y } })
+  const dispatchMoveEvent = () => guessDispatch({ type: GuessAction.EnterLetter, info: { row: boardRow, column: boardColumn } })
 
   const showScore = scoreType === ScoreType.Letters || undefined
   const showNumberHints = hints.includes(HintTypeMap.Number)
 
   return <div
     className={classes}
-    key={`spacer-${row}-${column}`}
+    key={`spacer-${displayRow}-${displayColumn}`}
   >
     <div
       className="activator"
@@ -63,7 +63,7 @@ const Letter: React.FC<LetterProps> = ({
       <div className="letter">{letter.toUpperCase()}</div>
     </div>
     {showScore && <div className="board-letter-score">{getLetterScore(letter, letterScores)}</div>}
-    {showNumberHints ? <div className="board-letter-hints">{letterHints[`${x}-${y}`]}</div> : ''}
+    {showNumberHints ? <div className="board-letter-hints">{letterHints[`${boardRow}-${boardColumn}`]}</div> : ''}
   </div>
 }
 
@@ -97,32 +97,32 @@ export const Board = (props: BoardProps): React.JSX.Element => {
 
   const boardWidth = board.width
 
-  const getRotatedCoords = useCallback((x: number, y: number, unRotate: boolean = false) => {
+  const getRotatedCoords = useCallback((row: number, column: number, unRotate: boolean = false) => {
     const reflect = Directions[(Directions.indexOf(rotation) + 2) % Directions.length]
     const directionsToReflect: DirectionT[] = [Direction.East, Direction.West]
     const realRotation = unRotate && directionsToReflect.includes(rotation) ? reflect : rotation
-    const [mirrorX, mirrorY] = [boardWidth - 1 - x, boardWidth - 1 - y]
+    const [mirrorRow, mirrorColumn] = [boardWidth - 1 - row, boardWidth - 1 - column]
     switch (realRotation) {
       case Direction.North:
-        return [x, y]
+        return [row, column]
       case Direction.East:
-        return [mirrorY, x]
+        return [mirrorColumn, row]
       case Direction.South:
-        return [mirrorX, mirrorY]
+        return [mirrorRow, mirrorColumn]
       case Direction.West:
-        return [y, mirrorX]
+        return [column, mirrorRow]
     }
   }, [rotation, boardWidth])
 
-  const getUnRotatedCoords = useCallback((rotX: number, rotY: number) => getRotatedCoords(rotX, rotY, true), [getRotatedCoords])
+  const getUnRotatedCoords = useCallback((rotRow: number, rotColumn: number) => getRotatedCoords(rotRow, rotColumn, true), [getRotatedCoords])
 
   const makeColumn = (row: number) => (column: number) => {
     const [rotRow, rotCol] = getRotatedCoords(row, column)
     return (<Letter {...{
-      row,
-      column,
-      x: rotRow,
-      y: rotCol,
+      displayRow: row,
+      displayColumn: column,
+      boardRow: rotRow,
+      boardColumn: rotCol,
       ...board[rotRow][rotCol],
       key: `letter-${row}-${column}`
     }}/>)
