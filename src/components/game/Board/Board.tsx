@@ -143,7 +143,7 @@ export const Board = (props: BoardProps): React.JSX.Element => {
     const { x, y } = residingSquare
 
     if (pointDistanceFromCenterOfSquare <= acceptableDistance) {
-      const [row, column] = getRotatedCoords(x, y)
+      const [row, column] = getRotatedCoords(y, x)
       dispatch({ type: GuessAction.EnterLetter, info: { row, column } })
     }
   }, [getRotatedCoords])
