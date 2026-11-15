@@ -63,7 +63,7 @@ const Letter: React.FC<LetterProps> = ({
       <div className="letter">{letter.toUpperCase()}</div>
     </div>
     {showScore && <div className="board-letter-score">{getLetterScore(letter, letterScores)}</div>}
-    {showNumberHints ? <div className="board-letter-hints">{letterHints[`${row}-${column}`]}</div> : ''}
+    {showNumberHints ? <div className="board-letter-hints">{letterHints[`${x}-${y}`]}</div> : ''}
   </div>
 }
 
@@ -106,11 +106,11 @@ export const Board = (props: BoardProps): React.JSX.Element => {
       case Direction.North:
         return [x, y]
       case Direction.East:
-        return [y, mirrorX]
+        return [mirrorY, x]
       case Direction.South:
         return [mirrorX, mirrorY]
       case Direction.West:
-        return [mirrorY, x]
+        return [y, mirrorX]
     }
   }, [rotation, boardWidth])
 
