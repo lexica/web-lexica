@@ -114,8 +114,6 @@ export const Board = (props: BoardProps): React.JSX.Element => {
     }
   }, [rotation, boardWidth])
 
-  const getUnRotatedCoords = useCallback((rotRow: number, rotColumn: number) => getRotatedCoords(rotRow, rotColumn, true), [getRotatedCoords])
-
   const makeColumn = (row: number) => (column: number) => {
     const [rotRow, rotCol] = getRotatedCoords(row, column)
     return (<Letter {...{
@@ -145,10 +143,10 @@ export const Board = (props: BoardProps): React.JSX.Element => {
     const { x, y } = residingSquare
 
     if (pointDistanceFromCenterOfSquare <= acceptableDistance) {
-      const [row, column] = getUnRotatedCoords(x, y)
+      const [row, column] = getRotatedCoords(x, y)
       dispatch({ type: GuessAction.EnterLetter, info: { row, column } })
     }
-  }, [getUnRotatedCoords])
+  }, [getRotatedCoords])
 
   return <div
     className="board"
