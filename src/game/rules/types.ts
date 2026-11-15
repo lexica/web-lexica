@@ -8,15 +8,6 @@ export const HintTypeMap = {
 
 export type HintType = typeof HintTypeMap[keyof typeof HintTypeMap]
 
-export type HintFlags<T extends string, U extends string = HintType> =
-  T extends U
-    ? T
-    : T extends `${U}${infer R}`
-      ? T extends `${infer F}${R}`
-        ? `${F}${HintFlags<R, Exclude<U, F>>}`
-        : never
-      : U
-
 export type RulesContext = {
   minimumWordLength: number,
   time: Duration,

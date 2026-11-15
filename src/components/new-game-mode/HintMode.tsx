@@ -1,4 +1,4 @@
-import { useCallback, useContext, useState } from 'react'
+import { useContext } from 'react'
 import MedicalServices from '@material-design-icons/svg/round/medical_services.svg'
 import Unchecked from '@material-design-icons/svg/round/check_box_outline_blank.svg'
 import Checked from '@material-design-icons/svg/round/check_box.svg'

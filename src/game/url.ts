@@ -6,7 +6,7 @@ import { utf8ToB64 } from '../util/base-64'
 import { HighestSupportedMinimumVersion } from '../util/compatibility-android'
 import { parseURLSearch } from '../util/url'
 import type { ScoreTypeType } from './score'
-import type { HintType, HintFlags } from './rules'
+import type { HintType } from './rules'
 
 export const GameParamMap = {
   Board: 'b',
@@ -36,7 +36,7 @@ export type GetSearchStringArgs = {
   score: ScoreTypeType,
   minimumWordLength: number,
   timeAttack?: number,
-  hints?: HintFlags<string>,
+  hints?: HintType[],
 }
 
 export const getSearchString = ({

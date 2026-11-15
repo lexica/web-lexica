@@ -1,6 +1,6 @@
 import type { GuessContext } from "../guess"
 import type { LanguageContext, MetadataV1 } from "../language"
-import type { HintType, RulesContext, Ruleset } from "../rules"
+import type { RulesContext, Ruleset } from "../rules"
 import type { ScoreContext, ScoreState } from "../score"
 import type { TimerContext } from "../timer"
 
