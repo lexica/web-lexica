@@ -85,6 +85,7 @@ export type TranslationsKeys = {
   },
   'lexicaGameScreens.inGame.guesses': string,
   'lexicaGameScreens.inGame.foundWords': string,
+  'lexicaGameScreens.inGame.rotateBoard': string,
   'lexicaGameScreens.results.foundWords': string,
   'lexicaGameScreens.results.missedWords': string,
   'lexicleGameScreens.results.shareScore': string,

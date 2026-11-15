@@ -64,7 +64,8 @@
   },
   "lexicaGameScreens": {
     "inGame": {
-      "foundWords": "$t(general.foundWords)"
+      "foundWords": "$t(general.foundWords)",
+      "rotateBoard": "Otočit desku"
     },
     "results": {
       "foundWords": "$t(general.foundWords)",

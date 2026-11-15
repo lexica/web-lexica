@@ -116,7 +116,8 @@
     "lexicaGameScreens": {
         "inGame": {
             "foundWords": "$t(general.foundWords)",
-            "guesses": "Aciertos"
+            "guesses": "Aciertos",
+            "rotateBoard": "Rotar tablero"
         },
         "results": {
             "missedWords": "Palabras incompletas",

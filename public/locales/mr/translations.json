@@ -37,7 +37,8 @@
   },
   "lexicaGameScreens": {
     "inGame": {
-      "foundWords": "$t(general.foundWords)"
+      "foundWords": "$t(general.foundWords)",
+      "rotateBoard": "बोर्ड फिरवा"
     },
     "results": {
       "missedWords": "सुटलेले शब्द",

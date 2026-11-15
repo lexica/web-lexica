@@ -116,7 +116,8 @@
     "lexicaGameScreens": {
         "inGame": {
             "foundWords": "$t(general.foundWords)",
-            "guesses": "Tahminler"
+            "guesses": "Tahminler",
+            "rotateBoard": "Tahtayı Çevir"
         },
         "results": {
             "missedWords": "Bulunamayan Sözcükler",

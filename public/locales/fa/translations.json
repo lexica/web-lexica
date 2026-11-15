@@ -37,7 +37,8 @@
   },
   "lexicaGameScreens": {
     "inGame": {
-      "foundWords": "$t(general.foundWords)"
+      "foundWords": "$t(general.foundWords)",
+      "rotateBoard": "چرخاندن صفحه"
     },
     "results": {
       "missedWords": "واژه‌های پیدا نشده",

@@ -136,7 +136,8 @@
     "lexicaGameScreens": {
         "inGame": {
             "guesses": "யூகங்கள்",
-            "foundWords": "$t(general.foundWords)"
+            "foundWords": "$t(general.foundWords)",
+            "rotateBoard": "அட்டை சுற்று"
         },
         "results": {
             "foundWords": "$t(general.foundWords)",

@@ -66,7 +66,8 @@
     },
     "lexicaGameScreens": {
         "inGame": {
-            "foundWords": "$t(general.foundWords)"
+            "foundWords": "$t(general.foundWords)",
+            "rotateBoard": "Obróć planszę"
         },
         "results": {
             "missedWords": "Brakujące słowa",

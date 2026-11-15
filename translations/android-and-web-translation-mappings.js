@@ -142,7 +142,11 @@ export const translationsFromWebToAndroid = {
   },
   lexicaGameScreens: {
     inGame: {
-      foundWords: new Reference('general.foundWords')
+      foundWords: new Reference('general.foundWords'),
+      rotateBoard: {
+        tag: 'string',
+        name: 'menu_rotate_board',
+      }
     },
     results: {
       foundWords: new Reference('general.foundWords'),

@@ -1,9 +1,12 @@
-import { useContext, useEffect, useState } from 'react' 
+import { useCallback, useContext, useEffect, useState } from 'react' 
+import RotateRight from '@material-design-icons/svg/round/rotate_right.svg'
 
-import { ScreenOrientation, useOrientation } from '../util/hooks'
 
 import { Score as ScoreContext } from '../game/score'
+import { Translations } from '../translations'
+import { ScreenOrientation, useOrientation } from '../util/hooks'
 
+import { useBannerBadge } from './Banner'
 import Board from './game/Board'
 import Score from './game/Score'
 import Guesses, { GuessOrientation } from './game/Guesses'
@@ -15,11 +18,21 @@ import { usePauseGameOnHidden } from '../game/pause-game'
 import { useSaveGame } from '../game/save-game'
 import { Timer } from '../game/timer'
 import { ConfirmationEffect, useConfirmationEffect } from './game/Board/hooks'
-import { Translations } from '../translations'
+import { Direction, Directions, type DirectionT } from './game/Board/types'
 
 import './InGameScreen.css'
 
 const Game: React.FC = () => {
+  const [rotation, setRotation] = useState<DirectionT>(Direction.North)
+
+  const rotateBoard = useCallback(() => {
+    setRotation(prev => {
+      const idx = Directions.indexOf(prev)
+      if (idx < 0) return Direction.North
+
+      return Directions[(idx + 1) % Directions.length]
+    })
+  }, [setRotation])
 
   const scoreContext = useContext(ScoreContext)
   const timer = useContext(Timer)
@@ -27,6 +40,11 @@ const Game: React.FC = () => {
   const useSaveGameState = useSaveGame()
   const setUseSaveGameStateWrapper = useState(useSaveGameState)[1]
   const { translationsFn } = useContext(Translations)
+  useBannerBadge({
+    svg: RotateRight,
+    onClick: rotateBoard,
+    svgTitle: translationsFn('lexicaGameScreens.inGame.rotateBoard'),
+  })
 
   // Weird way of removing callbacks...
   useEffect(() => {
@@ -49,7 +67,7 @@ const Game: React.FC = () => {
 
   const guessOrientation = useVerticalLayout ? GuessOrientation.Horizontal : GuessOrientation.Vertical
 
-  const board = <Board/>
+  const board = <Board rotation={rotation} />
   const mostRecentGuesses = <MostRecentGuess />
   const guesses = <Guesses orientation={guessOrientation} />
   const score = <Score />

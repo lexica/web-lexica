@@ -52,7 +52,8 @@
   },
   "lexicaGameScreens": {
     "inGame": {
-      "foundWords": "$t(general.foundWords)"
+      "foundWords": "$t(general.foundWords)",
+      "rotateBoard": "Girar o tabuleiro"
     },
     "results": {
       "missedWords": "Palavras a encontrar",

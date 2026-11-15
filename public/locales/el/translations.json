@@ -46,7 +46,8 @@
   },
   "lexicaGameScreens": {
     "inGame": {
-      "foundWords": "$t(general.foundWords)"
+      "foundWords": "$t(general.foundWords)",
+      "rotateBoard": "Περιστροφή πίνακα"
     },
     "results": {
       "missedWords": "Χαμένες λέξεις",

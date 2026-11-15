@@ -96,7 +96,8 @@
     },
     "lexicaGameScreens": {
         "inGame": {
-            "foundWords": "$t(general.foundWords)"
+            "foundWords": "$t(general.foundWords)",
+            "rotateBoard": "Spielfeld drehen"
         },
         "results": {
             "missedWords": "Übersehene Wörter",

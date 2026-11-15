@@ -53,7 +53,8 @@
   },
   "lexicaGameScreens": {
     "inGame": {
-      "foundWords": "$t(general.foundWords)"
+      "foundWords": "$t(general.foundWords)",
+      "rotateBoard": "বোর্ড ঘুরাও"
     },
     "results": {
       "foundWords": "$t(general.foundWords)"

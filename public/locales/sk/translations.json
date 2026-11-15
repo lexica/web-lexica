@@ -54,7 +54,8 @@
   },
   "lexicaGameScreens": {
     "inGame": {
-      "foundWords": "$t(general.foundWords)"
+      "foundWords": "$t(general.foundWords)",
+      "rotateBoard": "Otočiť hraciu plochu"
     },
     "results": {
       "missedWords": "Nenájdené Slová",
