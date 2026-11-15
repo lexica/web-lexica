@@ -41,7 +41,8 @@
   },
   "lexicaGameScreens": {
     "inGame": {
-      "foundWords": "$t(general.foundWords)"
+      "foundWords": "$t(general.foundWords)",
+      "rotateBoard": "Gira el tauler"
     },
     "results": {
       "missedWords": "Mots romanents",

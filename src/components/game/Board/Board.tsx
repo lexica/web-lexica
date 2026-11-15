@@ -1,4 +1,5 @@
-import React, { useContext, } from 'react'
+import type React from 'react'
+import { useCallback, useContext } from 'react'
 import * as R from 'ramda'
 
 import './Board.css'
@@ -14,10 +15,13 @@ import type { GuessActionType } from '../../../game/guess'
 import { makeClasses } from '../../../util/classes'
 import type { WithChildren } from '../../../util/types'
 import { LetterHints } from '../../../game/letterHints'
+import { Direction, Directions, type DirectionT } from './types'
 
 type LetterProps = {
   row: number,
   column: number,
+  x: number,
+  y: number,
   letter: string,
   visited: boolean,
 }
@@ -25,6 +29,8 @@ type LetterProps = {
 const Letter: React.FC<LetterProps> = ({
   row,
   column,
+  x,
+  y,
   letter,
   visited,
 }) => {
@@ -40,7 +46,7 @@ const Letter: React.FC<LetterProps> = ({
 
   const classes = makeClasses('spacer', { condition: visited, name: 'visited' }, feedbackClasses)
 
-  const dispatchMoveEvent = () => guessDispatch({ type: GuessAction.EnterLetter, info: { row, column } })
+  const dispatchMoveEvent = () => guessDispatch({ type: GuessAction.EnterLetter, info: { row: x, column: y } })
 
   const showScore = scoreType === ScoreType.Letters || undefined
   const showNumberHints = hints.includes(HintTypeMap.Number)
@@ -72,7 +78,13 @@ function getLast<T extends ArrayLike>(items: T): T[number] {
 }
 
 
-export const Board: React.FC = () => {
+export type BoardProps = { rotation?: DirectionT }
+
+export const Board = (props: BoardProps): React.JSX.Element => {
+  const {
+    rotation = Direction.North,
+  } = props
+
   const dispatch = useContext(GuessDispatch)
 
   const { board } = useContext(Guess)
@@ -85,16 +97,40 @@ export const Board: React.FC = () => {
 
   const boardWidth = board.width
 
-  const makeColumn = (row: number) => (column: number) => <Letter {...{
-    row,
-    column,
-    ...board[row][column],
-    key: `letter-${row}-${column}`
-  }}/>
+  const getRotatedCoords = useCallback((x: number, y: number, unRotate: boolean = false) => {
+    const reflect = Directions[(Directions.indexOf(rotation) + 2) % Directions.length]
+    const directionsToReflect: DirectionT[] = [Direction.East, Direction.West]
+    const realRotation = unRotate && directionsToReflect.includes(rotation) ? reflect : rotation
+    const [mirrorX, mirrorY] = [boardWidth - 1 - x, boardWidth - 1 - y]
+    switch (realRotation) {
+      case Direction.North:
+        return [x, y]
+      case Direction.East:
+        return [y, mirrorX]
+      case Direction.South:
+        return [mirrorX, mirrorY]
+      case Direction.West:
+        return [mirrorY, x]
+    }
+  }, [rotation, boardWidth])
+
+  const getUnRotatedCoords = useCallback((rotX: number, rotY: number) => getRotatedCoords(rotX, rotY, true), [getRotatedCoords])
+
+  const makeColumn = (row: number) => (column: number) => {
+    const [rotRow, rotCol] = getRotatedCoords(row, column)
+    return (<Letter {...{
+      row,
+      column,
+      x: rotRow,
+      y: rotCol,
+      ...board[rotRow][rotCol],
+      key: `letter-${row}-${column}`
+    }}/>)
+  }
 
   const makeRows = (row: number) => <Row row={row} key={`row-${row}`}>{R.times(makeColumn(row), boardWidth)}</Row>
 
-  const maybeDispatchMove = ({ clientX, clientY }: React.Touch, acceptableDistance: number) => {
+  const maybeDispatchMove = useCallback(({ clientX, clientY }: React.Touch, acceptableDistance: number) => {
     const board = document.getElementsByClassName('board')[0]
     const { top, bottom, left } = board.getBoundingClientRect()
     const divisionAmount = (bottom-top)/boardWidth
@@ -106,12 +142,13 @@ export const Board: React.FC = () => {
     const options: GetPointOnGridInfoArguments = { gridOrigin, point, squareDimensions, useBoundingBox: true, boundingBox }
 
     const { residingSquare, pointDistanceFromCenterOfSquare } = getPointOnGridInfo(options)
-    const { x: column, y: row } = residingSquare
+    const { x, y } = residingSquare
 
     if (pointDistanceFromCenterOfSquare <= acceptableDistance) {
+      const [row, column] = getUnRotatedCoords(x, y)
       dispatch({ type: GuessAction.EnterLetter, info: { row, column } })
     }
-  }
+  }, [getUnRotatedCoords])
 
   return <div
     className="board"

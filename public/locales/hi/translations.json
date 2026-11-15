@@ -46,7 +46,8 @@
   },
   "lexicaGameScreens": {
     "inGame": {
-      "foundWords": "$t(general.foundWords)"
+      "foundWords": "$t(general.foundWords)",
+      "rotateBoard": "बोर्ड घुमाएँ"
     },
     "results": {
       "missedWords": "छूटे हुए शब्द",

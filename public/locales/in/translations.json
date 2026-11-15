@@ -77,7 +77,8 @@
     },
     "lexicaGameScreens": {
         "inGame": {
-            "foundWords": "$t(general.foundWords)"
+            "foundWords": "$t(general.foundWords)",
+            "rotateBoard": "Putar Papan"
         },
         "results": {
             "missedWords": "Kata Yang Terlewat",

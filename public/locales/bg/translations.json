@@ -32,7 +32,8 @@
   },
   "lexicaGameScreens": {
     "inGame": {
-      "foundWords": "$t(general.foundWords)"
+      "foundWords": "$t(general.foundWords)",
+      "rotateBoard": "Завърти Табло"
     },
     "results": {
       "missedWords": "Пропуснати Думи",

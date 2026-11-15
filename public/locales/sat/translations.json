@@ -37,7 +37,8 @@
   },
   "lexicaGameScreens": {
     "inGame": {
-      "foundWords": "$t(general.foundWords)"
+      "foundWords": "$t(general.foundWords)",
+      "rotateBoard": "ᱵᱚᱰ ᱟᱹᱪᱩᱨ ᱢᱮ"
     },
     "results": {
       "missedWords": "ᱟᱲᱟ ᱠᱚ ᱵᱟᱹᱱᱩᱜᱼᱟ",

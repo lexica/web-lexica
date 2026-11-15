@@ -116,7 +116,8 @@
   "lexicaGameScreens": {
     "inGame": {
       "guesses": "Guesses",
-      "foundWords": "$t(general.foundWords)"
+      "foundWords": "$t(general.foundWords)",
+      "rotateBoard": "Rotate Board"
     },
     "results": {
       "foundWords": "$t(general.foundWords)",

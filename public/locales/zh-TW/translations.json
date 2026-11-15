@@ -112,7 +112,8 @@
     "lexicaGameScreens": {
         "inGame": {
             "foundWords": "$t(general.foundWords)",
-            "guesses": "猜測"
+            "guesses": "猜測",
+            "rotateBoard": "旋轉圖版"
         },
         "results": {
             "missedWords": "遺漏的單詞",

@@ -54,7 +54,8 @@
   },
   "lexicaGameScreens": {
     "inGame": {
-      "foundWords": "$t(general.foundWords)"
+      "foundWords": "$t(general.foundWords)",
+      "rotateBoard": "Tourner le plateau"
     },
     "results": {
       "missedWords": "Mots manqués",

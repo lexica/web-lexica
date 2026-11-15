@@ -52,7 +52,8 @@
   },
   "lexicaGameScreens": {
     "inGame": {
-      "foundWords": "$t(general.foundWords)"
+      "foundWords": "$t(general.foundWords)",
+      "rotateBoard": "旋转版面"
     },
     "results": {
       "missedWords": "遗漏的单词",

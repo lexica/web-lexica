@@ -116,7 +116,8 @@
     "lexicaGameScreens": {
         "inGame": {
             "foundWords": "$t(general.foundWords)",
-            "guesses": "Nagađanja"
+            "guesses": "Nagađanja",
+            "rotateBoard": "Okreni ploču"
         },
         "results": {
             "missedWords": "Propuštene riječi",

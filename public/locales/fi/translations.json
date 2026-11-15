@@ -54,7 +54,8 @@
   },
   "lexicaGameScreens": {
     "inGame": {
-      "foundWords": "$t(general.foundWords)"
+      "foundWords": "$t(general.foundWords)",
+      "rotateBoard": "Käännä lautaa"
     },
     "results": {
       "missedWords": "Löytämättömät sanat",
